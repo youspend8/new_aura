@@ -1,6 +1,5 @@
 package com.bitcamp.aura.user.controller;
 
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
@@ -26,7 +27,7 @@ public class MybatisConfig {
 	public SqlSessionFactory sqlSessionFactory (DriverManagerDataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
 		sqlSessionFactory.setDataSource(dataSource);
-		sqlSessionFactory.setTypeAliasesPackage("com.bitcamp.aura");
+		sqlSessionFactory.setTypeAliasesPackage("com.bitcamp.aura.user.model");
 		return sqlSessionFactory.getObject();
 	}
 	

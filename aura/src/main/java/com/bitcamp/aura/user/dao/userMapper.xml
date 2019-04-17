@@ -5,7 +5,99 @@
     
     
 <mapper namespace="com.bitcamp.aura.user.dao.UserMapper">
-	<select id="selectAll" resultType="userVO">
-		SELECT * FROM USER_ACCOUNT
+	<insert id="insert" parameterType="UserVO">
+		INSERT INTO USER_ACCOUNT (
+			NICKNAME,
+			EMAIL,
+			PASSWORD,
+			TEL,
+			NAME,
+			SSN,
+			GENDER,
+			ADDRESS,
+			REG_DATE,
+			REG_LOCATION,
+			DEL_DATE,
+			ISADMIN,
+			ACCESS_TOKEN,
+			REFRESH_TOKEN,
+			PW_MISS_COUNT,
+			AUTHOR_TYPE,
+			PROFILE,
+			USERID
+		)
+		VALUES (
+			#{nickname},
+			#{email},
+			#{password},
+			#{tel},
+			#{name},
+			#{ssn},
+			#{gender},
+			#{address},
+			#{regDate},
+			#{regLocation},
+			#{delDate},
+			#{isAdmin},
+			#{accessToken},
+			#{refreshToken},
+			#{pwMissCount},
+			#{authorType},
+			#{profile},
+			#{userId}
+		)
+	</insert>
+	<update id="update" parameterType="UserVO">
+		UPDATE 
+			USER_ACCOUNT 
+		SET
+			EMAIL = #{email},
+			PASSWORD = #{password},
+			TEL = #{tel},
+			NAME = #{name},
+			SSN = #{ssn},
+			GENDER = #{gender},
+			ADDRESS = #{address},
+			REG_DATE = #{regDate},
+			REG_LOCATION = #{regLocation},
+			DEL_DATE = #{delDate},
+			ISADMIN = #{isAdmin},
+			ACCESS_TOKEN = #{accessToken},
+			REFRESH_TOKEN = #{refreshToken},
+			PW_MISS_COUNT = #{pwMissCount},
+			AUTHOR_TYPE = #{authorType},
+			PROFILE = #{profile},
+			USERID = #{userId}
+		WHERE
+			NICKNAME = #{nickname}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM
+			USER_ACCOUNT
+		WHERE
+			NICKNAME = #{nickname}
+	</delete>
+	<select id="selectOne" parameterType="String" resultType="UserVO">
+		SELECT 
+			*
+		FROM
+			USER_ACCOUNT
+		WHERE
+			NICKNAME = #{nickname}
+	</select>
+	<select id="selectMany" parameterType="String" resultType="UserVO">
+		SELECT
+			* 
+		FROM 
+			USER_ACCOUNT
+		WHERE
+			NICKNAME LIKE '%'||#{nickname}||'%'
+	</select>
+	
+	<select id="selectAll" resultType="UserVO">
+		SELECT
+			*
+		FROM
+			USER_ACCOUNT
 	</select>
 </mapper>

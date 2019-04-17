@@ -1,5 +1,9 @@
 package com.bitcamp.aura.user.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.bitcamp.aura.user.model.UserVO;
 
 public interface UserService {
@@ -7,7 +11,7 @@ public interface UserService {
 	public boolean join (UserVO userVo);
 	public void modify (UserVO userVo);
 	public void withdraw (String nickname);
-	public void getUser (String nickname);
-	public void getUsers (String nickname);
-	public void getAllUser();
+	public UserVO getUser (String nickname);
+	public List<UserVO> getUsers (String nickname);
+	public List<UserVO> getAllUser();
 }
