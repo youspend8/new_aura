@@ -12,6 +12,7 @@ public interface UserMapper {
 	public int update (UserVO userVo);
 	public int delete (String nickname);
 	public UserVO selectOne(String nickname);
+	public UserVO selectOneEmail(String email);
 	public List<UserVO> selectMany(String nickname);
 	public List<UserVO> selectAll();
 }
