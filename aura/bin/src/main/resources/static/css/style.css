@@ -1,0 +1,245 @@
+
+li {
+    display: inline-block;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.first_container .carousel-inner * {
+    height: 100%;
+}
+
+.first_recommand {
+    background-size: 700px 700px;
+    background-position: center;
+    height: 40%;
+
+    transition-property: background-size, background-position;
+    transition-duration: 500ms;
+}
+
+.first_recommand:hover{
+    background-size: 100% 100%;
+}
+
+.thema-flex {
+    height: 420px;
+}
+
+.recommand_box {
+    color: white;
+    
+    text-align: center;
+    font-size: 100%;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.7);
+    transition-property: background opacity;
+    transition-duration: 500ms;
+}
+
+.recommand_box:hover{
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+}
+
+
+.pop-review-prev-button {
+    width: 5%;
+
+}
+
+.pop-review-next-button {
+    width: 5%;
+ 
+}
+
+#today_review .nav-link {
+    border-bottom: 5px solid #343a40;
+}
+
+#today_review .active {
+    border-bottom: 5px solid white;
+}
+
+.evnetPan {
+    height: 200px;
+}
+
+ .first_recommand {
+    margin: 10px 10px 10px 10px;
+}
+
+
+
+.card {
+    margin: 2px;
+}
+
+
+.win {
+    width: 40%;
+    height: 50%;
+    margin: 0 ;
+    padding: 1%;
+    padding-left: 0;
+    padding-right: 1% ;
+}
+
+
+.card-jisung {
+
+    width: 100%;
+    display: inline-block;
+    flex-flow: wrap;
+    height: 90%;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 5%;
+
+    box-shadow: 0px 0px 5px 4px rgb(158, 154, 154);
+}
+
+.cardtitle {
+    width: 100%;
+    height: 21%;
+    background: white;
+    padding-left: 5%;
+    padding-top: 2%;
+    font-size: 80%;
+}
+
+.cardcontent {
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    padding: 6%;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+
+    font-size: 50%;
+
+    overflow: hidden;
+
+    transition-duration: 500ms;
+
+}
+
+
+.cardpic {
+
+    width: 100%;
+    height: 79%;
+    bottom: 0;
+    background: green;
+}
+
+.cardpic>img {
+    width: 100%;
+    height: 100%;
+}
+
+.tl {
+    height: 500px;
+}
+
+.rank_section{
+    height: 180px;
+    margin-bottom: 6px;
+}
+  
+  
+
+@media screen and (min-width: 768px) {
+    .evnetPan {
+       height: 150px;
+    }
+
+    .thema-flex {
+        height: 800px;
+    }
+
+    .recommand_box {
+        font-size: 200%;
+    }
+
+    .first_recommand {
+        margin: 5px 15px 5px 15px;
+    }
+ 
+    .rank_section{
+        height: 150px;
+    }
+  
+  
+}
+
+@media screen and (min-width: 992px) {
+    .tl {
+        height: 270px;
+    }
+
+    .evnetPan {
+        height: 120px;
+    }
+
+    .first_container{
+        height: 350px;
+    }
+
+    header {
+        padding-bottom: 30px;
+    }
+
+    .thema-flex {
+        height: auto;
+    }
+
+    .first_recommand {
+        margin: 0 22px 0 22px;
+    }
+
+    .review_section {
+        height: 300px;
+    }
+
+    .win {
+        width: 18%;
+        height: 100%;
+        margin: 0 ;
+        padding: 1%;
+        padding-left: 0;
+        padding-right: 1%
+    
+    }
+    
+    .rank_section{
+          height: 230px;
+          margin-bottom: 0;
+      }
+    
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
