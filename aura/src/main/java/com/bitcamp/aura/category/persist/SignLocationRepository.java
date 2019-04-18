@@ -1,0 +1,11 @@
+package com.bitcamp.aura.category.persist;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.bitcamp.aura.category.model.SignLocationVO;
+
+@Repository
+public interface SignLocationRepository extends CrudRepository<SignLocationVO, Integer> {
+	
+}
