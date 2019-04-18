@@ -6,7 +6,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>All Review 로그인 페이지</title>
-
+	
+	<!-- naverAPI -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+	
+	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -89,18 +93,17 @@
 									<div class="view overlay col-3 p-0">
 										<a href="#">
 											<img src="/img/all_review_img/google.png"width="60px">
-										</a>								
 										<div class="mask flex-center rgba-white-light">
 										</div>
+										</a>								
 									</div>
 
-									<div class="view overlay col-3 p-0">
-										<a href="#">
+									<a href="${url}" class="view overlay col-3 p-0">
+										<div>
 											<img src="/img/all_review_img/naver.PNG"width="60px">
-										</a>									
-										<div class="mask flex-center rgba-white-light">
-										</div>	
-									</div>
+											<div class="mask flex-center rgba-white-light"></div>	
+										</div>
+									</a>									
 								</div>
 
 								<!-- 회원가입, 아이디/비밀번호 찾기 -->
