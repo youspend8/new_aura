@@ -1,16 +1,28 @@
 package com.bitcamp.aura.user.controller;
 
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
+
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.bitcamp.aura.user.social.NaverLoginAPI;
+
 
 @Controller
 @RequestMapping(value="/user")
 public class UserController {
-
+	
+	@Autowired
+	private NaverLoginAPI naverLogin;
+	
 	@RequestMapping(value="/loginForm")
-	public String loginForm() {
-		
+	public String loginForm(Model model) {
+		model.addAttribute("state", new BigInteger(130, new SecureRandom()).toString());
 		return "login";
 	}
 	
@@ -24,6 +36,13 @@ public class UserController {
 	public String forgotForm() {
 		
 		return "forgot";
+	}
+	
+	@RequestMapping(value="/oauth/naver")
+	public String naverLogin(String code, String state) throws IOException {
+		naverLogin.getUserInfo(naverLogin.getAccessToken(code, state)); 
+		
+		return "login";
 	}
 	
 }

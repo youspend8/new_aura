@@ -11,41 +11,43 @@ public class UserVO {
 	private String password;
 	private String tel;
 	private String name;
+	private String ssn;
 	private int gender;
 	private String address;
-	private Date reg_date;
-	private int reg_location;
-	private Date del_date;
+	private Date regDate;
+	private int regLocation;
+	private Date delDate;
 	private int isAdmin;
-	private String access_Token;
-	private String refresh_Token;
-	private int pw_Miss_Count;
-	private int author_Type;
+	private String accessToken;
+	private String refreshToken;
+	private int pwMissCount;
+	private int authorType;
 	private String profile;
 	private String userId;
 	
 	public UserVO() {
-		
+		// TODO Auto-generated constructor stub
 	}
-
-	public UserVO(String nickname, String email, String password, String tel, String name, int gender, String address,
-			Date reg_date, int reg_location, Date del_date, int isAdmin, String access_Token, String refresh_Token,
-			int pw_Miss_Count, int author_Type, String profile, String userId) {
+	
+	public UserVO(String nickname, String email, String password, String tel, String name, String ssn, int gender,
+			String address, Date regDate, int regLocation, Date delDate, int isAdmin, String accessToken,
+			String refreshToken, int pwMissCount, int authorType, String profile, String userId) {
 		this.nickname = nickname;
 		this.email = email;
 		this.password = password;
 		this.tel = tel;
 		this.name = name;
+		this.ssn = ssn;
 		this.gender = gender;
 		this.address = address;
-		this.reg_date = reg_date;
-		this.reg_location = reg_location;
-		this.del_date = del_date;
+		this.regDate = regDate;
+		this.regLocation = regLocation;
+		this.delDate = delDate;
 		this.isAdmin = isAdmin;
-		this.access_Token = access_Token;
-		this.refresh_Token = refresh_Token;
-		this.pw_Miss_Count = pw_Miss_Count;
-		this.author_Type = author_Type;
+		this.accessToken = accessToken;
+		this.refreshToken = refreshToken;
+		this.pwMissCount = pwMissCount;
+		this.authorType = authorType;
 		this.profile = profile;
 		this.userId = userId;
 	}
@@ -80,6 +82,12 @@ public class UserVO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getSsn() {
+		return ssn;
+	}
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
 	public int getGender() {
 		return gender;
 	}
@@ -92,23 +100,23 @@ public class UserVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Date getReg_date() {
-		return reg_date;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
-	public int getReg_location() {
-		return reg_location;
+	public int getRegLocation() {
+		return regLocation;
 	}
-	public void setReg_location(int reg_location) {
-		this.reg_location = reg_location;
+	public void setRegLocation(int regLocation) {
+		this.regLocation = regLocation;
 	}
-	public Date getDel_date() {
-		return del_date;
+	public Date getDelDate() {
+		return delDate;
 	}
-	public void setDel_date(Date del_date) {
-		this.del_date = del_date;
+	public void setDelDate(Date delDate) {
+		this.delDate = delDate;
 	}
 	public int getIsAdmin() {
 		return isAdmin;
@@ -116,29 +124,29 @@ public class UserVO {
 	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	public String getAccess_Token() {
-		return access_Token;
+	public String getAccessToken() {
+		return accessToken;
 	}
-	public void setAccess_Token(String access_Token) {
-		this.access_Token = access_Token;
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
-	public String getRefresh_Token() {
-		return refresh_Token;
+	public String getRefreshToken() {
+		return refreshToken;
 	}
-	public void setRefresh_Token(String refresh_Token) {
-		this.refresh_Token = refresh_Token;
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
-	public int getPw_Miss_Count() {
-		return pw_Miss_Count;
+	public int getPwMissCount() {
+		return pwMissCount;
 	}
-	public void setPw_Miss_Count(int pw_Miss_Count) {
-		this.pw_Miss_Count = pw_Miss_Count;
+	public void setPwMissCount(int pwMissCount) {
+		this.pwMissCount = pwMissCount;
 	}
-	public int getAuthor_Type() {
-		return author_Type;
+	public int getAuthorType() {
+		return authorType;
 	}
-	public void setAuthor_Type(int author_Type) {
-		this.author_Type = author_Type;
+	public void setAuthorType(int authorType) {
+		this.authorType = authorType;
 	}
 	public String getProfile() {
 		return profile;
@@ -155,10 +163,10 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [nickname=" + nickname + ", email=" + email + ", password=" + password + ", tel=" + tel
-				+ ", name=" + name + ", gender=" + gender + ", address=" + address + ", reg_date=" + reg_date
-				+ ", reg_location=" + reg_location + ", del_date=" + del_date + ", isAdmin=" + isAdmin
-				+ ", access_Token=" + access_Token + ", refresh_Token=" + refresh_Token + ", pw_Miss_Count="
-				+ pw_Miss_Count + ", author_Type=" + author_Type + ", profile=" + profile + ", userId=" + userId + "]";
+				+ ", name=" + name + ", ssn=" + ssn + ", gender=" + gender + ", address=" + address + ", regDate="
+				+ regDate + ", regLocation=" + regLocation + ", delDate=" + delDate + ", isAdmin=" + isAdmin
+				+ ", accessToken=" + accessToken + ", refreshToken=" + refreshToken + ", pwMissCount=" + pwMissCount
+				+ ", authorType=" + authorType + ", profile=" + profile + ", userId=" + userId + "]";
 	}
 	
 }
