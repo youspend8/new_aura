@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.bitcamp.aura.user.dao.UserMapper;
 import com.bitcamp.aura.user.model.UserVO;
 import com.bitcamp.aura.user.service.UserService;
 
@@ -41,15 +40,6 @@ public class AuraApplicationTests {
 				"chaehun.png",
 				"fdsahjf2");
 
-//		System.out.println("******* userMapper: " + userMapper);
-//		for (UserVO user : userMapper.selectAll()) {
-//			System.out.println(user);
-//		}
-		
-//		for (UserVO user : userServiceImpl.getAllUser()) {
-//			System.out.println(user);
-//		}
-		
 		System.out.println(userService.login("youspend8@gmail.com", "1234"));
 		System.out.println(userService.join(user2, "1234"));
 		System.out.println(userService.login("youspend8@gmail.com", "1234"));
