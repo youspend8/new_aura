@@ -15,10 +15,10 @@ public class AuraApplicationTests {
 	@Autowired
 	private UserService userService;
 	
-
+	
 	@Test
 	public void signTest() {
-		
+
 	}
 	
 	// UserService Test
@@ -49,5 +49,5 @@ public class AuraApplicationTests {
 //		System.out.println(userService.login("youspend8@gmail.com", "1234"));
 //		
 //	}
-
+	
 }
