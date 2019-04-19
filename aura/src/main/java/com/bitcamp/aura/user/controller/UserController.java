@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bitcamp.aura.user.social.FacebookLogin;
+import com.bitcamp.aura.user.social.FacebookLoginAPI;
 import com.bitcamp.aura.user.social.NaverLoginAPI;
 
 
@@ -19,6 +21,9 @@ public class UserController {
 	
 	@Autowired
 	private NaverLoginAPI naverLogin;
+	
+	@Autowired
+	private FacebookLoginAPI facebookLogin;
 	
 	@RequestMapping(value="/loginForm")
 	public String loginForm(Model model) {
@@ -43,6 +48,16 @@ public class UserController {
 		naverLogin.getUserInfo(naverLogin.getAccessToken(code, state)); 
 		
 		return "login";
+	}
+	
+	@RequestMapping("/oauth/facebook")
+	public String facebook(String code) {
+		
+		String accessToken = facebookLogin.getAccessToken(code);
+		String userId = facebookLogin.getUserId(accessToken);
+	    String UserInfo = facebookLogin.getUserInfo(accessToken, userId);
+	        
+		return "/index.jsp";
 	}
 	
 }

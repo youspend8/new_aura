@@ -74,7 +74,8 @@
 								
 								<!-- API 로그인 로고 -->
 								<div class = "api_login mt-3 d-flex flex-row jusfiy-content-center">
-									<div class="view overlay col-3 p-0">
+									<div class="view overlay col-3 p-0"
+									onclick="location.href='https://www.facebook.com/v3.2/dialog/oauth?client_id=432794210621575&redirect_uri=http://localhost:8000/user/oauth/facebook&response_type=code'">
 										<a href="#">
 											<img src="/img/all_review_img/facebook.png" width="60px">
 										</a>									

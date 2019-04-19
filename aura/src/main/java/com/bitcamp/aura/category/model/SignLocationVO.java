@@ -28,5 +28,4 @@ public class SignLocationVO {
 	
 	@Column(name="LOCATION_NAME", length=30)
 	private String name;
-	
 }
