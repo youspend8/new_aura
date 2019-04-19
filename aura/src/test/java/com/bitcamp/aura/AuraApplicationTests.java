@@ -19,8 +19,6 @@ public class AuraApplicationTests {
 	
 	@Autowired
 	private SignLocationRepository repo;
-	
-
 	@Test
 	public void signTest() {
 		System.out.println(repo.findById(1));
@@ -41,9 +39,6 @@ public class AuraApplicationTests {
 //				new Date(),
 //				1,
 //				new Date(),
-//				1,
-//				"1341234231432432",
-//				"13243214321413241234",
 //				4,
 //				1,
 //				"chaehun.png",
@@ -54,5 +49,5 @@ public class AuraApplicationTests {
 //		System.out.println(userService.login("youspend8@gmail.com", "1234"));
 //		
 //	}
-
+	
 }
