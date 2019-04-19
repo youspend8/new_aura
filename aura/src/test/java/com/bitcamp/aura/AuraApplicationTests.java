@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.bitcamp.aura.category.model.SignLocationVO;
+import com.bitcamp.aura.category.persist.SignLocationRepository;
 import com.bitcamp.aura.user.service.UserService;
 
 @RunWith(SpringRunner.class)
@@ -15,10 +17,11 @@ public class AuraApplicationTests {
 	@Autowired
 	private UserService userService;
 	
-	
+	@Autowired
+	private SignLocationRepository repo;
 	@Test
 	public void signTest() {
-
+		System.out.println(repo.findById(1));
 	}
 	
 	// UserService Test
@@ -36,9 +39,6 @@ public class AuraApplicationTests {
 //				new Date(),
 //				1,
 //				new Date(),
-//				1,
-//				"1341234231432432",
-//				"13243214321413241234",
 //				4,
 //				1,
 //				"chaehun.png",
