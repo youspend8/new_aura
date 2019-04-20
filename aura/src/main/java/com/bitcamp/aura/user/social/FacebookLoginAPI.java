@@ -56,11 +56,12 @@ public class FacebookLoginAPI implements FacebookLogin{
 
 	@Override
 	public String getUserId(String accessToken) {
+		System.out.println("accessToken :" + accessToken);
 		// TODO Auto-generated method stub
-        String reqURL = "https://graph.facebook.com/debug_token?"+
-        		"client_id=432794210621575"+
-        		"&input_token=" + accessToken+
-        		"&access_token=" + accessToken;
+		String reqURL = "https://graph.facebook.com/debug_token?"+
+		        		"client_id=432794210621575"+
+		        		"&input_token=" + accessToken+
+		        		"&access_token=EAAGJn8EvWIcBALTDILEht0XtNaTPzCN6R2tiTMWVC6VKnk7I30bZBZBRowKW5ugliNTKg1SyFOzEDmLigBeo8qmFEbGtI1pnyDZBzK81kH1hqj3oVCX2qb5R1Gb2fiQvK6JNAXM2rg0pYiZB2SZC5OV9XGZB2WfX4ES6URHTr8qAZDZD";
         String userId = null;
         URL url = null;
 		try {
