@@ -7,6 +7,7 @@ import java.net.URL;
 
 import org.springframework.stereotype.Service;
 
+import com.bitcamp.aura.user.model.UserVO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -57,12 +58,16 @@ public class FacebookLoginAPI implements FacebookLogin{
 	@Override
 	public String getUserId(String accessToken) {
 		System.out.println("accessToken :" + accessToken);
+		
+		//access_token => 개발자의 accessToken(accessToken 값이 똑같은걸로봐서 그냥 값을 떄려 박았음)
+		String development_Token = "EAAGJn8EvWIcBALTDILEht0XtNaTPzCN6R2tiTMWVC6VKnk7I30bZBZBRowKW5ugliNTKg1SyFOzEDmLigBeo8qmFEbGtI1pnyDZBzK81kH1hqj3oVCX2qb5R1Gb2fiQvK6JNAXM2rg0pYiZB2SZC5OV9XGZB2WfX4ES6URHTr8qAZDZD";
 		// TODO Auto-generated method stub
 		String reqURL = "https://graph.facebook.com/debug_token?"+
 		        		"client_id=432794210621575"+
 		        		"&input_token=" + accessToken+
-		        		"&access_token=EAAGJn8EvWIcBALTDILEht0XtNaTPzCN6R2tiTMWVC6VKnk7I30bZBZBRowKW5ugliNTKg1SyFOzEDmLigBeo8qmFEbGtI1pnyDZBzK81kH1hqj3oVCX2qb5R1Gb2fiQvK6JNAXM2rg0pYiZB2SZC5OV9XGZB2WfX4ES6URHTr8qAZDZD";
-        String userId = null;
+		        		"&access_token="+ development_Token;
+        //input_token => 로그인한 사용자의 accessToken 
+		String userId = null;
         URL url = null;
 		try {
 			url = new URL(reqURL);
@@ -97,9 +102,10 @@ public class FacebookLoginAPI implements FacebookLogin{
 	public String getUserInfo(String accessToken, String userId) {
 		// TODO Auto-generated method stub
 		
+		UserVO uservo = new UserVO();
 		
         String reqURL = "https://graph.facebook.com/"+userId
-        		+ "?fields=id,name,email"
+        		+ "?fields=name,email"
         		+ "&access_token="+accessToken;
         
         String UserInfo = "";
@@ -127,9 +133,13 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        String name = element.getAsJsonObject().get("name").getAsString();
 	        String email = element.getAsJsonObject().get("email").getAsString();
 	        
-	        System.out.println("name : "+name + "\n"+"email :"+email);
+//	        System.out.println("name : "+name + "\n"+"email :"+email);
 	        UserInfo = name + email;
-			
+	        //API 에서 받아오 name email set로 박음
+	        uservo.setName(name);
+	        uservo.setEmail(email);
+	        
+			System.out.println("UserInfo =>" + UserInfo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
