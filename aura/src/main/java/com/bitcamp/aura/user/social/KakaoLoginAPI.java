@@ -7,6 +7,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
@@ -102,6 +104,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 			
 			//아이디
 			userInfo.setUserId(element.getAsJsonObject().get("id").getAsString());
+			userInfo.setProfile(element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image").getAsString());
 			
 			//이메일 정보 
 			if(kakao_account.getAsJsonObject().get("has_email").getAsBoolean()) {
@@ -113,6 +116,10 @@ public class KakaoLoginAPI implements KakaoLogin{
 				userInfo.setAgeRange(Integer.parseInt(kakao_account.getAsJsonObject().get("age_range").getAsString().substring(0, 2)));
 			}
 			
+			//가임일
+			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+			sim.format(new Date());
+			userInfo.setRegDate(sim.format(new Date()));
 			//성별 정보 
 			if(kakao_account.getAsJsonObject().get("has_gender").getAsBoolean()) {
 				
