@@ -83,8 +83,9 @@
 										</div>
 									</div>
 
-									<div class="view overlay col-3 p-0">
-										<a href="#">
+									<div class="view overlay col-3 p-0" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=4d8be14468ba52dd371e3720b6c97958&redirect_uri=http://localhost:8000/user/oauth/kakao&response_type=code&scope=account_email,age_range,birthday,gender'">
+										<a href="">
+											
 											<img src="/img/all_review_img/kakao.png" width="60px">
 										</a>
 										<div class="mask flex-center rgba-white-light">

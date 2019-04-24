@@ -10,32 +10,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bitcamp.aura.category.model.SignLocationVO;
-import com.bitcamp.aura.category.persist.SignLocationRepository;
+import com.bitcamp.aura.category.model.ReviewCategoryVO;
+import com.bitcamp.aura.category.persist.ReviewCategoryRepository;
 
 @Service
 @Transactional
-public class SignLocationServiceImpl implements SignLocationService {
+public class ReviewCategoryServiceImpl implements ReviewCategoryService {
 
 	@Autowired
-	private SignLocationRepository repo;
-
+	private ReviewCategoryRepository repo;
+	
 	@Override
-	public SignLocationVO create(SignLocationVO signLocVo) {
+	public ReviewCategoryVO create(ReviewCategoryVO likeCateVo) {
 		// TODO Auto-generated method stub
-		return repo.save(signLocVo);
+		return repo.save(likeCateVo);
 	}
 
 	@Override
-	public Iterable<SignLocationVO> createAll(Iterable<SignLocationVO> iterator) {
+	public Iterable<ReviewCategoryVO> createAll(Iterable<ReviewCategoryVO> iterater) {
 		// TODO Auto-generated method stub
-		return repo.saveAll(iterator);
+		return repo.saveAll(iterater);
 	}
-
+	
 	@Override
-	public SignLocationVO update(SignLocationVO signLocVo) {
+	public ReviewCategoryVO update(ReviewCategoryVO likeCateVo) {
 		// TODO Auto-generated method stub
-		return repo.save(signLocVo);
+		return repo.save(likeCateVo);
 	}
 
 	@Override
@@ -49,15 +49,15 @@ public class SignLocationServiceImpl implements SignLocationService {
 		// TODO Auto-generated method stub
 		repo.deleteAll();
 	}
-
+	
 	@Override
-	public SignLocationVO read(int num) {
+	public ReviewCategoryVO read(int num) {
 		// TODO Auto-generated method stub
 		return repo.findById(num).orElseThrow(() -> new EntityNotFoundException(null));
 	}
 
 	@Override
-	public List<SignLocationVO> readAll() {
+	public List<ReviewCategoryVO> readAll() {
 		// TODO Auto-generated method stub
 		return StreamSupport.stream(repo.findAll().spliterator(), true)
 				.collect(Collectors.toList());

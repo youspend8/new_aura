@@ -19,29 +19,41 @@ public class BadCategoryServiceImpl implements BadCategoryService {
 
 	@Autowired
 	private BadCategoryRepository repo;
-	
+
 	@Override
-	public int create(BadCategoryVO badCateVo) {
+	public BadCategoryVO create(BadCategoryVO badCateVo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return repo.save(badCateVo);
 	}
 
 	@Override
-	public int update(BadCategoryVO badCateVo) {
+	public Iterable<BadCategoryVO> createAll(Iterable<BadCategoryVO> iterator) {
 		// TODO Auto-generated method stub
-		return 0;
+		return repo.saveAll(iterator);
 	}
 
 	@Override
-	public int delete(int num) {
+	public BadCategoryVO update(BadCategoryVO badCateVo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return repo.save(badCateVo);
+	}
+
+	@Override
+	public void delete(int num) {
+		// TODO Auto-generated method stub
+		repo.deleteById(num);
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		repo.deleteAll();
 	}
 
 	@Override
 	public BadCategoryVO read(int num) {
 		// TODO Auto-generated method stub
-		return repo.findById(num).orElseThrow(() -> new EntityNotFoundException(null));
+		return repo.findById(num).orElseThrow(() -> new EntityNotFoundException());
 	}
 
 	@Override
@@ -50,5 +62,4 @@ public class BadCategoryServiceImpl implements BadCategoryService {
 		return StreamSupport.stream(repo.findAll().spliterator(), true)
 				.collect(Collectors.toList());
 	}
-
 }
