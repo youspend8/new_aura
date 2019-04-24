@@ -112,7 +112,7 @@ public class FacebookLoginAPI implements FacebookLogin{
 		UserVO uservo = new UserVO();
 		
         String reqURL = "https://graph.facebook.com/"+userId
-        		+ "?fields=name,email,id,user_gender"
+        		+ "?fields=name,email,id"
         		+ "&access_token="+accessToken;
         
         String UserInfo = "";
