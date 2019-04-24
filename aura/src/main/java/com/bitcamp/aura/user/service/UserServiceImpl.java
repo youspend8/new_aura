@@ -22,8 +22,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean apiLoginCheck(String userid) {
 		// TODO Auto-generated method stub
-		return userMapper.selectOneUserid(userid) != null ? true : false ;
+		return userMapper.selectOneUserid(userid) != null ? true : false;
 	}
+	
 	@Override
 	public boolean login(String email, String password) {
 		// TODO Auto-generated method stub
