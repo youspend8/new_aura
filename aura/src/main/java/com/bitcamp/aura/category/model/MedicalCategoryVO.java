@@ -32,6 +32,6 @@ public class MedicalCategoryVO {
 	@SequenceGenerator(sequenceName="MEDICAL_CATEGORY_SEQ", name="MEDICAL_CATEGORY_SEQ", allocationSize=1, initialValue=1)
 	private int num;
 	
-	@Column(name="CATEGORY_NUM", length=30)
+	@Column(name="CATEGORY_NAME", length=30)
 	private String name;
 }

@@ -100,6 +100,9 @@ public class KakaoLoginAPI implements KakaoLogin{
 			JsonElement element = parser.parse(result.toString());
 			JsonElement kakao_account= element.getAsJsonObject().get("kakao_account");
 			
+			//아이디
+			userInfo.setUserId(element.getAsJsonObject().get("id").getAsString());
+			
 			//이메일 정보 
 			if(kakao_account.getAsJsonObject().get("has_email").getAsBoolean()) {
 				userInfo.setEmail(kakao_account.getAsJsonObject().get("email").getAsString());
@@ -107,8 +110,20 @@ public class KakaoLoginAPI implements KakaoLogin{
 			
 			//나이 정보 
 			if(kakao_account.getAsJsonObject().get("has_age_range").getAsBoolean()) {
-				userInfo.setEmail(kakao_account.getAsJsonObject().get("age_range").getAsString().substring(0, 2));
+				userInfo.setAgeRange(Integer.parseInt(kakao_account.getAsJsonObject().get("age_range").getAsString().substring(0, 2)));
 			}
+			
+			//성별 정보 
+			if(kakao_account.getAsJsonObject().get("has_gender").getAsBoolean()) {
+				
+				if(kakao_account.getAsJsonObject().get("gender").getAsString().equals("male")) {
+					userInfo.setGender(1);//남자
+				}else {
+					userInfo.setGender(0);//여자
+				}
+			}
+			
+			
 			
 			
 			return userInfo;

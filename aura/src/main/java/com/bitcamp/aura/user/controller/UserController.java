@@ -54,9 +54,12 @@ public class UserController {
 	
 	@RequestMapping(value="/oauth/naver")
 	public String naverLogin(String code, String state) throws IOException {
-		HashMap<String, Object> userInfo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state)); 
+		String resultPage = "";
 		
-		return "login";
+		UserVO userVo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state));
+		userService.apiLoginCheck(userVo.getUserId());
+		
+		return resultPage;
 	}
 	
 	@RequestMapping("/oauth/facebook")
@@ -65,12 +68,14 @@ public class UserController {
 		String userId = facebookLogin.getUserId(accessToken);
 	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
 	    
-	    if(userService.loginAPI(UserInfo.getUserId()) == false) {
-	    	return "";
-	    }else {
-	    	return "login";
-	    }
+//	    if(userService.loginAPI(UserInfo.getUserId()) == false) {
+//	    	return "";
+//	    }else {
+//	    	return "login";
+//	    }
 	    
+	    
+		return "login";
 	}
 	
 	@RequestMapping("/oauth/kakao")

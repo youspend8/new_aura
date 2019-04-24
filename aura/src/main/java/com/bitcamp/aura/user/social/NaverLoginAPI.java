@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
+import com.bitcamp.aura.user.model.UserVO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -17,7 +18,7 @@ import com.google.gson.JsonParser;
 public class NaverLoginAPI implements NaverLogin{
 
 	@Override
-	public HashMap<String, Object> getAccessToken(String code, String state) throws IOException {
+	public UserVO getAccessToken(String code, String state) throws IOException {
 		String reqUrl = "https://nid.naver.com/oauth2.0/token?"
 				+ "grant_type=authorization_code&"
 				+ "client_id=od8MnK4Tb6sAdnv6ZeIT&"
@@ -25,7 +26,7 @@ public class NaverLoginAPI implements NaverLogin{
 				+ "code=" + code + "&"
 				+ "state=" + state;
 		
-		HashMap<String, Object> userInfo = new HashMap<>();
+		UserVO userVo = new UserVO();
 		
 		URL url = new URL(reqUrl);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -42,21 +43,21 @@ public class NaverLoginAPI implements NaverLogin{
 		JsonParser json = new JsonParser();
 		JsonElement element = json.parse(result);
 		
-		userInfo.put("access", element.getAsJsonObject().get("access_token").getAsString()); 
-		userInfo.put("refresh", element.getAsJsonObject().get("refresh_token").getAsString());
+		userVo.setAccessToken((element.getAsJsonObject().get("access_token").getAsString())); 
+		userVo.setRefreshToken((element.getAsJsonObject().get("refresh_token").getAsString()));
 		
-		return userInfo;
+		return userVo;
 	}
 
 	@Override
-	public HashMap<String, Object> getUserInfo(HashMap<String, Object> userInfo) throws IOException {
+	public UserVO getUserInfo(UserVO userVo) throws IOException {
 		String reqUrl = "https://openapi.naver.com/v1/nid/me";
 		
 		URL url = new URL(reqUrl);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		conn.setRequestMethod("GET");
-		conn.setRequestProperty("Authorization", "Bearer " + userInfo.get("access"));
+		conn.setRequestProperty("Authorization", "Bearer " + userVo.getAccessToken());
 		
 		String responseMsg = conn.getResponseMessage();
 		int responseCode = conn.getResponseCode();
@@ -75,13 +76,24 @@ public class NaverLoginAPI implements NaverLogin{
 		
 		JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
 		
-		userInfo.put("userid", response.getAsJsonObject().get("id").getAsString());
-		userInfo.put("profile", response.getAsJsonObject().get("profile_image").getAsString());
-		userInfo.put("gender", response.getAsJsonObject().get("gender").getAsString());
-		userInfo.put("email", response.getAsJsonObject().get("email").getAsString());
-		userInfo.put("name", response.getAsJsonObject().get("name").getAsString());
+		int gender = 0;
 		
-		return userInfo;
+		if ("M" == (response.getAsJsonObject().get("gender").getAsString())) {
+			gender = 1;
+		} else if ("F" == (response.getAsJsonObject().get("gender").getAsString())) {
+			gender = 2;
+		}
+		
+		userVo.setUserId((response.getAsJsonObject().get("id").getAsString()));
+		userVo.setProfile((response.getAsJsonObject().get("profile_image").getAsString()));
+		userVo.setGender(gender);
+		userVo.setEmail((response.getAsJsonObject().get("email").getAsString()));
+		userVo.setName((response.getAsJsonObject().get("name").getAsString()));
+		userVo.setRegDate((new Date()));
+		userVo.setRegLocation(3);
+		userVo.setIsAdmin(0);
+		
+		return userVo;
 	}
 
 }
