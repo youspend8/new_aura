@@ -117,7 +117,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 			}
 			
 			//가임일
-			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			sim.format(new Date());
 			userInfo.setRegDate(sim.format(new Date()));
 			//성별 정보 
