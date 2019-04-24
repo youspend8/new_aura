@@ -1,6 +1,5 @@
 package com.bitcamp.aura.user.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +12,13 @@ import com.bitcamp.aura.user.model.UserVO;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-
+	
 	@Autowired
 	private UserMapper userMapper;
 	
 	@Override
-	public boolean loginAPI(String userid) {
-		
-		UserVO originUser = userMapper.selectOneUserid(userid);
-		
-		if (originUser != null) { // API로 로그인한 userid가 존재하면 true 반환
-			return true;
-		}
-		
-		return false;
+	public boolean apiLoginCheck (String userid) {
+		return userMapper.selectOneUserid(userid) != null ? true : false;
 	}
 	
 	@Override
@@ -83,6 +75,8 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userMapper.selectAll();
 	}
+
+	
 
 	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import com.bitcamp.aura.user.model.UserVO;
 
 public interface UserService {
-	public boolean loginAPI(String userid);
+	public boolean apiLoginCheck(String userid);
 	public boolean login (String email, String password);
 	public boolean join (UserVO userVo, String pwCheck);
 	public void modify (UserVO userVo);

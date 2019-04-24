@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bitcamp.aura.user.model.UserVO;
 import com.bitcamp.aura.user.service.UserServiceImpl;
 import com.bitcamp.aura.user.social.FacebookLogin;
 import com.bitcamp.aura.user.social.FacebookLoginAPI;
@@ -50,9 +51,12 @@ public class UserController {
 	
 	@RequestMapping(value="/oauth/naver")
 	public String naverLogin(String code, String state) throws IOException {
-		HashMap<String, Object> userInfo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state)); 
+		String resultPage = "";
 		
-		return "login";
+		UserVO userVo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state));
+		userService.apiLoginCheck(userVo.getUserId());
+		
+		return resultPage;
 	}
 	
 	@RequestMapping("/oauth/facebook")
@@ -61,7 +65,7 @@ public class UserController {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    String UserInfo = facebookLogin.getUserInfo(accessToken, userId);
-	        
+	    
 		return "login";
 	}
 	
