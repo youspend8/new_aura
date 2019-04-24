@@ -4,15 +4,21 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bitcamp.aura.user.dao.UserMapper;
 import com.bitcamp.aura.user.model.UserVO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 @Service
 public class FacebookLoginAPI implements FacebookLogin{
+	
+	@Autowired
+	public UserMapper UM;
 	
 	@Override
 	public String getAccessToken(String code) {
@@ -105,14 +111,13 @@ public class FacebookLoginAPI implements FacebookLogin{
 		UserVO uservo = new UserVO();
 		
         String reqURL = "https://graph.facebook.com/"+userId
-        		+ "?fields=name,email"
+        		+ "?fields=name,email,id"
         		+ "&access_token="+accessToken;
         
         String UserInfo = "";
         URL url = null;
         
 		try {
-			
 			url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
@@ -125,21 +130,40 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        }
 	        
 	        int responseCode = conn.getResponseCode();
-	        System.out.println("code : " + responseCode);
+	        
+//	        System.out.println("code : " + responseCode);
 	        
 	        JsonParser parser = new JsonParser();
 	        JsonElement element = parser.parse(result);
 	        
+	        
 	        String name = element.getAsJsonObject().get("name").getAsString();
 	        String email = element.getAsJsonObject().get("email").getAsString();
+	        String id = element.getAsJsonObject().get("id").getAsString();
 	        
-//	        System.out.println("name : "+name + "\n"+"email :"+email);
-	        UserInfo = name + email;
+//	        System.out.println("name : "+name + "\n"+"email :"+email + "\n" + "id :"+id);
+	       
+	        UserInfo = name + email + id;
 	        //API 에서 받아오 name email set로 박음
-	        uservo.setName(name);
-	        uservo.setEmail(email);
 	        
-			System.out.println("UserInfo =>" + UserInfo);
+	        
+	        uservo.setNickname("김민서");
+	        uservo.setEmail(email);
+	        uservo.setName(name);
+	        uservo.setRegDate(new Date());
+	        uservo.setRegLocation(2);
+	        uservo.setIsAdmin(1);
+	        uservo.setPwMissCount(0);
+	        uservo.setAuthorType(1);
+	        
+	        UM.insert(uservo);
+	        
+//	        //selectAll
+//	        for(UserVO Vo : UM.selectAll())
+//	        	System.out.println(Vo);
+	        
+	        
+//	        System.out.println("UserInfo =>" + UserInfo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -27,55 +27,55 @@
 			USERID
 		)
 		VALUES (
-			#{nickname},
-			#{email},
-			#{password},
-			#{tel},
-			#{name},
-			#{ssn},
-			#{gender},
-			#{address},
-			#{regDate},
-			#{regLocation},
-			#{delDate},
-			#{isAdmin},
-			#{accessToken},
-			#{refreshToken},
-			#{pwMissCount},
-			#{authorType},
-			#{profile},
-			#{userId}
+			#{nickname, jdbcType=VARCHAR},
+			#{email, jdbcType=VARCHAR},
+			#{password, jdbcType=VARCHAR},
+			#{tel, jdbcType=VARCHAR},
+			#{name, jdbcType=VARCHAR},
+			#{ssn, jdbcType=VARCHAR},
+			#{gender, jdbcType=NUMERIC},
+			#{address, jdbcType=VARCHAR},
+			#{regDate, jdbcType=VARCHAR},
+			#{regLocation, jdbcType=NUMERIC},
+			#{delDate, jdbcType=VARCHAR},
+			#{isAdmin, jdbcType=NUMERIC},
+			#{accessToken, jdbcType=VARCHAR},
+			#{refreshToken, jdbcType=VARCHAR},
+			#{pwMissCount, jdbcType=NUMERIC},
+			#{authorType, jdbcType=NUMERIC},
+			#{profile, jdbcType=VARCHAR},
+			#{userId, jdbcType=VARCHAR}
 		)
 	</insert>
 	<update id="update" parameterType="UserVO">
 		UPDATE 
 			USER_ACCOUNT 
 		SET
-			EMAIL = #{email},
-			PASSWORD = #{password},
-			TEL = #{tel},
-			NAME = #{name},
-			SSN = #{ssn},
-			GENDER = #{gender},
-			ADDRESS = #{address},
-			REG_DATE = #{regDate},
-			REG_LOCATION = #{regLocation},
-			DEL_DATE = #{delDate},
-			ISADMIN = #{isAdmin},
-			ACCESS_TOKEN = #{accessToken},
-			REFRESH_TOKEN = #{refreshToken},
-			PW_MISS_COUNT = #{pwMissCount},
-			AUTHOR_TYPE = #{authorType},
-			PROFILE = #{profile},
-			USERID = #{userId}
+			EMAIL = #{email, jdbcType=VARCHAR},
+			PASSWORD = #{password, jdbcType=VARCHAR},
+			TEL = #{tel, jdbcType=VARCHAR},
+			NAME = #{name, jdbcType=VARCHAR},
+			SSN = #{ssn, jdbcType=VARCHAR},
+			GENDER = #{gender, jdbcType=NUMERIC},
+			ADDRESS = #{address, jdbcType=VARCHAR},
+			REG_DATE = #{regDate, jdbcType=VARCHAR},
+			REG_LOCATION = #{regLocation, jdbcType=NUMERIC},
+			DEL_DATE = #{delDate, jdbcType=VARCHAR},
+			ISADMIN = #{isAdmin, jdbcType=NUMERIC},
+			ACCESS_TOKEN = #{accessToken, jdbcType=VARCHAR},
+			REFRESH_TOKEN = #{refreshToken, jdbcType=VARCHAR},
+			PW_MISS_COUNT = #{pwMissCount, jdbcType=NUMERIC},
+			AUTHOR_TYPE = #{authorType, jdbcType=NUMERIC},
+			PROFILE = #{profile, jdbcType=VARCHAR},
+			USERID = #{userId, jdbcType=VARCHAR}
 		WHERE
-			NICKNAME = #{nickname}
+			NICKNAME = #{nickname, jdbcType=VARCHAR}
 	</update>
 	<delete id="delete" parameterType="String">
 		DELETE FROM
 			USER_ACCOUNT
 		WHERE
-			NICKNAME = #{nickname}
+			NICKNAME = #{nickname, jdbcType=VARCHAR}
 	</delete>
 	<select id="selectOne" parameterType="String" resultType="UserVO">
 		SELECT 
@@ -83,7 +83,7 @@
 		FROM
 			USER_ACCOUNT
 		WHERE
-			NICKNAME = #{nickname}
+			NICKNAME = #{nickname, jdbcType=VARCHAR}
 	</select>
 	<select id="selectOneEmail" parameterType="String" resultType="UserVO">
 		SELECT
@@ -91,7 +91,7 @@
 		FROM
 			USER_ACCOUNT
 		WHERE
-			EMAIL = #{email}
+			EMAIL = #{email, jdbcType=VARCHAR}
 	</select>
 	<select id="selectMany" parameterType="String" resultType="UserVO">
 		SELECT
@@ -99,7 +99,7 @@
 		FROM 
 			USER_ACCOUNT
 		WHERE
-			NICKNAME LIKE '%'||#{nickname}||'%'
+			NICKNAME LIKE '%'||#{nickname, jdbcType=VARCHAR}||'%'
 	</select>
 	
 	<select id="selectAll" resultType="UserVO">
