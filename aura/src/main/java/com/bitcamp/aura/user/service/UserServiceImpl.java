@@ -16,12 +16,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 
-	
-	
-	
 	@Override
 	public boolean apiLoginCheck(String userid) {
-		// TODO Auto-generated method stub
 		return userMapper.selectOneUserid(userid) != null ? true : false;
 	}
 	
