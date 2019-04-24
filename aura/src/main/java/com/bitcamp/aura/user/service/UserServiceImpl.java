@@ -12,18 +12,22 @@ import com.bitcamp.aura.user.model.UserVO;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserMapper userMapper;
+
+	
+	
 	
 	@Override
-	public boolean apiLoginCheck (String userid) {
+	public boolean apiLoginCheck(String userid) {
+		// TODO Auto-generated method stub
 		return userMapper.selectOneUserid(userid) != null ? true : false;
 	}
 	
 	@Override
 	public boolean login(String email, String password) {
-		
+		// TODO Auto-generated method stub
 		UserVO originUser = userMapper.selectOneEmail(email);
 		if (originUser != null) {
 			if (originUser.getPassword().equals(password)) {
@@ -75,8 +79,4 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userMapper.selectAll();
 	}
-
-	
-
-	
 }

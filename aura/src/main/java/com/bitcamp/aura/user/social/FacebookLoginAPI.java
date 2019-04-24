@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,13 +106,13 @@ public class FacebookLoginAPI implements FacebookLogin{
 	}
 
 	@Override
-	public String getUserInfo(String accessToken, String userId) {
+	public UserVO getUserInfo(String accessToken, String userId) {
 		// TODO Auto-generated method stub
 		
 		UserVO uservo = new UserVO();
 		
         String reqURL = "https://graph.facebook.com/"+userId
-        		+ "?fields=name,email,id"
+        		+ "?fields=name,email,id,user_gender"
         		+ "&access_token="+accessToken;
         
         String UserInfo = "";
@@ -139,28 +140,33 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        
 	        String name = element.getAsJsonObject().get("name").getAsString();
 	        String email = element.getAsJsonObject().get("email").getAsString();
-	        String id = element.getAsJsonObject().get("id").getAsString();
+	        String userid = element.getAsJsonObject().get("id").getAsString();
 	        
-//	        System.out.println("name : "+name + "\n"+"email :"+email + "\n" + "id :"+id);
+	        System.out.println("name : "+name + "\n"+"email :"+email + "\n" + "userid :"+userid);
 	       
-	        UserInfo = name + email + id;
+//	        UserInfo = name + email + userid;
 	        //API 에서 받아오 name email set로 박음
 	        
+	        //가임일
+			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	        
+			
 	        uservo.setNickname("김민서");
 	        uservo.setEmail(email);
 	        uservo.setName(name);
-	        uservo.setRegDate(new Date());
+	        uservo.setUserId(userid);
+	        uservo.setRegDate(sim.format(new Date()));
 	        uservo.setRegLocation(2);
-	        uservo.setIsAdmin(1);
+	        uservo.setIsAdmin(0);
 	        uservo.setPwMissCount(0);
 	        uservo.setAuthorType(1);
 	        
-	        UM.insert(uservo);
+//	       UM.delete("김민서");
+	       
 	        
-//	        //selectAll
-//	        for(UserVO Vo : UM.selectAll())
-//	        	System.out.println(Vo);
+	        //selectAll
+	        for(UserVO Vo : UM.selectAll())
+	        	System.out.println(Vo);
 	        
 	        
 //	        System.out.println("UserInfo =>" + UserInfo);
@@ -168,6 +174,6 @@ public class FacebookLoginAPI implements FacebookLogin{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return UserInfo;
+		return uservo;
 	}
 }
