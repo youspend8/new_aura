@@ -1,72 +1,56 @@
 package com.bitcamp.aura.reviewlist.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bitcamp.aura.reviewlist.dao.ReviewListMapper;
+import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
 import com.bitcamp.aura.reviewlist.model.ReviewListVO;
-import com.bitcamp.aura.reviewlist.persist.ReviewListRepository;
 
 @Service
 @Transactional
 public class ReviewListServiceImpl implements ReviewListService {
 
 	@Autowired
-	private ReviewListRepository reviewRepo;
-	
+	private ReviewListMapper reviewMapper;
+
 	@Override
-	public ReviewListVO create(ReviewListVO reviewListVo) {
+	public int doReview(ReviewListVO reviewListVo) {
 		// TODO Auto-generated method stub
-		return reviewRepo.save(reviewListVo);
+		return 0;
 	}
 
 	@Override
-	public Iterable<ReviewListVO> createAll(Iterable<ReviewListVO> iterator) {
+	public int cancleReviewByNum(int num) {
 		// TODO Auto-generated method stub
-		return reviewRepo.saveAll(iterator);
+		return 0;
 	}
 
 	@Override
-	public ReviewListVO update(ReviewListVO reviewListVo) {
+	public int cancelReviewByParams(ReviewListSelectParamsVO params) {
 		// TODO Auto-generated method stub
-		return reviewRepo.save(reviewListVo);
+		return 0;
 	}
 
 	@Override
-	public void delete(int num) {
+	public ReviewListVO reviewByNum(int num) {
 		// TODO Auto-generated method stub
-		reviewRepo.deleteById(num);
+		return null;
 	}
 
 	@Override
-	public void deleteAllById(Iterable<ReviewListVO> iterator) {
+	public List<ReviewListVO> reviewListByParams(ReviewListSelectParamsVO params) {
 		// TODO Auto-generated method stub
-		reviewRepo.deleteAll(iterator);
+		return null;
 	}
 
 	@Override
-	public void deleteAll() {
+	public List<ReviewListVO> reviewList() {
 		// TODO Auto-generated method stub
-		reviewRepo.deleteAll();
-	}
-
-	@Override
-	public ReviewListVO read(int num) {
-		// TODO Auto-generated method stub
-		return reviewRepo.findById(num).orElseThrow(() -> new EntityNotFoundException());
-	}
-
-	@Override
-	public List<ReviewListVO> readAll() {
-		// TODO Auto-generated method stub
-		return StreamSupport.stream(reviewRepo.findAll().spliterator(), true)
-				.collect(Collectors.toList());
+		return null;
 	}
 
 }
