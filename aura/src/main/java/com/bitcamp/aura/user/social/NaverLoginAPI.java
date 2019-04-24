@@ -77,7 +77,10 @@ public class NaverLoginAPI implements NaverLogin{
 		
 		JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
 		
+		
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		int gender = 0;
+		
 		
 		if ("M" == (response.getAsJsonObject().get("gender").getAsString())) {
 			gender = 1;

@@ -97,17 +97,28 @@ public class UserController {
 //	}
 	
 	@RequestMapping("/oauth/kakao")
-	public String kakao(String code) {
-
+	public ModelAndView kakao(String code) {
+		
+		ModelAndView mav = new ModelAndView();
 		String accessToken = kakaoLogin.getAccessToken(code);
 		UserVO kakao_userinfo = kakaoLogin.getUserInfo(accessToken);
-		System.out.println("userinfo: "+kakao_userinfo);
 		
+		
+	if(userService.apiLoginCheck(kakao_userinfo.getUserId())) {
+		mav.setViewName("main");
+		
+		return mav;
+	}else {
+		mav.setViewName("addExtraForm");
+		mav.addObject("userInfo", kakao_userinfo);
+		
+		return mav;
+	}
 	
 
 	
 	        
-		return "login";
+	
 	}
 	
 	
