@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 
 import com.bitcamp.aura.user.model.UserVO;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Service
 public class KakaoLoginAPI implements KakaoLogin{
+	UserVO userInfo = new UserVO();
 
 	@Override
 	public String getAccessToken(String code) {
@@ -39,7 +39,6 @@ public class KakaoLoginAPI implements KakaoLogin{
 	        sb.append("&client_id=4d8be14468ba52dd371e3720b6c97958");
 	        sb.append("&redirect_uri=http://localhost:8000/user/oauth/kakao");
 	        sb.append("&code=" + code);
-	        System.out.println(sb.toString());
 	        bw.write(sb.toString());
 	        bw.flush();
 	        
@@ -57,6 +56,9 @@ public class KakaoLoginAPI implements KakaoLogin{
 	       JsonParser parser = new JsonParser();
 	       JsonElement element = parser.parse(response.toString());
 	       String accessToken = element.getAsJsonObject().get("access_token").getAsString();
+	       String refresh_token = element.getAsJsonObject().get("refresh_token").getAsString();
+	       userInfo.setAccessToken(accessToken);
+	       userInfo.setRefreshToken(refresh_token);
 	       
 	       return accessToken; 
 			
@@ -82,7 +84,6 @@ public class KakaoLoginAPI implements KakaoLogin{
 		try {
 			url = new URL(urlReq);
 			HttpURLConnection conn= (HttpURLConnection) url.openConnection();
-			UserVO user = new UserVO();
 			
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Authorization", "Bearer "+accessToken);
@@ -96,7 +97,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 				result += line;
 			}
 			
-			UserVO userInfo = new UserVO();
+		
 			
 			JsonParser parser =  new JsonParser();
 			JsonElement element = parser.parse(result.toString());
@@ -104,6 +105,8 @@ public class KakaoLoginAPI implements KakaoLogin{
 			
 			//아이디
 			userInfo.setUserId(element.getAsJsonObject().get("id").getAsString());
+			
+			//프로필
 			userInfo.setProfile(element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image").getAsString());
 			
 			//이메일 정보 
@@ -120,6 +123,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			sim.format(new Date());
 			userInfo.setRegDate(sim.format(new Date()));
+			
 			//성별 정보 
 			if(kakao_account.getAsJsonObject().get("has_gender").getAsBoolean()) {
 				
