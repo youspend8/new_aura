@@ -1,8 +1,9 @@
 package com.bitcamp.aura.user.social;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public interface NaverLogin {
-	public String getAccessToken(String code, String state) throws IOException;
-	public String getUserInfo(String accessToken) throws IOException;
+	public HashMap<String, Object> getAccessToken(String code, String state) throws IOException;
+	public HashMap<String, Object> getUserInfo(HashMap<String, Object> userInfo) throws IOException;
 }
