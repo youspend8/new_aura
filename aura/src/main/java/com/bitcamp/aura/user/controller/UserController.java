@@ -73,7 +73,7 @@ public class UserController {
 	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
 	    	
 	    	
-	    	mav.addObject("userInfo");
+	    	mav.addObject("UserInfo",UserInfo);
 	    	mav.setViewName("");
 	    	return mav;
 	    }else {
@@ -81,6 +81,20 @@ public class UserController {
 	    	return mav;
 	    }
 	}
+//
+//	@RequestMapping("/oauth/facebook")
+//	public String facebook(String code, Model model) {
+//		String accessToken = facebookLogin.getAccessToken(code);
+//		String userId = facebookLogin.getUserId(accessToken);
+//	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
+//	    
+//	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
+//	    	model.addAttribute("UserInfo", UserInfo);
+//	    	return "main";
+//	    } else {
+//	    	return "main";
+//	    }
+//	}
 	
 	@RequestMapping("/oauth/kakao")
 	public String kakao(String code) {
