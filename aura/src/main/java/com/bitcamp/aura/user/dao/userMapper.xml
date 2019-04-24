@@ -85,6 +85,14 @@
 		WHERE
 			NICKNAME = #{nickname}
 	</select>
+	<select id="selectOneUserid" parameterType="String" resultType="UserVO">
+		SELECT 
+			*
+		FROM
+			USER_ACCOUNT
+		WHERE
+			USERID = #{userid}
+	</select>
 	<select id="selectOneEmail" parameterType="String" resultType="UserVO">
 		SELECT
 			*
