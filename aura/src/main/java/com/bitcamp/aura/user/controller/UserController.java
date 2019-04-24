@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.aura.user.model.UserVO;
 import com.bitcamp.aura.user.service.UserServiceImpl;
@@ -63,17 +64,22 @@ public class UserController {
 	}
 	
 	@RequestMapping("/oauth/facebook")
-	public String facebook(String code) {
+	public ModelAndView facebook(String code) {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
+	    ModelAndView mav = new ModelAndView();
 	    
 	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
-	    	return "";
+	    	
+	    	
+	    	mav.addObject("userInfo");
+	    	mav.setViewName("");
+	    	return mav;
 	    }else {
-	    	return "login";
+	    	mav.setViewName("main");
+	    	return mav;
 	    }
-	    
 	}
 	
 	@RequestMapping("/oauth/kakao")
