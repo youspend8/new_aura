@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.stereotype.Service;
@@ -83,13 +84,16 @@ public class NaverLoginAPI implements NaverLogin{
 		} else if ("F" == (response.getAsJsonObject().get("gender").getAsString())) {
 			gender = 2;
 		}
+		//가입일
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
 		
 		userVo.setUserId((response.getAsJsonObject().get("id").getAsString()));
 		userVo.setProfile((response.getAsJsonObject().get("profile_image").getAsString()));
 		userVo.setGender(gender);
 		userVo.setEmail((response.getAsJsonObject().get("email").getAsString()));
 		userVo.setName((response.getAsJsonObject().get("name").getAsString()));
-		userVo.setRegDate((new Date()));
+		userVo.setRegDate(sim.format(new Date()));
 		userVo.setRegLocation(3);
 		userVo.setIsAdmin(0);
 		

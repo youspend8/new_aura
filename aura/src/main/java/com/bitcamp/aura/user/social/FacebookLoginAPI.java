@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,11 +147,15 @@ public class FacebookLoginAPI implements FacebookLogin{
 //	        UserInfo = name + email + userid;
 	        //API 에서 받아오 name email set로 박음
 	        
+	        //가임일
+			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	        
+			
 	        uservo.setNickname("김민서");
 	        uservo.setEmail(email);
 	        uservo.setName(name);
 	        uservo.setUserId(userid);
-	        uservo.setRegDate(new Date());
+	        uservo.setRegDate(sim.format(new Date()));
 	        uservo.setRegLocation(2);
 	        uservo.setIsAdmin(0);
 	        uservo.setPwMissCount(0);
