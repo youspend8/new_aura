@@ -16,6 +16,14 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 
+	
+	
+	
+	@Override
+	public boolean apiLoginCheck(String userid) {
+		// TODO Auto-generated method stub
+		return userMapper.selectOneUserid(userid) != null ? true : false ;
+	}
 	@Override
 	public boolean login(String email, String password) {
 		// TODO Auto-generated method stub
@@ -69,11 +77,5 @@ public class UserServiceImpl implements UserService {
 	public List<UserVO> getAllUser() {
 		// TODO Auto-generated method stub
 		return userMapper.selectAll();
-	}
-
-	@Override
-	public boolean apiLoginCheck(String userid) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
