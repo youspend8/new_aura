@@ -56,7 +56,7 @@ public class UserController {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    String UserInfo = facebookLogin.getUserInfo(accessToken, userId);
-	        
+	    
 		return "login";
 	}
 	

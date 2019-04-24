@@ -147,6 +147,8 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        //API 에서 받아오 name email set로 박음
 	        
 	        
+	        
+	        
 	        uservo.setNickname("김민서");
 	        uservo.setEmail(email);
 	        uservo.setName(name);
