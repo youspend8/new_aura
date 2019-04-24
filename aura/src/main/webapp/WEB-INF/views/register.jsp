@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>All Review 회원가입 페이지</title>
+	<title>회원가입 - All Review</title>
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -23,7 +23,7 @@
 				<div class="card-wrapper" style="width : 400px;">
 					<div class="brand">
 						<!-- 로고 -->
-						<a href="/user/loginForm">
+						<a href="/main">
 							<img src="/img/all_review_img/All Review 로고.png" alt="bootstrap 4 login page"
 								style="width:150px;">
 						</a>

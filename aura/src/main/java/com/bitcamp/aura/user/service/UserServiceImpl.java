@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean join(UserVO userVo, String pwCheck) {
 		// TODO Auto-generated method stub

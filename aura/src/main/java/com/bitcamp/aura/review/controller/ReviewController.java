@@ -10,7 +10,14 @@ public class ReviewController {
 	
 	@RequestMapping(value="/list")
 	public String list() {
-		
+
 		return "reviewList";
 	}
+	
+	@RequestMapping(value="/post")
+	public String post() {
+		
+		return "reviewPost";
+	}
+	
 }

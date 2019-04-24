@@ -13,18 +13,17 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/main")
+	public String main() {
+		
+		return "main";
+	}
+	
 	@RequestMapping(value="/manager/page/gogo/gimoddi")
 	public String manager() {
 		
 		return "redirect:http://localhost:3000/";
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }
 

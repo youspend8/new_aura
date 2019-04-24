@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="refresh" content="1.5;url=/user/loginForm">
+	<meta http-equiv="refresh" content="1.5;url=/main">
 	
 	<title>All Review Explain</title>
 	
