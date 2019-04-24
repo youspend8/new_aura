@@ -34,5 +34,6 @@ public class UserVO {
 	private int pwMissCount;
 	private int authorType;
 	private String profile;
-	private String userId;
+	private String userId; 
+	private int ageRange;
 }

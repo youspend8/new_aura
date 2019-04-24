@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bitcamp.aura.user.model.UserVO;
 import com.bitcamp.aura.user.service.UserServiceImpl;
-import com.bitcamp.aura.user.social.FacebookLogin;
 import com.bitcamp.aura.user.social.FacebookLoginAPI;
+import com.bitcamp.aura.user.social.KakaoLoginAPI;
 import com.bitcamp.aura.user.social.NaverLoginAPI;
 
 
@@ -30,6 +30,9 @@ public class UserController {
 	
 	@Autowired
 	private FacebookLoginAPI facebookLogin;
+	
+	@Autowired
+	private KakaoLoginAPI kakaoLogin;
 	
 	@RequestMapping(value="/loginForm")
 	public String loginForm(Model model) {
@@ -68,5 +71,23 @@ public class UserController {
 	    
 		return "login";
 	}
+	
+	@RequestMapping("/oauth/kakao")
+	public String kakao(String code) {
+
+		String accessToken = kakaoLogin.getAccessToken(code);
+		UserVO kakao_userinfo = kakaoLogin.getUserInfo(accessToken);
+		System.out.println("userinfo: "+kakao_userinfo);
+		
+	
+
+	
+	        
+		return "login";
+	}
+	
+	
+	
+	
 	
 }
