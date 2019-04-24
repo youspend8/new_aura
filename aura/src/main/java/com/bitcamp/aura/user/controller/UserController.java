@@ -73,8 +73,8 @@ public class UserController {
 	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
 	    	
 	    	
-	    	mav.addObject("UserInfo",UserInfo);
-	    	mav.setViewName("");
+	    	mav.addObject("userInfo",UserInfo);
+	    	mav.setViewName("addExtraForm");
 	    	return mav;
 	    }else {
 	    	mav.setViewName("main");
