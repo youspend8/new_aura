@@ -88,7 +88,6 @@ public class NaverLoginAPI implements NaverLogin{
 			gender = 2;
 		}
 		//가입일
-		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 		userVo.setUserId((response.getAsJsonObject().get("id").getAsString()));
 		userVo.setProfile((response.getAsJsonObject().get("profile_image").getAsString()));
