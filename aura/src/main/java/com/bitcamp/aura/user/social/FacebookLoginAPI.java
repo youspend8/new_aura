@@ -146,20 +146,22 @@ public class FacebookLoginAPI implements FacebookLogin{
 //	        UserInfo = name + email + userid;
 	        //API 에서 받아오 name email set로 박음
 	        
-	        uservo.setNickname("김민서");
-	        uservo.setEmail(email);
-	        uservo.setName(name);
-	        uservo.setUserId(userid);
-	        uservo.setRegDate(new Date());
-	        uservo.setRegLocation(2);
-	        uservo.setIsAdmin(0);
-	        uservo.setPwMissCount(0);
-	        uservo.setAuthorType(1);
+//	        uservo.setNickname("김민서");
+//	        uservo.setEmail(email);
+//	        uservo.setName(name);
+//	        uservo.setUserId(userid);
+//	        uservo.setRegDate(new Date());
+//	        uservo.setRegLocation(2);
+//	        uservo.setIsAdmin(0);
+//	        uservo.setPwMissCount(0);
+//	        uservo.setAuthorType(1);
+	        
+//	       UM.delete("김민서");
 	       
 	        
-//	        //selectAll
-//	        for(UserVO Vo : UM.selectAll())
-//	        	System.out.println(Vo);
+	        //selectAll
+	        for(UserVO Vo : UM.selectAll())
+	        	System.out.println(Vo);
 	        
 	        
 //	        System.out.println("UserInfo =>" + UserInfo);

@@ -61,12 +61,16 @@ public class UserController {
 	
 	@RequestMapping("/oauth/facebook")
 	public String facebook(String code) {
-		
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
 	    
-		return "login";
+	    if(userService.loginAPI(UserInfo.getUserId()) == false) {
+	    	return "";
+	    }else {
+	    	return "login";
+	    }
+	    
 	}
 	
 	@RequestMapping("/oauth/kakao")

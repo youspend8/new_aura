@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+	
 	@Override
 	public boolean login(String email, String password) {
 		
