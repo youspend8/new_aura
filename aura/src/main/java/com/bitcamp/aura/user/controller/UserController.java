@@ -4,7 +4,6 @@ package com.bitcamp.aura.user.controller;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,13 +53,20 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/oauth/naver")
-	public String naverLogin(String code, String state) throws IOException {
-		String resultPage = "";
-		
+	public ModelAndView naverLogin(String code, String state) throws IOException {
+		ModelAndView model = new ModelAndView();
 		UserVO userVo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state));
-		userService.apiLoginCheck(userVo.getUserId());
 		
-		return resultPage;
+		
+		if(userService.apiLoginCheck(userVo.getUserId()) == false) {
+			model.addObject("userInfo", userVo);
+			model.setViewName("addExtraForm");
+	    	return model;
+	    }else {
+	    	model.setViewName("main");
+	    	return model;
+	    }
+		
 	}
 	
 	@RequestMapping("/oauth/facebook")
