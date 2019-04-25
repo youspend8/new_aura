@@ -2,6 +2,7 @@ package com.bitcamp.aura.user.service;
 
 import java.util.List;
 
+import org.omg.Messaging.SyncScopeHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,16 +39,20 @@ public class UserServiceImpl implements UserService {
 	public boolean join(@ModelAttribute UserVO userVo, String pwCheck,
 			String addr,
 			String addr_code,
-			String addr_Datail,
+			String addr_Detail,
 			String address) {
 		// TODO Auto-generated method stub
 		//닉네임이 없으면 password 2개 체크해서 추가
 		if (userMapper.selectOne(userVo.getNickname()) == null) {
 			if (userVo.getPassword().equals(pwCheck)) {
-			
-				address = addr + addr_code + addr_Datail;
 				
-				System.out.println(userVo.getAddress());
+				StringBuilder sb = new StringBuilder();
+				StringBuilder Addr_code = sb.append(userVo.getAddr_code()+"\t");
+				StringBuilder Addr = sb.append(userVo.getAddr()+"\t");
+				StringBuilder Addr_Detail = sb.append(userVo.getAddr_Detail()+"\t");
+				
+				userVo.setAddress(sb.toString());
+				
 				userMapper.insert(userVo);
 				return true;
 			}

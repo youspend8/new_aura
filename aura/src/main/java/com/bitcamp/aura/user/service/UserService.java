@@ -11,7 +11,7 @@ public interface UserService {
 	public boolean join (UserVO userVo, String pwCheck,
 			String addr,
 			String addr_code,
-			String addr_Datail,
+			String addr_Detail,
 			String address);
 	public void modify (UserVO userVo);
 	public void withdraw (String nickname);
