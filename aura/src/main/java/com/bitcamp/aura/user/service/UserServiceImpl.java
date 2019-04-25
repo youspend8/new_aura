@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.bitcamp.aura.user.dao.UserMapper;
 import com.bitcamp.aura.user.model.UserVO;
@@ -34,15 +35,23 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public boolean join(UserVO userVo, String pwCheck) {
+	public boolean join(@ModelAttribute UserVO userVo, String pwCheck,
+			String addr,
+			String addr_code,
+			String addr_Datail,
+			String address) {
 		// TODO Auto-generated method stub
+		//닉네임이 없으면 password 2개 체크해서 추가
 		if (userMapper.selectOne(userVo.getNickname()) == null) {
 			if (userVo.getPassword().equals(pwCheck)) {
+			
+				address = addr + addr_code + addr_Datail;
+				
+				System.out.println(userVo.getAddress());
 				userMapper.insert(userVo);
 				return true;
 			}
 		}
-		
 		return false;
 	}
 
@@ -74,5 +83,17 @@ public class UserServiceImpl implements UserService {
 	public List<UserVO> getAllUser() {
 		// TODO Auto-generated method stub
 		return userMapper.selectAll();
+	}
+
+	@Override
+	public boolean snsLogin(UserVO uservo) {
+		//DB 속에 아무것도 같은게 없을떄 true
+		if (userMapper.selectOne(uservo.getNickname()) == null || userMapper.selectOne(uservo.getEmail()) == null) {
+			userMapper.insert(uservo);
+			return true;
+		}else {
+			
+			return false;
+		}
 	}
 }

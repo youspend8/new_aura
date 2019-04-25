@@ -19,14 +19,11 @@
 <body>
 
 
-
-
-
 	<div class="container d-flex align-items-center flex-column mt-5">
 		<div>추가정보 입력</div>
 
 		<form class="col-lg-5 col-md-7 d-flex flex-column" method="post"
-			action="/user/test">
+			action="/user/oauth/register">
 
 			<!-- 닉네임 -->
 
@@ -58,9 +55,9 @@
 					<div class="btn-group btn-group-toggle my-2 w-50 align-self-center"
 						data-toggle="buttons">
 						<label class="btn btn-primary active"> <input type="radio"
-							name="gender" class="btn btn-primary" value="male" checked>남자
+							name="gender" class="btn btn-primary" value="1" checked>남자
 						</label> <label class="btn btn-primary"> <input type="radio"
-							name="gender" class="btn btn-primary" value="female">여자
+							name="gender" class="btn btn-primary" value="0">여자
 						</label>
 					</div>
 				</c:when>
@@ -72,17 +69,14 @@
 
 
 			<input type="hidden" value="${userInfo.regDate }" name="regDate">
-			<input type="hidden" value="${userInfo.regLocation }"
-				name="regLocation"> <input type="hidden"
-				value="${userInfo.isAdmin }" name="isAdmin"> <input
-				type="hidden" value="${userInfo.accessToken }" name="accessToken">
-			<input type="hidden" value="${userInfo.refreshToken }"
-				name="refreshToken"> <input type="hidden"
-				value="${userInfo.profile }" name="profile"> <input
-				type="hidden" value="${userInfo.userId }" name="userId"> <br>
-			<br>
-			<button type="submit"
-				class="btn btn-primary my-3 w-50 align-self-center">Submit</button>
+			<input type="hidden" value="${userInfo.regLocation }" name="regLocation">
+			<input type="hidden" value="${userInfo.isAdmin }" name="isAdmin">
+			<input type="hidden" value="${userInfo.accessToken }" name="accessToken">
+			<input type="hidden" value="${userInfo.refreshToken }" name="refreshToken">
+			<input type="hidden" value="${userInfo.profile }" name="profile">
+			<input type="hidden" value="${userInfo.userId }" name="userId">
+			<input type="hidden" value="${userInfo.name }" name="name">
+			<button type="submit" class="btn btn-primary my-3 w-50 align-self-center" >Submit</button>
 		</form>
 
 

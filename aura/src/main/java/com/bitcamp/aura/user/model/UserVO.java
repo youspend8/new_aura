@@ -35,4 +35,7 @@ public class UserVO {
 	private String profile;
 	private String userId; 
 	private int ageRange;
+	private String addr;
+	private String addr_code;
+	private String addr_Datail;
 }

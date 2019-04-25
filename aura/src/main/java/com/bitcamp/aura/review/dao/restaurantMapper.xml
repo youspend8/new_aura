@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.bitcamp.aura.review.dao.RestaurantMapper">
+	<insert id="insert" parameterType="RestaurantVO">
+		
+	</insert>
+	<update id="update" parameterType="RestaurantVO">
+		
+	</update>
+	<delete id="delete" parameterType="int">
+		
+	</delete>
+	<select id="selectByNum" parameterType="int" resultType="RestaurantVO">
+	
+	</select>
+	<select id="selectAll" resultType="RestaurantVO">
+		
+	</select>
+</mapper>

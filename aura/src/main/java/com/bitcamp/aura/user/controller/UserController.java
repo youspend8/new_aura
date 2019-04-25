@@ -4,13 +4,19 @@ package com.bitcamp.aura.user.controller;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.aura.user.model.UserVO;
@@ -29,12 +35,11 @@ public class UserController {
 	
 	@Autowired
 	private NaverLoginAPI naverLogin;
-	
 	@Autowired
 	private FacebookLoginAPI facebookLogin;
-	
 	@Autowired
 	private KakaoLoginAPI kakaoLogin;
+	
 	
 	@RequestMapping(value="/loginForm")
 	public String loginForm(Model model) {
@@ -44,9 +49,17 @@ public class UserController {
 	
 	@RequestMapping(value="/registerForm")
 	public String registerForm() {
-		
 		return "register";
 	}
+
+	@RequestMapping(value="/register")
+	public String register(@ModelAttribute UserVO uservo,String pwCheck) {
+		
+	userService.join(uservo, pwCheck, (String)uservo.getAddress(),(String)uservo.getAddr_code(),(String)uservo.getAddr_Datail(),(String)uservo.getAddr());
+		
+		return "login";
+	}
+	
 	
 	@RequestMapping(value="/forgotForm")
 	public String forgotForm() {
@@ -87,7 +100,7 @@ public class UserController {
 	    	return mav;
 	    }
 	}
-//
+	
 //	@RequestMapping("/oauth/facebook")
 //	public String facebook(String code, Model model) {
 //		String accessToken = facebookLogin.getAccessToken(code);
@@ -116,22 +129,19 @@ public class UserController {
 		} else {
 			mav.setViewName("addExtraForm");
 			mav.addObject("userInfo", kakao_userinfo);
-
 			return mav;
 		}
 
+		
 	}
 	
-	@RequestMapping("/test")
-	public void test(@RequestParam Map<String, Object> params) {
-
-		System.out.println(params);
-
+	@RequestMapping("/oauth/register")
+	public String oauth_reg (@ModelAttribute UserVO uservo,HttpSession session) {
+		if(userService.snsLogin(uservo) == true) { //DB에 중복값 X => insert
+			return "main";
+		}
+		else { //DB에 중복값 O => insert X => 바로 로그인시켜주기
+			return "main";
+		}
 	}
-	
-	
-	
-	
-	
-	
 }

@@ -137,7 +137,6 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        JsonParser parser = new JsonParser();
 	        JsonElement element = parser.parse(result);
 	        
-	        
 	        String name = element.getAsJsonObject().get("name").getAsString();
 	        String email = element.getAsJsonObject().get("email").getAsString();
 	        String userid = element.getAsJsonObject().get("id").getAsString();
@@ -148,11 +147,13 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        //API 에서 받아오 name email set로 박음
 	        
 	        //가임일
-			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			
 			//페이스북 성별 없다
+	        uservo.setGender(-1);
 	        uservo.setEmail(email);
 	        uservo.setName(name);
+	        uservo.setAccessToken(accessToken);
 	        uservo.setUserId(userid);
 	        uservo.setRegDate(sim.format(new Date()));
 	        uservo.setRegLocation(2);
@@ -160,14 +161,9 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        uservo.setPwMissCount(0);
 	        uservo.setAuthorType(1);
 	        
-	        
-	        
-//	       UM.delete("김민서");
-	       
-	        
 	        //selectAll
 	        for(UserVO Vo : UM.selectAll())
-	        	System.out.println(Vo);
+	        	System.out.println("확인 :"+Vo);
 	        
 	        
 //	        System.out.println("UserInfo =>" + UserInfo);
