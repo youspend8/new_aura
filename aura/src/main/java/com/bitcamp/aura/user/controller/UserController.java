@@ -59,7 +59,6 @@ public class UserController {
 		ModelAndView model = new ModelAndView();
 		UserVO userVo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state));
 		
-		
 		if(userService.apiLoginCheck(userVo.getUserId()) == false) {
 			model.addObject("userInfo", userVo);
 			model.setViewName("addExtraForm");
