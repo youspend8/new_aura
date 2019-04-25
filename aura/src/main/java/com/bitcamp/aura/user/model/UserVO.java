@@ -1,6 +1,5 @@
 package com.bitcamp.aura.user.model;
 
-import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 

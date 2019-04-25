@@ -15,7 +15,8 @@ import org.springframework.context.annotation.Configuration;
 		"com.bitcamp.aura.user.dao",
 		"com.bitcamp.aura.review.dao",
 		"com.bitcamp.aura.notice.dao",
-		"com.bitcamp.aura.reviewlist.dao"
+		"com.bitcamp.aura.reviewlist.dao",
+		"com.bitcamp.aura.comment.dao"
 	}
 )
 public class MybatisConfig {

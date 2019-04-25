@@ -82,9 +82,9 @@ public class NaverLoginAPI implements NaverLogin{
 		int gender = -1;
 		
 		
-		if ("M" == (response.getAsJsonObject().get("gender").getAsString())) {
+		if ("M".equals((response.getAsJsonObject().get("gender").getAsString()))) {
 			gender = 1;
-		} else if ("F" == (response.getAsJsonObject().get("gender").getAsString())) {
+		} else if ("F".equals((response.getAsJsonObject().get("gender").getAsString()))) {
 			gender = 0;
 		}
 

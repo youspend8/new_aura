@@ -1,0 +1,23 @@
+{
+	"id":1067242569,
+	"properties": {
+		"nickname":"YongChan",
+		"profile_image":"http://k.kakaocdn.net/dn/btoubG/btquEBc7zFW/ZtFJ98SzzRtodubiPpLZj0/profile_640x640s.jpg",
+		"thumbnail_image":"http://k.kakaocdn.net/dn/btoubG/btquEBc7zFW/ZtFJ98SzzRtodubiPpLZj0/profile_110x110c.jpg"
+	},
+	"kakao_account": {
+		"has_email":true,
+		"email_needs_agreement":false,
+		"is_email_valid":true,
+		"is_email_verified":true,
+		"email":"syc0821@naver.com",
+		"has_age_range":true,
+		"age_range_needs_agreement":false,
+		"age_range":"20~29",
+		"has_birthday":true,
+		"birthday_needs_agreement":false,
+		"birthday":"0821",
+		"has_gender":false,
+		"gender_needs_agreement":false
+	}
+}
