@@ -4,11 +4,13 @@ package com.bitcamp.aura.user.controller;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.aura.user.model.UserVO;
@@ -103,28 +105,31 @@ public class UserController {
 	
 	@RequestMapping("/oauth/kakao")
 	public ModelAndView kakao(String code) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		String accessToken = kakaoLogin.getAccessToken(code);
 		UserVO kakao_userinfo = kakaoLogin.getUserInfo(accessToken);
-		
-		
-	if(userService.apiLoginCheck(kakao_userinfo.getUserId())) {
-		mav.setViewName("main");
-		
-		return mav;
-	}else {
-		mav.setViewName("addExtraForm");
-		mav.addObject("userInfo", kakao_userinfo);
-		
-		return mav;
-	}
-	
 
-	
-	        
-	
+		if (userService.apiLoginCheck(kakao_userinfo.getUserId())) {
+			mav.setViewName("main");
+
+			return mav;
+		} else {
+			mav.setViewName("addExtraForm");
+			mav.addObject("userInfo", kakao_userinfo);
+
+			return mav;
+		}
+
 	}
+	
+	@RequestMapping("/test")
+	public void test(@RequestParam Map<String, Object> params) {
+
+		System.out.println(params);
+
+	}
+	
 	
 	
 	
