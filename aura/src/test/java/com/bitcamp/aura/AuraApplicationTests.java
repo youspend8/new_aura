@@ -1,10 +1,13 @@
 package com.bitcamp.aura;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.bitcamp.aura.review.dao.RestaurantMapper;
+import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.reviewlist.service.ReviewListService;
 
 @RunWith(SpringRunner.class)
@@ -18,7 +21,14 @@ public class AuraApplicationTests {
 //	private BadCategoryRepository cRepo;
 	
 	@Autowired
-	private ReviewListService reviewService;
+	private RestaurantMapper rMapper;
+	
+	@Test
+	public void restaurant() {
+		for (RestaurantVO r : rMapper.selectAll()) {
+			System.out.println(r);
+		}
+	}
 	
 //	@Test
 //	public void SignTest() {
