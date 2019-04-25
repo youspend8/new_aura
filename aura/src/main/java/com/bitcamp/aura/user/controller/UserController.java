@@ -4,10 +4,14 @@ package com.bitcamp.aura.user.controller;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,19 +53,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/register")
-	public String register(@ModelAttribute UserVO uservo,
-			String addr,
-			String addr_code,
-			String addr_Datail) {
+	public String register(@ModelAttribute UserVO uservo,String pwCheck) {
 		
-		
-		System.out.println(uservo.getEmail());
-		System.out.println(uservo.getPassword());
-		System.out.println(uservo.getName());
-		System.out.println(uservo.getNickname());
-		System.out.println(uservo.getGender());
-		System.out.println(uservo.getTel());
-		
+	userService.join(uservo, pwCheck, (String)uservo.getAddress(),(String)uservo.getAddr_code(),(String)uservo.getAddr_Datail(),(String)uservo.getAddr());
 		
 		return "login";
 	}
@@ -108,8 +102,19 @@ public class UserController {
 	    }
 	}
 	
-	//model.addAttribute("UserINfo", userInfo);
-	//return "main"
+//	@RequestMapping("/oauth/facebook")
+//	public String facebook(String code, Model model) {
+//		String accessToken = facebookLogin.getAccessToken(code);
+//		String userId = facebookLogin.getUserId(accessToken);
+//	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
+//	    
+//	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
+//	    	model.addAttribute("UserInfo", UserInfo);
+//	    	return "main";
+//	    } else {
+//	    	return "main";
+//	    }
+//	}
 	
 	@RequestMapping("/oauth/kakao")
 	public ModelAndView kakao(String code) {
@@ -125,22 +130,18 @@ public class UserController {
 		} else {
 			mav.setViewName("addExtraForm");
 			mav.addObject("userInfo", kakao_userinfo);
-
 			return mav;
 		}
 
 	}
 	
-	@RequestMapping("/test")
-	public void test(@RequestParam Map<String, Object> params) {
-
-		System.out.println(params);
-
+	@RequestMapping("/oauth/register")
+	public String oauth_reg (@ModelAttribute UserVO uservo,HttpSession session) {
+		if(userService.snsLogin(uservo) == true) { //DB에 중복값 X => insert
+			return "main";
+		}
+		else { //DB에 중복값 O => insert X => 바로 로그인시켜주기
+			return "main";
+		}
 	}
-	
-	
-	
-	
-	
-	
 }

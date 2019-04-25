@@ -63,7 +63,7 @@
 
 								<div class="form-group">
 									<div class="md-form">
-										<input type="password" class="form-control" id="password_confirm">
+										<input type="password" class="form-control" id="password_confirm" name="pwCheck">
 										<label for="password_confirm">비밀번호 확인 *</label>
 									</div>
 									<div class="invalid-feedback">
