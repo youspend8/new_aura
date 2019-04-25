@@ -7,6 +7,7 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bitcamp.aura.user.service.UserServiceImpl;
 import com.bitcamp.aura.user.social.FacebookLogin;
 import com.bitcamp.aura.user.social.FacebookLoginAPI;
+import com.bitcamp.aura.user.social.GoogleLoginAPI;
 import com.bitcamp.aura.user.social.NaverLoginAPI;
 
 
@@ -29,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	private FacebookLoginAPI facebookLogin;
+		
+	@Autowired
+	private GoogleLoginAPI googleLogin;
 	
 	@RequestMapping(value="/loginForm")
 	public String loginForm(Model model) {
@@ -61,6 +66,16 @@ public class UserController {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    String UserInfo = facebookLogin.getUserInfo(accessToken, userId);
+	        
+		return "login";
+	}
+	
+	@RequestMapping("/oauth/google")
+	public String google(String code) {
+		
+		String accessToken = googleLogin.getAccessToken(code);
+		String userId = googleLogin.getUserId(accessToken);
+	    String UserInfo = googleLogin.getUserInfo(accessToken, userId);
 	        
 		return "login";
 	}

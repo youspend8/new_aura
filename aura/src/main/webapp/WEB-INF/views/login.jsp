@@ -91,16 +91,18 @@
 										</div>
 									</div>
 
-									<div class="view overlay col-3 p-0">
+									<div class="view overlay col-3 p-0"
+									>
 										<a href="#">
 											<img src="/img/all_review_img/google.png"width="60px">
+										</a>								
 										<div class="mask flex-center rgba-white-light">
 										</div>
-										</a>								
 									</div>
 
-									<a class="view overlay col-3 p-0"
-									onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=od8MnK4Tb6sAdnv6ZeIT&redirect_uri=http://localhost:8000/user/oauth/naver&state=${state}'">
+										<a class="view overlay col-3 p-0"
+										onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=od8MnK4Tb6sAdnv6ZeIT
+										&redirect_uri=http://localhost:8000/user/oauth/naver&state=${state}'">
 										<div>
 											<img src="/img/all_review_img/naver.PNG"width="60px">
 											<div class="mask flex-center rgba-white-light"></div>	
