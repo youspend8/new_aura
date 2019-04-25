@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.bitcamp.aura.comment.dao.CommentMapper">
+
+	<insert id="insert" parameterType="CommentVO">
+		INSERT INTO USER_COMMENT (
+			REVIEW_POST_NUM,
+			NICKNAME,
+			COMMENT_CONTENTS,
+			COMMENT_LIKE,
+			COMMENT_SCORE,
+			COMMENT_DATE,
+			COMMENT_NUM
+		)
+		VALUES (
+			#{review_post_num, jdbcType=NUMBER},
+			#{nickname, jdbcType=VARCHAR},
+			#{comment_contents, jdbcType=VARCHAR},
+			#{comment_like, jdbcType=NUMBER},
+			#{comment_score, jdbcType=NUMBER},
+			#{comment_Date, jdbcType=VARCHAR},
+			#{comment_num, jdbcType=NUMBER}
+		)
+	</insert>
+	<update id="update" parameterType="CommentVO">
+		UPDATE
+			USER_COMMENT
+		SET
+			COMMENT_CONTENTS = #{comment_contents, jdbcType=VARCHAR},
+			COMMENT_LIKE = #{comment_like, jdbcType=NUMBER},
+			COMMENT_SCORE = #{comment_score, jdbcType=NUMBER},
+			COMMENT_DATE = #{comment_Date, jdbcType=VARCHAR}
+		WHERE
+			COMMENT_NUM = #{comment_num, jdbcType=NUMBER}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM
+			USER_COMMENT
+		WHERE
+			COMMENT_NUM = #{comment_num, jdbcType=NUMBER}
+	</delete>
+	<select id="selectOne" parameterType="String" resultType="CommentVO">
+		SELECT
+			*
+		FROM
+			USER_COMMENT
+		WHERE
+			NICKNAME = #{NICKNAME}
+	</select>
+	<select id="selectAll" resultType="CommentVO">
+		SELECT
+			*
+		FROM
+			USER_COMMENT
+	</select>
+
+
+
+
+
+
+
+
+
+</mapper>
