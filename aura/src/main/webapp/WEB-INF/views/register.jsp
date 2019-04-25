@@ -33,11 +33,10 @@
 							<!-- 회원가입 시작 -->
 							<h4 class="card-title" style="margin: 0;">회원가입</h4>
 							<hr style="border : solid 1px; color:rgb(190, 186, 186) ">
-							<form method="POST" class="my-login-validation" novalidate="">
-
+							<form method="POST" class="my-login-validation" novalidate="" action="register">
 								<div class="form-group">
 									<div class="md-form" style="display: flex;">
-										<input type="text" class="form-control" id="email" style="width:69%;">
+										<input type="text" class="form-control" id="email" name="email" style="width:69%;">
 										<label for="email">이메일 *</label>
 										<!-- 중복체크 아이디 넘김 -->
 										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="duplicate">
@@ -54,7 +53,7 @@
 								<!-- 비밀번호 -->
 								<div class="form-group">
 									<div class="md-form">
-										<input type="password" class="form-control" id="password">
+										<input type="password" class="form-control" id="password" name="password">
 										<label for="password">비밀번호 *</label>
 									</div>
 									<div class="invalid-feedback">
@@ -77,7 +76,7 @@
 
 								<div class="form-group">
 									<div class="md-form">
-										<input type="text" class="form-control" id="name">
+										<input type="text" class="form-control" id="name" name="name">
 										<label for="name">이름 *</label>
 									</div>
 									<div class="invalid-feedback">
@@ -88,7 +87,7 @@
 
 								<div class="form-group">
 									<div class="md-form" style="display: flex">
-										<input type="text" class="form-control" id="nickname" style="width:69%;">
+										<input type="text" class="form-control" id="nickname" name="nickname" style="width:69%;">
 										<label for="nickname">닉네임 *</label>
 										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="duplicate">
 
@@ -104,21 +103,21 @@
 									<div class="custom-control custom-radio custom-control-inline"
 										style="margin-left: 50px">
 										<input type="radio" class="custom-control-input" id="defaultInline1"
-											name="gender">
+											name="gender" value="1">
 										<label class="custom-control-label" for="defaultInline1">남자</label>
 									</div>
 
 									<div class="custom-control custom-radio custom-control-inline"
 										style="margin-left: 10px">
 										<input type="radio" class="custom-control-input" id="defaultInline2"
-											name="gender">
+											name="gender" value="0">
 										<label class="custom-control-label" for="defaultInline2">여자</label>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<div class="md-form">
-										<input type="text" class="form-control" id="phone">
+										<input type="text" class="form-control" id="phone" name="phone">
 										<label for="phone">휴대폰 번호 *</label>
 									</div>
 									<div class="invalid-feedback">
@@ -128,7 +127,7 @@
 
 								<div class="form-group">
 									<div class="md-form" style="display: flex">
-										<input type="text" class="form-control" id="address" style="width:69%;">
+										<input type="text" class="form-control" id="address" name="address" style="width:69%;">
 										<label for="address">주소(선택)</label>
 										<input type="button" class="btn btn-primary btn-sm" value="주소검색"
 											id="address_find">
@@ -137,8 +136,9 @@
 						</div>
 					</div>
 
-
 					<div class="form-group">
+					
+					
 						<button type="submit" class="btn btn-primary btn-block">
 							회원가입
 						</button>

@@ -9,7 +9,10 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.aura.user.model.UserVO;
@@ -28,12 +31,11 @@ public class UserController {
 	
 	@Autowired
 	private NaverLoginAPI naverLogin;
-	
 	@Autowired
 	private FacebookLoginAPI facebookLogin;
-	
 	@Autowired
 	private KakaoLoginAPI kakaoLogin;
+	
 	
 	@RequestMapping(value="/loginForm")
 	public String loginForm(Model model) {
@@ -43,9 +45,24 @@ public class UserController {
 	
 	@RequestMapping(value="/registerForm")
 	public String registerForm() {
-		
 		return "register";
 	}
+
+	@RequestMapping(value="/register")
+	public String register(@ModelAttribute UserVO uservo) {
+		
+		System.out.println(uservo.getEmail());
+		System.out.println(uservo.getPassword());
+		System.out.println(uservo.getName());
+		System.out.println(uservo.getNickname());
+		System.out.println(uservo.getGender());
+		System.out.println(uservo.getTel());
+		System.out.println(uservo.getAddress());
+		
+		
+		return "login";
+	}
+	
 	
 	@RequestMapping(value="/forgotForm")
 	public String forgotForm() {
@@ -81,19 +98,8 @@ public class UserController {
 	    }
 	}
 	
-//	@RequestMapping("/oauth/facebook")
-//	public String facebook(String code, Model model) {
-//		String accessToken = facebookLogin.getAccessToken(code);
-//		String userId = facebookLogin.getUserId(accessToken);
-//	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
-//	    
-//	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
-//	    	model.addAttribute("UserInfo", UserInfo);
-//	    	return "main";
-//	    } else {
-//	    	return "main";
-//	    }
-//	}
+	//model.addAttribute("UserINfo", userInfo);
+	//return "main"
 	
 	@RequestMapping("/oauth/kakao")
 	public ModelAndView kakao(String code) {
