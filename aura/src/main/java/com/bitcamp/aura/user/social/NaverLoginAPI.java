@@ -79,15 +79,14 @@ public class NaverLoginAPI implements NaverLogin{
 		
 		
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		int gender = 0;
+		int gender = -1;
 		
 		
 		if ("M" == (response.getAsJsonObject().get("gender").getAsString())) {
 			gender = 1;
 		} else if ("F" == (response.getAsJsonObject().get("gender").getAsString())) {
-			gender = 2;
+			gender = 0;
 		}
-		//가입일
 
 		userVo.setUserId((response.getAsJsonObject().get("id").getAsString()));
 		userVo.setProfile((response.getAsJsonObject().get("profile_image").getAsString()));

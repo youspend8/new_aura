@@ -199,12 +199,12 @@ a:hover {
     bottom: 3%;
     right: 2%;
     font-size: 3rem;
+    z-index: 10;
 }
 
 .board_search_title {
-    text-align: center;
-    font-weight: bolder;
-    font-size: 38px;
+    font-weight:bolder;
+    font-size: 30px;
 }
 
 .board_search_contents {
@@ -221,7 +221,7 @@ a:hover {
 
 @media (max-width: 767.9px) {
     .board_search_title {
-        font-size: 1.625rem;
+        font-size: 1.2rem;
     }
 
     .board_search_contents {
@@ -231,6 +231,11 @@ a:hover {
     .board_list_title {
         margin-top:3%; 
     }
+    
+    .board_filter {
+        font-size: 100%;
+    }
+    
     .hospital-category {
         width: 75%;
         left: -40%;
