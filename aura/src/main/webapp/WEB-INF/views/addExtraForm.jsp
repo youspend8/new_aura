@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +9,24 @@
 </head>
 <body>
 추가정보 입력하는데다!!ㅋㅋㅋㅋㅋㅋ
-${userInfo.email}
+${userInfo}<br>
+
+<div>
+
+<c:if test="${userInfo.nickname==null }">
+	닉네임 : <input type="text" placeholder="닉네임" name="nickname">
+</c:if>
+
+<c:if test="${userInfo.email==null }">
+<br>
+	이메일 : <input type="text" placeholder="email" name="email">
+</c:if>
+
+
+
+</div>
+
+
+
 </body>
 </html>
