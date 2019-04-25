@@ -147,17 +147,6 @@ public class FacebookLoginAPI implements FacebookLogin{
 //	        UserInfo = name + email + userid;
 	        //API 에서 받아오 name email set로 박음
 	        
-<<<<<<< HEAD
-	        
-//	        uservo.setNickname("김민서");
-//	        uservo.setEmail(email);
-//	        uservo.setName(name);
-//	        uservo.setRegDate(new Date());
-//	        uservo.setRegLocation(2);
-//	        uservo.setIsAdmin(1);
-//	        uservo.setPwMissCount(0);
-//	        uservo.setAuthorType(1);
-=======
 	        //가임일
 			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			
@@ -170,7 +159,6 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        uservo.setIsAdmin(0);
 	        uservo.setPwMissCount(0);
 	        uservo.setAuthorType(1);
->>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
 	        
 	        
 	        
