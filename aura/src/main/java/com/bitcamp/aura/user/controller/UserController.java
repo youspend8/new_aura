@@ -16,6 +16,7 @@ import com.bitcamp.aura.user.service.UserServiceImpl;
 import com.bitcamp.aura.user.social.FacebookLogin;
 import com.bitcamp.aura.user.social.FacebookLoginAPI;
 import com.bitcamp.aura.user.social.GoogleLoginAPI;
+import com.bitcamp.aura.user.social.KakaoLoginAPI;
 import com.bitcamp.aura.user.social.NaverLoginAPI;
 
 
@@ -31,9 +32,9 @@ public class UserController {
 	
 	@Autowired
 	private FacebookLoginAPI facebookLogin;
-		
+	
 	@Autowired
-	private GoogleLoginAPI googleLogin;
+	private KakaoLoginAPI kakaoLogin;
 	
 	@RequestMapping(value="/loginForm")
 	public String loginForm(Model model) {
@@ -54,15 +55,24 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/oauth/naver")
-	public String naverLogin(String code, String state) throws IOException {
-		HashMap<String, Object> userInfo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state)); 
+	public ModelAndView naverLogin(String code, String state) throws IOException {
+		ModelAndView model = new ModelAndView();
+		UserVO userVo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state));
 		
-		return "login";
+		
+		if(userService.apiLoginCheck(userVo.getUserId()) == false) {
+			model.addObject("userInfo", userVo);
+			model.setViewName("addExtraForm");
+	    	return model;
+	    }else {
+	    	model.setViewName("main");
+	    	return model;
+	    }
+		
 	}
 	
 	@RequestMapping("/oauth/facebook")
-	public String facebook(String code) {
-		
+	public ModelAndView facebook(String code) {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    String UserInfo = facebookLogin.getUserInfo(accessToken, userId);
@@ -79,5 +89,10 @@ public class UserController {
 	        
 		return "login";
 	}
+	
+	
+	
+	
+	
 	
 }

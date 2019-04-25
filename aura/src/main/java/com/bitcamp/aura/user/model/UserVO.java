@@ -25,14 +25,15 @@ public class UserVO {
 	private String ssn;
 	private int gender;
 	private String address;
-	private Date regDate;
+	private String regDate;
 	private int regLocation;
-	private Date delDate;
+	private String delDate;
 	private int isAdmin;
 	private String accessToken;
 	private String refreshToken;
 	private int pwMissCount;
 	private int authorType;
 	private String profile;
-	private String userId;
+	private String userId; 
+	private int ageRange;
 }

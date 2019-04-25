@@ -1,27 +1,24 @@
 package com.bitcamp.aura;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.bitcamp.aura.category.model.BadCategoryVO;
-import com.bitcamp.aura.category.model.SignLocationVO;
-import com.bitcamp.aura.category.persist.BadCategoryRepository;
-import com.bitcamp.aura.category.persist.SignLocationRepository;
-import com.bitcamp.aura.user.service.UserService;
-import com.fasterxml.jackson.databind.deser.CreatorProperty;
+import com.bitcamp.aura.reviewlist.service.ReviewListService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AuraApplicationTests {
 
-	@Autowired
-	private SignLocationRepository repo;
+//	@Autowired
+//	private SignLocationRepository repo;
+//	
+//	@Autowired
+//	private BadCategoryRepository cRepo;
 	
 	@Autowired
-	private BadCategoryRepository cRepo;
+	private ReviewListService reviewService;
 	
 //	@Test
 //	public void SignTest() {

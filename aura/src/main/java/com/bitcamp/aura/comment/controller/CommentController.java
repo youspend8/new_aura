@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CommentController {
 
 	@RequestMapping(value="/list")
-	public @ResponseBody String list() {
-		
-		return "";
+	public String list() {
+		return "reviewList";
+	}
+	
+	@RequestMapping(value="/post")
+	public String post() {
+		return "reviewPost";
 	}
 
 }

@@ -14,7 +14,8 @@ import org.springframework.context.annotation.Configuration;
 	basePackages={
 		"com.bitcamp.aura.user.dao",
 		"com.bitcamp.aura.review.dao",
-		"com.bitcamp.aura.notice.dao"
+		"com.bitcamp.aura.notice.dao",
+		"com.bitcamp.aura.reviewlist.dao"
 	}
 )
 public class MybatisConfig {
@@ -23,7 +24,7 @@ public class MybatisConfig {
 	public SqlSessionFactory sqlSessionFactory (DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
 		sqlSessionFactory.setDataSource(dataSource);
-		sqlSessionFactory.setTypeAliasesPackage("com.bitcamp.aura.user.model");
+		sqlSessionFactory.setTypeAliasesPackage("com.bitcamp.aura");
 		return sqlSessionFactory.getObject();
 	}
 	

@@ -24,7 +24,8 @@
 			PW_MISS_COUNT,
 			AUTHOR_TYPE,
 			PROFILE,
-			USERID
+			USERID,
+			AGE_RANGE
 		)
 		VALUES (
 			#{nickname, jdbcType=VARCHAR},
@@ -44,7 +45,8 @@
 			#{pwMissCount, jdbcType=NUMERIC},
 			#{authorType, jdbcType=NUMERIC},
 			#{profile, jdbcType=VARCHAR},
-			#{userId, jdbcType=VARCHAR}
+			#{userId, jdbcType=VARCHAR},
+			#{ageRange, jdbcType=NUMERIC}
 		)
 	</insert>
 	<update id="update" parameterType="UserVO">
@@ -67,7 +69,8 @@
 			PW_MISS_COUNT = #{pwMissCount, jdbcType=NUMERIC},
 			AUTHOR_TYPE = #{authorType, jdbcType=NUMERIC},
 			PROFILE = #{profile, jdbcType=VARCHAR},
-			USERID = #{userId, jdbcType=VARCHAR}
+			USERID = #{userId, jdbcType=VARCHAR},
+			AGE_RANGE = #{ageRange, jdbcType=NUMERIC}
 		WHERE
 			NICKNAME = #{nickname, jdbcType=VARCHAR}
 	</update>
