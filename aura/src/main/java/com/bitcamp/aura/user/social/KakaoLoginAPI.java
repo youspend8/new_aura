@@ -103,6 +103,14 @@ public class KakaoLoginAPI implements KakaoLogin{
 			JsonElement element = parser.parse(result.toString());
 			JsonElement kakao_account= element.getAsJsonObject().get("kakao_account");
 			
+			
+			
+			//비번틀린횟수
+			userInfo.setPwMissCount(0);
+			
+			//가입방식(카카오)			
+			userInfo.setRegLocation(4);
+			
 			//아이디
 			userInfo.setUserId(element.getAsJsonObject().get("id").getAsString());
 			
@@ -128,7 +136,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 			if(kakao_account.getAsJsonObject().get("has_gender").getAsBoolean()) {
 				
 				if(kakao_account.getAsJsonObject().get("gender").getAsString().equals("male")) {
-					userInfo.setGender(1);//남자
+					userInfo.setGender(-1);//남자
 				}else {
 					userInfo.setGender(0);//여자
 				}
