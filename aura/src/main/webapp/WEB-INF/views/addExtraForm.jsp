@@ -30,18 +30,12 @@
 
 			<!-- 닉네임 -->
 
-			<c:choose>
-				<c:when test="">
+	
 					<div class="md-form my-2">
 						<input type="text" class="form-control" id="nickname"
 							name="nickname" required> <label for="nickname">Nickname</label>
 					</div>
-				</c:when>
-				<c:otherwise>
-					<input type="hidden" value="${userInfo.nickname}" name="nickname">
-				</c:otherwise>
-			</c:choose>
-
+		
 
 
 			<!-- 이메일 -->
@@ -60,7 +54,7 @@
 
 			<!-- 성별 -->
 			<c:choose>
-				<c:when test="${userInfo.gender ne null}">
+				<c:when test="${userInfo.gender eq -1}">
 					<div class="btn-group btn-group-toggle my-2 w-50 align-self-center"
 						data-toggle="buttons">
 						<label class="btn btn-primary active"> <input type="radio"
