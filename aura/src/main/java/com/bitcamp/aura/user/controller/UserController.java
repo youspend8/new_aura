@@ -49,7 +49,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/register")
-	public String register(@ModelAttribute UserVO uservo) {
+	public String register(@ModelAttribute UserVO uservo,
+			String addr,
+			String addr_code,
+			String addr_Datail) {
+		
 		
 		System.out.println(uservo.getEmail());
 		System.out.println(uservo.getPassword());
@@ -57,7 +61,6 @@ public class UserController {
 		System.out.println(uservo.getNickname());
 		System.out.println(uservo.getGender());
 		System.out.println(uservo.getTel());
-		System.out.println(uservo.getAddress());
 		
 		
 		return "login";
