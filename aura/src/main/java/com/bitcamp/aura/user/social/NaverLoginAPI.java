@@ -87,7 +87,7 @@ public class NaverLoginAPI implements NaverLogin{
 		} else if ("F" == (response.getAsJsonObject().get("gender").getAsString())) {
 			gender = 0;
 		}
-		
+
 		userVo.setUserId((response.getAsJsonObject().get("id").getAsString()));
 		userVo.setProfile((response.getAsJsonObject().get("profile_image").getAsString()));
 		userVo.setGender(gender);

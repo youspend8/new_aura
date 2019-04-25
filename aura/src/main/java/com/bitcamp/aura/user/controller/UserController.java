@@ -70,18 +70,36 @@ public class UserController {
 	}
 	
 	@RequestMapping("/oauth/facebook")
-	public String facebook(String code) {
+	public ModelAndView facebook(String code) {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
+	    ModelAndView mav = new ModelAndView();
 	    
 	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
-	    	return "";
+	    	
+	    	mav.addObject("userInfo",UserInfo);
+	    	mav.setViewName("addExtraForm");
+	    	return mav;
 	    }else {
-	    	return "login";
+	    	mav.setViewName("main");
+	    	return mav;
 	    }
-	    
 	}
+//
+//	@RequestMapping("/oauth/facebook")
+//	public String facebook(String code, Model model) {
+//		String accessToken = facebookLogin.getAccessToken(code);
+//		String userId = facebookLogin.getUserId(accessToken);
+//	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
+//	    
+//	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
+//	    	model.addAttribute("UserInfo", UserInfo);
+//	    	return "main";
+//	    } else {
+//	    	return "main";
+//	    }
+//	}
 	
 	@RequestMapping("/oauth/kakao")
 	public ModelAndView kakao(String code) {

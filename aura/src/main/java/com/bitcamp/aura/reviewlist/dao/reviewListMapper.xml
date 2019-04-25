@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.bitcamp.aura.reviewlist.dao.ReviewListMapper">
+	<insert id="insert" parameterType="ReviewListVO">
+		
+	</insert>
+	<delete id="deleteByNum" parameterType="int">
+	
+	</delete>
+	<delete id="deleteAllByParams" parameterType="ReviewListSelectParamsVO">
+		
+	</delete>
+	<select id="selectByNum" parameterType="int" resultType="ReviewListVO">
+	
+	</select>
+	<select id="selectAllByParams" parameterType="ReviewListSelectParamsVO" resultType="ReviewListVO">
+	
+	</select>
+	<select id="selectAll" resultType="ReviewListVO">
+	
+	</select>
+</mapper>

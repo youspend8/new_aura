@@ -112,7 +112,7 @@ public class FacebookLoginAPI implements FacebookLogin{
 		UserVO uservo = new UserVO();
 		
         String reqURL = "https://graph.facebook.com/"+userId
-        		+ "?fields=name,email,id,user_gender"
+        		+ "?fields=name,email,id"
         		+ "&access_token="+accessToken;
         
         String UserInfo = "";
@@ -149,9 +149,8 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        
 	        //가임일
 			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-	        
 			
-	        uservo.setNickname("김민서");
+			//페이스북 성별 없다
 	        uservo.setEmail(email);
 	        uservo.setName(name);
 	        uservo.setUserId(userid);
@@ -160,6 +159,8 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        uservo.setIsAdmin(0);
 	        uservo.setPwMissCount(0);
 	        uservo.setAuthorType(1);
+	        
+	        
 	        
 //	       UM.delete("김민서");
 	       
