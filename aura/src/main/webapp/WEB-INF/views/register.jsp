@@ -20,7 +20,6 @@
 	<link href="/css/my-login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 	<section class="my-login-page h-100">
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
@@ -43,8 +42,7 @@
 										<input type="text" class="form-control" id="email" name="email" style="width:69%;">
 										<label for="email">이메일 *</label>
 										<!-- 중복체크 아이디 넘김 -->
-										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="duplicate">
-
+										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="idDupCheck" >
 									</div>
 									<div class="invalid-feedback">
 										이미 사용중인 이메일입니다.
@@ -52,6 +50,16 @@
 									<div class="invalid-feedback">
 										상용 가능한 아이디 입니다.
 									</div>
+									
+									<div style="display:none; color:blue; font-size:15px;" id="email_true">
+										이메일형식이  맞습니다.
+									</div>
+									
+									<div style="display:none; color:red; font-size:15px;" id="email_false">
+										이메일형식이 아닙니다.
+									</div>
+									
+									
 								</div>
 
 								<!-- 비밀번호 -->
@@ -67,14 +75,18 @@
 
 								<div class="form-group">
 									<div class="md-form">
-										<input type="password" class="form-control" id="password_confirm" name="pwCheck">
-										<label for="password_confirm">비밀번호 확인 *</label>
+										<input type="password" class="form-control" id="pwCheck" name="pwCheck">
+										<label for="pwCheck">비밀번호 확인 *</label>
 									</div>
-									<div class="invalid-feedback">
-										비밀번호 확인 입력이 필요합니다.
+									<div style="display:none; color:red; font-size:15px;" id="pwCheck_check">
+										비밀번호를 입력해주세요
 									</div>
-									<div class="invalid-feedback">
+									<div style="display:none; color:red; font-size:15px;" id="pwCheck_false">
 										비밀번호가 일치하지 않습니다.
+									</div>
+									
+									<div style="display:none; color:blue; font-size:15px;" id="pwCheck_true" >
+										비밀번호가 일치합니다
 									</div>
 								</div>
 
@@ -93,11 +105,19 @@
 									<div class="md-form" style="display: flex">
 										<input type="text" class="form-control" id="nickname" name="nickname" style="width:69%;">
 										<label for="nickname">닉네임 *</label>
-										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="duplicate">
+										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="nicknameDupCheck" name="nickname_Check">
 
 									</div>
 									<div class="invalid-feedback">
 										닉네임 입력이 필요합니다
+									</div>
+									
+									<div class="invalid-feedback" id="nickname_false">
+										닉네임 중복입니다.
+									</div>
+									
+									<div class="invalid-feedback" id="nickname_true">
+										닉네임 사용 가능합니다.
 									</div>
 								</div>
 
@@ -291,10 +311,77 @@
 			});
 </script>
 		
-		
+<!-- start-->
+<script>
 
+	function regular(){
+		//이메일 정규식
+		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-
+		if($("#email").val() == ""){
+			$("#email_false").css('display', 'none');
+			$("#email_true").css('display', 'none');
+		}else if(regExp.test( $("#email").val() ) == true){
+			$("#email_false").css('display', 'none');
+			$("#email_true").css('display', 'inline');
+		}else{
+			$("#email_true").css('display', 'none');
+			$("#email_false").css('display', 'inline');
+		}
+	}
+	
+	//비밀번호 확인
+	function PwCheck(){
+		if( $("#password").val() == "" || $("#pwCheck").val() == "" ){
+			$("#pwCheck_check").css('display','inline');
+			$("#pwCheck_false").css('display','none');
+			$("#pwCheck_true").css('display','none');
+		}else if( $("#password").val() == $("#pwCheck").val() ){
+			$("#pwCheck_false").css('display','none');
+			$("#pwCheck_true").css('display','inline');
+			$("#pwCheck_check").css('display','none');
+		}else{
+			$("#pwCheck_true").css('display','none');
+			$("#pwCheck_false").css('display','inline');
+			$("#pwCheck_check").css('display','none');
+		}
+	}
+	
+	//닉네임 중복체크
+	 $("#nicknameDupCheck").on("click", function() {
+		$.ajax({
+			url: "/user/nickNameCheck",								 // 클라이언트가 요청을 보낼 서버의 URL 주소
+			data: { 
+				nickname: $("#nickname").val() 
+			},                // HTTP 요청과 함께 서버로 보낼 데이터
+			type: "POST",                             			// HTTP 요청 방식(GET, POST)
+			dataType: "text",       			// 서버에서 보내줄 데이터의 타입
+			success : function(data) {
+				console.log(data);
+				if (data == true) {
+					$("#nickname_false").css('display','none');
+				    $("#nickname_true").css('display','inline');
+				} else if(data == false){
+					 $("#nickname_false").css('display','inline');
+					 $("#nickname_true").css('display','none');
+				}
+			},
+			error : function() {
+				alert("오류");
+			}
+		})
+	 })
+	$('#email').focusout(function(){
+		regular();
+	});
+	$('#pwCheck').focusout(function(){
+		PwCheck();
+	})
+	$('#password').focusout(function(){
+		PwCheck();
+	})
+</script>
+<!-- end-->
 
 
 

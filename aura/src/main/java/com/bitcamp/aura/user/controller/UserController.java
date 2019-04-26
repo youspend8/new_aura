@@ -148,6 +148,14 @@ public class UserController {
 			return "login";
 	}
 	
-	
-	
+	@RequestMapping("/nickNameCheck")
+	@ResponseBody
+	public String nickNameCheck(String nickname, String name) {
+		System.out.println("nickname : " + nickname);
+		System.out.println("name : " + name);
+		if(userService.getUser(nickname) == null) {
+			return "true";
+		}
+		return "false";
+	}
 }
