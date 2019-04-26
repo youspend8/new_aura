@@ -67,6 +67,7 @@ public class UserController {
 		
 		return "login";
 	}
+	
 	@RequestMapping(value="/forgotForm")
 	public String forgotForm() {
 		
@@ -137,4 +138,17 @@ public class UserController {
 			return "main";
 		}
 	}
+	
+	@RequestMapping("/oauth/loginResult")
+	public String loginResult(HttpSession session,String email, String password) {
+		System.out.println("Eamil :"+email);
+		System.out.println("password :"+password);
+		if(userService.login(email,password) == true) {
+			return "main";
+		}else
+			return "login";
+	}
+	
+	
+	
 }

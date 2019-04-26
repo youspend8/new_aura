@@ -35,11 +35,11 @@
 
 					<div class="card fat">
 						<div class="card-body">
-							<form method="POST" class="my-login-validation" novalidate="">
-								
+							<form method="POST" class="my-login-validation" novalidate="" action="/user/oauth/loginResult">
+							
 								<div class="form-group">
 									<div class="md-form">
-										<input type="text" class="form-control" id="email">
+										<input type="text" class="form-control" id="email" name="email">
 										<label for="email">Email</label>
 									</div>
 									<div class="invalid-feedback">
@@ -49,7 +49,7 @@
 
 								<div class="form-group">
 										<div class="md-form">
-												<input type="password" class="form-control" id="password">
+												<input type="password" class="form-control" id="password" name="password">
 												<label for="password">Password</label>
 										</div>
 							
@@ -66,11 +66,10 @@
 								</div>
 
 								<div class="form-group m-0">
-									<button type="submit" class="btn btn-primary w-100 m-0">
+									<button type="submit" class="btn btn-primary w-100 m-0" onclick="location.href=''">
 										로그인
 									</button>
 								</div>
-								
 								
 								<!-- API 로그인 로고 -->
 								<div class = "api_login mt-3 d-flex flex-row jusfiy-content-center">
