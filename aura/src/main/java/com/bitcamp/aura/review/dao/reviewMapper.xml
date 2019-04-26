@@ -46,7 +46,7 @@
 	<delete id="delete" parameterType="int">
 		
 	</delete>
-	<select id="selectByNum" parameterType="int" resultType="ReviewVO">
+	<select id="selectRestaurantByNum" parameterType="int" resultType="RestaurantVO">
 		<![CDATA[
 			SELECT
 			    REVIEW.NUM AS num,
@@ -58,13 +58,17 @@
 			    REVIEW.SHARES AS shares,
 			    REVIEW.READ_COUNT AS readCount,
 			    REVIEW.ADD_DATE AS addDate,
-			    PLACE_REVIEW.ADDRESS AS address,
+			    PLACE_REVIEW.ADDRESS1 AS address1,
+			    PLACE_REVIEW.ADDRESS2 AS address2,
+			    PLACE_REVIEW.ADDRESS3 AS address3,
+			    PLACE_REVIEW.DETAIL_ADDR AS addr,
 			    PLACE_REVIEW.TEL AS tel,
 			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
 			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
 			    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
 			    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
-			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut
+			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut,
+			    RESTAURANT_REVIEW.RESTAURANT_MENU AS menu
 			FROM 
 			    REVIEW 
 	        INNER JOIN 
@@ -143,7 +147,8 @@
 			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
 			    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
 			    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
-			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut
+			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut,
+			    RESTAURANT_REVIEW.RESTAURANT_MENU AS menu
 			FROM 
 			    REVIEW 
 	        INNER JOIN 

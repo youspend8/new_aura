@@ -14,7 +14,7 @@ public interface ReviewMapper {
 	public int insert(ReviewVO reviewVo);
 	public int update(ReviewVO reviewVo);
 	public int delete(int num);
-	public ReviewVO selectByNum(int num);
+	public RestaurantVO selectRestaurantByNum(int num);
 	public List<RestaurantVO> selectRestaurantsByParams(ReviewSelectParamVO params);
 	public List<HashMap<String, Object>> selectAll();
 }
