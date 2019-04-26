@@ -1,5 +1,7 @@
 package com.bitcamp.aura.review.model;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -31,4 +33,5 @@ public class RestaurantVO {
 	private int category;
 	private boolean delivery;
 	private boolean takeOut;
+	private List<String> files;
 }

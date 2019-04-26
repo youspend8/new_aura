@@ -5,7 +5,40 @@
     
 <mapper namespace="com.bitcamp.aura.review.dao.RestaurantMapper">
 	<insert id="insert" parameterType="RestaurantVO">
-		
+		<![CDATA[
+			INSERT ALL
+			    INTO REVIEW 
+		    VALUES (
+		    	null,
+		    	#{title, jdbcType=VARCHAR},
+		    	#{contents, jdbcType=VARCHAR},
+		    	0,
+		    	0,
+		    	0,
+		    	0,
+		    	0,
+		    	#{addDate, jdbcType=VARCHAR}
+		    )
+		    INTO PLACE_REVIEW
+		    VALUES (
+		    	null,
+		    	#{address, jdbcType=VARCHAR},
+		    	#{tel, jdbcType=VARCHAR},
+		    	#{serviceTime, jdbcType=VARCHAR},
+		    	#{waitingTime, jdbcType=VARCHAR}
+		    )
+		    INTO RESTAURANT_REVIEW
+		    VALUES (
+		    	null,
+		    	#{category, jdbcType=NUMERIC},
+		    	#{delivery, jdbcType=NUMERIC},
+		    	#{takeOut, jdbcType=NUMERIC},
+		    )
+			SELECT
+			    *
+			FROM
+			    DUAL;
+		]]>
 	</insert>
 	<update id="update" parameterType="RestaurantVO">
 		
@@ -14,9 +47,75 @@
 		
 	</delete>
 	<select id="selectByNum" parameterType="int" resultType="RestaurantVO">
-	
+		<![CDATA[
+			SELECT
+			    REVIEW.NUM AS num,
+			    REVIEW.TITLE AS title,
+			    REVIEW.CONTENTS AS contents,
+			    REVIEW.STARS AS stars,
+			    REVIEW.GOODS AS goods,
+			    REVIEW.BOOKMARK AS bookmark,
+			    REVIEW.SHARES AS shares,
+			    REVIEW.READ_COUNT AS readCount,
+			    REVIEW.ADD_DATE AS addDate,
+			    PLACE_REVIEW.ADDRESS AS address,
+			    PLACE_REVIEW.TEL AS tel,
+			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
+			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
+			    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
+			    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
+			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut
+			FROM 
+			    REVIEW 
+	        INNER JOIN 
+	            PLACE_REVIEW
+	        ON
+	            REVIEW.NUM = PLACE_REVIEW.NUM
+	        INNER JOIN
+	            RESTAURANT_REVIEW
+	        ON
+	            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
+	        INNER JOIN 
+	            RESTAURANT_CATEGORY
+	        ON
+	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
+			WHERE
+			    REVIEW.NUM = #{num}
+		]]>
 	</select>
 	<select id="selectAll" resultType="RestaurantVO">
-		
+		<![CDATA[
+			SELECT
+			    REVIEW.NUM AS num,
+			    REVIEW.TITLE AS title,
+			    REVIEW.CONTENTS AS contents,
+			    REVIEW.STARS AS stars,
+			    REVIEW.GOODS AS goods,
+			    REVIEW.BOOKMARK AS bookmark,
+			    REVIEW.SHARES AS shares,
+			    REVIEW.READ_COUNT AS readCount,
+			    REVIEW.ADD_DATE AS addDate,
+			    PLACE_REVIEW.ADDRESS AS address,
+			    PLACE_REVIEW.TEL AS tel,
+			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
+			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
+			    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
+			    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
+			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut
+			FROM 
+			    REVIEW 
+	        INNER JOIN 
+	            PLACE_REVIEW
+	        ON
+	            REVIEW.NUM = PLACE_REVIEW.NUM
+	        INNER JOIN
+	            RESTAURANT_REVIEW
+	        ON
+	            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
+	        INNER JOIN 
+	            RESTAURANT_CATEGORY
+	        ON
+	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
+		]]>
 	</select>
 </mapper>

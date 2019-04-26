@@ -4,12 +4,15 @@ package com.bitcamp.aura.user.controller;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -53,14 +56,17 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/register")
-	public String register(@ModelAttribute UserVO uservo,String pwCheck) {
-		
-	userService.join(uservo, pwCheck, (String)uservo.getAddress(),(String)uservo.getAddr_code(),(String)uservo.getAddr_Datail(),(String)uservo.getAddr());
+	public String register(@ModelAttribute UserVO uservo,String pwCheck,String addr_Detail) {
+		uservo.setRegLocation(1);
+		uservo.setRegDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		userService.join(uservo, pwCheck, 
+				(String)uservo.getAddress(),
+				(String)uservo.getAddr_code(),
+				(String)uservo.getAddr_Detail(),
+				(String)uservo.getAddr());
 		
 		return "login";
 	}
-	
-	
 	@RequestMapping(value="/forgotForm")
 	public String forgotForm() {
 		
@@ -100,20 +106,6 @@ public class UserController {
 	    	return mav;
 	    }
 	}
-	
-//	@RequestMapping("/oauth/facebook")
-//	public String facebook(String code, Model model) {
-//		String accessToken = facebookLogin.getAccessToken(code);
-//		String userId = facebookLogin.getUserId(accessToken);
-//	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
-//	    
-//	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
-//	    	model.addAttribute("UserInfo", UserInfo);
-//	    	return "main";
-//	    } else {
-//	    	return "main";
-//	    }
-//	}
 	
 	@RequestMapping("/oauth/kakao")
 	public ModelAndView kakao(String code) {
