@@ -1,7 +1,5 @@
 package com.bitcamp.aura.review.model;
 
-import org.apache.ibatis.type.Alias;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +11,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantVO {
+public class ProductorVO<T> {
 	private int num;
 	private int category;
-	private boolean delivery;
-	private boolean takeOut;
+	private String release;
+	private int price;
+	private T productorType;
 }

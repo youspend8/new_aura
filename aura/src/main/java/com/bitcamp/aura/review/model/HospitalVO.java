@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantVO {
+public class HospitalVO {
 	private int num;
 	private int category;
 	private boolean delivery;

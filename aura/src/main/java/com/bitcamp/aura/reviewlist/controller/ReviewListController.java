@@ -13,16 +13,6 @@ public class ReviewListController {
 	@Autowired
 	private RestaurantService service;
 	
-	@RequestMapping(value="/list")
-	public String list(Model model) {
-		model.addAttribute("list", service.searchAll());
-		return "/reviewList";
-	}
-	
-	
-	
-	
-	
 	
 	
 	
