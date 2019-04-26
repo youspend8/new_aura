@@ -141,10 +141,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 					userInfo.setGender(0);//여자
 				}
 			}
-			
-			
-			
-			
+				
 			return userInfo;
 			
 		} catch (MalformedURLException e) {
