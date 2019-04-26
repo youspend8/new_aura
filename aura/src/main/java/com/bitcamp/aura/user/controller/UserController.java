@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bitcamp.aura.user.model.UserVO;
 import com.bitcamp.aura.user.service.UserServiceImpl;
 import com.bitcamp.aura.user.social.FacebookLoginAPI;
+import com.bitcamp.aura.user.social.GoogleLoginAPI;
 import com.bitcamp.aura.user.social.KakaoLoginAPI;
 import com.bitcamp.aura.user.social.NaverLoginAPI;
 
@@ -42,7 +43,8 @@ public class UserController {
 	private FacebookLoginAPI facebookLogin;
 	@Autowired
 	private KakaoLoginAPI kakaoLogin;
-	
+	@Autowired
+	private GoogleLoginAPI googleLogin;
 	
 	@RequestMapping(value="/loginForm")
 	public String loginForm(Model model) {
@@ -123,9 +125,31 @@ public class UserController {
 			mav.addObject("userInfo", kakao_userinfo);
 			return mav;
 		}
-
 		
 	}
+	
+	@RequestMapping("/oauth/google")
+	public ModelAndView google(String code) {
+		System.out.println("code 여기는 Controller : " + code);
+
+		ModelAndView mav = new ModelAndView();
+		String accessToken = googleLogin.getAccessToken(code);
+		UserVO google_userinfo = googleLogin.getUserInfo(accessToken);
+		
+		
+		
+		System.out.println("google userinfo:"+ google_userinfo);
+//		if (userService.apiLoginCheck(google_userinfo.getUserId())) {
+//			mav.setViewName("main");
+//			return mav;
+//		} else {
+//			mav.setViewName("addExtraForm");
+//			mav.addObject("userInfo", google_userinfo);
+//		}
+		return mav;
+
+	}
+	
 	
 	@RequestMapping("/oauth/register")
 	public String oauth_reg (@ModelAttribute UserVO uservo,HttpSession session) {

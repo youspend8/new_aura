@@ -1,10 +1,11 @@
 package com.bitcamp.aura.user.social;
 
+import com.bitcamp.aura.user.model.UserVO;
+
 public interface GoogleLogin {
 	
 	public String getAccessToken(String code);
-	public String getUserId(String accessToken);
-	public String getUserInfo(String accessToken, String userId);
+	public UserVO getUserInfo(String accessToken);
 
 	
 }
