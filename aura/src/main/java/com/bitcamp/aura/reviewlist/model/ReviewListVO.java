@@ -33,6 +33,6 @@ public class ReviewListVO {
 	private int num;
 	private int postNum;
 	private String nickname;
-	private ReviewCategoryVO reviewType;
-	private Date date;
+	private int reviewType;
+	private String date;
 }

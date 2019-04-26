@@ -4,6 +4,7 @@
 	<jsp:include page="/WEB-INF/views/commons/header.jsp" />
 	<title>석촌호수 - All Review</title>
 	
+	
     <!-- 카테고리 선택 -->
     <div class="d-flex container p-0 flex-wrap justify-content-center">
         <div class="btn-group col-4 m-0 px-0">
@@ -549,13 +550,14 @@
                 <img class="main-review-photo w-100" src="https://picsum.photos/350/300?image=1040">
             </div>
             <div class="col-12 d-flex justify-content-center my-4">
-                <i class="fas fa-share-alt"></i>
+                <a href="#" id="share"><i class="fas fa-share-alt"></i></a>
                 <i class="far fa-star mx-4"></i>
                 <i class="far fa-thumbs-up"></i>
             </div>
             <button type="button" id="review_write" class="btn btn-dark review-write">리뷰 작성하기</button>
         </div>
     </div>
+    
 
     <!-- 컨텐트 영역 -->
     <div class="container d-flex flex-wrap">
@@ -1057,6 +1059,27 @@
 	<jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 	
     <script>
+    
+	    $("#share").click(function(){
+	    	$.ajax({
+	    		url: '/reviewList/reviewPost', // 요청 할 주소
+	    	    type: 'POST', // GET, PUT
+	    	    dataType: 'text',
+	    	    data: {
+	    	    	num : 1,
+	    	    	postNum: '1',
+	    	    	nickname: 'jisungkoon',
+	    	    	reviewType: 3,
+	    	    },
+	    	    success: function(data) {    
+    	        },
+    	       error : function (data) {
+    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+	    	        return false;
+    	       }  // 전송할 데이터
+	    	})
+	    });
+    
         $(document).ready(function() {
             var state = false;
             var generalHospitalState = false;
