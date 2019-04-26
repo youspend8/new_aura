@@ -51,7 +51,6 @@
 		</dependency>
 		
 <!-- 		Java Mail -->
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context-support</artifactId>
@@ -153,11 +152,7 @@
 			<artifactId>google-api-services-oauth2</artifactId>
 			<version>v1-rev154-1.25.0</version>
 		</dependency>
-        
 		
-		
-
-
 
 	</dependencies>
 

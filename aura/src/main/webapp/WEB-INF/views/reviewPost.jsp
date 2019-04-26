@@ -605,22 +605,23 @@
             <div class="col-md-9 col-12 p-0 flex-column my-3">
            		<form method="POST">
 <!--             		텍스트 영역			 -->
+<!--             		텍스트 영역			 -->
 	               <textarea rows="10" class="form-control px-2" id="comment"></textarea>
 	               
 	               <div class="d-md-flex d-none col-12 p-0 my-3">
 	                   <div style="width: 20%;">
-	                       <a href="#">
+	                       <input type="file" accept="image/*">
 	                           <img src="https://picsum.photos/200/300?image=194" class="w-100" style="height: 160px">
 	                       </a>
 	                   </div>
 	                   <div class="mx-2" style="width: 20%;">
-	                       <a href="#">
-	                           <img src="https://picsum.photos/200/300?image=536" class="w-100" style="height: 160px">                            <a href="#">                            <a href="#">
+	                       <a type="file">
+	                           <img src="https://picsum.photos/200/300?image=536" class="w-100" style="height: 160px">
 	                       </a>
 	                   </div>
 	                   <div style="width: 20%;">
 	                       <a href="#">
-	                           <img src="https://picsum.photos/200/300?image=392" class="w-100" style="height: 160px">                            </a>                            </a>
+	                           <img src="https://picsum.photos/200/300?image=392" class="w-100" style="height: 160px">
 	                       </a>
 	                   </div>
 	                   <div class="mx-2" style="width: 20%;">
@@ -635,9 +636,9 @@
 	                   </div>
 	               </div>
 	
-	               <div class="form-group d-md-none d-block">
-	                   <input type="file" class="form-control-file my-1">
-	               </div>
+<!-- 	               <div class="form-group d-md-none d-block"> -->
+<!-- 	                   <input type="file" class="form-control-file my-1"> -->
+<!-- 	               </div> -->
 	
 	               <div class="my-4 text-md-right text-center">
 	                   <button type="reset" class="btn btn-light">다시작성</button>
@@ -1155,12 +1156,12 @@
             $('#special-category').css('visibility', 'hidden');
         }
         
-        $.ajax({
-            url : "/review/write"
+//         $.ajax({
+//             url : "/review/write"
 
 
 
-        })
+//         })
 
 		
     </script>

@@ -56,7 +56,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/register")
-	public String register(@ModelAttribute UserVO uservo,String pwCheck,String addr_Detail) {
+	public String register(@ModelAttribute UserVO uservo, String pwCheck) {
 		uservo.setRegLocation(1);
 		uservo.setRegDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		userService.join(uservo, pwCheck, 
