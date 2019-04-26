@@ -150,9 +150,8 @@ public class UserController {
 	
 	@RequestMapping("/nickNameCheck")
 	@ResponseBody
-	public String nickNameCheck(String nickname, String name) {
+	public String nickNameCheck(String nickname) {
 		System.out.println("nickname : " + nickname);
-		System.out.println("name : " + name);
 		if(userService.getUser(nickname) == null) {
 			return "true";
 		}

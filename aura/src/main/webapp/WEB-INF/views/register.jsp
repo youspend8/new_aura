@@ -102,21 +102,21 @@
 
 
 								<div class="form-group">
-									<div class="md-form" style="display: flex">
+									<div class="md-form" style="display: flex;">
 										<input type="text" class="form-control" id="nickname" name="nickname" style="width:69%;">
 										<label for="nickname">닉네임 *</label>
 										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="nicknameDupCheck" name="nickname_Check">
 
 									</div>
-									<div class="invalid-feedback">
+									<div style="display:none; color:red; font-size:15px;" id="nickname_none">
 										닉네임 입력이 필요합니다
 									</div>
 									
-									<div class="invalid-feedback" id="nickname_false">
+									<div style="display:none; color:red; font-size:15px;" id="nickname_false">
 										닉네임 중복입니다.
 									</div>
 									
-									<div class="invalid-feedback" id="nickname_true">
+									<div style="display:none; color:blue; font-size:15px;" id="nickname_true">
 										닉네임 사용 가능합니다.
 									</div>
 								</div>
@@ -358,12 +358,19 @@
 			dataType: "text",       			// 서버에서 보내줄 데이터의 타입
 			success : function(data) {
 				console.log(data);
-				if (data == true) {
+				if (data == "true") {
 					$("#nickname_false").css('display','none');
+					$("#nickname_none").css('display','none');
 				    $("#nickname_true").css('display','inline');
-				} else if(data == false){
+				} else if(data == "false"){
 					 $("#nickname_false").css('display','inline');
+					 $("#nickname_none").css('display','none');
 					 $("#nickname_true").css('display','none');
+				}
+				if($("#nickname").val() == ""){
+					$("#nickname_none").css('display','inline');
+					$("#nickname_true").css('display','none');
+					$("#nickname_false").css('display','none');
 				}
 			},
 			error : function() {
