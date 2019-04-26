@@ -37,7 +37,7 @@
 					<div class="card fat">
 						<div class="card-body">
 							<form method="POST" class="my-login-validation" novalidate="" action="/user/oauth/loginResult">
-							
+								
 								<div class="form-group">
 									<div class="md-form">
 										<input type="text" class="form-control" id="email" name="email">
@@ -67,10 +67,11 @@
 								</div>
 
 								<div class="form-group m-0">
-									<button type="submit" class="btn btn-primary w-100 m-0" onclick="location.href=''">
+									<button type="submit" class="btn btn-primary w-100 m-0">
 										로그인
 									</button>
 								</div>
+								
 								
 								<!-- API 로그인 로고 -->
 								<div class = "api_login mt-3 d-flex flex-row jusfiy-content-center">
@@ -92,10 +93,9 @@
 										</div>
 									</div>
 
-									<div class="view overlay col-3 p-0" onclick="location.href='https://accounts.google.com/o/oauth2/auth?client_id=965189490710-v4c0vpevad5c2m825dlombqvcv8l8evm.apps.googleusercontent.com&redirect_uri=http://localhost:8000/user/oauth/google&response_type=code&scope=email%20profile'">
+									<div class="view overlay col-3 p-0" onclick="location.href='https://accounts.google.com/o/oauth2/auth?client_id=965189490710-v4c0vpevad5c2m825dlombqvcv8l8evm.apps.googleusercontent.com&redirect_uri=http://localhost:8000/user/oauth/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile'">
 <!-- 									https://www.googleapis.com/auth/login -->
 <!-- 									https://www.googleapis.com/auth/userinfo.email -->
-									<div class="view overlay col-3 p-0">
 										<a href="#">
 											<img src="/img/all_review_img/google.png"width="60px">
 										</a>								
@@ -106,8 +106,9 @@
 									<div class="view overlay col-3 p-0">
 										<a onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=od8MnK4Tb6sAdnv6ZeIT&redirect_uri=http://localhost:8000/user/oauth/naver&state=${state}'">
 										<img src="/img/all_review_img/naver.PNG"width="60px">
-										<div class="mask flex-center rgba-white-light"></div>	
 										</a>									
+										<div class="mask flex-center rgba-white-light">
+										</div>	
 									</div>
 								</div>
 
@@ -129,10 +130,6 @@
 			</div>
 		</div>
 	</section>
-	
-	
-	
-	
 	
 
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
