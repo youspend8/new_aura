@@ -118,7 +118,7 @@ public class GoogleLoginAPI implements GoogleLogin{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		성별, 닉네임, 연령대
+//		성별, 닉네임, 연령대 
 		return null;
 	}
 
