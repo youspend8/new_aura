@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
+import com.bitcamp.aura.review.model.RestaurantVO;
+import com.bitcamp.aura.review.model.ReviewSelectParamVO;
+import com.bitcamp.aura.review.model.ReviewVO;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -20,19 +23,19 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private ReviewFileMapper fileMapper;
 
-//	@Override
-//	public List<ReviewVO> searchByParams() {
-//		// TODO Auto-generated method stub
-//		Iterable<ReviewVO> ite = mapper.selectAll();
-//		ite.forEach(review -> {
-//			List<String> files = fileMapper.selectByPostNum(review.getNum())
-//					.stream()
-//					.map(e -> e.getFilePath())
-//					.collect(Collectors.toList());
-//			review.setFiles(files);
-//		});
-//		return StreamSupport.stream(ite.spliterator(), true).collect(Collectors.toList());
-//	}
+	@Override
+	public List<ReviewVO> searchRestaurant(ReviewSelectParamVO params) {
+		// TODO Auto-generated method stub
+		Iterable<RestaurantVO> ite = mapper.selectRestaurantsByParams(params);
+		ite.forEach(review -> {
+			List<String> files = fileMapper.selectByPostNum(review.getNum())
+					.stream()
+					.map(e -> e.getFilePath())
+					.collect(Collectors.toList());
+			review.setFiles(files);
+		});
+		return StreamSupport.stream(ite.spliterator(), true).collect(Collectors.toList());
+	}
 	
 	@Override
 	public List<HashMap<String, Object>> searchAll() {

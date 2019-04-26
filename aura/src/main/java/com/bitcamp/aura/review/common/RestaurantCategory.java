@@ -1,20 +1,21 @@
 package com.bitcamp.aura.review.common;
 
-public interface RestaurantCategory {
-	public static final int 한식 = 1;
-	public static final int 양식 = 2;
-	public static final int 중식 = 3;
-	public static final int 일식 = 4;
-	public static final int 분식 = 5;
-	public static final int 카페 = 6;
-	public static final int 치킨 = 7;
-	public static final int 피자 = 8;
-	public static final int 중국집 = 9;
-	public static final int 족발보쌈 = 10;
-	public static final int 도시락 = 11;
-	public static final int 패스트푸드 = 12;
-	public static final int 테이크아웃 = 13;
-	public static final int 프렌차이즈 = 14;
-	public static final int 호프 = 15;
-	public static final int 맥주 = 16;
+public enum RestaurantCategory {
+	한식,
+	양식,
+	중식,
+	일식,
+	분식,
+	카페 ,
+	치킨,
+	피자,
+	중국집,
+	족발보쌈,
+	도시락,
+	패스트푸드,
+	테이크아웃,
+	프렌차이즈,
+	뷔페,
+	호프,
+	맥주
 }

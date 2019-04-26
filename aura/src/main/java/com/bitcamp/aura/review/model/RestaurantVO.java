@@ -19,4 +19,5 @@ public class RestaurantVO extends PlaceVO {
 	private int category;
 	private boolean delivery;
 	private boolean takeOut;
+	private String menu;
 }
