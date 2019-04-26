@@ -13,6 +13,12 @@ public class ReviewController {
 
 	@Autowired
 	private RestaurantService service;
+
+	@RequestMapping(value="/list")
+	public String list(Model model) {
+		model.addAttribute("list", service.searchAll());
+		return "/reviewList";
+	}
 	
 	@RequestMapping(value="/post")
 	public String post() {
@@ -24,6 +30,12 @@ public class ReviewController {
 	public String write() {
 		
 		return "";
+	}
+	
+	@RequestMapping(value="/file")
+	public String file() {
+		
+		return "reviewPost";
 	}
 	
 }

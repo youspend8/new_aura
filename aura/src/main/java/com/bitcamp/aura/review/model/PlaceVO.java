@@ -13,10 +13,14 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias(value="restaurantVo")
-public class RestaurantVO extends PlaceVO {
+@Alias(value="placeVo")
+public class PlaceVO extends ReviewVO {
 	private int num;
-	private int category;
-	private boolean delivery;
-	private boolean takeOut;
+	private String address1;
+	private String address2;
+	private String address3;
+	private String detailAddr;
+	private String tel;
+	private String serviceTime;
+	private String waitingTime;
 }

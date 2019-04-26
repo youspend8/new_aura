@@ -1,32 +1,33 @@
 package com.bitcamp.aura.reviewlist.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bitcamp.aura.review.service.RestaurantService;
+import com.bitcamp.aura.reviewlist.model.ReviewListVO;
+import com.bitcamp.aura.reviewlist.service.ReviewListService;
 
 @Controller
+@RequestMapping(value="/reviewList")
 public class ReviewListController {
-	
 	@Autowired
-	private RestaurantService service;
+	private ReviewListService service;
 	
-	@RequestMapping(value="/list")
-	public String list(Model model) {
-		model.addAttribute("list", service.searchAll());
-		return "/reviewList";
+	
+	@RequestMapping("/reviewPost")
+	@ResponseBody
+	public String reviewPost(
+			@ModelAttribute ReviewListVO params) {
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		params.setDate(sim.format(new Date()));
+		service.doReview(params);
+		System.out.println(params);
+		return "1";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.bitcamp.aura.review.dao.ReviewFileMapper">
+	<insert id="insert" parameterType="ReviewFileVO">
+		<![CDATA[
+		
+		]]>
+	</insert>
+	<update id="update" parameterType="ReviewFileVO">
+		<![CDATA[
+		
+		]]>
+	</update>
+	<delete id="deleteByNum" parameterType="int">
+		<![CDATA[
+			DELETE FROM
+				REVIEW_FILE
+			WHERE
+				REVIEW_POST_NUM = #{num}
+		]]>
+	</delete>
+	<delete id="deleteByPostNum" parameterType="int">
+		<![CDATA[
+			DELETE FROM
+				REVIEW_FILE
+			WHERE
+				REVIEW_POST_NUM = #{postNum}
+		]]>
+	</delete>
+	<select id="selectByNum" parameterType="int" resultType="ReviewFileVO">
+		<![CDATA[
+			SELECT
+				NUM AS num,
+				REVIEW_POST_NUM AS postNum,
+				REVIEW_FILE AS filePath
+			FROM
+				REVIEW_FILE
+			WHERE
+				NUM = #{num}
+		]]>
+	</select>
+	<select id="selectByPostNum" parameterType="int" resultType="ReviewFileVO">
+		<![CDATA[
+			SELECT
+				NUM AS num,
+				REVIEW_POST_NUM AS postNum,
+				REVIEW_FILE AS filePath
+			FROM
+				REVIEW_FILE
+			WHERE
+				REVIEW_POST_NUM = #{postNum}
+		]]>
+	</select>
+	<select id="selectAll" resultType="ReviewFileVO">
+		<![CDATA[
+			SELECT
+				NUM AS num,
+				REVIEW_POST_NUM AS postNum,
+				REVIEW_FILE AS filePath
+			FROM
+				REVIEW_FILE
+		]]>
+	</select>
+</mapper>
