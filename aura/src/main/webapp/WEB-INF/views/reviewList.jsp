@@ -60,7 +60,7 @@
 			
 					<div class="col-md-6 col-12">
 						<div>
-						    <a href="#" class="text-dark"><h5 class="board_list_title mb-1">${review.title}</h5></a>
+						    <a href="#" class="text-dark"><h5 class="board_list_title mb-1">${review.TITLE}</h5></a>
 						    <span style="float:right; font-size:2rem;">
 						      <a style="color:rgb(0, 102, 255)"><i class="far fa-star"></i></a>
 						    </span>
@@ -73,34 +73,34 @@
 						<div class="my-1 align-middle">
 						    <i class="fas fa-heart"></i>
 						    <span>
-								<c:choose>
-									<c:when test="${review.category eq 1}">
+						    	<c:choose>
+									<c:when test="${review.CATEGORY eq 1}">
 										한식
 									</c:when>
-									<c:when test="${review.category eq 2}">
+									<c:when test="${review.CATEGORY eq 2}">
 										양식
 									</c:when>
-									<c:when test="${review.category eq 16}">
+									<c:when test="${review.CATEGORY eq 16}">
 										호프
 									</c:when>
 									<c:otherwise>
 										기타분류
 									</c:otherwise>
-								</c:choose>
+						    	</c:choose>
 							</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-phone"></i>
-							<span>${review.tel}</span> 
+							<span>${review.TEL}</span> 
 						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-location-arrow"></i>
-							<span>${review.address}</span>
+							<span>${review.DETAILADDR}</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder;">
 							<i class="fas fa-clipboard-list"></i>
 							<div>
-								${review.contents}
+								${review.CONTENTS}
 							</div>
 						</div>
 					</div>

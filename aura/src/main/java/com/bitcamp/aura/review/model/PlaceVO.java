@@ -1,5 +1,7 @@
 package com.bitcamp.aura.review.model;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlaceVO<T> {
+@Alias(value="placeVo")
+public class PlaceVO extends ReviewVO {
 	private int num;
 	private String address1;
 	private String address2;
@@ -20,5 +23,4 @@ public class PlaceVO<T> {
 	private String tel;
 	private String serviceTime;
 	private String waitingTime;
-	private T placeType;
 }

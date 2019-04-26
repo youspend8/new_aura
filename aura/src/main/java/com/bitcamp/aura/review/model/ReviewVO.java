@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Alias(value="reviewVo")
-public class ReviewVO<T> {
+public class ReviewVO {
 	private int num;
 	private String title;
 	private String contents;
@@ -27,5 +27,4 @@ public class ReviewVO<T> {
 	private int readCount;
 	private String addDate;
 	private List<String> files;
-	private T type;
 }

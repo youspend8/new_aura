@@ -13,7 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class HospitalVO {
+@Alias(value="hospitalVo")
+public class HospitalVO extends PlaceVO {
 	private int num;
 	private int category;
 	private boolean delivery;

@@ -22,13 +22,6 @@ public class AuraApplicationTests {
 	@Autowired
 	private RestaurantService service;
 	
-	@Test
-	public void restaurant() {
-		for (RestaurantVO r : service.searchAll()) {
-			System.out.println(r);
-		}
-	}
-	
 //	@Test
 //	public void SignTest() {
 //		SignLocationVO sign1 = new SignLocationVO();

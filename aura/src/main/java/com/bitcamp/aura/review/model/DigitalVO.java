@@ -1,5 +1,7 @@
 package com.bitcamp.aura.review.model;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class DigitalVO {
+@Alias(value="digitalVo")
+public class DigitalVO extends ProductorVO {
 	private int num;
 	private String model;
 	private String subCategory1;
