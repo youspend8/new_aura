@@ -605,44 +605,47 @@
             </div>
             
             <div class="col-md-9 col-12 p-0 flex-column my-3">
-                <textarea rows="10" class="form-control px-2"></textarea>
-
-                <div class="d-md-flex d-none col-12 p-0 my-3">
-                    <div style="width: 20%;">
-                        <a href="#">
-                            <img src="https://picsum.photos/200/300?image=194" class="w-100" style="height: 160px">
-                        </a>
-                    </div>
-                    <div class="mx-2" style="width: 20%;">
-                        <a href="#">
-                            <img src="https://picsum.photos/200/300?image=536" class="w-100" style="height: 160px">                            <a href="#">                            <a href="#">
-                        </a>
-                    </div>
-                    <div style="width: 20%;">
-                        <a href="#">
-                            <img src="https://picsum.photos/200/300?image=392" class="w-100" style="height: 160px">                            </a>                            </a>
-                        </a>
-                    </div>
-                    <div class="mx-2" style="width: 20%;">
-                        <a href="#">
-                                <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
-                        </a>
-                    </div>
-                    <div style="width: 20%;">
-                        <a href="#">
-                            <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="form-group d-md-none d-block">
-                    <input type="file" class="form-control-file my-1">
-                </div>
-
-                <div class="my-4 text-md-right text-center">
-                    <button type="button" class="btn btn-light">다시작성</button>
-                    <button type="button" class="btn btn-elegant">등록하기</button>
-                </div>
+           		<form method="POST">
+<!--             		텍스트 영역			 -->
+	               <textarea rows="10" class="form-control px-2" id="comment"></textarea>
+	               
+	               <div class="d-md-flex d-none col-12 p-0 my-3">
+	                   <div style="width: 20%;">
+	                       <a href="#">
+	                           <img src="https://picsum.photos/200/300?image=194" class="w-100" style="height: 160px">
+	                       </a>
+	                   </div>
+	                   <div class="mx-2" style="width: 20%;">
+	                       <a href="#">
+	                           <img src="https://picsum.photos/200/300?image=536" class="w-100" style="height: 160px">                            <a href="#">                            <a href="#">
+	                       </a>
+	                   </div>
+	                   <div style="width: 20%;">
+	                       <a href="#">
+	                           <img src="https://picsum.photos/200/300?image=392" class="w-100" style="height: 160px">                            </a>                            </a>
+	                       </a>
+	                   </div>
+	                   <div class="mx-2" style="width: 20%;">
+	                       <a href="#">
+	                               <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+	                       </a>
+	                   </div>
+	                   <div style="width: 20%;">
+	                       <a href="#">
+	                           <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+	                       </a>
+	                   </div>
+	               </div>
+	
+	               <div class="form-group d-md-none d-block">
+	                   <input type="file" class="form-control-file my-1">
+	               </div>
+	
+	               <div class="my-4 text-md-right text-center">
+	                   <button type="reset" class="btn btn-light">다시작성</button>
+	                   <button type="submit" class="btn btn-elegant">등록하기</button>
+	               </div>
+               </form>
             </div>
         </div>
 
@@ -1160,7 +1163,7 @@
                 }
             });
         });
-
+        
         function showGeneralCategory() {
             $('#general-category').css('visibility', 'visible');
         }
@@ -1174,7 +1177,15 @@
         function hideSpecialCategory() {
             $('#special-category').css('visibility', 'hidden');
         }
+        
+        $.ajax({
+            url : "/review/write"
 
+
+
+        })
+
+		
     </script>
 </body>
 </html>

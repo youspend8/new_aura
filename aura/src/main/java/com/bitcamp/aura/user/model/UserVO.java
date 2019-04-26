@@ -37,5 +37,5 @@ public class UserVO {
 	private int ageRange;
 	private String addr;
 	private String addr_code;
-	private String addr_Datail;
+	private String addr_Detail;
 }

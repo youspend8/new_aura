@@ -148,6 +148,8 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        
 	        //가임일
 			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			
 			
 			//페이스북 성별 없다
 	        uservo.setGender(-1);

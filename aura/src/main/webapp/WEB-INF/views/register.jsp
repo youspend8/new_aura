@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +20,7 @@
 	<link href="/css/my-login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
 	<section class="my-login-page h-100">
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
@@ -116,10 +120,17 @@
 								</div>
 
 								<div class="form-group">
-									<div class="md-form">
-										<input type="text" class="form-control" id="phone" name="tel">
-										<label for="phone">휴대폰 번호 *</label>
+									<div class="d-flex justify-content-between">
+										<div class="md-form my-1">
+											<input type="text" class="form-control" id="phone" name="tel">
+											<label for="phone">휴대폰 번호 *</label>
+										</div>	
+										
+										<div class="md-form my-1">
+											<input type="button" class="btn btn-primary btn-sm" onclick="IMP.certification()" value="휴대폰   인증">
+										</div>
 									</div>
+										
 									<div class="invalid-feedback">
 										휴대폰번호 입력이 필요합니다
 									</div>
@@ -153,8 +164,6 @@
 					</div>
 
 					<div class="form-group">
-					
-					
 						<button type="submit" class="btn btn-primary btn-block">
 							회원가입
 						</button>
@@ -180,12 +189,19 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="/js/mdb.min.js"></script>
+	<!--sns API Script-->
+	<!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<!-- iamport.payment.js -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script
+	  src="https://code.jquery.com/jquery-3.4.0.js"
+	  integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+	  crossorigin="anonymous">
+	</script>
 	
-	<!--우편 번호 검색 판업창을 뛰움-->
-
 	
-	
-
+	<!--우편 번호API-->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function addr_search() {
@@ -236,6 +252,55 @@
         }).open();
     }
 </script>
+
+		<!--SMS 본인인증 API-->
+			
+		
+<script>
+// 		<!--SMS API 필요한것 start-->
+			IMP.init('imp76278587');
+// 		<!--SMS API 필요한것 end-->
+		
+			IMP.certification({
+			    merchant_uid : 'imp76278587' + new Date().getTime(),
+			    popup : true
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			    	 // 인증성공
+			        console.log(rsp.imp_uid);
+			        console.log(rsp.merchant_uid);
+			        
+			        $.ajax({
+							type : 'POST',
+							url : '/certifications/confirm',
+							dataType : 'json',
+							data : {
+								imp_uid : rsp.imp_uid
+							}
+					 }).done(function(rsp) {
+					 		// 이후 Business Logic 처리하시면 됩니다.
+					 });
+			        	
+			    } else {
+			    	 // 인증취소 또는 인증실패
+			        var msg = '인증에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+
+			        alert(msg);
+			    }
+			});
+</script>
+		
+		
+
+
+
+
+
+
+
+
+
 	
 </body>
 </html>

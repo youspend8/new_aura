@@ -19,6 +19,7 @@
     <!-- Your custom styles (optional) -->
 	<link href="/css/style.css" rel="stylesheet">
 	<link href="/css/my-login.css" rel="stylesheet" type="text/css">
+	
 </head>
 <body>
 
@@ -35,11 +36,11 @@
 
 					<div class="card fat">
 						<div class="card-body">
-							<form method="POST" class="my-login-validation" novalidate="">
+							<form method="POST" class="my-login-validation" novalidate="" action="/user/oauth/loginResult">
 								
 								<div class="form-group">
 									<div class="md-form">
-										<input type="text" class="form-control" id="email">
+										<input type="text" class="form-control" id="email" name="email">
 										<label for="email">Email</label>
 									</div>
 									<div class="invalid-feedback">
@@ -49,7 +50,7 @@
 
 								<div class="form-group">
 										<div class="md-form">
-												<input type="password" class="form-control" id="password">
+												<input type="password" class="form-control" id="password" name="password">
 												<label for="password">Password</label>
 										</div>
 							
@@ -92,8 +93,9 @@
 										</div>
 									</div>
 
-									<div class="view overlay col-3 p-0"
-									>
+									<div class="view overlay col-3 p-0" onclick="location.href='https://accounts.google.com/o/oauth2/auth?client_id=965189490710-v4c0vpevad5c2m825dlombqvcv8l8evm.apps.googleusercontent.com&redirect_uri=http://localhost:8000/user/oauth/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile'">
+<!-- 									https://www.googleapis.com/auth/login -->
+<!-- 									https://www.googleapis.com/auth/userinfo.email -->
 										<a href="#">
 											<img src="/img/all_review_img/google.png"width="60px">
 										</a>								
@@ -101,14 +103,13 @@
 										</div>
 									</div>
 
-										<a class="view overlay col-3 p-0"
-										onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=od8MnK4Tb6sAdnv6ZeIT
-										&redirect_uri=http://localhost:8000/user/oauth/naver&state=${state}'">
-										<div>
-											<img src="/img/all_review_img/naver.PNG"width="60px">
-											<div class="mask flex-center rgba-white-light"></div>	
-										</div>
-									</a>									
+									<div class="view overlay col-3 p-0">
+										<a onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=od8MnK4Tb6sAdnv6ZeIT&redirect_uri=http://localhost:8000/user/oauth/naver&state=${state}'">
+										<img src="/img/all_review_img/naver.PNG"width="60px">
+										</a>									
+										<div class="mask flex-center rgba-white-light">
+										</div>	
+									</div>
 								</div>
 
 								<!-- 회원가입, 아이디/비밀번호 찾기 -->
@@ -130,10 +131,6 @@
 		</div>
 	</section>
 	
-	
-	
-	
-	
 
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 	<!-- Bootstrap tooltips -->
@@ -142,7 +139,6 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="/js/mdb.min.js"></script>
-	
 	
 	
 </body>
