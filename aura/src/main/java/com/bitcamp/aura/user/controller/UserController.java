@@ -60,10 +60,10 @@ public class UserController {
 		uservo.setRegLocation(1); 
 		uservo.setRegDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		userService.join(uservo, pwCheck, 
-				(String)uservo.getAddress(),
-				(String)uservo.getAddr_code(),
-				(String)uservo.getAddr_Detail(),
-				(String)uservo.getAddr());
+				uservo.getAddress(),
+				uservo.getAddr_code(),
+				uservo.getAddr_Detail(),
+				uservo.getAddr());
 		
 		return "login";
 	}
