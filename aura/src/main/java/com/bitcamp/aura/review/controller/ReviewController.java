@@ -20,4 +20,10 @@ public class ReviewController {
 		return "reviewPost";
 	}
 	
+	@RequestMapping(value="/write")
+	public String write() {
+		
+		return "";
+	}
+	
 }

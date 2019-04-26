@@ -50,11 +50,14 @@
 		    <artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 		
-		<!-- Java Mail -->
+<!-- 		Java Mail -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>5.1.5.RELEASE</version>
 		</dependency>
+
 		
 		<!-- WEB MVC, MVC -->
 		<dependency>
