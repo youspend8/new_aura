@@ -25,6 +25,8 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean login(String email, String password) {
+		System.out.println("email :"+email);
+		System.out.println("password :"+password);
 		// TODO Auto-generated method stub
 		UserVO originUser = userMapper.selectOneEmail(email);
 		if (originUser != null) {

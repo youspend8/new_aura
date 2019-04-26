@@ -4,6 +4,7 @@
 	<jsp:include page="/WEB-INF/views/commons/header.jsp" />
 	<title>석촌호수 - All Review</title>
 	
+	
     <!-- 카테고리 선택 -->
     <div class="d-flex container p-0 flex-wrap justify-content-center">
         <div class="btn-group col-4 m-0 px-0">
@@ -549,13 +550,14 @@
                 <img class="main-review-photo w-100" src="https://picsum.photos/350/300?image=1040">
             </div>
             <div class="col-12 d-flex justify-content-center my-4">
-                <i class="fas fa-share-alt"></i>
+                <a href="#" id="share"><i class="fas fa-share-alt"></i></a>
                 <i class="far fa-star mx-4"></i>
                 <i class="far fa-thumbs-up"></i>
             </div>
             <button type="button" id="review_write" class="btn btn-dark review-write">리뷰 작성하기</button>
         </div>
     </div>
+    
 
     <!-- 컨텐트 영역 -->
     <div class="container d-flex flex-wrap">
@@ -603,44 +605,47 @@
             </div>
             
             <div class="col-md-9 col-12 p-0 flex-column my-3">
-                <textarea rows="10" class="form-control px-2"></textarea>
-
-                <div class="d-md-flex d-none col-12 p-0 my-3">
-                    <div style="width: 20%;">
-                        <a href="#">
-                            <img src="https://picsum.photos/200/300?image=194" class="w-100" style="height: 160px">
-                        </a>
-                    </div>
-                    <div class="mx-2" style="width: 20%;">
-                        <a href="#">
-                            <img src="https://picsum.photos/200/300?image=536" class="w-100" style="height: 160px">                            <a href="#">                            <a href="#">
-                        </a>
-                    </div>
-                    <div style="width: 20%;">
-                        <a href="#">
-                            <img src="https://picsum.photos/200/300?image=392" class="w-100" style="height: 160px">                            </a>                            </a>
-                        </a>
-                    </div>
-                    <div class="mx-2" style="width: 20%;">
-                        <a href="#">
-                                <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
-                        </a>
-                    </div>
-                    <div style="width: 20%;">
-                        <a href="#">
-                            <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="form-group d-md-none d-block">
-                    <input type="file" class="form-control-file my-1">
-                </div>
-
-                <div class="my-4 text-md-right text-center">
-                    <button type="button" class="btn btn-light">다시작성</button>
-                    <button type="button" class="btn btn-elegant">등록하기</button>
-                </div>
+           		<form method="POST">
+<!--             		텍스트 영역			 -->
+	               <textarea rows="10" class="form-control px-2" id="comment"></textarea>
+	               
+	               <div class="d-md-flex d-none col-12 p-0 my-3">
+	                   <div style="width: 20%;">
+	                       <a href="#">
+	                           <img src="https://picsum.photos/200/300?image=194" class="w-100" style="height: 160px">
+	                       </a>
+	                   </div>
+	                   <div class="mx-2" style="width: 20%;">
+	                       <a href="#">
+	                           <img src="https://picsum.photos/200/300?image=536" class="w-100" style="height: 160px">                            <a href="#">                            <a href="#">
+	                       </a>
+	                   </div>
+	                   <div style="width: 20%;">
+	                       <a href="#">
+	                           <img src="https://picsum.photos/200/300?image=392" class="w-100" style="height: 160px">                            </a>                            </a>
+	                       </a>
+	                   </div>
+	                   <div class="mx-2" style="width: 20%;">
+	                       <a href="#">
+	                               <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+	                       </a>
+	                   </div>
+	                   <div style="width: 20%;">
+	                       <a href="#">
+	                           <img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+	                       </a>
+	                   </div>
+	               </div>
+	
+	               <div class="form-group d-md-none d-block">
+	                   <input type="file" class="form-control-file my-1">
+	               </div>
+	
+	               <div class="my-4 text-md-right text-center">
+	                   <button type="reset" class="btn btn-light">다시작성</button>
+	                   <button type="submit" class="btn btn-elegant">등록하기</button>
+	               </div>
+               </form>
             </div>
         </div>
 
@@ -1057,6 +1062,27 @@
 	<jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 	
     <script>
+    
+	    $("#share").click(function(){
+	    	$.ajax({
+	    		url: '/reviewList/reviewPost', // 요청 할 주소
+	    	    type: 'POST', // GET, PUT
+	    	    dataType: 'text',
+	    	    data: {
+	    	    	num : 1,
+	    	    	postNum: '1',
+	    	    	nickname: 'jisungkoon',
+	    	    	reviewType: 3,
+	    	    },
+	    	    success: function(data) {    
+    	        },
+    	       error : function (data) {
+    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+	    	        return false;
+    	       }  // 전송할 데이터
+	    	})
+	    });
+    
         $(document).ready(function() {
             var state = false;
             var generalHospitalState = false;
@@ -1137,7 +1163,7 @@
                 }
             });
         });
-
+        
         function showGeneralCategory() {
             $('#general-category').css('visibility', 'visible');
         }
@@ -1151,7 +1177,15 @@
         function hideSpecialCategory() {
             $('#special-category').css('visibility', 'hidden');
         }
+        
+        $.ajax({
+            url : "/review/write"
 
+
+
+        })
+
+		
     </script>
 </body>
 </html>

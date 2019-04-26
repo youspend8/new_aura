@@ -1,5 +1,9 @@
 package com.bitcamp.aura.reviewlist.model;
 
+import java.util.Date;
+
+import com.bitcamp.aura.category.model.ReviewCategoryVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
