@@ -19,7 +19,7 @@ public class PlaceVO extends ReviewVO {
 	private String address1;
 	private String address2;
 	private String address3;
-	private String detailAddr;
+	private String addr;
 	private String tel;
 	private String serviceTime;
 	private String waitingTime;

@@ -98,7 +98,7 @@
 			    PLACE_REVIEW.ADDRESS1 AS address1,
 			    PLACE_REVIEW.ADDRESS2 AS address2,
 			    PLACE_REVIEW.ADDRESS3 AS address3,
-			    PLACE_REVIEW.DETAIL_ADDR AS detailAddr,
+			    PLACE_REVIEW.DETAIL_ADDR AS addr,
 			    PLACE_REVIEW.TEL AS tel,
 			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
 			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
@@ -122,7 +122,6 @@
 	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
 		]]>
 	</select>
-	
 	<select id="selectAll" resultType="HashMap">
 		<![CDATA[
 			SELECT
@@ -138,7 +137,7 @@
 			    PLACE_REVIEW.ADDRESS1 AS address1,
 			    PLACE_REVIEW.ADDRESS2 AS address2,
 			    PLACE_REVIEW.ADDRESS3 AS address3,
-			    PLACE_REVIEW.DETAIL_ADDR AS detailAddr,
+			    PLACE_REVIEW.DETAIL_ADDR AS addr,
 			    PLACE_REVIEW.TEL AS tel,
 			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
 			    PLACE_REVIEW.WAITING_TIME AS waitingTime,

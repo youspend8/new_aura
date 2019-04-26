@@ -1,6 +1,7 @@
 package com.bitcamp.aura.review.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,13 +42,28 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public List<HashMap<String, Object>> searchAll() {
 		// TODO Auto-generated method stub
 		Iterable<HashMap<String, Object>> ite = mapper.selectAll();
+		
+		/*	key값을 소문자로 변경하는 코드 (임시)	*/
+		List<HashMap<String, Object>> temp = new ArrayList<>();
+		
+		ite.forEach(e -> {
+			HashMap<String, Object> tempMap = new HashMap<>();
+			e.entrySet().forEach(item -> {
+				tempMap.put(item.getKey().toLowerCase(), item.getValue());
+			});
+			temp.add(tempMap);
+		});
+		ite = temp;
+		
+		/*	Jsp페이지로 넘겨줄 데이터에 파일 데이터 추가	*/
 		ite.forEach(review -> {
-			List<String> files = fileMapper.selectByPostNum(((BigDecimal)review.get("NUM")).intValue())
+			List<String> files = fileMapper.selectByPostNum(((BigDecimal)review.get("num")).intValue())
 					.stream()
 					.map(e -> e.getFilePath())
 					.collect(Collectors.toList());
 			review.put("files", files);
 		});
+		System.out.println(ite);
 		return StreamSupport.stream(ite.spliterator(), true).collect(Collectors.toList());
 	}
 

@@ -95,7 +95,7 @@
 						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-location-arrow"></i>
-							<span>${review.detailAddr}</span>
+							<span>${review.addr}</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder;">
 							<i class="fas fa-clipboard-list"></i>
