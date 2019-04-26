@@ -1,9 +1,9 @@
 package com.bitcamp.aura.review.service;
 
+import java.util.HashMap;
 import java.util.List;
 
-import com.bitcamp.aura.review.model.RestaurantVO;
-
 public interface RestaurantService {
-	public List<RestaurantVO> searchAll();
+	public List<HashMap<String, Object>> searchAll();
+//	public List<ReviewVO> searchByParams();
 }

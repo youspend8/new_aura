@@ -36,11 +36,11 @@
 
 					<div class="card fat">
 						<div class="card-body">
-							<form method="POST" class="my-login-validation" novalidate="">
+							<form method="POST" class="my-login-validation" novalidate="" action="/user/oauth/loginResult">
 								
 								<div class="form-group">
 									<div class="md-form">
-										<input type="text" class="form-control" id="email">
+										<input type="text" class="form-control" id="email" name="email">
 										<label for="email">Email</label>
 									</div>
 									<div class="invalid-feedback">
@@ -50,7 +50,7 @@
 
 								<div class="form-group">
 										<div class="md-form">
-												<input type="password" class="form-control" id="password">
+												<input type="password" class="form-control" id="password" name="password">
 												<label for="password">Password</label>
 										</div>
 							
@@ -130,10 +130,6 @@
 			</div>
 		</div>
 	</section>
-	
-	
-	
-	
 	
 
 	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>

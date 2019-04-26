@@ -136,7 +136,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 			if(kakao_account.getAsJsonObject().get("has_gender").getAsBoolean()) {
 				
 				if(kakao_account.getAsJsonObject().get("gender").getAsString().equals("male")) {
-					userInfo.setGender(-1);//남자
+					userInfo.setGender(1);//남자
 				}else {
 					userInfo.setGender(0);//여자
 				}

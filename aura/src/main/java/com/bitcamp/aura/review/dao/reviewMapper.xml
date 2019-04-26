@@ -3,8 +3,8 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.bitcamp.aura.review.dao.RestaurantMapper">
-	<insert id="insert" parameterType="RestaurantVO">
+<mapper namespace="com.bitcamp.aura.review.dao.ReviewMapper">
+	<insert id="insert" parameterType="ReviewVO">
 		<![CDATA[
 			INSERT ALL
 			    INTO REVIEW 
@@ -40,13 +40,13 @@
 			    DUAL;
 		]]>
 	</insert>
-	<update id="update" parameterType="RestaurantVO">
+	<update id="update" parameterType="ReviewVO">
 		
 	</update>
 	<delete id="delete" parameterType="int">
 		
 	</delete>
-	<select id="selectByNum" parameterType="int" resultType="RestaurantVO">
+	<select id="selectByNum" parameterType="int" resultType="ReviewVO">
 		<![CDATA[
 			SELECT
 			    REVIEW.NUM AS num,
@@ -83,7 +83,7 @@
 			    REVIEW.NUM = #{num}
 		]]>
 	</select>
-	<select id="selectAll" resultType="RestaurantVO">
+	<select id="selectByParams" parameterType="ReviewSelectParamVO" resultType="HashMap">
 		<![CDATA[
 			SELECT
 			    REVIEW.NUM AS num,
@@ -96,6 +96,47 @@
 			    REVIEW.READ_COUNT AS readCount,
 			    REVIEW.ADD_DATE AS addDate,
 			    PLACE_REVIEW.ADDRESS AS address,
+			    PLACE_REVIEW.TEL AS tel,
+			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
+			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
+			    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
+			    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
+			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut
+			FROM 
+			    REVIEW 
+	        INNER JOIN 
+	            PLACE_REVIEW
+	        ON
+	            REVIEW.NUM = PLACE_REVIEW.NUM
+	        INNER JOIN
+	            RESTAURANT_REVIEW
+	        ON
+	            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
+	        INNER JOIN 
+	            RESTAURANT_CATEGORY
+	        ON
+	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
+			WHERE
+			    REVIEW.NUM = #{num}
+		]]>
+	</select>
+	
+	<select id="selectAll" resultType="HashMap">
+		<![CDATA[
+			SELECT
+			    REVIEW.NUM AS num,
+			    REVIEW.TITLE AS title,
+			    REVIEW.CONTENTS AS contents,
+			    REVIEW.STARS AS stars,
+			    REVIEW.GOODS AS goods,
+			    REVIEW.BOOKMARK AS bookmark,
+			    REVIEW.SHARES AS shares,
+			    REVIEW.READ_COUNT AS readCount,
+			    REVIEW.ADD_DATE AS addDate,
+			    PLACE_REVIEW.ADDRESS1 AS address1,
+			    PLACE_REVIEW.ADDRESS2 AS address2,
+			    PLACE_REVIEW.ADDRESS3 AS address3,
+			    PLACE_REVIEW.DETAIL_ADDR AS detailAddr,
 			    PLACE_REVIEW.TEL AS tel,
 			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
 			    PLACE_REVIEW.WAITING_TIME AS waitingTime,

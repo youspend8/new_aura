@@ -58,8 +58,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/register")
-	public String register(@ModelAttribute UserVO uservo,String pwCheck,String addr_Detail) {
-		uservo.setRegLocation(1);
+	public String register(@ModelAttribute UserVO uservo,String pwCheck) {
+		uservo.setRegLocation(1); 
 		uservo.setRegDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		userService.join(uservo, pwCheck, 
 				(String)uservo.getAddress(),
@@ -69,6 +69,7 @@ public class UserController {
 		
 		return "login";
 	}
+	
 	@RequestMapping(value="/forgotForm")
 	public String forgotForm() {
 		
@@ -160,4 +161,17 @@ public class UserController {
 			return "main";
 		}
 	}
+	
+	@RequestMapping("/oauth/loginResult")
+	public String loginResult(HttpSession session,String email, String password) {
+		System.out.println("Eamil :"+email);
+		System.out.println("password :"+password);
+		if(userService.login(email,password) == true) {
+			return "main";
+		}else
+			return "login";
+	}
+	
+	
+	
 }

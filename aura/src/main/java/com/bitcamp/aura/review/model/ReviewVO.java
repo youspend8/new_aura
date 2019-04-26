@@ -1,5 +1,7 @@
 package com.bitcamp.aura.review.model;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -13,10 +15,16 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias(value="restaurantVo")
-public class RestaurantVO extends PlaceVO {
+@Alias(value="reviewVo")
+public class ReviewVO {
 	private int num;
-	private int category;
-	private boolean delivery;
-	private boolean takeOut;
+	private String title;
+	private String contents;
+	private int stars;
+	private int goods;
+	private int bookmark;
+	private int shares;
+	private int readCount;
+	private String addDate;
+	private List<String> files;
 }
