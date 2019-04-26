@@ -13,9 +13,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantVO {
+@Alias(value="reviewFileVo")
+public class ReviewFileVO {
 	private int num;
-	private int category;
-	private boolean delivery;
-	private boolean takeOut;
+	private int postNum;
+	private String filePath;
 }
