@@ -1,13 +1,17 @@
 package com.bitcamp.aura;
 
+import java.util.HashMap;
+
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.bitcamp.aura.review.dao.ReviewMapper;
 import com.bitcamp.aura.review.model.RestaurantVO;
-import com.bitcamp.aura.review.service.RestaurantService;
+import com.bitcamp.aura.review.service.ReviewService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -18,10 +22,7 @@ public class AuraApplicationTests {
 //	
 //	@Autowired
 //	private BadCategoryRepository cRepo;
-	
-	@Autowired
-	private RestaurantService service;
-	
+
 //	@Test
 //	public void SignTest() {
 //		SignLocationVO sign1 = new SignLocationVO();

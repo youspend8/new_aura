@@ -20,6 +20,7 @@ public class ReviewVO {
 	private int num;
 	private String title;
 	private String contents;
+	private int type;
 	private int stars;
 	private int goods;
 	private int bookmark;
