@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 	<jsp:include page="/WEB-INF/views/commons/header.jsp"></jsp:include>
 	<title>All Review</title>
 	
@@ -259,13 +261,13 @@
 
         <div class="carousel-item active">
           <div class="d-flex flex-wrap w-100 justify-content-center tl">
-
+			<c:forEach items="${reviewVo}" var="review">
             <div class="win">
 
               <div class="card-jisung">
-                <a href="/review/post">
+                <a href="/review/post?num=${review.num}&type=${review.type}">
                   <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
+                    <span class="text-primary" style="font-size: 70%;">${review.title}</span>
                     <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
                     <i class="fas fa-star" style="color: red;"></i>
                     <i class="fas fa-star" style="color: red;"></i>
@@ -278,18 +280,7 @@
 
                 <div class="cardcontent">
                   <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
+                    ${review.contents}
                   </div>
                   <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
                     read more...
@@ -298,55 +289,13 @@
 
 
                 <div class="cardpic">
-                  <img class="" src="https://picsum.photos/210" alt="" />
+                  <img class="" src="${review.files[0]}" alt="" />
                 </div>
 
               </div>
             </div>
-
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="/review/post">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/220" alt="" />
-                </div>
-
-              </div>
-            </div>
+			</c:forEach>
+			
             <div class="win">
 
               <div class="card-jisung">

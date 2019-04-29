@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>석촌호수 - All Review</title>
@@ -361,94 +362,60 @@
 </div>
 
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
-<div class="container d-flex p-md-5 px-2 py-4"
-	style="border-bottom: 2px solid; border-top: 2px solid; border-color: #dadee6">
-	<div
-		class="col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap">
-
+<div class="container d-flex flex-wrap p-md-5 px-2 py-4" style="border-bottom: 2px solid; border-top: 2px solid; border-color: #dadee6">
+	<div class="col-12 text-center">
+		${reviewInfo.TITLE}
+	</div>
+	<div class="col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap">
 		<!-- 리뷰 사진 캐러셀 -->
 		<div id="carousel-example-2" class="carousel slide col-12"
 			data-ride="carousel">
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
 					<div class="d-flex">
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=701">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=113">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=242">
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="view d-flex">
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="view d-flex">
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
+						<c:forEach var="file" items="${reviewInfo.files}">
+							<div class="card-body p-1 col-4">
+								<img class="w-100" src="${file}" style="width: 100%; height: 200px">
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
-			<!--Controls-->
-			<a class="carousel-control-prev" href="#carousel-example-2"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"
-				style="color: white;"></span>
-			</a> <a class="carousel-control-next review-photo-button-right"
-				href="#carousel-example-2" role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"
-				style="color: white;"></span>
-			</a>
+			
+			<c:if test="${reviewInfo.files.size() > 3}">
+				<!--Controls-->
+				<a class="carousel-control-prev" href="#carousel-example-2"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"
+					style="color: white;"></span>
+				</a> <a class="carousel-control-next review-photo-button-right"
+					href="#carousel-example-2" role="button" data-slide="next"> <span
+					class="carousel-control-next-icon" aria-hidden="true"
+					style="color: white;"></span>
+				</a>
+			</c:if>
 		</div>
 		<!-- 리뷰 상세 설명 -->
 		<div class="d-flex flex-wrap col-12">
 			<p class="col-12 p-0 my-1">
-				<span> ■ 연락처 : </span> <span> 010-2053-4968 </span>
+				<span> ■ 연락처 : </span> <span> ${reviewInfo.TEL} </span>
 			</p>
 			<p class="col-12 p-0 my-1">
-				<span> ■ 주소 : </span> <span> 서울특별시 송파구 잠실동 석촌호수 서호 </span>
+				<span> ■ 주소 : </span> <span> ${reviewInfo.ADDR} </span>
 			</p>
 			<p class="col-12 p-0 my-1">
 				<span> ■ 운영 시간 </span>
 			<p class="ml-4 my-1">
 			<div>
-				평일 : 09: 00 ~ 11 : 00<br> 토: 10: 00 ~ 11: 00
+				${reviewInfo.SERVICETIME}
 			</div>
 			</p>
 			</p>
 			<p class="col-12 p-0 my-1">
-				<span> ■ 세부 정보 : </span> <span class="review-explanation-2  col-18"
-					text=""> Lorem ipsum dolor sit amet consectetur, adipisicing
-					elit. Et fugiat temporibus voluptate laudantium ducimus sequi error
-					rerum, dolores consequatur? Dolorum minus a aliquam ipsa laboriosam
-					esse odit tempore non sed. </span>
+				<span> ■ 세부 정보 : </span> 
+				<span class="review-explanation-2  col-18">
+					${reviewInfo.CONTENTS}				
+				</span>
 			</p>
 		</div>
 		<div
