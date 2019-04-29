@@ -64,21 +64,17 @@ public class GoogleLoginAPI implements GoogleLogin{
 	       JsonParser parser = new JsonParser();
 	       JsonElement element = parser.parse(response.toString());
 	       String accessToken = element.getAsJsonObject().get("access_token").getAsString();
+
 	       userInfo.setAccessToken(accessToken);
+	       return accessToken;
 	       
-	       
-	       System.out.println("accessToken :"+accessToken);
-	       return accessToken; 
-			
-			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	
+		}	
 		return null;
 	}
 
@@ -105,9 +101,19 @@ public class GoogleLoginAPI implements GoogleLogin{
 
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
-//			JsonObject response = element.getAsJsonObject().get("response").getAsJsonObject();
-			
 			System.out.println("element :"+ element);
+
+			userInfo.setUserId(element.getAsJsonObject().get("id").getAsString());
+			userInfo.setProfile(element.getAsJsonObject().get("picture").getAsString());
+			userInfo.setName(element.getAsJsonObject().get("name").getAsString());
+			userInfo.setPwMissCount(0);
+			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			userInfo.setRegDate(sim.format(new Date()));
+			userInfo.setGender(-1); // 구글 성별 무.
+			userInfo.setIsAdmin(0);
+			userInfo.setRegLocation(5);
+
+			System.out.println("userInfo:" + userInfo);
 
 			return userInfo;
 
@@ -120,7 +126,7 @@ public class GoogleLoginAPI implements GoogleLogin{
 		}
 //		성별, 닉네임, 연령대 
 		return null;
-	}
+		}
 
 	}
 
