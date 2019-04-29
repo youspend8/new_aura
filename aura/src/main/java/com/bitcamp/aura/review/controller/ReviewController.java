@@ -1,5 +1,7 @@
 package com.bitcamp.aura.review.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +25,13 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/post")
-	public String post() {
-		
+	public String post(int num, int type, Model model) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("num", num);
+		HashMap<String, Object> reviewInfo = service.searchByNum(params);
+		model.addAttribute("reviewInfo", reviewInfo);
+		System.out.println(reviewInfo);
 		return "reviewPost";
 	}
 	

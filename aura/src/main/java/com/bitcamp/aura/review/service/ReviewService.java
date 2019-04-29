@@ -10,6 +10,6 @@ public interface ReviewService {
 	public List<ReviewVO> searchRestaurants(ReviewSelectParamVO params);
 	public List<ReviewVO> searchDigitals(ReviewSelectParamVO params);
 	public List<ReviewVO> searchHospitals(ReviewSelectParamVO params);
-	public HashMap<String, Object> searchByNum(int num);
+	public HashMap<String, Object> searchByNum(HashMap<String, Object> params);
 	public List<ReviewVO> searchAll();
 }

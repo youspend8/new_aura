@@ -209,7 +209,7 @@
 		    REVIEW.TYPE
 		FROM 
 		    REVIEW
-		ORDER NUM BY
+		ORDER BY NUM
 	</select>
 	<resultMap type="ReviewVO" id="selectAllMap">
 		<id property="num" column="NUM" />

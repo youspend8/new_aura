@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
 import com.bitcamp.aura.review.model.RestaurantVO;
+import com.bitcamp.aura.review.model.ReviewFileVO;
 import com.bitcamp.aura.review.model.ReviewSelectParamVO;
 import com.bitcamp.aura.review.model.ReviewVO;
 
@@ -51,9 +52,15 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public HashMap<String, Object> searchByNum(int num) {
+	public HashMap<String, Object> searchByNum(HashMap<String, Object> params) {
 		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Object> reviewInfo = mapper.selectByNum(params);
+		List<String> files = new ArrayList<>();
+		for (ReviewFileVO r : fileMapper.selectByPostNum((Integer)params.get("num"))) {
+			files.add(r.getFilePath());
+		}
+		reviewInfo.put("files", files);
+		return reviewInfo;
 	}
 
 	@Override
