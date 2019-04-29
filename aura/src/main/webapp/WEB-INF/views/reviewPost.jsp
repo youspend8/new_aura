@@ -405,11 +405,11 @@
 			</p>
 			<p class="col-12 p-0 my-1">
 				<span> ■ 운영 시간 </span>
-			<p class="ml-4 my-1">
-			<div>
-				${reviewInfo.SERVICETIME}
-			</div>
-			</p>
+				<p class="ml-4 my-1">
+					<div>
+						${reviewInfo.SERVICETIME}
+					</div>
+				</p>
 			</p>
 			<p class="col-12 p-0 my-1">
 				<span> ■ 세부 정보 : </span> 
@@ -417,12 +417,27 @@
 					${reviewInfo.CONTENTS}				
 				</span>
 			</p>
+			<p class="col-12 p-0 my-1">
+				<span> ■ 메뉴 : </span> 
+				
+			</p>
+			
+				<p class="col-12 p-0 my-1 ml-lg-3">
+
+				<c:forEach var="menu" items="${menu}"  varStatus="num">
+					<span>${num.index+1}. ${menu.name}</span>
+					<span>( ${String.format("%,3d", Integer.parseInt(menu.price))} 원 )</span><br>
+				</c:forEach>
+				</p>
+			
+			
 		</div>
 		<div
 			class="d-md-none col-12 d-flex justify-content-between align-items-center p-0 ">
 			<div class="col-6 d-flex align-items-center justify-content-center">
-				<i class="fas fa-share-alt"></i> <i class="far fa-star mx-4"></i> <i
-					class="far fa-thumbs-up"></i>
+				<i class="fas fa-share-alt"></i> 
+				<i class="far fa-star mx-4"></i>
+				<i class="far fa-thumbs-up"></i>
 			</div>
 			<div class="col-6 d-flex align-items-center justify-content-end p-0">
 				<button type="button" id="review_write_mobile"
@@ -437,8 +452,15 @@
 				src="https://picsum.photos/350/300?image=1040">
 		</div>
 		<div class="col-12 d-flex justify-content-center my-4">
-			<a href="#" id="share"><i class="fas fa-share-alt"></i></a> <i
-				class="far fa-star mx-4"></i> <i class="far fa-thumbs-up"></i>
+			<a id="share" onclick="doReview(1)">
+				<i class="fas fa-share-alt"></i>
+			</a>
+			<a id="share" onclick="doReview(2)">
+			<i class="far fa-star mx-4" ></i>
+			</a>
+			<a id="share" onclick="doReview(3)">
+			<i class="far fa-thumbs-up"></i>
+				</a>
 		</div>
 		<button type="button" id="review_write"
 			class="btn btn-dark review-write">리뷰 작성하기</button>
@@ -1022,17 +1044,15 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
 <script>
-    
-	    $("#share").click(function(){
+    	function doReview(type) {
 	    	$.ajax({
-	    		url: '/reviewList/reviewPost', // 요청 할 주소
+	    		url: '/reviewList/reviewPost', // 요청 할 주소 
 	    	    type: 'POST', // GET, PUT
-	    	    dataType: 'text',
+	    	    dataType: 'text', 
 	    	    data: {
-	    	    	num : 1,
-	    	    	postNum: '1',
-	    	    	nickname: 'jisungkoon',
-	    	    	reviewType: 3,
+	    	    	postNum : ${reviewInfo.NUM},
+	    	    	nickname: '채훈22',
+	    	    	reviewType: type
 	    	    },
 	    	    success: function(data) {    
     	        },
@@ -1041,7 +1061,7 @@
 	    	        return false;
     	       }  // 전송할 데이터
 	    	})
-	    });
+    	}
     
         $(document).ready(function() {
             var state = false;

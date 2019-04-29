@@ -5,7 +5,7 @@
     
 <mapper namespace="com.bitcamp.aura.reviewlist.dao.ReviewListMapper">
 	<insert id="insert" parameterType="ReviewListVO">
-		insert into REVIEW_LIST values(${num}, ${postNum}, ${nickname},${reviewType},${date})
+		insert into REVIEW_LIST values(#{postNum}, #{nickname},#{reviewType},#{date},null)
 	</insert>
 	<delete id="deleteByNum" parameterType="int">
 	
@@ -13,6 +13,8 @@
 	<delete id="deleteAllByParams" parameterType="ReviewListSelectParamsVO">
 		
 	</delete>
+	
+
 	<select id="selectByNum" parameterType="int" resultType="ReviewListVO">
 	
 	</select>

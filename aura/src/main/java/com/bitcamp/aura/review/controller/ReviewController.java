@@ -1,7 +1,6 @@
 package com.bitcamp.aura.review.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitcamp.aura.review.model.RestaurantSelectParamVO;
-import com.bitcamp.aura.review.model.RestaurantVO;
-import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.google.gson.Gson;
 
@@ -30,7 +27,11 @@ public class ReviewController {
 		params.put("num", num);
 		HashMap<String, Object> reviewInfo = service.searchByNum(params);
 		model.addAttribute("reviewInfo", reviewInfo);
-		System.out.println(reviewInfo);
+
+		Gson gson = new Gson();
+		HashMap<String, Object> list = gson.fromJson((String)reviewInfo.get("MENU"), HashMap.class);
+		model.addAttribute("menu", list.get("menu"));
+		
 		return "reviewPost";
 	}
 	
