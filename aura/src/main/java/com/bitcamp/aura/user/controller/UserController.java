@@ -137,17 +137,15 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		String accessToken = googleLogin.getAccessToken(code);
 		UserVO google_userinfo = googleLogin.getUserInfo(accessToken);
-		
-		
-		
+			
 		System.out.println("google userinfo:"+ google_userinfo);
-//		if (userService.apiLoginCheck(google_userinfo.getUserId())) {
-//			mav.setViewName("main");
-//			return mav;
-//		} else {
-//			mav.setViewName("addExtraForm");
-//			mav.addObject("userInfo", google_userinfo);
-//		}
+		if (userService.apiLoginCheck(google_userinfo.getUserId())) {
+			mav.setViewName("main");
+			return mav;
+		} else {
+			mav.setViewName("addExtraForm");
+			mav.addObject("userInfo", google_userinfo);
+		}
 		return mav;
 	}
 	

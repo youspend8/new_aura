@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bitcamp.aura.review.model.ReviewSelectParamVO;
-import com.bitcamp.aura.review.service.RestaurantService;
+import com.bitcamp.aura.review.service.ReviewService;
 
 @Controller
 @RequestMapping(value="/review")
 public class ReviewController {
 
 	@Autowired
-	private RestaurantService service;
+	private ReviewService service;
 
 	@RequestMapping(value="/list")
 	public String list(Model model) {
@@ -44,7 +44,7 @@ public class ReviewController {
 	public String search(Model model,
 			@ModelAttribute ReviewSelectParamVO params) {
 		
-		model.addAttribute("list", service.searchRestaurant(params));
+		model.addAttribute("list", service.searchRestaurants(params));
 		return "/reviewList";
 	}
 }

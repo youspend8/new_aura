@@ -140,8 +140,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 				}else {
 					userInfo.setGender(0);//여자
 				}
-			}
-				
+			}				
 			return userInfo;
 			
 		} catch (MalformedURLException e) {
@@ -150,9 +149,7 @@ public class KakaoLoginAPI implements KakaoLogin{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	
-		
+		}		
 		return null;
 	}
 
