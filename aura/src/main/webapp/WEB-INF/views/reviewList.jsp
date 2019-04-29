@@ -12,7 +12,25 @@
 			<!-- 검색한 내용의 제목 -->
 			<div class="col-12 py-4">
 				<div class="board_search_title  d-flex justify-content-between">
-					<span><span>'</span>석촌호수 벚꽃축제<span>' </span>에 대한 결과</span>
+					<span>
+						<c:if test="${keyword == ''}">
+							<c:choose>
+								<c:when test="${type == 1}">
+									맛집
+								</c:when>
+								<c:when test="${type == 2}">
+									병원
+								</c:when>
+								<c:when test="${type == 3}">
+									전자제품
+								</c:when>
+							</c:choose>
+						</c:if>
+						<c:if test="${keyword != ''}">
+							'${keyword}'
+						</c:if>
+						에 대한 검색결과
+					</span>
 					<a class="board_filter text-dark" data-toggle="modal" data-target="#exampleModalPopovers">
 						<i class="fas fa-sliders-h" style="font-size: 100%;"></i>
 						<span style="font-size:90%;">필터</span>
@@ -36,7 +54,7 @@
 			      		<!-- 마우스 호버시 줌 이벤트 -->
 			      		<div class="view overlay zoom" style="width: 100%; height: 100%">
 			        		<!-- 사진 캐러셀 -->
-			        		<a href="#">
+			        		<a href="/review/post?num=${review.num}&type=${review.type}">
 								<div id="searchCarousel${i.index}" class="carousel slide carousel-fade" data-ride="carousel">
 								  <div class="carousel-inner">
 								  	<c:forEach var="file" items="${review.files}" varStatus="j">
@@ -60,7 +78,9 @@
 			
 					<div class="col-md-6 col-12">
 						<div>
-						    <a href="#" class="text-dark"><h5 class="board_list_title mb-1">${review.title}</h5></a>
+						    <a href="/review/post?num=${review.num}&type=${review.type}" class="text-dark">
+						    	<h5 class="board_list_title mb-1">${review.title}</h5>
+						    </a>
 						    <span style="float:right; font-size:2rem;">
 						      <a style="color:rgb(0, 102, 255)"><i class="far fa-star"></i></a>
 						    </span>
@@ -73,29 +93,29 @@
 						<div class="my-1 align-middle">
 						    <i class="fas fa-heart"></i>
 						    <span>
-<%-- 						    	<c:choose> --%>
-<%-- 									<c:when test="${review.category eq 1}"> --%>
-<!-- 										한식 -->
-<%-- 									</c:when> --%>
-<%-- 									<c:when test="${review.category eq 2}"> --%>
-<!-- 										양식 -->
-<%-- 									</c:when> --%>
-<%-- 									<c:when test="${review.category eq 16}"> --%>
-<!-- 										호프 -->
-<%-- 									</c:when> --%>
-<%-- 									<c:otherwise> --%>
-<!-- 										기타분류 -->
-<%-- 									</c:otherwise> --%>
-<%-- 						    	</c:choose> --%>
+						    	<c:choose>
+									<c:when test="${review.category eq 1}">
+										한식
+									</c:when>
+									<c:when test="${review.category eq 2}">
+										양식
+									</c:when>
+									<c:when test="${review.category eq 16}">
+										호프
+									</c:when>
+									<c:otherwise>
+										기타분류
+									</c:otherwise>
+						    	</c:choose>
 							</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-phone"></i>
-<%-- 							<span>${review.tel}</span>  --%>
+							<span>${review.tel}</span> 
 						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-location-arrow"></i>
-<%-- 							<span>${review.addr}</span> --%>
+							<span>${review.addr}</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder;">
 							<i class="fas fa-clipboard-list"></i>
@@ -111,8 +131,8 @@
 		
 			<div id="review_more" class="d-flex col-12 justify-content-center align-items-center bg-light py-3 my-5">
 			    <a class="text-center" href="#" style="text-decoration: none">
-			        <img src="img/more.png" style="width: 20%; border-radius: 100%; border: 1px solid gray">
-			        <span class="ml-2 text-dark">댓글 더보기</span>
+			        <img src="/img/more.png" style="width: 20%; border-radius: 100%; border: 1px solid gray">
+			        <span class="ml-2 text-dark">검색결과 더보기</span>
 			    </a>
 			</div>
 		</div>
