@@ -100,6 +100,17 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userMapper.selectMany(nickname);
 	}
+	@Override
+	public UserVO getUser_email(String email) {
+		// TODO Auto-generated method stub
+		
+		return userMapper.selectOneEmail(email);
+	}
+	@Override
+	public List<UserVO> getUsers_email(String email) {
+		// TODO Auto-generated method stub
+		return userMapper.selectMany(email);
+	}
 
 	@Override
 	public List<UserVO> getAllUser() {
@@ -158,4 +169,5 @@ public class UserServiceImpl implements UserService {
 		}
 		return random_Num;
 	}
+
 }

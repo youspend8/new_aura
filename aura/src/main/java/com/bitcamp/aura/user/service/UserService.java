@@ -21,4 +21,6 @@ public interface UserService {
 	public List<UserVO> getUsers (String nickname);
 	public List<UserVO> getAllUser();
 	public String emailCode(String code);
+	public UserVO getUser_email(String email);
+	public List<UserVO> getUsers_email(String email);
 }

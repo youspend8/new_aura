@@ -186,4 +186,13 @@ public class UserController {
 		
 		return userService.emailCode(email);
 	}
+	
+	@RequestMapping("/emailOverlap")
+	@ResponseBody
+	public String overlap(String email) {
+		if(userService.getUser_email(email) == null) {
+			return "true";
+		}else
+			return "false";
+	}
 }
