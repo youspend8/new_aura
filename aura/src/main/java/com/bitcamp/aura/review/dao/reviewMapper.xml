@@ -50,15 +50,15 @@
 		
 	</delete>
 	
-	<select id="selectHospitalsByParams" parameterType="ReviewSelectParamVO" resultType="HospitalVo">
+	<select id="selectHospitalsByParams" parameterType="RestaurantSelectParamVO" resultType="HospitalVo">
 	
 	</select>
 	
-	<select id="selectDigitalsByParams" parameterType="ReviewSelectParamVO" resultType="DigitalVO">
+	<select id="selectDigitalsByParams" parameterType="RestaurantSelectParamVO" resultType="DigitalVO">
 	
 	</select>
 	
-	<select id="selectRestaurantsByParams" parameterType="ReviewSelectParamVO" resultType="RestaurantVO">
+	<select id="selectRestaurantsByParams" parameterType="RestaurantSelectParamVO" resultType="RestaurantVO">
 		<![CDATA[
 			SELECT
 			    REVIEW.NUM AS num,
@@ -96,6 +96,7 @@
 	            RESTAURANT_CATEGORY
 	        ON
 	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
+	        ORDER BY REVIEW.NUM
 		]]>
 	</select>
 	
@@ -209,7 +210,7 @@
 		    REVIEW.TYPE
 		FROM 
 		    REVIEW
-		ORDER NUM BY
+		ORDER BY NUM
 	</select>
 	<resultMap type="ReviewVO" id="selectAllMap">
 		<id property="num" column="NUM" />

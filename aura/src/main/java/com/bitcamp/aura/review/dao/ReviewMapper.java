@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.bitcamp.aura.review.model.ReviewSelectParamVO;
+import com.bitcamp.aura.review.model.RestaurantSelectParamVO;
+import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewVO;
 
 @Mapper
@@ -13,9 +14,9 @@ public interface ReviewMapper {
 	public int insert(ReviewVO reviewVo);
 	public int update(ReviewVO reviewVo);
 	public int delete(int num);
-	public List<ReviewVO> selectRestaurantsByParams(ReviewSelectParamVO params);
-	public List<ReviewVO> selectHospitalsByParams(ReviewSelectParamVO params);
-	public List<ReviewVO> selectDigitalsByParams(ReviewSelectParamVO params);
+	public List<RestaurantVO> selectRestaurantsByParams(RestaurantSelectParamVO params);
+	public List<ReviewVO> selectHospitalsByParams(RestaurantSelectParamVO params);
+	public List<ReviewVO> selectDigitalsByParams(RestaurantSelectParamVO params);
 	public HashMap<String, Object> selectByNum(HashMap<String, Object> params);
 	public List<ReviewVO> selectAll();
 }

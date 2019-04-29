@@ -1,6 +1,6 @@
 package com.bitcamp.aura.review.model;
 
-public class ReviewSelectParamVO {
+public class RestaurantSelectParamVO {
 	private String title;
 	private String orderStars;
 	private String orderPop;

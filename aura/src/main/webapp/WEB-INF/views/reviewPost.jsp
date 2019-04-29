@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>석촌호수 - All Review</title>
@@ -361,101 +362,82 @@
 </div>
 
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
-<div class="container d-flex p-md-5 px-2 py-4"
-	style="border-bottom: 2px solid; border-top: 2px solid; border-color: #dadee6">
-	<div
-		class="col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap">
-
+<div class="container d-flex flex-wrap p-md-5 px-2 py-4" style="border-bottom: 2px solid; border-top: 2px solid; border-color: #dadee6">
+	<div class="col-12 text-center">
+		${reviewInfo.TITLE}
+	</div>
+	<div class="col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap">
 		<!-- 리뷰 사진 캐러셀 -->
 		<div id="carousel-example-2" class="carousel slide col-12"
 			data-ride="carousel">
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
 					<div class="d-flex">
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=701">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=113">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=242">
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="view d-flex">
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="view d-flex">
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
-
-						<div class="card-body p-1 col-4">
-							<img class="w-100" src="https://picsum.photos/200/200?image=0">
-						</div>
+						<c:forEach var="file" items="${reviewInfo.files}">
+							<div class="card-body p-1 col-4">
+								<img class="w-100" src="${file}" style="width: 100%; height: 200px">
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
-			<!--Controls-->
-			<a class="carousel-control-prev" href="#carousel-example-2"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"
-				style="color: white;"></span>
-			</a> <a class="carousel-control-next review-photo-button-right"
-				href="#carousel-example-2" role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"
-				style="color: white;"></span>
-			</a>
+			
+			<c:if test="${reviewInfo.files.size() > 3}">
+				<!--Controls-->
+				<a class="carousel-control-prev" href="#carousel-example-2"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"
+					style="color: white;"></span>
+				</a> <a class="carousel-control-next review-photo-button-right"
+					href="#carousel-example-2" role="button" data-slide="next"> <span
+					class="carousel-control-next-icon" aria-hidden="true"
+					style="color: white;"></span>
+				</a>
+			</c:if>
 		</div>
 		<!-- 리뷰 상세 설명 -->
 		<div class="d-flex flex-wrap col-12">
 			<p class="col-12 p-0 my-1">
-				<span> ■ 연락처 : </span> <span> 010-2053-4968 </span>
+				<span> ■ 연락처 : </span> <span> ${reviewInfo.TEL} </span>
 			</p>
 			<p class="col-12 p-0 my-1">
-				<span> ■ 주소 : </span> <span> 서울특별시 송파구 잠실동 석촌호수 서호 </span>
+				<span> ■ 주소 : </span> <span> ${reviewInfo.ADDR} </span>
 			</p>
 			<p class="col-12 p-0 my-1">
 				<span> ■ 운영 시간 </span>
-			<p class="ml-4 my-1">
-			<div>
-				평일 : 09: 00 ~ 11 : 00<br> 토: 10: 00 ~ 11: 00
-			</div>
-			</p>
+				<p class="ml-4 my-1">
+					<div>
+						${reviewInfo.SERVICETIME}
+					</div>
+				</p>
 			</p>
 			<p class="col-12 p-0 my-1">
-				<span> ■ 세부 정보 : </span> <span class="review-explanation-2  col-18"
-					text=""> Lorem ipsum dolor sit amet consectetur, adipisicing
-					elit. Et fugiat temporibus voluptate laudantium ducimus sequi error
-					rerum, dolores consequatur? Dolorum minus a aliquam ipsa laboriosam
-					esse odit tempore non sed. </span>
+				<span> ■ 세부 정보 : </span> 
+				<span class="review-explanation-2  col-18">
+					${reviewInfo.CONTENTS}				
+				</span>
 			</p>
+			<p class="col-12 p-0 my-1">
+				<span> ■ 메뉴 : </span> 
+				
+			</p>
+			
+				<p class="col-12 p-0 my-1 ml-lg-3">
+
+				<c:forEach var="menu" items="${menu}"  varStatus="num">
+					<span>${num.index+1}. ${menu.name}</span>
+					<span>( ${String.format("%,3d", Integer.parseInt(menu.price))} 원 )</span><br>
+				</c:forEach>
+				</p>
+			
+			
 		</div>
 		<div
 			class="d-md-none col-12 d-flex justify-content-between align-items-center p-0 ">
 			<div class="col-6 d-flex align-items-center justify-content-center">
-				<i class="fas fa-share-alt"></i> <i class="far fa-star mx-4"></i> <i
-					class="far fa-thumbs-up"></i>
+				<i class="fas fa-share-alt"></i> 
+				<i class="far fa-star mx-4"></i>
+				<i class="far fa-thumbs-up"></i>
 			</div>
 			<div class="col-6 d-flex align-items-center justify-content-end p-0">
 				<button type="button" id="review_write_mobile"
@@ -470,8 +452,15 @@
 				src="https://picsum.photos/350/300?image=1040">
 		</div>
 		<div class="col-12 d-flex justify-content-center my-4">
-			<a href="#" id="share"><i class="fas fa-share-alt"></i></a> <i
-				class="far fa-star mx-4"></i> <i class="far fa-thumbs-up"></i>
+			<a id="share" onclick="doReview(1)">
+				<i class="fas fa-share-alt"></i>
+			</a>
+			<a id="share" onclick="doReview(2)">
+			<i class="far fa-star mx-4" ></i>
+			</a>
+			<a id="share" onclick="doReview(3)">
+			<i class="far fa-thumbs-up"></i>
+				</a>
 		</div>
 		<button type="button" id="review_write"
 			class="btn btn-dark review-write">리뷰 작성하기</button>
@@ -1055,17 +1044,15 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
 <script>
-    
-	    $("#share").click(function(){
+    	function doReview(type) {
 	    	$.ajax({
-	    		url: '/reviewList/reviewPost', // 요청 할 주소
+	    		url: '/reviewList/reviewPost', // 요청 할 주소 
 	    	    type: 'POST', // GET, PUT
-	    	    dataType: 'text',
+	    	    dataType: 'text', 
 	    	    data: {
-	    	    	num : 1,
-	    	    	postNum: '1',
-	    	    	nickname: 'jisungkoon',
-	    	    	reviewType: 3,
+	    	    	postNum : ${reviewInfo.NUM},
+	    	    	nickname: '채훈22',
+	    	    	reviewType: type
 	    	    },
 	    	    success: function(data) {    
     	        },
@@ -1074,7 +1061,7 @@
 	    	        return false;
     	       }  // 전송할 데이터
 	    	})
-	    });
+    	}
     
         $(document).ready(function() {
             var state = false;
