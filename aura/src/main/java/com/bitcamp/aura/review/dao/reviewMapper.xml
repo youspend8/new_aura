@@ -17,7 +17,8 @@
 		    	0,
 		    	0,
 		    	0,
-		    	#{addDate, jdbcType=VARCHAR}
+		    	#{addDate, jdbcType=VARCHAR},
+		    	#{type, jdbcType=NUMERIC}
 		    )
 		    INTO PLACE_REVIEW
 		    VALUES (
@@ -40,53 +41,23 @@
 			    DUAL;
 		]]>
 	</insert>
+	
 	<update id="update" parameterType="ReviewVO">
 		
 	</update>
+	
 	<delete id="delete" parameterType="int">
 		
 	</delete>
-	<select id="selectRestaurantByNum" parameterType="int" resultType="RestaurantVO">
-		<![CDATA[
-			SELECT
-			    REVIEW.NUM AS num,
-			    REVIEW.TITLE AS title,
-			    REVIEW.CONTENTS AS contents,
-			    REVIEW.STARS AS stars,
-			    REVIEW.GOODS AS goods,
-			    REVIEW.BOOKMARK AS bookmark,
-			    REVIEW.SHARES AS shares,
-			    REVIEW.READ_COUNT AS readCount,
-			    REVIEW.ADD_DATE AS addDate,
-			    PLACE_REVIEW.ADDRESS1 AS address1,
-			    PLACE_REVIEW.ADDRESS2 AS address2,
-			    PLACE_REVIEW.ADDRESS3 AS address3,
-			    PLACE_REVIEW.DETAIL_ADDR AS addr,
-			    PLACE_REVIEW.TEL AS tel,
-			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
-			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
-			    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
-			    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
-			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut,
-			    RESTAURANT_REVIEW.RESTAURANT_MENU AS menu
-			FROM 
-			    REVIEW 
-	        INNER JOIN 
-	            PLACE_REVIEW
-	        ON
-	            REVIEW.NUM = PLACE_REVIEW.NUM
-	        INNER JOIN
-	            RESTAURANT_REVIEW
-	        ON
-	            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
-	        INNER JOIN 
-	            RESTAURANT_CATEGORY
-	        ON
-	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
-			WHERE
-			    REVIEW.NUM = #{num}
-		]]>
+	
+	<select id="selectHospitalsByParams" parameterType="ReviewSelectParamVO" resultType="HospitalVo">
+	
 	</select>
+	
+	<select id="selectDigitalsByParams" parameterType="ReviewSelectParamVO" resultType="DigitalVO">
+	
+	</select>
+	
 	<select id="selectRestaurantsByParams" parameterType="ReviewSelectParamVO" resultType="RestaurantVO">
 		<![CDATA[
 			SELECT
@@ -99,6 +70,7 @@
 			    REVIEW.SHARES AS shares,
 			    REVIEW.READ_COUNT AS readCount,
 			    REVIEW.ADD_DATE AS addDate,
+			    REVIEW.TYPE AS type,
 			    PLACE_REVIEW.ADDRESS1 AS address1,
 			    PLACE_REVIEW.ADDRESS2 AS address2,
 			    PLACE_REVIEW.ADDRESS3 AS address3,
@@ -126,18 +98,20 @@
 	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
 		]]>
 	</select>
-	<select id="selectAll" resultType="HashMap">
-		<![CDATA[
-			SELECT
-			    REVIEW.NUM AS num,
-			    REVIEW.TITLE AS title,
-			    REVIEW.CONTENTS AS contents,
-			    REVIEW.STARS AS stars,
-			    REVIEW.GOODS AS goods,
-			    REVIEW.BOOKMARK AS bookmark,
-			    REVIEW.SHARES AS shares,
-			    REVIEW.READ_COUNT AS readCount,
-			    REVIEW.ADD_DATE AS addDate,
+	
+	<select id="selectByNum" resultType="HashMap" parameterType="HashMap">
+		SELECT
+		    REVIEW.NUM AS num,
+		    REVIEW.TITLE AS title,
+		    REVIEW.CONTENTS AS contents,
+		    REVIEW.STARS AS stars,
+		    REVIEW.GOODS AS goods,
+		    REVIEW.BOOKMARK AS bookmark,
+		    REVIEW.SHARES AS shares,
+		    REVIEW.READ_COUNT AS readCount,
+		    REVIEW.ADD_DATE AS addDate,
+		    REVIEW.TYPE AS type,
+			<if test='type == 1'>
 			    PLACE_REVIEW.ADDRESS1 AS address1,
 			    PLACE_REVIEW.ADDRESS2 AS address2,
 			    PLACE_REVIEW.ADDRESS3 AS address3,
@@ -149,22 +123,104 @@
 			    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
 			    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut,
 			    RESTAURANT_REVIEW.RESTAURANT_MENU AS menu
-			FROM 
-			    REVIEW 
-	        INNER JOIN 
-	            PLACE_REVIEW
-	        ON
-	            REVIEW.NUM = PLACE_REVIEW.NUM
-	        INNER JOIN
-	            RESTAURANT_REVIEW
-	        ON
-	            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
-	        INNER JOIN 
-	            RESTAURANT_CATEGORY
-	        ON
-	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
-	        ORDER BY
-	        	REVIEW.NUM
-		]]>
+			</if>
+			<if test='type == 2'>
+			    PLACE_REVIEW.ADDRESS1 AS address1,
+			    PLACE_REVIEW.ADDRESS2 AS address2,
+			    PLACE_REVIEW.ADDRESS3 AS address3,
+			    PLACE_REVIEW.DETAIL_ADDR AS addr,
+			    PLACE_REVIEW.TEL AS tel,
+			    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
+			    PLACE_REVIEW.WAITING_TIME AS waitingTime,
+			    HOSPITAL_REVIEW.NUM AS category,
+			    HOSPITAL_REVIEW.HOSPITAL_CATEGORY AS hospitalCategory,
+			    HOSPITAL_REVIEW.MEDICAL_CATEGORY AS medicalCategory,
+			    HOSPITAL_REVIEW.SUB_MEDICAL_CATEGORY AS subCategory
+			</if>
+			<if test='type == 3'>
+			    PRODUCTOR_REVIEW.NUM AS num,
+			    PRODUCTOR_REVIEW.CATEGORY AS category,
+			    PRODUCTOR_REVIEW.PRICE AS price,
+			    PRODUCTOR_REVIEW.RELEASE AS release,
+			    DIGITAL_REVIEW.NUM AS num,
+			    DIGITAL_REVIEW.MODEL AS model,
+			    DIGITAL_REVIEW.SUB_CATEGORY1 AS subCategory1,
+			    DIGITAL_REVIEW.SUB_CATEGORY2 AS subCategory2,
+			    DIGITAL_REVIEW.SUB_CATEGORY3 AS subCategory3
+			</if>
+		FROM 
+		    REVIEW
+			<if test='type == 1'>
+		        INNER JOIN 
+		            PLACE_REVIEW
+		        ON
+		            REVIEW.NUM = PLACE_REVIEW.NUM
+		        INNER JOIN
+		            RESTAURANT_REVIEW
+		        ON
+		            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
+		        INNER JOIN 
+		            RESTAURANT_CATEGORY
+		        ON
+		            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
+			</if>
+			<if test='type == 2'>
+		        INNER JOIN 
+		            PLACE_REVIEW
+		        ON
+		            REVIEW.NUM = PLACE_REVIEW.NUM
+		        INNER JOIN
+		            HOSPITAL_REVIEW
+		        ON
+		            PLACE_REVIEW.NUM = HOSPITAL_REVIEW.NUM
+		        INNER JOIN 
+		            HOSPITAL_CATEGORY
+		        ON
+		            HOSPITAL_REVIEW.HOSPITAL_CATEGORY = HOSPITAL_CATEGORY.CATEGORY_NUM
+		        INNER JOIN 
+		            MEDICAL_CATEGORY
+		        ON
+		            HOSPITAL_REVIEW.MEDICAL_CATEGORY = MEDICAL_CATEGORY.CATEGORY_NUM
+			</if>
+			<if test='type == 3'>
+		        INNER JOIN 
+		            PRODUCTOR_REVIEW
+		        ON
+		            REVIEW.NUM = PRODUCTOR_REVIEW.NUM
+		        INNER JOIN
+		            DIGITAL_REVIEW
+		        ON
+		            PRODUCTOR_REVIEW.NUM = DIGITAL_REVIEW.NUM
+			</if>
+		WHERE
+		    REVIEW.NUM = #{num}
 	</select>
+	<select id="selectAll" resultMap="selectAllMap">
+		SELECT
+		    REVIEW.NUM,
+		    REVIEW.TITLE,
+		    REVIEW.CONTENTS,
+		    REVIEW.STARS,
+		    REVIEW.GOODS,
+		    REVIEW.BOOKMARK,
+		    REVIEW.SHARES,
+		    REVIEW.READ_COUNT,
+		    REVIEW.ADD_DATE,
+		    REVIEW.TYPE
+		FROM 
+		    REVIEW
+		ORDER NUM BY
+	</select>
+	<resultMap type="ReviewVO" id="selectAllMap">
+		<id property="num" column="NUM" />
+		<result property="title" column="TITLE" />
+		<result property="contents" column="CONTENTS" />
+		<result property="stars" column="STARS" />
+		<result property="goods" column="GOODS" />
+		<result property="bookmark" column="BOOKMARK" />
+		<result property="shares" column="SHARES" />
+		<result property="readCount" column="READ_COUNT" />
+		<result property="addDate" column="ADD_DATE" />
+		<result property="type" column="TYPE" />
+	</resultMap>
 </mapper>

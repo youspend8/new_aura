@@ -73,29 +73,29 @@
 						<div class="my-1 align-middle">
 						    <i class="fas fa-heart"></i>
 						    <span>
-						    	<c:choose>
-									<c:when test="${review.category eq 1}">
-										한식
-									</c:when>
-									<c:when test="${review.category eq 2}">
-										양식
-									</c:when>
-									<c:when test="${review.category eq 16}">
-										호프
-									</c:when>
-									<c:otherwise>
-										기타분류
-									</c:otherwise>
-						    	</c:choose>
+<%-- 						    	<c:choose> --%>
+<%-- 									<c:when test="${review.category eq 1}"> --%>
+<!-- 										한식 -->
+<%-- 									</c:when> --%>
+<%-- 									<c:when test="${review.category eq 2}"> --%>
+<!-- 										양식 -->
+<%-- 									</c:when> --%>
+<%-- 									<c:when test="${review.category eq 16}"> --%>
+<!-- 										호프 -->
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 										기타분류 -->
+<%-- 									</c:otherwise> --%>
+<%-- 						    	</c:choose> --%>
 							</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-phone"></i>
-							<span>${review.tel}</span> 
+<%-- 							<span>${review.tel}</span>  --%>
 						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-location-arrow"></i>
-							<span>${review.addr}</span>
+<%-- 							<span>${review.addr}</span> --%>
 						</div>
 						<div class="my-2" style="font-weight:bolder;">
 							<i class="fas fa-clipboard-list"></i>
@@ -831,24 +831,6 @@
 					                                  <hr>
 					                          </div>
 					                      </div>
-					                  
-					
-					                  <div class="pt-1">
-					                      <div class="pb-2">
-					                          <b style="font-size:18px;">주차</b>
-					                      </div>
-					                          <div class="custom-control custom-radio d-flex justify-content-around py-2">
-					                              <b>
-					                                  <input type="radio" class="custom-control-input" id="parking1" name="parking_group" checked>
-					                                  <label class="custom-control-label" for="parking1">상관없음</label>
-					                              </b>
-					                              <b>
-					                                  <input type="radio" class="custom-control-input" id="parking2" name="parking_group">
-					                                  <label class="custom-control-label" for="parking2">가능한 곳만</label>
-					                              </b>
-					                          </div>
-					                          <hr>
-					                  </div>
 					              </div>
 					                      
 					                          
@@ -1515,24 +1497,6 @@
 					                              <hr>
 					                      </div>
 					                  </div>
-					              
-					
-					              <div class="pt-1">
-					                  <div class="pb-2">
-					                      <b style="font-size:18px;">주차</b>
-					                  </div>
-					                      <div class="custom-control custom-radio d-flex justify-content-around py-2">
-					                          <b>
-					                              <input type="radio" class="custom-control-input" id="parking3" name="hospital_parking_group" checked>
-					                              <label class="custom-control-label" for="parking3">상관없음</label>
-					                          </b>
-					                          <b>
-					                              <input type="radio" class="custom-control-input" id="parking4" name="hospital_parking_group">
-					                              <label class="custom-control-label" for="parking4">가능한 곳만</label>
-					                          </b>
-					                      </div>
-					                      <hr>
-					              </div>
 					          </div>
 					                  
 					                      
