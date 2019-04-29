@@ -43,7 +43,7 @@
 							</div>
 
 							<!-- 아이디찾기 -->
-							<div id="id_find" class="tabcontent">
+							<div id="id_find" class="tabcontent" value="id_find">
 								<div class="form-group">
 
 									<!-- 휴대폰 인증으로 찾기-->
@@ -135,7 +135,7 @@
 							</div>
 
 							<!-- 비밀번호 찾기 -->
-							<div id="pw_find" class="tabcontent">
+							<div id="pw_find" class="tabcontent" value="pw_find">
 								<div class="form-group">
 
 									<form method="POST" class="my-login-validation" novalidate="">

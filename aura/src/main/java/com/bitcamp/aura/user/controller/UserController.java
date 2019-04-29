@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,9 +149,7 @@ public class UserController {
 //			mav.addObject("userInfo", google_userinfo);
 //		}
 		return mav;
-
 	}
-	
 	
 	@RequestMapping("/oauth/register")
 	public String oauth_reg (@ModelAttribute UserVO uservo,HttpSession session) {
@@ -180,5 +179,13 @@ public class UserController {
 			return "true";
 		}
 		return "false";
+	}
+	
+	@RequestMapping("/emailCheck")
+	@ResponseBody
+	public String emailCheck(String email) {
+		System.out.println(userService.emailCode(email));
+		
+		return userService.emailCode(email);
 	}
 }

@@ -38,27 +38,34 @@
 							<hr style="border : solid 1px; color:rgb(190, 186, 186) ">
 							<form method="POST" class="my-login-validation" novalidate="" action="register">
 								<div class="form-group">
-									<div class="md-form" style="display: flex;">
+									<div class="md-form" style="display: flex; margin:0px;">
 										<input type="text" class="form-control" id="email" name="email" style="width:69%;">
 										<label for="email">이메일 *</label>
 										<!-- 중복체크 아이디 넘김 -->
-										<input type="button" class="btn btn-primary btn-sm" value="중복체크" id="idDupCheck" >
-									</div>
-									<div class="invalid-feedback">
-										이미 사용중인 이메일입니다.
-									</div>
-									<div class="invalid-feedback">
-										상용 가능한 아이디 입니다.
+										<input type="button" class="btn btn-primary btn-sm" value="인증하기 " id="idDupCheck">
 									</div>
 									
+									
 									<div style="display:none; color:blue; font-size:15px;" id="email_true">
-										이메일형식이  맞습니다.
+										사용사능한 이메일입니다.
 									</div>
 									
 									<div style="display:none; color:red; font-size:15px;" id="email_false">
 										이메일형식이 아닙니다.
 									</div>
 									
+									<div class="md-form" style="display: flex;">
+										<input type="text" class="form-control" id="email_Check_num" name="email_Check_num" style="width:50%;">
+										<label for="email_Check_num">이메일 인증 번호 *</label>
+									</div>
+									
+									<div style="display:none; color:blue; font-size:15px;" id="email_Check_num_true">
+										인증번호가 일치합니다.
+									</div>
+									
+									<div style="display:none; color:red; font-size:15px;" id="email_Check_num_false">
+										인증번호가 일치하지 않습니다.
+									</div>
 									
 								</div>
 
@@ -219,6 +226,7 @@
 	  integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
 	  crossorigin="anonymous">
 	</script>
+	<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
 	
 	
 	<!--우편 번호API-->
@@ -332,7 +340,7 @@
 	
 	//비밀번호 확인
 	function PwCheck(){
-		if( $("#password").val() == "" || $("#pwCheck").val() == "" ){
+		if( $("#password").val() == "" && $("#pwCheck").val() == "" ){
 			$("#pwCheck_check").css('display','inline');
 			$("#pwCheck_false").css('display','none');
 			$("#pwCheck_true").css('display','none');
@@ -372,28 +380,49 @@
 					$("#nickname_true").css('display','none');
 					$("#nickname_false").css('display','none');
 				}
-			},
-			error : function() {
-				alert("오류");
 			}
 		})
 	 })
+	 
+	 $("#idDupCheck").on("click", function(){
+		 $.ajax({
+			 url: "/user/emailCheck",
+			 data:{
+				 email : $("#email").val()
+			 },
+			 type : "POST",
+			 dataType : "text",
+			 
+			 success : function(data){
+				 emailCheck(data);
+			 }
+		 })
+	 })
+	 
 	$('#email').focusout(function(){
 		regular();
 	});
 	$('#pwCheck').focusout(function(){
 		PwCheck();
-	})
+	});
 	$('#password').focusout(function(){
 		PwCheck();
-	})
+	});
+	
+	function emailCheck(Check_num) {
+		$('#email_Check_num').focusout(function(){
+			alert(Check_num);
+			if( Check_num == $("#email_Check_num").val() ){
+				$("#email_Check_num_true").css("display","inline");
+				$("#email_Check_num_false").css("display","none");
+			}else
+				$("#email_Check_num_true").css("display","none");
+				$("#email_Check_num_false").css("display","inline");
+		});
+	}
+	
 </script>
 <!-- end-->
-
-
-
-
-
 
 	
 </body>
