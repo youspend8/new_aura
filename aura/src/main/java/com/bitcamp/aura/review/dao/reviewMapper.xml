@@ -163,6 +163,8 @@
 	            RESTAURANT_CATEGORY
 	        ON
 	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
+	        ORDER BY
+	        	REVIEW.NUM
 		]]>
 	</select>
 </mapper>
