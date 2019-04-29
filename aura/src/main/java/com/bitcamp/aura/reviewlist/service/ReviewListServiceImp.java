@@ -13,11 +13,12 @@ import com.bitcamp.aura.reviewlist.model.ReviewListVO;
 public class ReviewListServiceImp implements ReviewListService{
 	
 	@Autowired
-	private ReviewListMapper reviewDao;
+	private ReviewListMapper reviewMapper;
 
 	@Override//insert하는놈(share, like, star)
 	public int doReview(ReviewListVO reviewListVo) {
-	
+		System.out.println(reviewListVo);
+		reviewMapper.insert(reviewListVo);
 		return 0;
 	}
 

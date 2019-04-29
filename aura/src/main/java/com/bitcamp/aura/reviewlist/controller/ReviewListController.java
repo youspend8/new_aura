@@ -23,10 +23,10 @@ public class ReviewListController {
 	@ResponseBody
 	public String reviewPost(
 			@ModelAttribute ReviewListVO params) {
-		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		System.out.println("@@@@@@@@@@"+params);
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		params.setDate(sim.format(new Date()));
 		service.doReview(params);
-		System.out.println(params);
 		return "1";
 	}
 	
