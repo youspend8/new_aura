@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public boolean join(@ModelAttribute UserVO userVo, String pwCheck,
+	public boolean join(UserVO userVo, String pwCheck,
 			String addr,
 			String addr_code,
 			String addr_Detail,
