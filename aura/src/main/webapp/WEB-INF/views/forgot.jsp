@@ -34,22 +34,21 @@
 							<hr style="border : solid 1px; color:rgb(190, 186, 186) ">
 
 							<div class="tab" style="width: 100%;">
-								<button class="tablinks w-50" onclick="findThing(event, 'id_find')" id="defaultOpen">
-									<div>아이디 찾기</div>
-								</button>
+<!-- 								<button class="tablinks w-50" onclick="findThing(event, 'id_find')" id="defaultOpen"> -->
+<!-- 									<div>아이디 찾기</div> -->
+<!-- 								</button> -->
 								<button class="tablinks w-50" onclick="findThing(event, 'pw_find')">
 									<div>비밀번호 찾기</div>
 								</button>
 							</div>
 
 							<!-- 아이디찾기 -->
+<!-- 							아이디찾기 -->
 <!-- 							<div id="id_find" class="tabcontent" value="id_find"> -->
 <!-- 								<div class="form-group"> -->
 
 <!-- 									휴대폰 인증으로 찾기 -->
 <!-- 									<form method="POST" class="my-login-validation" novalidate=""> -->
-									
-									
 <!-- 										휴대폰 인증으로 찾기 -->
 <!-- 										<div class="custom-control custom-radio"> -->
 <!-- 												<input type="radio" class="custom-control-input" id="defaultGroupExample1" -->
@@ -91,7 +90,7 @@
 <!-- 											<div class="custom-control custom-radio"> -->
 <!-- 												<input type="radio" class="custom-control-input" -->
 <!-- 													id="defaultGroupExample2" name="groupOfDefaultRadios" -->
-<!-- 													onclick="Radio_OnOff('test2')"> -->
+<!-- 													onclick="Radio_OnOff('test2')" > -->
 <!-- 												<label class="custom-control-label" for="defaultGroupExample2">본인확인 이메일로 -->
 <!-- 													인증</label> -->
 <!-- 												<div class="form-group" id="test2" style="display: none;"> -->
@@ -100,6 +99,7 @@
 <!-- 													<div class="md-form flex-column flex-sm-row" style="display: flex;"> -->
 <!-- 														<input type="text" class="form-control col-sm-8 col-12" id="identified_email"> -->
 <!-- 														<label for="identified_email">이메일 *</label> -->
+<!-- 														<label for="identified_email">인증번호 받을 이메일주소를 적어주세요 *</label> -->
 <!-- 														<button class="btn btn-primary btn-sm" id="duplicate">인증번호</button> -->
 <!-- 													</div> -->
 

@@ -6,20 +6,14 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,12 +46,22 @@ public class UserController {
 		model.addAttribute("state", new BigInteger(130, new SecureRandom()).toString());
 		return "login";
 	}
-	
+
 	@RequestMapping(value="/registerForm")
 	public String registerForm() {
 		return "register";
 	}
 
+	@RequestMapping("/login")
+	public String loginResult(HttpSession session, String email, String password) {
+		System.out.println("Eamil :"+ email);
+		System.out.println("password :"+ password);
+		if(userService.login(session, email,password) == true) {
+			return "redirect:/main";
+		} else
+			return "redirect:/user/loginForm";
+	}
+	
 	@RequestMapping(value="/register")
 	public String register(@ModelAttribute UserVO uservo,String pwCheck) {
 		uservo.setRegLocation(1); 
@@ -71,6 +75,13 @@ public class UserController {
 		return "login";
 	}
 	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("userid");
+		session.removeAttribute("nickname");
+		return "redirect:/main";
+	}
+	
 	@RequestMapping(value="/forgotForm")
 	public String forgotForm() {
 		
@@ -78,7 +89,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/oauth/naver")
-	public ModelAndView naverLogin(String code, String state) throws IOException {
+	public ModelAndView naverLogin(HttpSession session, String code, String state) throws IOException {
 		ModelAndView model = new ModelAndView();
 		UserVO userVo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state));
 		
@@ -87,40 +98,42 @@ public class UserController {
 			model.setViewName("addExtraForm");
 	    	return model;
 	    }else {
-	    	model.setViewName("main");
+			userService.apiSession(session, userVo.getUserId());			
+	    	model.setViewName("redirect:/main");	
 	    	return model;
 	    }
 		
 	}
+	//굿
 	
 	@RequestMapping("/oauth/facebook")
-	public ModelAndView facebook(String code) {
+	public ModelAndView facebook(HttpSession session, String code) {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
 	    ModelAndView mav = new ModelAndView();
 	    
-	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {
-	    	
+	    if(userService.apiLoginCheck(UserInfo.getUserId()) == false) {	    	
 	    	mav.addObject("userInfo",UserInfo);
-	    	mav.setViewName("addExtraForm");
+	    	mav.setViewName("addExtraForm");	    	
 	    	return mav;
 	    }else {
-	    	mav.setViewName("main");
+			userService.apiSession(session, UserInfo.getUserId());			
+			mav.setViewName("redirect:/main");
 	    	return mav;
 	    }
 	}
 	
 	@RequestMapping("/oauth/kakao")
-	public ModelAndView kakao(String code) {
+	public ModelAndView kakao(HttpSession session, String code) {
 
 		ModelAndView mav = new ModelAndView();
 		String accessToken = kakaoLogin.getAccessToken(code);
 		UserVO kakao_userinfo = kakaoLogin.getUserInfo(accessToken);
 
-		if (userService.apiLoginCheck(kakao_userinfo.getUserId())) {
-			mav.setViewName("main");
-
+		if (userService.apiLoginCheck (kakao_userinfo.getUserId())) {
+			mav.setViewName("redirect:/main");
+			userService.apiSession(session, kakao_userinfo.getUserId());
 			return mav;
 		} else {
 			mav.setViewName("addExtraForm");
@@ -131,7 +144,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/oauth/google")
-	public ModelAndView google(String code) {
+	public ModelAndView google(HttpSession session,String code) {
 		System.out.println("code 여기는 Controller : " + code);
 
 		ModelAndView mav = new ModelAndView();
@@ -139,8 +152,10 @@ public class UserController {
 		UserVO google_userinfo = googleLogin.getUserInfo(accessToken);
 		
 		System.out.println("google userinfo:"+ google_userinfo);
+	
 		if (userService.apiLoginCheck(google_userinfo.getUserId())) {
-			mav.setViewName("main");
+			userService.apiSession(session, google_userinfo.getUserId());
+			mav.setViewName("redirect:/main");
 			return mav;
 		} else {
 			mav.setViewName("addExtraForm");
@@ -151,25 +166,17 @@ public class UserController {
 	
 	@RequestMapping("/oauth/register")
 	public String oauth_reg (@ModelAttribute UserVO uservo, HttpSession session) {
-//		session.setAttribute("nickname", uservo.getNickname());
-//		System.out.println("session nickname:"+ uservo.getNickname());
-//		session.removeAttribute("nickname");//닉네임 삭제
+		session.setAttribute("nickname", uservo.getNickname());
+		session.setAttribute("email", uservo.getEmail());
+		System.out.println("닉네임 : " + uservo.getNickname());
+		System.out.println("유저 아이디 :" + uservo.getEmail());
+		
 		if(userService.snsLogin(uservo) == true) { //DB에 중복값 X => insert
-			return "main";
+			return "redirect:/main";
 		}
 		else { //DB에 중복값 O => insert X => 바로 로그인시켜주기
-			return "main";
+			return "redirect:/main";
 		}
-	}
-	
-	@RequestMapping("/oauth/loginResult")
-	public String loginResult(HttpSession session, String email, String password) {
-		System.out.println("Eamil :"+ email);
-		System.out.println("password :"+ password);
-		if(userService.login(email,password) == true) {
-			return "main";
-		}else
-			return "login";
 	}
 	
 	@RequestMapping("/nickNameCheck")
