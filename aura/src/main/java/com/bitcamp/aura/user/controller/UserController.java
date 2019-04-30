@@ -30,7 +30,7 @@ import com.bitcamp.aura.user.social.NaverLoginAPI;
 public class UserController {
 	
 	@Autowired
-	UserServiceImpl userService = new UserServiceImpl();
+	UserServiceImpl userService;
 	
 	@Autowired
 	private NaverLoginAPI naverLogin;

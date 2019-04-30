@@ -462,8 +462,14 @@
 			<i class="far fa-thumbs-up"></i>
 				</a>
 		</div>
-		<button type="button" id="review_write"
-			class="btn btn-dark review-write">리뷰 작성하기</button>
+		<c:choose>
+			<c:when test="${nickname ne null}">
+				<button type="button" id="review_write_pc" class="btn btn-dark review-write">리뷰 작성하기</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" id="review_write_login" class="btn btn-dark review-write">리뷰 작성하기</button>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 
@@ -489,7 +495,7 @@
 			</div>
 			
 <!-- 			세션 유저의 닉네임 넣기 			-->
-			<div class="w-100 my-3">유저 닉네임1</div>
+			<div class="w-100 my-3">${nickname}</div>
 
 			<div class="d-flex flex-wrap text-left mt-4">
 				<div class="star-box">
@@ -508,7 +514,7 @@
 			<form id="commentForm" method="post" enctype="multipart/form-data">
 				<!--             		텍스트 영역			 -->
 				<!--             		텍스트 영역			 -->
-				<textarea rows="10" class="form-control px-2" id="comment"></textarea>
+				<textarea rows="10" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
 
 				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
 					<div class="mr-2" style="width: 20%;">
@@ -1031,7 +1037,6 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
 <script>
-
     	function doReview(type) {
 	    	$.ajax({
 	    		url: '/reviewList/reviewPost', // 요청 할 주소 
@@ -1089,8 +1094,8 @@
                     generalHospitalState = !generalHospitalState;
                 }
             });
-
-            $('#review_write').on('click', () => {
+            
+            $('#review_write_pc').on('click', () => {
                 $('#write_form').animate({
                     height: '630px'
                 }, 400);
@@ -1114,7 +1119,12 @@
 
                 }, 180);
             });
-
+            
+            $('#review_write_login').on('click', () => {
+            	alert('로그인이 필요합니다.');
+            });
+            
+            
             $(document).on('click', (e) => {
                 var target = e.target.id;
                 if (target == 'general-button' || target == 'special-button'
@@ -1131,9 +1141,6 @@
                 }
             });
             
-            $('#review_write').on('click', function(){
-            	$('#comment').css('autofocus', 'autofocus');
-            })
         });
         
         function showGeneralCategory() {
@@ -1150,7 +1157,7 @@
             $('#special-category').css('visibility', 'hidden');
         }
         
-        function fileSubmit(){
+        function fileSubmit(){ // 멀티파트 파일 업로더
         	
         	var formData = new FormData($('#commentForm')[0]);
         	
