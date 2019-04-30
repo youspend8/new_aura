@@ -27,4 +27,5 @@ public interface UserService {
 	public List<UserVO> getUsers_email(String email);
 //	boolean logout(HttpSession session);
 //	public void logout(HttpSession session);
+	public void apiSession(HttpSession session, String userid);
 }
