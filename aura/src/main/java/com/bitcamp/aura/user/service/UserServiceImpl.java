@@ -6,11 +6,9 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Properties;
 
-<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 
 import org.omg.Messaging.SyncScopeHelper;
-=======
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -19,7 +17,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
->>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,22 +38,29 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean apiLoginCheck(String userid) {
+//		UserVO apiUser = userMapper.selectOneUserid(userid);
+//		session.setAttribute("nickname", apiUser.getNickname());
 		return userMapper.selectOneUserid(userid) != null ? true : false;
 	}
 	
 	@Override
-	public boolean login(String email, String password) {
+	public boolean login(HttpSession session, String email, String password) {
 		System.out.println("email :"+email);
 		System.out.println("password :"+password);
 		// TODO Auto-generated method stub
 		UserVO originUser = userMapper.selectOneEmail(email);
 		if (originUser != null) {
 			if (originUser.getPassword().equals(password)) {
+				session.setAttribute("nickname", originUser.getNickname());
+				session.setAttribute("email", originUser.getEmail());
+				System.out.println("닉네임 값:" + session.getAttribute("nickname"));
+				System.out.println("AR가입 회원 email:" + session.getAttribute("email"));
 				return true;
 			}
 		}
 		return false;
 	}
+
 	
 	@Override
 	public boolean join(@ModelAttribute UserVO userVo, String pwCheck,
