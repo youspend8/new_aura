@@ -34,106 +34,103 @@
 							<hr style="border : solid 1px; color:rgb(190, 186, 186) ">
 
 							<div class="tab" style="width: 100%;">
-								<button class="tablinks w-50" onclick="findThing(event, 'id_find')" id="defaultOpen">
-									<div>아이디 찾기</div>
-								</button>
+<!-- 								<button class="tablinks w-50" onclick="findThing(event, 'id_find')" id="defaultOpen"> -->
+<!-- 									<div>아이디 찾기</div> -->
+<!-- 								</button> -->
 								<button class="tablinks w-50" onclick="findThing(event, 'pw_find')">
 									<div>비밀번호 찾기</div>
 								</button>
 							</div>
 
-							<!-- 아이디찾기 -->
-							<div id="id_find" class="tabcontent" value="id_find">
-								<div class="form-group">
+<!-- 							아이디찾기 -->
+<!-- 							<div id="id_find" class="tabcontent" value="id_find"> -->
+<!-- 								<div class="form-group"> -->
 
-									<!-- 휴대폰 인증으로 찾기-->
-									<form method="POST" class="my-login-validation" novalidate="">
-									
-									
-										<!-- 휴대폰 인증으로 찾기-->
-										<div class="custom-control custom-radio">
-												<input type="radio" class="custom-control-input" id="defaultGroupExample1"
-													name="groupOfDefaultRadios" onclick="Radio_OnOff('test1')" checked>
-												<label class="custom-control-label" for="defaultGroupExample1">회원정보에 등록한
-													휴대전화로 인증</label>
+<!-- 									휴대폰 인증으로 찾기 -->
+<!-- 									<form method="POST" class="my-login-validation" novalidate=""> -->
+<!-- 										휴대폰 인증으로 찾기 -->
+<!-- 										<div class="custom-control custom-radio"> -->
+<!-- 												<input type="radio" class="custom-control-input" id="defaultGroupExample1" -->
+<!-- 													name="groupOfDefaultRadios" onclick="Radio_OnOff('test1')" checked> -->
+<!-- 												<label class="custom-control-label" for="defaultGroupExample1">회원정보에 등록한 -->
+<!-- 													휴대전화로 인증</label> -->
 	
 	
-												<div class="form-group" id="test1" >
+<!-- 												<div class="form-group" id="test1" > -->
 	
-														<div class="form-group">
-															<div class="md-form">
-																<input type="text" class="form-control" id="find_name">
-																<label for="find_name">이름 *</label>
-															</div>
-															<div class="invalid-feedback">
-																이름 입력이 필요합니다.
-															</div>
-														</div>
+<!-- 														<div class="form-group"> -->
+<!-- 															<div class="md-form"> -->
+<!-- 																<input type="text" class="form-control" id="find_name"> -->
+<!-- 																<label for="find_name">이름 *</label> -->
+<!-- 															</div> -->
+<!-- 															<div class="invalid-feedback"> -->
+<!-- 																이름 입력이 필요합니다. -->
+<!-- 															</div> -->
+<!-- 														</div> -->
 		
-														<div class="md-form flex-column flex-sm-row" style="display: flex;">
-															<input type="text" class="form-control col-sm-8 col-12" id="identified_phone">
-															<label for="identified_phone">휴대폰 *</label>
-															<button class="btn btn-primary btn-sm" id="duplicate" >인증번호</button>
-														</div>
+<!-- 														<div class="md-form flex-column flex-sm-row" style="display: flex;"> -->
+<!-- 															<input type="text" class="form-control col-sm-8 col-12" id="identified_phone"> -->
+<!-- 															<label for="identified_phone">휴대폰 *</label> -->
+<!-- 															<button class="btn btn-primary btn-sm" id="duplicate" >인증번호</button> -->
+<!-- 														</div> -->
 
-														<div class="md-form flex-column flex-sm-row" style="display: flex;">
-																<input type="text" class="form-control col-sm-8 col-12" id="identified_number_idphone">
-																<label for="identified_number_idphone">인증번호*</label>
-																<button type="button" class="btn btn-primary btn-sm">확인</button>
-														</div>
+<!-- 														<div class="md-form flex-column flex-sm-row" style="display: flex;"> -->
+<!-- 																<input type="text" class="form-control col-sm-8 col-12" id="identified_number_idphone"> -->
+<!-- 																<label for="identified_number_idphone">인증번호*</label> -->
+<!-- 																<button type="button" class="btn btn-primary btn-sm">확인</button> -->
+<!-- 														</div> -->
 													
-												</div>
-										</div>
+<!-- 												</div> -->
+<!-- 										</div> -->
 
 
-										<!-- 이메일 인증으로 찾기 -->
-										<form method="POST" class="my-login-validation" novalidate="">
-											<div class="custom-control custom-radio">
-												<input type="radio" class="custom-control-input"
-													id="defaultGroupExample2" name="groupOfDefaultRadios"
-													onclick="Radio_OnOff('test2')">
-												<label class="custom-control-label" for="defaultGroupExample2">본인확인 이메일로
-													인증</label>
-												<div class="form-group" id="test2" style="display: none;">
+<!-- 										이메일 인증으로 찾기 -->
+<!-- 										<form method="POST" class="my-login-validation" novalidate=""> -->
+<!-- 											<div class="custom-control custom-radio"> -->
+<!-- 												<input type="radio" class="custom-control-input" -->
+<!-- 													id="defaultGroupExample2" name="groupOfDefaultRadios" -->
+<!-- 													onclick="Radio_OnOff('test2')" > -->
+<!-- 												<label class="custom-control-label" for="defaultGroupExample2">본인확인 이메일로 -->
+<!-- 													인증</label> -->
+<!-- 												<div class="form-group" id="test2" style="display: none;"> -->
 
 
-													<div class="md-form flex-column flex-sm-row" style="display: flex;">
-														<input type="text" class="form-control col-sm-8 col-12" id="identified_email">
-														<label for="identified_email">이메일 *</label>
-														<button class="btn btn-primary btn-sm" id="duplicate">인증번호</button>
-													</div>
+<!-- 													<div class="md-form flex-column flex-sm-row" style="display: flex;"> -->
+<!-- 														<input type="text" class="form-control col-sm-8 col-12" id="identified_email"> -->
+<!-- 														<label for="identified_email">인증번호 받을 이메일주소를 적어주세요 *</label> -->
+<!-- 														<button class="btn btn-primary btn-sm" id="duplicate">인증번호</button> -->
+<!-- 													</div> -->
 
 
-														<div class="md-form flex-column flex-sm-row" style="display: flex;">
-															<input type="text" class="form-control  col-sm-8 col-12" id="identified_number_idemail">
-															<label for="identified_number_idemail">인증번호*</label>
-															<button  class="btn btn-primary btn-sm" id="duplicate1">확인</button>
-														</div>
-												</div>
-											</div>
-										</form>
-								</div>
+<!-- 														<div class="md-form flex-column flex-sm-row" style="display: flex;"> -->
+<!-- 															<input type="text" class="form-control  col-sm-8 col-12" id="identified_number_idemail"> -->
+<!-- 															<label for="identified_number_idemail">인증번호*</label> -->
+<!-- 															<button  class="btn btn-primary btn-sm" id="duplicate1">확인</button> -->
+<!-- 														</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</form> -->
+<!-- 								</div> -->
 
-								<!-- 아이디/ 로그인 버튼 -->
-								<form method="POST" class="my-login-validation" novalidate=""
-									style="margin-top: 20px;margin-bottom: 0;">
-									<div class="form-group m-0" style="display: flex">
-										<!-- <button type="button" onclick="location.href='login.html'"
-											class="btn  btn-outline-primary waves-effect"
-											style="width:40%; background: white; margin-left: 0px">
-											이전으로
-										</button> -->
-										<button type="button" class="btn  btn-outline-primary waves-effect"
-											style="width:100%; height: 46px; margin: 10px auto">
-											<a href="/user/loginForm">
-												<div style=" margin-bottom: 20px">로그인 하러가기</div>
-											</a>
-										</button>
+<!-- 								아이디/ 로그인 버튼 -->
+<!-- 								<form method="POST" class="my-login-validation" novalidate="" -->
+<!-- 									style="margin-top: 20px;margin-bottom: 0;"> -->
+<!-- 									<div class="form-group m-0" style="display: flex"> -->
+<!-- 										<button type="button" onclick="location.href='login.html'"
+<!-- 											class="btn  btn-outline-primary waves-effect" -->
+<!-- 											style="width:40%; background: white; margin-left: 0px"> -->
+<!-- 											이전으로 -->
+<!-- 										</button> --> -->
+<!-- 										<button type="button" class="btn  btn-outline-primary waves-effect" -->
+<!-- 											style="width:100%; height: 46px; margin: 10px auto"> -->
+<!-- 											<a href="/user/loginForm"> -->
+<!-- 												<div style=" margin-bottom: 20px">로그인 하러가기</div> -->
+<!-- 											</a> -->
+<!-- 										</button> -->
 
-									</div>
-								</form>
-							</div>
-
+<!-- 									</div> -->
+<!-- 								</form> -->
+<!-- 							</div> -->
 							<!-- 비밀번호 찾기 -->
 							<div id="pw_find" class="tabcontent" value="pw_find">
 								<div class="form-group">

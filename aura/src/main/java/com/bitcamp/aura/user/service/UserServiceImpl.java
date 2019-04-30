@@ -1,13 +1,10 @@
 package com.bitcamp.aura.user.service;
 
 import java.math.BigInteger;
-import java.net.Authenticator;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.http.HttpSession;
-import org.omg.Messaging.SyncScopeHelper;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -15,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.bitcamp.aura.user.dao.UserMapper;
 import com.bitcamp.aura.user.model.UserVO;
-import com.sun.mail.smtp.SMTPSaslAuthenticator;
 
 @Service
 @Transactional
@@ -39,6 +36,15 @@ public class UserServiceImpl implements UserService {
 	public boolean apiLoginCheck(String userid) {
 
 		return userMapper.selectOneUserid(userid) != null ? true : false;
+	}
+	
+	@Override	
+	public void apiSession(HttpSession session, String userid) {
+		UserVO apiUser = userMapper.selectOneUserid(userid);
+		session.setAttribute("nickname", apiUser.getNickname());
+		session.setAttribute("email", apiUser.getEmail());
+		System.out.println("닉네임 테스트: " + apiUser.getNickname());
+		System.out.println("유저 아이디 :" + apiUser.getEmail());
 	}
 	
 	@Override
@@ -176,6 +182,12 @@ public class UserServiceImpl implements UserService {
 		    e.printStackTrace();
 		}
 		return random_Num;
+	}
+	@Override
+	public String forgotPWD_emailCheck(String email) {
+		
+		
+		return null;
 	}
 
 }

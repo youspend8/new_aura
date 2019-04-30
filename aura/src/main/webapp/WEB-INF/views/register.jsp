@@ -378,6 +378,7 @@
 				dataType:"text",
 				success : function(data) {
 					var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+					
 					if(regExp.test($("#email").val()) == true && data == "true"){
 						$("#email_overlap").css('display','none');
 						$("#email_false").css('display', 'none');

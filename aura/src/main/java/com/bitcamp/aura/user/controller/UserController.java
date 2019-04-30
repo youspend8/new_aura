@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,18 +47,21 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value="/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("userid");
-		session.removeAttribute("nickname");
-		return "main";
-	}
-	
 	@RequestMapping(value="/registerForm")
 	public String registerForm() {
 		return "register";
 	}
 
+	@RequestMapping("/login")
+	public String loginResult(HttpSession session, String email, String password) {
+		System.out.println("Eamil :"+ email);
+		System.out.println("password :"+ password);
+		if(userService.login(session, email,password) == true) {
+			return "redirect:/main";
+		} else
+			return "redirect:/user/loginForm";
+	}
+	
 	@RequestMapping(value="/register")
 	public String register(@ModelAttribute UserVO uservo,String pwCheck) {
 		uservo.setRegLocation(1); 
@@ -71,6 +75,13 @@ public class UserController {
 		return "login";
 	}
 	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("userid");
+		session.removeAttribute("nickname");
+		return "redirect:/main";
+	}
+	
 	@RequestMapping(value="/forgotForm")
 	public String forgotForm() {
 		
@@ -78,7 +89,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/oauth/naver")
-	public ModelAndView naverLogin(HttpSession session,String code, String state) throws IOException {
+	public ModelAndView naverLogin(HttpSession session, String code, String state) throws IOException {
 		ModelAndView model = new ModelAndView();
 		UserVO userVo = naverLogin.getUserInfo(naverLogin.getAccessToken(code, state));
 		
@@ -87,19 +98,16 @@ public class UserController {
 			model.setViewName("addExtraForm");
 	    	return model;
 	    }else {
-	    	model.setViewName("main");
-	    	session.setAttribute("nickname", userVo.getNickname());
-			session.setAttribute("email", userVo.getEmail());
-			System.out.println("닉네임 : " + userVo.getNickname());
-			System.out.println("유저 이메일 :" + userVo.getEmail());
-			
+			userService.apiSession(session, userVo.getUserId());			
+	    	model.setViewName("redirect:/main");	
 	    	return model;
 	    }
 		
 	}
+	//굿
 	
 	@RequestMapping("/oauth/facebook")
-	public ModelAndView facebook(HttpSession session,String code) {
+	public ModelAndView facebook(HttpSession session, String code) {
 		String accessToken = facebookLogin.getAccessToken(code);
 		String userId = facebookLogin.getUserId(accessToken);
 	    UserVO UserInfo = facebookLogin.getUserInfo(accessToken, userId);
@@ -110,29 +118,22 @@ public class UserController {
 	    	mav.setViewName("addExtraForm");	    	
 	    	return mav;
 	    }else {
-	    	session.setAttribute("nickname", UserInfo.getNickname());
-			session.setAttribute("email", UserInfo.getEmail());
-			System.out.println("닉네임 : " + UserInfo.getNickname());
-			System.out.println("유저 이메일 :" + UserInfo.getEmail());
-			
-			mav.setViewName("main");
+			userService.apiSession(session, UserInfo.getUserId());			
+			mav.setViewName("redirect:/main");
 	    	return mav;
 	    }
 	}
 	
 	@RequestMapping("/oauth/kakao")
-	public ModelAndView kakao(HttpSession session,String code) {
+	public ModelAndView kakao(HttpSession session, String code) {
 
 		ModelAndView mav = new ModelAndView();
 		String accessToken = kakaoLogin.getAccessToken(code);
 		UserVO kakao_userinfo = kakaoLogin.getUserInfo(accessToken);
 
 		if (userService.apiLoginCheck (kakao_userinfo.getUserId())) {
-			mav.setViewName("main");
-			session.setAttribute("nickname", kakao_userinfo.getNickname());
-			session.setAttribute("email", kakao_userinfo.getEmail());
-			System.out.println("닉네임 : " + kakao_userinfo.getNickname());
-			System.out.println("유저 이메일 :" + kakao_userinfo.getEmail());
+			mav.setViewName("redirect:/main");
+			userService.apiSession(session, kakao_userinfo.getUserId());
 			return mav;
 		} else {
 			mav.setViewName("addExtraForm");
@@ -153,17 +154,12 @@ public class UserController {
 		System.out.println("google userinfo:"+ google_userinfo);
 	
 		if (userService.apiLoginCheck(google_userinfo.getUserId())) {
-			session.setAttribute("nickname", google_userinfo.getNickname());
-			session.setAttribute("email", google_userinfo.getEmail());
-			System.out.println("닉네임 : " + google_userinfo.getNickname());
-			System.out.println("유저 이메일 :" + google_userinfo.getEmail());
-
-			mav.setViewName("main");
+			userService.apiSession(session, google_userinfo.getUserId());
+			mav.setViewName("redirect:/main");
 			return mav;
 		} else {
 			mav.setViewName("addExtraForm");
 			mav.addObject("userInfo", google_userinfo);
-
 		}
 		return mav;
 	}
@@ -176,21 +172,11 @@ public class UserController {
 		System.out.println("유저 아이디 :" + uservo.getEmail());
 		
 		if(userService.snsLogin(uservo) == true) { //DB에 중복값 X => insert
-			return "main";
+			return "redirect:/main";
 		}
 		else { //DB에 중복값 O => insert X => 바로 로그인시켜주기
-			return "main";
+			return "redirect:/main";
 		}
-	}
-	
-	@RequestMapping("/oauth/loginResult")
-	public String loginResult(HttpSession session, String email, String password) {
-		System.out.println("Eamil :"+ email);
-		System.out.println("password :"+ password);
-		if(userService.login(session, email,password) == true) {
-			return "main";
-		}else
-			return "login";
 	}
 	
 	@RequestMapping("/nickNameCheck")
