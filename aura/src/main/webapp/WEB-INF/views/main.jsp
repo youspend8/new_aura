@@ -1610,7 +1610,7 @@
               <ul class="row flex-wrap pl-2 pt-4">
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
                   <li class="col-11 d-flex border-bottom mb-2" style="height: 120px;">
-                    <img class="mt-1" src="img/추천/병원/아산병원.jpg" alt=""
+                    <img class="mt-1" src="/img/추천/병원/아산병원.jpg" alt=""
                       style="border-radius: 7px; width: 35%; height: 80%;">
                     <div class="d-flex flex-wrap ">
                       <div class="col-12 mt-4 pt-3 pr-0 pl-1" style="font-size: 70%;">빵순이 빵돌이들이 환장하는 집</div>
@@ -1621,7 +1621,7 @@
                 </a>
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
                   <li class="col-11 d-flex border-bottom mb-2" style="height: 120px;">
-                    <img class="mt-1" src="img/추천/병원/차병원.jpg" alt=""
+                    <img class="mt-1" src="/img/추천/병원/차병원.jpg" alt=""
                       style="border-radius: 7px; width: 35%; height: 100px;">
                     <div class="d-flex flex-wrap ">
                       <div class="col-12 mt-4 pt-3 pr-0 pl-1" style="font-size: 70%;">빵순이 빵돌이들이 환장하는 집</div>
@@ -1632,7 +1632,7 @@
                 </a>
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
                   <li class="col-11 d-flex border-bottom mb-2" style="height: 120px;">
-                    <img class="mt-1" src="img/추천/병원/삼성병원.jpg" alt=""
+                    <img class="mt-1" src="/img/추천/병원/삼성병원.jpg" alt=""
                       style="border-radius: 7px; width: 35%; height: 100px;">
                     <div class="d-flex flex-wrap ">
                       <div class="col-12 mt-4 pt-3 pr-0 pl-1" style="font-size: 70%;">빵순이 빵돌이들이 환장하는 집</div>
@@ -1643,7 +1643,7 @@
                 </a>
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
                   <li class="col-11 d-flex border-bottom mb-2" style="height: 120px;">
-                    <img class="mt-1" src="img/추천/병원/건대병원.jpg" alt=""
+                    <img class="mt-1" src="/img/추천/병원/건대병원.jpg" alt=""
                       style="border-radius: 7px; width: 35%; height: 100px;">
                     <div class="d-flex flex-wrap ">
                       <div class="col-12 mt-4 pt-3 pr-0 pl-1" style="font-size: 70%;">빵순이 빵돌이들이 환장하는 집</div>
@@ -1654,7 +1654,7 @@
                 </a>
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
                   <li class="col-11 d-flex" style="height: 120px;">
-                    <img class="mt-1" src="img/추천/병원/가천길병원.jpg" alt=""
+                    <img class="mt-1" src="/img/추천/병원/가천길병원.jpg" alt=""
                       style="border-radius: 7px; width: 35%; height: 100px;">
                     <div class="d-flex flex-wrap ">
                       <div class="col-12 mt-4 pt-3 pr-0 pl-1" style="font-size: 70%;">빵순이 빵돌이들이 환장하는 집</div>
@@ -1673,7 +1673,7 @@
 
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
                   <li class="col-11 d-flex border-bottom mb-2" style="height: 120px;">
-                    <img class="mt-1" src="img/추천/전자기기/노트북.jpg" alt=""
+                    <img class="mt-1" src="/img/추천/전자기기/노트북.jpg" alt=""
                       style="border-radius: 7px; width: 35%; height: 100px;">
                     <div class="d-flex flex-wrap ">
                       <div class="col-12 mt-4 pt-3 pr-0 pl-1" style="font-size: 70%;">빵순이 빵돌이들이 환장하는 집</div>
@@ -1800,7 +1800,7 @@
         class="thema-flex col-md-12 col-12 col-lg-8 d-flex ml-0 mb-5 p-lg-0 flex-wrap justify-content-lg-end justify-content-center">
         <div class="w-100 pl-4 pt-5 pt-lg-0 pl-lg-5 ml-lg-3 ml-4" style="font-weight: 900; ">테마별 리뷰</div>
 
-        <div class="first_recommand col-5 p-0" style="background-image: url('img/테마별사진/img.jpg');">
+        <div class="first_recommand col-5 p-0" style="background-image: url('/img/테마별사진/img.jpg');">
           <a href="#">
             <div class="recommand_box justify-content-center align-items-center row m-0 h-100 w-100">
               <div class="text">데이트추천 100</div>
@@ -1809,7 +1809,7 @@
         </div>
 
 
-        <div class="first_recommand col-5 p-0" style="background-image: url('img/테마별사진/img.jpg'); ">
+        <div class="first_recommand col-5 p-0" style="background-image: url('/img/테마별사진/img.jpg'); ">
           <a href="#">
             <div class="recommand_box justify-content-center align-items-center row m-0 h-100 w-100">
               <div>멸치국수추천 베트스 100!!!!</div>
@@ -1817,7 +1817,7 @@
           </a>
         </div>
 
-        <div class="first_recommand col-5 p-0 " style="background-image: url('img/테마별사진/새우회.png');">
+        <div class="first_recommand col-5 p-0 " style="background-image: url('/img/테마별사진/새우회.png');">
           <a href="#">
             <div class="recommand_box justify-content-center align-items-center row m-0 h-100 w-100">
               <div>얄루얄루!!!추천 100</div>
@@ -1825,7 +1825,7 @@
           </a>
         </div>
 
-        <div class="first_recommand col-5 p-0 " style="background-image: url('img/테마별사진/커리.png');">
+        <div class="first_recommand col-5 p-0 " style="background-image: url('/img/테마별사진/커리.png');">
           <a href="#">
             <div class="recommand_box justify-content-center align-items-center row m-0 h-100 w-100">
               <div>데이트추천 100 꺅@@@</div>

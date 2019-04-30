@@ -137,7 +137,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		String accessToken = googleLogin.getAccessToken(code);
 		UserVO google_userinfo = googleLogin.getUserInfo(accessToken);
-			
+		
 		System.out.println("google userinfo:"+ google_userinfo);
 		if (userService.apiLoginCheck(google_userinfo.getUserId())) {
 			mav.setViewName("main");
@@ -150,7 +150,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/oauth/register")
-	public String oauth_reg (@ModelAttribute UserVO uservo,HttpSession session) {
+	public String oauth_reg (@ModelAttribute UserVO uservo, HttpSession session) {
+//		session.setAttribute("nickname", uservo.getNickname());
+//		System.out.println("session nickname:"+ uservo.getNickname());
+//		session.removeAttribute("nickname");//닉네임 삭제
 		if(userService.snsLogin(uservo) == true) { //DB에 중복값 X => insert
 			return "main";
 		}
@@ -160,9 +163,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/oauth/loginResult")
-	public String loginResult(HttpSession session,String email, String password) {
-		System.out.println("Eamil :"+email);
-		System.out.println("password :"+password);
+	public String loginResult(HttpSession session, String email, String password) {
+		System.out.println("Eamil :"+ email);
+		System.out.println("password :"+ password);
 		if(userService.login(email,password) == true) {
 			return "main";
 		}else

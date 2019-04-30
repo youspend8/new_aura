@@ -6,6 +6,11 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Properties;
 
+<<<<<<< HEAD
+import javax.servlet.http.HttpSession;
+
+import org.omg.Messaging.SyncScopeHelper;
+=======
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -14,6 +19,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+>>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
