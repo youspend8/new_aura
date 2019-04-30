@@ -2,6 +2,8 @@ package com.bitcamp.aura.user.service;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.bitcamp.aura.user.model.UserVO;
 
 public interface UserService {
@@ -18,4 +20,7 @@ public interface UserService {
 	public UserVO getUser (String nickname);
 	public List<UserVO> getUsers (String nickname);
 	public List<UserVO> getAllUser();
+	public String emailCode(String code);
+	public UserVO getUser_email(String email);
+	public List<UserVO> getUsers_email(String email);
 }

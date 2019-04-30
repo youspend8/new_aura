@@ -487,11 +487,13 @@
 				<img class="rounded-circle w-100"
 					src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg">
 			</div>
-
+			
+<!-- 			세션 유저의 닉네임 넣기 			-->
 			<div class="w-100 my-3">유저 닉네임1</div>
 
 			<div class="d-flex flex-wrap text-left mt-4">
 				<div class="star-box">
+<!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
 					<a> <i class="far fa-star" style="font-size: 30px;"></i>
 					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
 					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
@@ -503,37 +505,24 @@
 		</div>
 
 		<div class="col-md-9 col-12 p-0 flex-column my-3">
-			<form method="POST">
+			<form id="commentForm" method="post" enctype="multipart/form-data">
 				<!--             		텍스트 영역			 -->
 				<!--             		텍스트 영역			 -->
 				<textarea rows="10" class="form-control px-2" id="comment"></textarea>
 
-				<div class="d-md-flex d-none col-12 p-0 my-3">
-					<div style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
+				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
+					<div class="mr-2" style="width: 20%;">
+						<label for="comment_file" class="filebox">
+							<a>
+								<img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+								<input type="file" id="comment_file" name="comment_file" multiple>
+							</a>
+						</label>
 					</div>
-					<div class="mx-2" style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
-					<div style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
-					<div class="mx-2" style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
-					<div style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
+					
+					
+					
+					
 				</div>
 
 				<!-- 	               <div class="form-group d-md-none d-block"> -->
@@ -541,11 +530,7 @@
 				<!-- 	               </div> -->
 
 				<div class="my-4 text-md-right text-center">
-					<span class="filebox">
-						<label for="ex_file" class="btn btn-light-blue" style="width: 113.31px; line-height: 34px;">사진 업로드</label>
-						<input type="file" id="ex_file">
-					</span>
-					<button type="submit" class="btn btn-elegant">등록하기</button>
+					<input type="button" class="btn btn-elegant" value="등록하기" onclick="fileSubmit();">
 				</div>
 			</form>
 		</div>
@@ -1158,22 +1143,33 @@
             $('#special-category').css('visibility', 'hidden');
         }
         
-//         $.ajax({
-//             url : "/review/write"
-
-
-
-//         })
-
+        function fileSubmit(){
+        	
+        	var formData = new FormData($('#commentForm')[0]);
+        	
+	        $.ajax({
+	            url : "/comment/write",
+				type : "post",
+				data : formData,
+				processData : false,
+				contentType : false,
+				
+				success: function(html){
+					alert("업로드 성공");	
+				},
+				error : function(error) {
+					alert("파일업로드 실패");
+					console.log(error);
+					console.log(error.status);
+				}
+	        });
+        }
 		
     </script>
     
     
     
 <style>
-.filebox label {
-	padding : 0.375rem;
-}
 
 .filebox input[type="file"] { /* 파일 필드 숨기기 */
 	position: absolute;

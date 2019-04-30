@@ -16,13 +16,13 @@
 			COMMENT_NUM
 		)
 		VALUES (
-			#{review_post_num, jdbcType=NUMBER},
+			#{review_post_num, jdbcType=NUMERIC},
 			#{nickname, jdbcType=VARCHAR},
 			#{comment_contents, jdbcType=VARCHAR},
-			#{comment_like, jdbcType=NUMBER},
-			#{comment_score, jdbcType=NUMBER},
+			#{comment_like, jdbcType=NUMERIC},
+			#{comment_score, jdbcType=NUMERIC},
 			#{comment_Date, jdbcType=VARCHAR},
-			#{comment_num, jdbcType=NUMBER}
+			#{comment_num, jdbcType=NUMERIC}
 		)
 	</insert>
 	<update id="update" parameterType="CommentVO">
@@ -30,17 +30,17 @@
 			USER_COMMENT
 		SET
 			COMMENT_CONTENTS = #{comment_contents, jdbcType=VARCHAR},
-			COMMENT_LIKE = #{comment_like, jdbcType=NUMBER},
-			COMMENT_SCORE = #{comment_score, jdbcType=NUMBER},
+			COMMENT_LIKE = #{comment_like, jdbcType=NUMERIC},
+			COMMENT_SCORE = #{comment_score, jdbcType=NUMERIC},
 			COMMENT_DATE = #{comment_Date, jdbcType=VARCHAR}
 		WHERE
-			COMMENT_NUM = #{comment_num, jdbcType=NUMBER}
+			COMMENT_NUM = #{comment_num, jdbcType=NUMERIC}
 	</update>
 	<delete id="delete" parameterType="String">
 		DELETE FROM
 			USER_COMMENT
 		WHERE
-			COMMENT_NUM = #{comment_num, jdbcType=NUMBER}
+			COMMENT_NUM = #{comment_num, jdbcType=NUMERIC}
 	</delete>
 	<select id="selectOne" parameterType="String" resultType="CommentVO">
 		SELECT
@@ -48,7 +48,7 @@
 		FROM
 			USER_COMMENT
 		WHERE
-			NICKNAME = #{NICKNAME}
+			NICKNAME = #{NICKNAME, jdbcType=VARCHAR}
 	</select>
 	<select id="selectAll" resultType="CommentVO">
 		SELECT
