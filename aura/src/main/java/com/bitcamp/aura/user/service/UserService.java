@@ -28,4 +28,5 @@ public interface UserService {
 //	boolean logout(HttpSession session);
 //	public void logout(HttpSession session);
 	public void apiSession(HttpSession session, String userid);
+	public String forgotPWD_emailCheck(String email);
 }
