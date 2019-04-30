@@ -27,7 +27,7 @@
                 </div>
                 <div id="general-restaurant" class="general-restaurant">
                     <ul class="general-category">
-                        <li>
+                        <li>l
                             <i class="fas fa-square"></i>
                             정형외과
                         </li>
@@ -482,7 +482,7 @@
 
 		<div
 			class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
-			<h4 class="my-3 font-weight-bold w-100">리뷰 작성</h4>
+			<h4 class="my-3 font-weight-bold w-100" id="review_write">리뷰 작성</h4>
 			<div class="w-50">
 				<img class="rounded-circle w-100"
 					src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg">
@@ -1026,9 +1026,12 @@
 	</div>
 </div>
 
+
+
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
 <script>
+
     	function doReview(type) {
 	    	$.ajax({
 	    		url: '/reviewList/reviewPost', // 요청 할 주소 
@@ -1127,6 +1130,10 @@
                     state = false;
                 }
             });
+            
+            $('#review_write').on('click', function(){
+            	$('#comment').css('autofocus', 'autofocus');
+            })
         });
         
         function showGeneralCategory() {
@@ -1154,8 +1161,8 @@
 				processData : false,
 				contentType : false,
 				
-				success: function(html){
-					alert("업로드 성공");	
+				success: function(data){
+					
 				},
 				error : function(error) {
 					alert("파일업로드 실패");
