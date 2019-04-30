@@ -51,8 +51,8 @@
           <li class="deconone">
           
           	<c:choose> 
-	          	<c:when test="${nickname ne null}">	          	 
-	          	   	${nickname}님           	
+	          	<c:when test="${nickname ne null}" >	          	 
+	          	  ${nickname}님     	
 	          	</c:when>
 	          	<c:otherwise>
 	          	   <a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>          	
@@ -60,7 +60,14 @@
           	</c:choose>
           </li>
           <li class="deconone">
-          	<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a>
+          	<c:choose>
+          		<c:when test = "${nickname eq null}">
+          		<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a>
+          		</c:when>
+          		<c:otherwise>
+          		   <a href="/user/logout" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">로그아웃</a>
+          		</c:otherwise>
+          	</c:choose>
           </li>
         </ul>
       </div>

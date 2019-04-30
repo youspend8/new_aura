@@ -2,6 +2,8 @@ package com.bitcamp.aura.user.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.aura.user.model.UserVO;
@@ -9,7 +11,7 @@ import com.bitcamp.aura.user.model.UserVO;
 public interface UserService {
 	public boolean apiLoginCheck(String userid);
 	public boolean snsLogin(UserVO uservo);
-	public boolean login (String email, String password);
+	public boolean login (HttpSession session, String email, String password);
 	public boolean join (UserVO userVo, String pwCheck,
 			String addr,
 			String addr_code,
