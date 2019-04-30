@@ -169,5 +169,11 @@ public class UserServiceImpl implements UserService {
 		}
 		return random_Num;
 	}
+	@Override
+	public String forgotPWD_emailCheck(String email) {
+		
+		
+		return null;
+	}
 
 }

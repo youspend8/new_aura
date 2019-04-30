@@ -23,4 +23,5 @@ public interface UserService {
 	public String emailCode(String code);
 	public UserVO getUser_email(String email);
 	public List<UserVO> getUsers_email(String email);
+	public String forgotPWD_emailCheck(String email);
 }
