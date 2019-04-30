@@ -38,7 +38,7 @@
 							<h4 class="card-title" style="margin: 0;">회원가입</h4>
 							<hr style="border: solid 1px; color: rgb(190, 186, 186)">
 							<form method="POST" class="my-login-validation"
-								id="register_Form" novalidate="" action="/register">
+								id="register_Form" action="/user/register">
 								<div>
 									<div class="form-group">
 										<div class="md-form" style="display: flex; margin: 0px;">
@@ -190,7 +190,7 @@
 								</div>
 
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-block" id="join">
+									<button type="submit" class="btn btn-primary btn-block" id="join" disabled>
 										회원가입</button>
 								</div>
 								<div class="mt-4 text-center">
@@ -351,9 +351,9 @@
 		//비밀번호 확인
 		function PwCheck() {
 			if ($("#password").val() == "" && $("#pwCheck").val() == "") {
-				$("#pwCheck_check").css('display', 'inline');
 				$("#pwCheck_false").css('display', 'none');
 				$("#pwCheck_true").css('display', 'none');
+// 				$("#pwCheck_check").css('display', 'inline');
 				return false;
 			} else if ($("#password").val() == $("#pwCheck").val()) {
 				$("#pwCheck_false").css('display', 'none');
@@ -367,10 +367,8 @@
 				return false;
 			}
 		}
-
-		
 		//이메일 중복체크
-		$('#email').focusout(function(){
+		$('#email').change(function(){
 			$.ajax({
 				url : "/user/emailOverlap",
 				data : {
@@ -378,28 +376,51 @@
 				},
 				type : "POST",
 				dataType:"text",
-				
 				success : function(data) {
-					if(data == "false"){
+					var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+					if(regExp.test($("#email").val()) == true && data == "true"){
+						$("#email_overlap").css('display','none');
+						$("#email_false").css('display', 'none');
+						$("#email_none").css('display','none');
+						$("#email_true").css('display', 'inline');
+						$('#idDupCheck').click(function(e){
+							e.preventDefault();
+						}).prop("disabled",false);
+						e_mail();
+					}else if($("#email").val() == ""){
+						$("#email_overlap").css('display','none');
+						$("#email_none").css('display','inline');
+						$("#email_false").css('display', 'none');
+						$("#email_true").css('display', 'none');
+						
+						$('#idDupCheck').click(function(e){
+							e.preventDefault();
+						}).prop("disabled",true);
+						return false;
+					}else if(data == "false"){
 						$("#email_none").css('display','none');
 						$('#email_false').css('display', 'none');
 						$('#email_true').css("display","none");
 						$("#email_overlap").css('display','inline');
-					}else if(data == ""){
-						$('#email_false').css('display', 'none');
-						$('#email_true').css('display', 'none');
-						$("#email_overlap").css('display','none');
-						$("#email_none").css('display','inline');
+						
+						$('#idDupCheck').click(function(e){
+							e.preventDefault();
+						}).prop("disabled",true);
+						return false;
 					}else{
 						$("#email_overlap").css('display','none');
 						$("#email_none").css('display','none');
-						$('#email_false').css('display', 'none');
-						$('#email_true').css('display', 'inline');
+						$("#email_true").css('display', 'none');
+						$("#email_false").css('display', 'inline');
+						
+						$('#idDupCheck').click(function(e){
+							e.preventDefault();
+						}).prop("disabled",true);
+						return false;
 					}
 				}
 			})
 		})
-		
 		
 		//닉네임 중복체크
 		$("#nicknameDupCheck").on("click", function() {
@@ -419,24 +440,21 @@
 		})
 		function nickname_Check(data) {
 			if (data == "true") {
-				$("#email_overlap").css('display','none');
 				$("#nickname_false").css('display', 'none');
 				$("#nickname_none").css('display', 'none');
 				$("#nickname_true").css('display', 'inline');
-				return true;
 			} else if (data == "false") {
 				$("#nickname_false").css('display', 'inline');
 				$("#nickname_none").css('display', 'none');
 				$("#nickname_true").css('display', 'none');
-				return false;
 			}
 			if ($("#nickname").val() == "") {
 				$("#nickname_none").css('display', 'inline');
 				$("#nickname_true").css('display', 'none');
 				$("#nickname_false").css('display', 'none');
-				return false;
 			}
 		}
+		
 		function e_mail() {
 			$("#idDupCheck").on("click", function() {
 				$.ajax({
@@ -455,10 +473,10 @@
 				})
 			})
 		}
-		e_mail();
-		$('#email').focusout(function() {
-			regular();
-		});
+// 		e_mail();
+// 		$('#email').focusout(function() {
+// 			regular();
+// 		});
 		$('#pwCheck').focusout(function() {
 			PwCheck();
 		});
@@ -484,14 +502,23 @@
 
 		//마지막으로 이메일 인증번호, 비밀번호 맞고, 닉네임 중복X,성별 선택햇고,핸드폰 번호입력 값 다 있을때 회원 가입 시켜주기
 		function insert_Check() {
-			if ($("#email_Check_num_true").text() == "인증번호가 일치합니다."
-					&& PwCheck() == true
-					&& ($('.custom-control-input').val() == 0 || $('.custom-control-input').val() == 1)
-					&& $('#nickname_true').text() == "닉네임 사용 가능합니다.") {
-			} else
+			console.log('check')
+			if (
+				$("#email_Check_num_true").text() == "인증번호가 일치합니다." && 
+// 				$("#pwCheck_true").text() == "비밀번호가 일치합니다" &&
+				PwCheck() == true && 
+				$(':input[name=gender]:radio:checked').val() == 1 ||
+				$(':input[name=gender]:radio:checked').val() == 0 &&
+				$('#nickname_true').text() == "닉네임 사용 가능합니다."
+			) {
+				$('#join').removeAttr('disabled');
+				return true;
+			} else{
+				return false;
+			}
 		}
-
-		$("#join").onsumit./("click", function() {
+		
+		$(':input').change(function() {
 			insert_Check();
 		})
 	</script>

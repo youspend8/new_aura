@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
-
 import org.omg.Messaging.SyncScopeHelper;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -38,8 +37,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean apiLoginCheck(String userid) {
-//		UserVO apiUser = userMapper.selectOneUserid(userid);
-//		session.setAttribute("nickname", apiUser.getNickname());
+
 		return userMapper.selectOneUserid(userid) != null ? true : false;
 	}
 	
