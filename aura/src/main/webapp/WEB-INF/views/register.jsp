@@ -474,18 +474,7 @@
 				})
 			})
 		}
-// 		e_mail();
-// 		$('#email').focusout(function() {
-// 			regular();
-// 		});
-		$('#pwCheck').focusout(function() {
-			PwCheck();
-		});
-		$('#password').focusout(function() {
-			PwCheck();
-		});
-
-		//이메일 인증번호 맞는지 확인
+// 		이메일 인증번호 맞는지 확인
 		function emailCheck(Check_num) {
 			alert(Check_num);
 			$('#email_Check_num').focusout(function() {
@@ -500,6 +489,17 @@
 				}
 			});
 		}
+// 		e_mail();
+// 		$('#email').focusout(function() {
+// 			regular();
+// 		});
+		$('#pwCheck').focusout(function() {
+			PwCheck();
+		});
+		$('#password').focusout(function() {
+			PwCheck();
+		});
+
 
 		//마지막으로 이메일 인증번호, 비밀번호 맞고, 닉네임 중복X,성별 선택햇고,핸드폰 번호입력 값 다 있을때 회원 가입 시켜주기
 		function insert_Check() {
