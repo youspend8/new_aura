@@ -104,6 +104,7 @@ public class UserController {
 	    }
 		
 	}
+	//굿
 	
 	@RequestMapping("/oauth/facebook")
 	public ModelAndView facebook(HttpSession session, String code) {
