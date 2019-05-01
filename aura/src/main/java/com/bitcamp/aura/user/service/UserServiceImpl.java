@@ -1,7 +1,6 @@
 package com.bitcamp.aura.user.service;
 
 import java.math.BigInteger;
-import java.net.Authenticator;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Properties;
@@ -13,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.bitcamp.aura.user.dao.UserMapper;
 import com.bitcamp.aura.user.model.UserVO;
-import com.sun.mail.smtp.SMTPSaslAuthenticator;
 
 @Service
 @Transactional
@@ -35,25 +34,40 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean apiLoginCheck(String userid) {
+
 		return userMapper.selectOneUserid(userid) != null ? true : false;
 	}
 	
+	@Override	
+	public void apiSession(HttpSession session, String userid) {
+		UserVO apiUser = userMapper.selectOneUserid(userid);
+		session.setAttribute("nickname", apiUser.getNickname());
+		session.setAttribute("email", apiUser.getEmail());
+		System.out.println("닉네임 테스트: " + apiUser.getNickname());
+		System.out.println("유저 아이디 :" + apiUser.getEmail());
+	}
+	
 	@Override
-	public boolean login(String email, String password) {
+	public boolean login(HttpSession session, String email, String password) {
 		System.out.println("email :"+email);
 		System.out.println("password :"+password);
 		// TODO Auto-generated method stub
 		UserVO originUser = userMapper.selectOneEmail(email);
 		if (originUser != null) {
 			if (originUser.getPassword().equals(password)) {
+				session.setAttribute("nickname", originUser.getNickname());
+				session.setAttribute("email", originUser.getEmail());
+				System.out.println("닉네임 값:" + session.getAttribute("nickname"));
+				System.out.println("AR가입 회원 email:" + session.getAttribute("email"));
 				return true;
 			}
 		}
 		return false;
 	}
+
 	
 	@Override
-	public boolean join(@ModelAttribute UserVO userVo, String pwCheck,
+	public boolean join(UserVO userVo, String pwCheck,
 			String addr,
 			String addr_code,
 			String addr_Detail,
@@ -168,6 +182,12 @@ public class UserServiceImpl implements UserService {
 		    e.printStackTrace();
 		}
 		return random_Num;
+	}
+	@Override
+	public String forgotPWD_emailCheck(String email) {
+		
+		
+		return null;
 	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +37,10 @@
         </form>
       </div>
 
+
+
+
+
       <div class="d-lg-none col-md-5"></div>
 
       <div class="col-lg-3 col-12 pl-lg-4 pl-md-0 pr-0 order-1 order-lg-1">
@@ -44,10 +49,26 @@
             <i class="fas fa-user-alt" style="font-size: 1rem;"></i>
           </li>
           <li class="deconone">
-          	<a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>
+          
+          	<c:choose> 
+	          	<c:when test="${nickname ne null}" >	          	 
+	          	  ${nickname}님     	
+	          	</c:when>
+	          	<c:otherwise>
+	          	   <a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>          	
+	          	</c:otherwise>
+          	</c:choose>
           </li>
           <li class="deconone">
-          	<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a></li>
+          	<c:choose>
+          		<c:when test = "${nickname eq null}">
+          		<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a>
+          		</c:when>
+          		<c:otherwise>
+          		   <a href="/user/logout" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">로그아웃</a>
+          		</c:otherwise>
+          	</c:choose>
+          </li>
         </ul>
       </div>
     </header>

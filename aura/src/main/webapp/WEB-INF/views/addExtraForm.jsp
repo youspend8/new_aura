@@ -19,15 +19,13 @@
 <body>
 	<div class="container d-flex align-items-center flex-column mt-5">
 		<div>추가정보 입력</div>
-
-		<form class="col-lg-5 col-md-7 d-flex flex-column" method="post"
-			action="/user/oauth/register">
+		<form class="col-lg-5 col-md-7 d-flex flex-column" method="post" action="/user/oauth/register">
 
 			<!-- 닉네임 -->
-					<div class="md-form my-2">
-						<input type="text" class="form-control" id="nickname"
-							name="nickname" required> <label for="nickname">Nickname</label>
-					</div>
+			<div class="md-form my-2">
+				<input type="text" class="form-control" id="nickname"
+					name="nickname" required> <label for="nickname">Nickname</label>
+			</div>
 			<!-- 이메일 -->
 			<c:choose>
 				<c:when test="${userInfo.email==null}">
