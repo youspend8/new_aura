@@ -129,10 +129,9 @@
 										<div class="md-form" style="display: flex;">
 											<input type="text" class="form-control" id="nickname"
 												name="nickname" style="width: 69%;"> <label
-												for="nickname">닉네임 *</label> 
-<!-- 												<input type="button" -->
-<!-- 												class="btn btn-primary btn-sm" value="중복체크" -->
-<!-- 												id="nicknameDupCheck" name="nickname_Check"> -->
+												for="nickname">닉네임 *</label> <input type="button"
+												class="btn btn-primary btn-sm" value="중복체크"
+												id="nicknameDupCheck" name="nickname_Check">
 										</div>
 <!-- 닉네임 안내메세지 -->
 										<div style="display: none; color: red; font-size: 15px;"
@@ -180,7 +179,7 @@
 										<div class="d-flex justify-content-between">
 											<div class="md-form my-1">
 												<input type="text" class="form-control" id="addr_code"
-													name="addr_code" placeholder="우편번호">
+													name="addr_code" placeholder="우편번호" readonly="readonly">
 											</div>
 
 											<div class="md-form my-1">
@@ -207,7 +206,7 @@
 <!-- 8. 회원가입 등록으로 보내는 곳!! 확인 필요 -->
 <!-- //disabled -->
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-block" id="join" disabled>회원가입</button>
+									<button type="submit" class="btn btn-primary btn-block" id="join" >회원가입</button>
 								</div>
 								<div class="mt-4 text-center">이미 가입하셨나요? <a href="/user/loginForm">로그인</a>
 								</div>
@@ -302,7 +301,7 @@
 		}
 	</script>
 
-	<!--SMS 본인인증 API-->
+	<!--SMS  후대폰 본인인증 API-->
 	<script>
 		IMP.init('imp76278587');
 		// 		<!--SMS API 필요한것 end-->
@@ -393,6 +392,7 @@
 			if ($("#password").val() == "" && $("#pwCheck").val() == "") {
 				$("#pwCheck_false").css('display', 'none');
 				$("#pwCheck_true").css('display', 'none');
+// 				$("#pwCheck_check").css('display', 'inline');
 				return false;
 			} else if ($("#password").val() == $("#pwCheck").val()) {
 				$("#pwCheck_false").css('display', 'none');
@@ -432,7 +432,6 @@
 						$("#email_none").css('display','inline');
 						$("#email_false").css('display', 'none');
 						$("#email_true").css('display', 'none');
-						
 						$('#idDupCheck').click(function(e){
 							e.preventDefault();
 						}).prop("disabled",true);
@@ -463,7 +462,7 @@
 		})
 		
 		//닉네임 중복체크
-		$("#nickname").focusout(function() {
+		$("#nicknameDupCheck").on("click", function() {
 			$.ajax({
 				url : "/user/nickNameCheck", // 클라이언트가 요청을 보낼 서버의 URL 주소
 				data : {
@@ -539,44 +538,47 @@
 				}
 			});
 		}
-//$("#email_Check_num_true").val() == 1 ) && &&($('#nickname_true').val() == 1)&&($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) (PwCheck() == true)&&
 
-		//마지막으로 이메일 인증번호, 비밀번호 맞고, 닉네임 중복X,성별 선택햇고,핸드폰 번호입력 값 다 있을때 회원 가입 시켜주기
-
-// 				$("#pwCheck_true").text() == "비밀번호가 일치합니다" &&
-// 			console.log('check')
-// 			if (				
-// 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() && $('#phone').val() && $("#addr_code").val()) != "") 			
-// 			) {
-// 				return true;
-// 			} else{
-// 				return false;
-// 			}
-// 		if(insert_Check() == true){
-// 			console.log(insert_Check());
-// 			$('#join').removeAttr('disabled');
-// 		}else{
-// 			$('#join').attr('disabled','true');
-// 		}
-// 		$('#email').val() && $()
-// 		var nickNameStatus = false;	
-// 		var emailAuthStatus = false;
-
-
-// 			if (				
-//  				($("#email_true").css('display') == "inline") == true
-//  				&& ($('#email_Check_num_true').css('display') == 'inline') == true
-//  				&& ($('#pwCheck_true').css('display') == "inline") == true
-// 				&& ($('#nickname_true').css('display') == "inline") == true
-// 				&& ($('#defaultInline1').prop('checked') == true || $('#defaultInline2').prop("checked") == true)
-//  			) {
-// 				$('#join').removeAttr('disabled');
-// 			}else{
-// 				$('#join').attr('disabled','true');
-// 			}
-
-
-			
+		var nickNameStatus = false;	
+		var emailAuthStatus = false;
+		
+		function insert_Check() {
+			console.log(window)
+		// 성별, 주소, 휴대폰번호
+			if (
+				//이메일, 비밀번호,  비밀번호 확인 ,	이름, 닉네임, 핸드폰, 주소 코드
+ 				(($("#email").val() && $("#password").val()&& $("#pwCheck").val() && $("#name").val() && $("#nickname").val() && $("#phone").val() && $("#addr_code").val() ) !="")
+ 				// 성별 체크
+				&& (($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) != "") 
+ 				// 비번 같은지 여부 확인
+				&& ($("#password").val() == $("#pwCheck").val()) 
+ 				// 닉네임 중복확인
+				&& window.nickNameStatus ==true 
+ 				// 이메일 중복확인
+				&& window.emailAuthStatus == true
+ 			) {
+				alert("조건충족!! 가입해 주셔서 감사합니다. :)");
+				return true;
+			}else{
+				alert("입력과 인증을 모두 해주셔야 합니다.");
+				return false;
+			}
+		}
+		
+		
+		
+//			if (				
+//		($("#email_true").css('display') == "inline") == true
+//		&& ($('#email_Check_num_true').css('display') == 'inline') == true
+//		&& ($('#pwCheck_true').css('display') == "inline") == true
+//		&& ($('#nickname_true').css('display') == "inline") == true
+//		&& ($('#defaultInline1').prop('checked') == true || $('#defaultInline2').prop("checked") == true)
+//	) {
+//		$('#join').removeAttr('disabled');
+//	}else{
+//		$('#join').attr('disabled','true');
+//	}
+	
 	</script>
 	<!-- end-->
 </body>
