@@ -2,6 +2,8 @@ package com.bitcamp.aura.comment.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +13,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bitcamp.aura.comment.dao.CommentMapper;
+import com.bitcamp.aura.comment.model.CommentFileVO;
+import com.bitcamp.aura.comment.model.CommentVO;
 
 @Service
 @Transactional
 public class CommentServicelmpl implements CommentService{
-
+	
 	@Autowired
 	CommentMapper commentMapper;
 	
 	@Override
 	public String insert_Comment(MultipartHttpServletRequest comment) {
-		
 		
 		String content = comment.getParameter("comment");
 		String root = comment.getSession().getServletContext().getRealPath("/");
@@ -33,28 +36,45 @@ public class CommentServicelmpl implements CommentService{
 			dir.mkdirs();
 		}
 		
+		CommentVO commentVo = new CommentVO();
+		CommentFileVO commentFileVO = new CommentFileVO();
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		
 		List<MultipartFile> fileList = comment.getFiles("comment_file");
 		
+		commentVo.setComment_Date(sim.format(new Date()));
+		commentVo.setComment_contents(content);
+		
 		for (MultipartFile mf : fileList) {
+			
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             
-//            long fileSize = mf.getSize(); // 파일 사이즈
-//            System.out.println("fileSize : " + fileSize);
-
-            System.out.println("originFileName : " + originFileName);
-            
-            String safeFile = path + System.currentTimeMillis() + originFileName;
-            System.out.println(safeFile);
-            
-            try {
-                mf.transferTo(new File(safeFile)); // 파일 저장
-            } catch (IllegalStateException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            if (originFileName.equals("")) {	// 파일이 아무것도 안들어왔을 때
+            	
+            	
+            	
+            } else { 	// 파일이 들어왔을 때
+//              long fileSize = mf.getSize(); // 파일 사이즈를 알고 싶다면 주석을 푸시오
+//              System.out.println("fileSize : " + fileSize);
+            	
+            	System.out.println("originFileName : " + originFileName);
+                String safeFile = path + System.currentTimeMillis() + originFileName;
+                System.out.println(safeFile);
+                
+                try {
+                    mf.transferTo(new File(safeFile)); // 파일 저장
+                } catch (IllegalStateException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
+            
+
+
+            
         }
 		
 		

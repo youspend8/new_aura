@@ -1,6 +1,5 @@
 package com.bitcamp.aura.comment.model;
 
-import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
@@ -22,6 +21,6 @@ public class CommentVO {
     private String comment_contents;
     private int comment_like;
     private int comment_score;
-    private Date comment_Date;
+    private String comment_Date;
     private int comment_num;
 }
