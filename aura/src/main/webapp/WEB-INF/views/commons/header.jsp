@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,16 +24,22 @@
         <img src="/img/logo/logo.png" width="130px" class="pt-1">
       </a>
 
-      <div
-        class="pt-2 pt-md-3 pl-0 pl-md-0 mt-lg-5 pr-0 pb-3 pb-md-3 col-lg-6 col-md-7 d-flex align-items-center order-2 order-lg-1">
-        <form class="form-check-inline w-100" action="/review/list">
-          <input class="form-control ml-3 w-100" type="text" placeholder="Search" aria-label="Search"
-            style="border-radius: 400px; ">
+      <div class="pt-2 pt-md-3 pl-0 pl-md-0 mt-lg-5 pr-0 pb-3 pb-md-3 col-lg-6 col-md-7 d-flex align-items-center order-2 order-lg-1">
+        <form class="form-check-inline w-100" action="/review/search">
+        	<select class="form-control w-25" style="border-radius: 5%" name="type">
+        		<option value="1">음식점</option>
+        		<option value="2">병원</option>
+        		<option value="3">전자제품</option>
+        	</select>
+          <input class="form-control ml-3 w-100" type="text" name="keyword" placeholder="Search" style="border-radius: 400px; ">
 		
-          	<button type="submit" class="fas text-dark ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;">
-          	</button>
+          	<button type="submit" class="fas text-dark ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
         </form>
       </div>
+
+
+
+
 
       <div class="d-lg-none col-md-5"></div>
 
@@ -42,10 +49,26 @@
             <i class="fas fa-user-alt" style="font-size: 1rem;"></i>
           </li>
           <li class="deconone">
-          	<a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>
+          
+          	<c:choose> 
+	          	<c:when test="${nickname ne null}" >	          	 
+	          	  ${nickname}님     	
+	          	</c:when>
+	          	<c:otherwise>
+	          	   <a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>          	
+	          	</c:otherwise>
+          	</c:choose>
           </li>
           <li class="deconone">
-          	<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a></li>
+          	<c:choose>
+          		<c:when test = "${nickname eq null}">
+          		<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a>
+          		</c:when>
+          		<c:otherwise>
+          		   <a href="/user/logout" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">로그아웃</a>
+          		</c:otherwise>
+          	</c:choose>
+          </li>
         </ul>
       </div>
     </header>

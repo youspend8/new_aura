@@ -27,7 +27,7 @@
                 </div>
                 <div id="general-restaurant" class="general-restaurant">
                     <ul class="general-category">
-                        <li>
+                        <li>l
                             <i class="fas fa-square"></i>
                             정형외과
                         </li>
@@ -462,8 +462,14 @@
 			<i class="far fa-thumbs-up"></i>
 				</a>
 		</div>
-		<button type="button" id="review_write"
-			class="btn btn-dark review-write">리뷰 작성하기</button>
+		<c:choose>
+			<c:when test="${nickname ne null}">
+				<button type="button" id="review_write_pc" class="btn btn-dark review-write">리뷰 작성하기</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" id="review_write_login" class="btn btn-dark review-write">리뷰 작성하기</button>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 
@@ -482,16 +488,18 @@
 
 		<div
 			class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
-			<h4 class="my-3 font-weight-bold w-100">리뷰 작성</h4>
+			<h4 class="my-3 font-weight-bold w-100" id="review_write">리뷰 작성</h4>
 			<div class="w-50">
 				<img class="rounded-circle w-100"
 					src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg">
 			</div>
-
-			<div class="w-100 my-3">유저 닉네임1</div>
+			
+<!-- 			세션 유저의 닉네임 넣기 			-->
+			<div class="w-100 my-3">${nickname}</div>
 
 			<div class="d-flex flex-wrap text-left mt-4">
 				<div class="star-box">
+<!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
 					<a> <i class="far fa-star" style="font-size: 30px;"></i>
 					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
 					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
@@ -503,37 +511,24 @@
 		</div>
 
 		<div class="col-md-9 col-12 p-0 flex-column my-3">
-			<form method="POST">
+			<form id="commentForm" method="post" enctype="multipart/form-data">
 				<!--             		텍스트 영역			 -->
 				<!--             		텍스트 영역			 -->
-				<textarea rows="10" class="form-control px-2" id="comment"></textarea>
+				<textarea rows="10" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
 
-				<div class="d-md-flex d-none col-12 p-0 my-3">
-					<div style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
+				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
+					<div class="mr-2" style="width: 20%;">
+						<label for="comment_file" class="filebox">
+							<a>
+								<img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+								<input type="file" id="comment_file" name="comment_file" multiple accept="image/*">
+							</a>
+						</label>
 					</div>
-					<div class="mx-2" style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
-					<div style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
-					<div class="mx-2" style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
-					<div style="width: 20%;">
-						<a> <img src="/img/addfile.png" class="w-100"
-							style="height: 160px; border: 2px dotted #b8bcc4">
-						</a>
-					</div>
+					
+					
+					
+					
 				</div>
 
 				<!-- 	               <div class="form-group d-md-none d-block"> -->
@@ -541,11 +536,8 @@
 				<!-- 	               </div> -->
 
 				<div class="my-4 text-md-right text-center">
-					<span class="filebox">
-						<label for="ex_file" class="btn btn-light-blue" style="width: 113.31px; line-height: 34px;">사진 업로드</label>
-						<input type="file" id="ex_file">
-					</span>
-					<button type="submit" class="btn btn-elegant">등록하기</button>
+					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
+					
 				</div>
 			</form>
 		</div>
@@ -1041,6 +1033,8 @@
 	</div>
 </div>
 
+
+
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
 <script>
@@ -1101,8 +1095,8 @@
                     generalHospitalState = !generalHospitalState;
                 }
             });
-
-            $('#review_write').on('click', () => {
+            
+            $('#review_write_pc').on('click', () => {
                 $('#write_form').animate({
                     height: '630px'
                 }, 400);
@@ -1126,7 +1120,12 @@
 
                 }, 180);
             });
-
+            
+            $('#review_write_login').on('click', () => {
+            	alert('로그인이 필요합니다.');
+            });
+            
+            
             $(document).on('click', (e) => {
                 var target = e.target.id;
                 if (target == 'general-button' || target == 'special-button'
@@ -1142,6 +1141,7 @@
                     state = false;
                 }
             });
+            
         });
         
         function showGeneralCategory() {
@@ -1158,22 +1158,59 @@
             $('#special-category').css('visibility', 'hidden');
         }
         
-//         $.ajax({
-//             url : "/review/write"
-
-
-
-//         })
-
+        function fileSubmit(){ // 멀티파트 파일 업로더
+        	
+        	var comment = $('#comment').val();
+        	var comment_file = $('#comment_file').val();
+        	
+        	var formData = new FormData($('#commentForm')[0]);
+        	
+        	if (comment == "") {
+        		alert('내용을 입력해주세요.');
+        	} else {
+        		$.ajax({
+       	            url : "/comment/write",
+       				type : "post",
+       				data : formData,
+       				processData : false,
+       				contentType : false,
+       				
+       				success: function(data){
+       					
+       				},
+       				error : function(error) {
+       					alert("파일업로드 실패");
+       					console.log(error);
+       					console.log(error.status);
+       				}
+       	        });
+        	}
+        	
+	        
+        }
+        
+        $('#comment').on('keyup', function(){
+        	
+        	var comment = $('#comment').val();
+        	var comment_file = $('#comment_file').val();
+        	
+        	if(comment != ""){
+        		$('#comment_submit').removeAttr('disabled');
+            	$('#comment_submit').removeClass().addClass('btn btn-elegant');
+        	} else {
+        		$('#comment_submit').prop('disabled', true);
+            	$('#comment_submit').removeClass().addClass('btn btn-light');
+        	}
+        	
+        	
+        	
+        })
 		
     </script>
     
     
     
 <style>
-.filebox label {
-	padding : 0.375rem;
-}
 
 .filebox input[type="file"] { /* 파일 필드 숨기기 */
 	position: absolute;

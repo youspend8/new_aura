@@ -2,6 +2,7 @@ package com.bitcamp.aura;
 
 import java.util.HashMap;
 
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,7 @@ public class AuraApplicationTests {
 //	
 //	@Autowired
 //	private BadCategoryRepository cRepo;
-	
-	@Autowired
-	private ReviewMapper mapper;
-	
-	@Test
-	public void test() {
-		System.out.println(mapper.selectAll());
-	}
+
 //	@Test
 //	public void SignTest() {
 //		SignLocationVO sign1 = new SignLocationVO();

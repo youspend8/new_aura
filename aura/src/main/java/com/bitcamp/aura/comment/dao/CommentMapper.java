@@ -11,6 +11,7 @@ import com.bitcamp.aura.comment.model.CommentVO;
 public interface CommentMapper {
 	public int insert (CommentVO comment);
 	public int update (CommentVO comment);
+//	public int update_Comment_File (CommentFileVO comment);
 	public int delete (String nickname);
 	public CommentVO selectOne (String nickname);
 	public List<CommentVO> selectAll();

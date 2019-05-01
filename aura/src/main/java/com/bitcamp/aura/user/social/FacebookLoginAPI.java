@@ -141,7 +141,7 @@ public class FacebookLoginAPI implements FacebookLogin{
 	        String email = element.getAsJsonObject().get("email").getAsString();
 	        String userid = element.getAsJsonObject().get("id").getAsString();
 	        
-	        System.out.println("name : "+name + "\n"+"email :"+email + "\n" + "userid :"+userid);
+	        System.out.println("name : " + name + "\n"+"email :"+email + "\n" + "userid :"+userid);
 	       
 //	        UserInfo = name + email + userid;
 	        //API 에서 받아오 name email set로 박음
