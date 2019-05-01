@@ -206,7 +206,7 @@
 <!-- 8. 회원가입 등록으로 보내는 곳!! 확인 필요 -->
 <!-- //disabled -->
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-block" id="join" >회원가입</button>
+									<button type="submit" class="btn btn-primary btn-block" id="join" disabled>회원가입</button>
 								</div>
 								<div class="mt-4 text-center">이미 가입하셨나요? <a href="/user/loginForm">로그인</a>
 								</div>
@@ -552,28 +552,35 @@
 // 			} else{
 // 				return false;
 // 			}
-// 	$(':input').change(function() {
-// 			insert_Check();
-// 				$('#join').removeAttr('disabled');
+
+	$(':input').change(function() {
+		
+		if(insert_Check() == true){
+			console.log(insert_Check());
+			$('#join').removeAttr('disabled');
+		}else
+			$('#join').attr('disabled',true);
+	})
 		var nickNameStatus = false;	
 		var emailAuthStatus = false;
 		
 		function insert_Check() {
 			console.log(window)
 			if (				
- 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() &&('#email_Check_num').val())
- 				&& (($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) != "") 
- 				&& ($("#password").val() == $("#pwCheck").val()) 
- 				&& window.nickNameStatus ==true 
- 				&& window.emailAuthStatus == true
+ 				$("#email").val() != "" 
+ 				&& $("#email_true").css('display') == "inline"
+ 				&& $('#email_Check_num_true').css('display') == 'inline' 
+ 				&& $('#pwCheck_true').css('display') == "inline"
+				&& $('#nickname_true').css('display') == "inline"
+				&& $('.custom-control-input').checked == true
  			) {
-
 				return true;
 			}else{
-				alert("입력과 인증을 모두 해주셔야 합니다.");
 				return false;
 			}
 		}
+		
+		console.log($('.custom-control-input').checked == false);
 	
 	</script>
 	<!-- end-->

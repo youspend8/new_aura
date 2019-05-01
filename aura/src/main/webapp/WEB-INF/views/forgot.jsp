@@ -488,7 +488,6 @@
 			})
 		})
 		
-		
 		function nextgo(){
 		}
 		console.log( $('#email_check_true').css('display') != "none" );
