@@ -407,7 +407,7 @@
 			}
 		}
 		//이메일 중복체크
-		$('#email').change(function(){
+		$('#email').focusout(function(){
 			$.ajax({
 				url : "/user/emailOverlap",
 				data : {
@@ -515,7 +515,6 @@
 				})
 			})
 		}
-
 		$('#pwCheck').focusout(function() {
 			PwCheck();
 		});
@@ -523,6 +522,7 @@
 			PwCheck();
 		});
 		//이메일 인증번호 맞는지 확인
+
 		function emailCheck(Check_num) {
 			alert(Check_num);
 			$('#email_Check_num').focusout(function() {
@@ -540,7 +540,9 @@
 			});
 		}
 //$("#email_Check_num_true").val() == 1 ) && &&($('#nickname_true').val() == 1)&&($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) (PwCheck() == true)&&
+
 		//마지막으로 이메일 인증번호, 비밀번호 맞고, 닉네임 중복X,성별 선택햇고,핸드폰 번호입력 값 다 있을때 회원 가입 시켜주기
+
 // 				$("#pwCheck_true").text() == "비밀번호가 일치합니다" &&
 // 			console.log('check')
 // 			if (				
@@ -565,6 +567,7 @@
  				&& window.nickNameStatus ==true 
  				&& window.emailAuthStatus == true
  			) {
+
 				return true;
 			}else{
 				alert("입력과 인증을 모두 해주셔야 합니다.");

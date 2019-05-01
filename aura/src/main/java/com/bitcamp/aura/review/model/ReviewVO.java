@@ -25,6 +25,7 @@ public class ReviewVO {
 	private int goods;
 	private int bookmark;
 	private int shares;
+	private int comments;
 	private int readCount;
 	private String addDate;
 	private List<String> files;
