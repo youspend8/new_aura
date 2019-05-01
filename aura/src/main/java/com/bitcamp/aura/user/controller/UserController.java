@@ -56,6 +56,9 @@ public class UserController {
 	public String loginResult(HttpSession session, String email, String password) {
 		System.out.println("Eamil :"+ email);
 		System.out.println("password :"+ password);
+		if(email == null || password == null)
+			return "redirect:/user/login";
+
 		if(userService.login(session, email,password) == true) {
 			return "redirect:/main";
 		} else

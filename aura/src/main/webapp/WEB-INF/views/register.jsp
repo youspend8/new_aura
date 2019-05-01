@@ -27,71 +27,85 @@
 				<div class="card-wrapper" style="width: 400px;">
 					<div class="brand">
 						<!-- 로고 -->
-						<a href="/main"> <img
-							src="/img/all_review_img/All Review 로고.png"
-							alt="bootstrap 4 login page" style="width: 150px;">
-						</a>
+						<a href="/main"> <img src="/img/all_review_img/All Review 로고.png" alt="bootstrap 4 login page" style="width: 150px;"></a>
 					</div>
 					<div class="card fat">
 						<div class="card-body">
 							<!-- 회원가입 시작 -->
 							<h4 class="card-title" style="margin: 0;">회원가입</h4>
 							<hr style="border: solid 1px; color: rgb(190, 186, 186)">
-							<form method="POST" class="my-login-validation"
-								id="register_Form" action="/user/register">
+<!-- form으로 등록정보 보내기 -->
+							<form method="POST" class="my-login-validation" name="register_Form" onsubmit ="return insert_Check()" action="/user/register">
+							
+						
 								<div>
-									<div class="form-group">
+									
+<!-- 1. 이메일 입력 및 인증하기 버튼-->
+								<div class="form-group">
 										<div class="md-form" style="display: flex; margin: 0px;">
-											<input type="text" class="form-control" id="email"
-												name="email" style="width: 69%;"> <label for="email">이메일
-												*</label>
+											<input type="text" class="form-control" id="email" name="email" style="width: 69%;"> <label for="email">이메일*</label>
 											<!-- 중복체크 아이디 넘김 -->
-											<input type="button" class="btn btn-primary btn-sm"
-												value="인증하기 " id="idDupCheck">
+											<input type="button" class="btn btn-primary btn-sm" value="인증하기 " id="idDupCheck">
 										</div>
-
-										<div style="display: none; color: red; font-size: 15px;"
-											id="email_overlap">이미 사용중인 이메일 입니다.</div>
-											
-										<div style="display: none; color: red; font-size: 15px;"
-											id="email_none">이메일을 입력해주세요</div>
-
-										<div style="display: none; color: blue; font-size: 15px;"
-											id="email_true">사용사능한 이메일입니다.</div>
-
-										<div style="display: none; color: red; font-size: 15px;"
-											id="email_false">이메일형식이 아닙니다.</div>
-
+										
+<!-- 이메일 안내메세지 -->
+												<div style="display: none; color: red; font-size: 15px;"
+													id="email_overlap">이미 사용중인 이메일 입니다.</div>
+													
+												<div style="display: none; color: red; font-size: 15px;"
+													id="email_none">이메일을 입력해주세요</div>
+		
+												<div style="display: none; color: blue; font-size: 15px;"
+													id="email_true">사용가능한 이메일입니다.</div>
+		
+												<div style="display: none; color: red; font-size: 15px;"
+													id="email_false">이메일형식이 아닙니다.</div>
+<!-- 이메일 인증번호 -->
 										<div class="md-form" style="display: flex;">
-											<input type="text" class="form-control" id="email_Check_num"
-												name="email_Check_num" style="width: 50%;"> <label
-												for="email_Check_num">이메일 인증 번호 *</label>
+											<input type="text" class="form-control" id="email_Check_num" name="email_Check_num" style="width: 50%;"> 
+												<label for="email_Check_num">이메일 인증 번호 *</label>
 										</div>
 
+<!-- 이메일 인증번호 메세지 -->
 										<div style="display: none; color: blue; font-size: 15px;"
 											id="email_Check_num_true" value="1">인증번호가 일치합니다.</div>
 
 										<div style="display: none; color: red; font-size: 15px;"
 											id="email_Check_num_false" value="0">인증번호가 일치하지 않습니다.</div>
+								</div>
+								
+								
+										<div>
+										<script type="text/javascript">
+// 이메일 인증 시간 카운트										
+// 											window.onload = function() {
+// 												var AuthTimer = new $ComTimer();
+// 												AuthTimer.comSecond =180;
+// 												AuthTimer.fnCallback =function(){
+// 													alert("다시 인증을 시도해주세요");
+// 												}
+// 												AuthTimer.timer = setInterval('AuthTimer.fnTimer()',1000);
+// 												AuthTimer.domId = document.getElementById("timer");
+// 											}
+										</script>
 
-									</div>
+									   </div>
 
-									<!-- 비밀번호 -->
+<!-- 2. 비밀번호 입력 및 비밀번호 확인-->
 									<div class="form-group">
 										<div class="md-form">
-											<input type="password" class="form-control" id="password"
-												name="password"> <label for="password">비밀번호
-												*</label>
+											<input type="password" class="form-control" id="password" name="password"> 
+											<label for="password">비밀번호*</label>
 										</div>
 										<div class="invalid-feedback">비밀번호 입력이 필요합니다.</div>
 									</div>
-
+<!-- 비밀번호 확인 -->
 									<div class="form-group">
 										<div class="md-form">
-											<input type="password" class="form-control" id="pwCheck"
-												name="pwCheck"> <label for="pwCheck">비밀번호 확인
-												*</label>
+											<input type="password" class="form-control" id="pwCheck" name="pwCheck"> 
+											<label for="pwCheck">비밀번호 확인*</label>
 										</div>
+<!-- 비밀번호 안내메세지 -->
 										<div style="display: none; color: red; font-size: 15px;"
 											id="pwCheck_check">비밀번호를 입력해주세요</div>
 										<div style="display: none; color: red; font-size: 15px;"
@@ -100,7 +114,8 @@
 										<div style="display: none; color: blue; font-size: 15px;"
 											id="pwCheck_true">비밀번호가 일치합니다</div>
 									</div>
-
+									
+<!-- 3. 이름 입력 -->
 									<div class="form-group">
 										<div class="md-form">
 											<input type="text" class="form-control" id="name" name="name">
@@ -109,7 +124,7 @@
 										<div class="invalid-feedback">이름 입력이 필요합니다</div>
 									</div>
 
-
+<!-- 4. 닉네임입력 -->
 									<div class="form-group">
 										<div class="md-form" style="display: flex;">
 											<input type="text" class="form-control" id="nickname"
@@ -117,8 +132,8 @@
 												for="nickname">닉네임 *</label> <input type="button"
 												class="btn btn-primary btn-sm" value="중복체크"
 												id="nicknameDupCheck" name="nickname_Check">
-
 										</div>
+<!-- 닉네임 안내메세지 -->
 										<div style="display: none; color: red; font-size: 15px;"
 											id="nickname_none">닉네임 입력이 필요합니다</div>
 
@@ -127,11 +142,11 @@
 
 										<div style="display: none; color: red; font-size: 15px;"
 											id="nickname_false" value="0">닉네임 중복입니다.</div>
-
 									</div>
 
-									<div class="form-group">
 
+<!-- 5.성별 -->
+									<div class="form-group">
 										<div>성별*</div>
 										<div class="custom-control custom-radio custom-control-inline"
 											style="margin-left: 50px">
@@ -147,7 +162,7 @@
 												class="custom-control-label" for="defaultInline2">여자</label>
 										</div>
 									</div>
-
+<!-- 6.휴대폰 번호 -->
 									<div class="form-group">
 										<div class="d-flex justify-content-between">
 											<div class="md-form my-1">
@@ -155,20 +170,20 @@
 													name="tel"> <label for="phone">휴대폰 번호 *</label>
 											</div>
 										</div>
-
+<!-- 휴대폰번호 입력 안내메세지 -->
 										<div class="invalid-feedback">휴대폰번호 입력이 필요합니다</div>
 									</div>
 
 									<div class="form-group">
-										<!-- 주소 들어갈 곳  start-->
+<!-- 7. 주소 들어갈 곳  start-->
 										<div class="d-flex justify-content-between">
 											<div class="md-form my-1">
 												<input type="text" class="form-control" id="addr_code"
-													name="addr_code" placeholder="우편번호" readonly="readonly">
+													name="addr_code" placeholder="우편번호">
 											</div>
 
 											<div class="md-form my-1">
-												<input type="button" class="btn btn-primary btn-sm"
+												<input type="button" class="btn btn-primary btn-sm" id="postLink"
 													onclick="addr_search()" value="우편번호 찾기">
 											</div>
 										</div>
@@ -183,24 +198,23 @@
 												name="addr_Detail"> <label for="addr_Detail">상세주소</label>
 										</div>
 
-										<input type="hidden" class="form-control my-1" id="addr_refer"
-											name="addr_refer">
+										<input type="hidden" class="form-control my-1" id="addr_refer" name="addr_refer">
 										<!-- 주소 들어갈 곳 end-->
 									</div>
 								</div>
 
+<!-- 8. 회원가입 등록으로 보내는 곳!! 확인 필요 -->
+<!-- //disabled -->
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-block" id="join" disabled>
-										회원가입</button>
+									<button type="submit" class="btn btn-primary btn-block" id="join" >회원가입</button>
 								</div>
-								<div class="mt-4 text-center">
-									이미 가입하셨나요? <a href="/user/loginForm">로그인</a>
+								<div class="mt-4 text-center">이미 가입하셨나요? <a href="/user/loginForm">로그인</a>
 								</div>
 							</form>
 						</div>
 					</div>
-					<div class="footer">Copyright &copy; 2019 &mdash; Your All
-						Review</div>
+					<div class="footer">Copyright &copy; 2019 &mdash; Your All Review</div>
+					
 				</div>
 			</div>
 		</div>
@@ -288,8 +302,6 @@
 	</script>
 
 	<!--SMS 본인인증 API-->
-
-
 	<script>
 		IMP.init('imp76278587');
 		// 		<!--SMS API 필요한것 end-->
@@ -326,6 +338,33 @@
 
 	<!-- start-->
 	<script>
+		//시간 인증 타이머
+		function $ComTimer(){
+			
+		}
+		$ComTimer.prototype ={
+			comSecond : "",
+			fnCallback : function(){},
+			timer : "",
+			domId : "",
+			fnTimer : function(){
+				var m = Math.floor(this.comSecond /60) +"분" + (this.comSecond % 60) +"초";
+				this.comSecond--;
+				console.log(m);
+				this.domId.innerText = m;
+				if(this.comSecond <0){
+					clearInterval(this.timer);
+					alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다")
+				}
+			}
+			,fnStop : function(){
+				clearInterval(this.timer);
+			}
+		
+		}
+		
+		
+		
 		function regular() {
 			//이메일 정규식
 			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -444,10 +483,12 @@
 				$("#nickname_false").css('display', 'none');
 				$("#nickname_none").css('display', 'none');
 				$("#nickname_true").css('display', 'inline');
+				window.nickNameStatus = true;
 			} else if (data == "false") {
 				$("#nickname_false").css('display', 'inline');
 				$("#nickname_none").css('display', 'none');
 				$("#nickname_true").css('display', 'none');
+				window.nickNameStatus = false;
 			}
 			if ($("#nickname").val() == "") {
 				$("#nickname_none").css('display', 'inline');
@@ -474,17 +515,13 @@
 				})
 			})
 		}
-// 		e_mail();
-// 		$('#email').focusout(function() {
-// 			regular();
-// 		});
+
 		$('#pwCheck').focusout(function() {
 			PwCheck();
 		});
 		$('#password').focusout(function() {
 			PwCheck();
 		});
-
 		//이메일 인증번호 맞는지 확인
 		function emailCheck(Check_num) {
 			alert(Check_num);
@@ -492,36 +529,49 @@
 				if (Check_num == $("#email_Check_num").val()) {
 					$('#email_Check_num_false').css('display', 'none');
 					$('#email_Check_num_true').css('display', 'inline');
+					window.emailAuthStatus = true;
 					return true;
 				} else {
 					$('#email_Check_num_true').css('display', 'none');
 					$('#email_Check_num_false').css('display', 'inline');
+					window.emailAuthStatus = false;
 					return false;
 				}
 			});
 		}
-
+//$("#email_Check_num_true").val() == 1 ) && &&($('#nickname_true').val() == 1)&&($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) (PwCheck() == true)&&
 		//마지막으로 이메일 인증번호, 비밀번호 맞고, 닉네임 중복X,성별 선택햇고,핸드폰 번호입력 값 다 있을때 회원 가입 시켜주기
-		function insert_Check() {
-			console.log('check')
-			if (
-				$("#email_Check_num_true").text() == "인증번호가 일치합니다." && 
 // 				$("#pwCheck_true").text() == "비밀번호가 일치합니다" &&
-				PwCheck() == true && 
-				$(':input[name=gender]:radio:checked').val() == 1 ||
-				$(':input[name=gender]:radio:checked').val() == 0 &&
-				$('#nickname_true').text() == "닉네임 사용 가능합니다."
-			) {
-				$('#join').removeAttr('disabled');
+// 			console.log('check')
+// 			if (				
+// 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() && $('#phone').val() && $("#addr_code").val()) != "") 			
+// 			) {
+// 				return true;
+// 			} else{
+// 				return false;
+// 			}
+// 	$(':input').change(function() {
+// 			insert_Check();
+// 				$('#join').removeAttr('disabled');
+		var nickNameStatus = false;	
+		var emailAuthStatus = false;
+		
+		function insert_Check() {
+			console.log(window)
+			if (				
+ 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() &&('#email_Check_num').val() && $('#phone').val() && $("#addr_code").val()) != "")
+ 				&& (($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) != "") 
+ 				&& ($("#password").val() == $("#pwCheck").val()) 
+ 				&& window.nickNameStatus ==true 
+ 				&& window.emailAuthStatus == true
+ 			) {
 				return true;
-			} else{
+			}else{
+				alert("입력과 인증을 모두 해주셔야 합니다.");
 				return false;
 			}
 		}
-		
-		$(':input').change(function() {
-			insert_Check();
-		})
+	
 	</script>
 	<!-- end-->
 </body>
