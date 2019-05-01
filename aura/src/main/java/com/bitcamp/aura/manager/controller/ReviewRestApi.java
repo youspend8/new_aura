@@ -1,7 +1,6 @@
 package com.bitcamp.aura.manager.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.service.ReviewService;
-import com.google.gson.Gson;
 
 @RestController
 @RequestMapping(value="/api/review/")
