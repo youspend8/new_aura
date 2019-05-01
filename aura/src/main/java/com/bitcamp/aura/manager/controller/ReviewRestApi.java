@@ -69,12 +69,7 @@ public class ReviewRestApi {
 		
 		HashMap<String, Object> review = service.searchByNum(params);
 		StringBuilder sb = new StringBuilder();
-		Gson gson = new GsonBuilder()
-				.setDateFormat("yyyy-MM-dd")
-				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-				.setPrettyPrinting()
-				.registerTypeAdapter(Date.class, new DateDeserializer())
-				.create();
+		Gson gson = new Gson();
 		sb.append(gson.toJson(review));
 		
 //		sb.append("{\"num\": \"" + review.get("NUM") + "\",");
@@ -89,21 +84,5 @@ public class ReviewRestApi {
 		System.out.println(sb.toString());
 		
 		return sb.toString();
-	}
-}
-
-class DateDeserializer implements JsonDeserializer<Date> {
- 
-	public Date deserialize(JsonElement element, Type typeOfT, JsonDeserializationContext context) {
-		String date = element.getAsString();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		try {
-			return sdf.parse(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 	}
 }
