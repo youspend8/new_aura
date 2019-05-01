@@ -3,6 +3,8 @@ package com.bitcamp.aura.manager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +18,13 @@ public class UserRestApi {
 	@Autowired
 	private UserService service;
 	
-	@RequestMapping(value="/list")
+	@GetMapping(value="/{nickname}")
+	public String getUser(@PathVariable("nickname") String nickname) {
+		
+		return new Gson().toJson(service.getUser(nickname));
+	}
+	
+	@GetMapping(value="/list")
 	public String list() {
 		List<UserVO> list = service.getAllUser();
 		
