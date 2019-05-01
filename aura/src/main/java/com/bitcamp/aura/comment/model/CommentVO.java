@@ -16,11 +16,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Alias(value="commentVo")
 public class CommentVO {
-    private int review_post_num;
+    private int review_Post_Num;
     private String nickname;
-    private String comment_contents;
-    private int comment_like;
-    private int comment_score;
+    private String comment_Contents;
+    private int comment_Like;
+    private int comment_Score;
     private String comment_Date;
-    private int comment_num;
+    private int comment_Num;
 }

@@ -26,7 +26,10 @@ public class CommentServicelmpl implements CommentService{
 	@Override
 	public String insert_Comment(MultipartHttpServletRequest comment) {
 		
+		String review_Num = comment.getParameter("review_post_num");
+		String nickname = comment.getParameter("nickname_post");
 		String content = comment.getParameter("comment");
+		
 		String root = comment.getSession().getServletContext().getRealPath("/");
 		String path = root + "resources/upload/";
 		
@@ -43,7 +46,8 @@ public class CommentServicelmpl implements CommentService{
 		List<MultipartFile> fileList = comment.getFiles("comment_file");
 		
 		commentVo.setComment_Date(sim.format(new Date()));
-		commentVo.setComment_contents(content);
+		commentVo.setComment_Contents(content);
+		commentVo.setReview_Post_Num(Integer.parseInt(review_Num));
 		
 		for (MultipartFile mf : fileList) {
 			
