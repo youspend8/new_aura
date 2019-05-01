@@ -1,5 +1,7 @@
 package com.bitcamp.aura.manager.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,28 @@ public class ReviewRestApi {
 	private ReviewService service;
 	
 	@RequestMapping(value="/list")
-	public String list() {
+	public String list() throws ParseException {
 		List<ReviewVO> review = service.searchAll();
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("{\"data\": [");
-//		sb.append("{\"num\": ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		for (int i = 0; i < review.size(); i++) {
+			sb.append("{\"num\": \"" + review.get(i).getNum() + "\",");
+			sb.append("\"category\": \"" + review.get(i).getType() + "\",");
+			sb.append("\"title\": \"" + review.get(i).getTitle() + "\",");
+			sb.append("\"addDate\": \"" + review.get(i).getAddDate() + "\",");
+			sb.append("\"goods\": \"" + review.get(i).getGoods() + "\",");
+			sb.append("\"bookmark\": \"" + review.get(i).getBookmark() + "\",");
+			sb.append("\"comments\": \"" + 0 + "\",");
+			if (i != review.size() - 1) {
+				sb.append("\"readCount\": \"" + review.get(i).getReadCount() + "\"},");
+			} else {
+				sb.append("\"readCount\": \"" + review.get(i).getReadCount() + "\"}");
+			}
+		}
+		sb.append("]");
+		System.out.println(sb.toString());
 		
-		return new Gson().toJson(review);
+		return sb.toString();
+//		return new Gson().toJson(review);
 	}
 }
