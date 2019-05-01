@@ -301,7 +301,7 @@
 		}
 	</script>
 
-	<!--SMS 본인인증 API-->
+	<!--SMS  후대폰 본인인증 API-->
 	<script>
 		IMP.init('imp76278587');
 		// 		<!--SMS API 필요한것 end-->
@@ -432,7 +432,6 @@
 						$("#email_none").css('display','inline');
 						$("#email_false").css('display', 'none');
 						$("#email_true").css('display', 'none');
-						
 						$('#idDupCheck').click(function(e){
 							e.preventDefault();
 						}).prop("disabled",true);
@@ -539,26 +538,7 @@
 				}
 			});
 		}
-//$("#email_Check_num_true").val() == 1 ) && &&($('#nickname_true').val() == 1)&&($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) (PwCheck() == true)&&
 
-		//마지막으로 이메일 인증번호, 비밀번호 맞고, 닉네임 중복X,성별 선택햇고,핸드폰 번호입력 값 다 있을때 회원 가입 시켜주기
-
-// 				$("#pwCheck_true").text() == "비밀번호가 일치합니다" &&
-// 			console.log('check')
-// 			if (				
-// 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() && $('#phone').val() && $("#addr_code").val()) != "") 			
-// 			) {
-// 				return true;
-// 			} else{
-// 				return false;
-// 			}
-// 	$(':input').change(function() {
-// 			insert_Check();
-// 				$('#join').removeAttr('disabled');
-
-// 	$(':input').change(function() {
-// // 	 				insert_Check();
-// 	 				})
 		var nickNameStatus = false;	
 		var emailAuthStatus = false;
 		
@@ -577,9 +557,7 @@
  				// 이메일 중복확인
 				&& window.emailAuthStatus == true
  			) {
-				alert("조건충족!!");
-//  				$('#join').removeAttr('disabled');
-
+				alert("조건충족!! 가입해 주셔서 감사합니다. :)");
 				return true;
 			}else{
 				alert("입력과 인증을 모두 해주셔야 합니다.");
