@@ -432,6 +432,7 @@
 			
 			
 		</div>
+<!-- 		점수		 -->
 		<div
 			class="d-md-none col-12 d-flex justify-content-between align-items-center p-0 ">
 			<div class="col-6 d-flex align-items-center justify-content-center">
@@ -482,7 +483,7 @@
 		class="col-12 flex-md-row flex-wrap justify-content-center"
 		style="display: none; height: 0px; border-bottom: 2px solid #dadee6;">
 		<button id="review_write_cancel" type="button"
-			class="btn btn-light col-12 text-center py-3 m-0 mb-3">
+			class="btn btn-primary col-12 text-center py-3 m-0 mb-3">
 			댓글 작성창 접기 <i class="fas fa-arrow-up"></i>
 		</button>
 
@@ -495,20 +496,19 @@
 			</div>
 			
 <!-- 			세션 유저의 닉네임 넣기 			-->
-			<div class="w-100 my-3">${nickname}</div>
+			<div class="w-100 my-3" id="nickname">${nickname}</div>
 
 			<div class="d-flex flex-wrap text-left mt-4">
 				<div class="star-box">
 <!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
-					<a> <i class="far fa-star" style="font-size: 30px;"></i>
-					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
-					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
-					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
-					</a> <a> <i class="far fa-star" style="font-size: 30px;"></i>
-					</a>
+					<a class="far fa-star" id="star1" name="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star2" name="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star3" name="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star4" name="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star5" name="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
 				</div>
 			</div>
-		</div>
+		</div>	
 
 		<div class="col-md-9 col-12 p-0 flex-column my-3">
 			<form id="commentForm" method="post" enctype="multipart/form-data">
@@ -520,7 +520,7 @@
 					<div class="mr-2" style="width: 20%;">
 						<label for="comment_file" class="filebox">
 							<a>
-								<img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+								<img src="/img/addfile.png" id="img22" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
 								<input type="file" id="comment_file" name="comment_file" multiple accept="image/*">
 							</a>
 						</label>
@@ -534,12 +534,28 @@
 				<!-- 	               <div class="form-group d-md-none d-block"> -->
 				<!-- 	                   <input type="file" class="form-control-file my-1"> -->
 				<!-- 	               </div> -->
-
+				
+				<input id="review_post_num" name="review_post_num" type="text" value=${reviewInfo.NUM} style="display: none;">
+				<input id="nickname_post" name="nickname_post" type="text" value=${nickname} style="display: none;">
+				
 				<div class="my-4 text-md-right text-center">
 					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
 					
 				</div>
 			</form>
+			<script>
+				window.onload = function() {
+					document.getElementById('comment_file').onchange = function(e) {
+// 						console.log(e.target.files[0])
+
+						var reader = new FileReader();
+						reader.onload = function(f) {
+							document.getElementById('img22').setAttribute('src', f.target.result);
+						}
+						reader.readAsDataURL(e.target.files[0]);
+					}
+				}
+			</script>
 		</div>
 	</div>
 
@@ -1185,18 +1201,17 @@
        				}
        	        });
         	}
-        	
-	        
         }
         
-        $('#comment').on('keyup', function(){
+        
+        $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
         	var comment = $('#comment').val();
         	var comment_file = $('#comment_file').val();
         	
         	if(comment != ""){
         		$('#comment_submit').removeAttr('disabled');
-            	$('#comment_submit').removeClass().addClass('btn btn-elegant');
+            	$('#comment_submit').removeClass().addClass('btn btn-primary');
         	} else {
         		$('#comment_submit').prop('disabled', true);
             	$('#comment_submit').removeClass().addClass('btn btn-light');
@@ -1204,8 +1219,58 @@
         	
         	
         	
-        })
+        });
+        
+        
+//         뒤에 숫자 떼오기
 		
+		for (var i = 1; i <= 5; i++){
+			$('#star' + i).hover(function(){ // 별 마우스호버 이벤트
+	        	$(this).removeClass().addClass('fas fa-star');
+	        }, function(){
+	        		$(this).removeClass().addClass('far fa-star');
+	        	});
+		}
+		
+		$('#star2').hover(function(){
+			$('#star1').removeClass().addClass('fas fa-star');
+		}, function(){
+			$('#star1').removeClass().addClass('far fa-star');
+		});
+		
+		$('#star3').hover(function(){
+			$('#star1').removeClass().addClass('fas fa-star');
+			$('#star2').removeClass().addClass('fas fa-star');
+		}, function(){
+			$('#star1').removeClass().addClass('far fa-star');
+			$('#star2').removeClass().addClass('far fa-star');
+		});
+		
+		$('#star4').hover(function(){
+			$('#star1').removeClass().addClass('fas fa-star');
+			$('#star2').removeClass().addClass('fas fa-star');
+			$('#star3').removeClass().addClass('fas fa-star');
+		}, function(){
+			$('#star1').removeClass().addClass('far fa-star');
+			$('#star2').removeClass().addClass('far fa-star');
+			$('#star3').removeClass().addClass('far fa-star');
+		});
+		
+		$('#star5').hover(function(){
+			$('#star1').removeClass().addClass('fas fa-star');
+			$('#star2').removeClass().addClass('fas fa-star');
+			$('#star3').removeClass().addClass('fas fa-star');
+			$('#star4').removeClass().addClass('fas fa-star');
+		}, function(){
+			$('#star1').removeClass().addClass('far fa-star');
+			$('#star2').removeClass().addClass('far fa-star');
+			$('#star3').removeClass().addClass('far fa-star');
+			$('#star4').removeClass().addClass('far fa-star');
+		});
+		
+        
+        
+        
     </script>
     
     

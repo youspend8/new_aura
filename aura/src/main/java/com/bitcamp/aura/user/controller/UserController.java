@@ -56,6 +56,9 @@ public class UserController {
 	public String loginResult(HttpSession session, String email, String password) {
 		System.out.println("Eamil :"+ email);
 		System.out.println("password :"+ password);
+		if(email == null || password == null)
+			return "redirect:/user/login";
+
 		if(userService.login(session, email,password) == true) {
 			return "redirect:/main";
 		} else
@@ -193,7 +196,7 @@ public class UserController {
 	@ResponseBody
 	public String emailCheck(String email) {
 		System.out.println(userService.emailCode(email));
-		if(userService.getUsers_email(email) == null) {
+		if(userService.getUsersEmail(email) == null) {
 			//등록된 이메일을 찾앗는대 없을경우는 1 을 리턴해준다
 			return "0";
 		}
@@ -203,7 +206,7 @@ public class UserController {
 	@RequestMapping("/emailOverlap")
 	@ResponseBody
 	public String overlap(String email) {
-		if(userService.getUser_email(email) == null) {
+		if(userService.getUserEmail(email) == null) {
 			return "true";
 		}else
 			return "false";
@@ -212,11 +215,20 @@ public class UserController {
 	@RequestMapping("/emailOverlap_2")
 	@ResponseBody
 	public String overlap_2(String email) {
-		if(userService.getUser_email(email) == null) {
-			return "true";
-		}else
+		if(userService.getUserEmail(email) == null) {
 			return "false";
+		}else 
+			return "true";
 	}
 	
+	@RequestMapping("/pwdChange")
+	public String Changepwd(String email, String password) {
+		UserVO userVo = userService.getUserEmail(email);
+		userVo.setPassword(password);
+		System.out.println(userVo);
+		userService.modify(userVo);
+		
+		return "redirect:/main";
+	}
 	
 }

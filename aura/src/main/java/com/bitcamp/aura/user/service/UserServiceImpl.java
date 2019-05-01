@@ -93,7 +93,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void modify(UserVO userVo) {
-		// TODO Auto-generated method stub
 		userMapper.update(userVo);
 	}
 
@@ -115,13 +114,13 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectMany(nickname);
 	}
 	@Override
-	public UserVO getUser_email(String email) {
+	public UserVO getUserEmail(String email) {
 		// TODO Auto-generated method stub
 		
 		return userMapper.selectOneEmail(email);
 	}
 	@Override
-	public List<UserVO> getUsers_email(String email) {
+	public List<UserVO> getUsersEmail(String email) {
 		// TODO Auto-generated method stub
 		return userMapper.selectMany(email);
 	}
@@ -183,11 +182,4 @@ public class UserServiceImpl implements UserService {
 		}
 		return random_Num;
 	}
-	@Override
-	public String forgotPWD_emailCheck(String email) {
-		
-		
-		return null;
-	}
-
 }
