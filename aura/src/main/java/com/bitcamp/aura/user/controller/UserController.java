@@ -195,7 +195,7 @@ public class UserController {
 	@RequestMapping("/emailCheck")
 	@ResponseBody
 	public String emailCheck(String email) {
-		System.out.println(userService.emailCode(email));
+	System.out.println(" >> [AURA_boot : 코드 보내고 있어.. 잠시만 기달려줘.. 이렇게 라도 하지않으면 민서짱이 날 봐주지 않는걸");
 		if(userService.getUsersEmail(email) == null) {
 			//등록된 이메일을 찾앗는대 없을경우는 1 을 리턴해준다
 			return "0";

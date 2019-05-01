@@ -49,16 +49,16 @@
 										</div>
 										
 <!-- 이메일 안내메세지 -->
-												<div style="display: none; color: red; font-size: 15px;"
+												<div style="display: none; color: red; font-size: 13px;"
 													id="email_overlap">이미 사용중인 이메일 입니다.</div>
 													
-												<div style="display: none; color: red; font-size: 15px;"
+												<div style="display: none; color: red; font-size: 13px;"
 													id="email_none">이메일을 입력해주세요</div>
 		
-												<div style="display: none; color: blue; font-size: 15px;"
+												<div style="display: none; color: blue; font-size: 13px;"
 													id="email_true">사용가능한 이메일입니다.</div>
 		
-												<div style="display: none; color: red; font-size: 15px;"
+												<div style="display: none; color: red; font-size: 13px;"
 													id="email_false">이메일형식이 아닙니다.</div>
 <!-- 이메일 인증번호 -->
 										<div class="md-form" style="display: flex;">
@@ -67,10 +67,10 @@
 										</div>
 
 <!-- 이메일 인증번호 메세지 -->
-										<div style="display: none; color: blue; font-size: 15px;"
+										<div style="display: none; color: blue; font-size: 13px;"
 											id="email_Check_num_true" value="1">인증번호가 일치합니다.</div>
 
-										<div style="display: none; color: red; font-size: 15px;"
+										<div style="display: none; color: red; font-size: 13px;"
 											id="email_Check_num_false" value="0">인증번호가 일치하지 않습니다.</div>
 								</div>
 								
@@ -97,22 +97,29 @@
 											<input type="password" class="form-control" id="password" name="password"> 
 											<label for="password">비밀번호*</label>
 										</div>
-										<div class="invalid-feedback">비밀번호 입력이 필요합니다.</div>
+										
+										<div style="display: none; color: green; font-size: 13px;" id="pw_regular_true"> 보안에 안전한 비밀번호 입니다. :)</div>
+										<div style="display: none; color: red; font-size: 13px;" id="pw_regular_false"> 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</div>
+										
+											
 									</div>
+									
 <!-- 비밀번호 확인 -->
 									<div class="form-group">
 										<div class="md-form">
 											<input type="password" class="form-control" id="pwCheck" name="pwCheck"> 
 											<label for="pwCheck">비밀번호 확인*</label>
 										</div>
+										
 <!-- 비밀번호 안내메세지 -->
-										<div style="display: none; color: red; font-size: 15px;"
-											id="pwCheck_check">비밀번호를 입력해주세요</div>
-										<div style="display: none; color: red; font-size: 15px;"
+										<div style="display: none; color: black; font-size: 13px;"
+											id="pwCheck_check"> 비밀번호 입력이 필요합니다.</div>
+										<div style="display: none; color: red; font-size: 13px;"
 											id="pwCheck_false">비밀번호가 일치하지 않습니다.</div>
-
-										<div style="display: none; color: blue; font-size: 15px;"
-											id="pwCheck_true">비밀번호가 일치합니다</div>
+										<div style="display: none; color: blue; font-size: 13px;"
+											id="pwCheck_true">비밀번호가 일치합니다
+										</div>
+										
 									</div>
 									
 <!-- 3. 이름 입력 -->
@@ -134,13 +141,13 @@
 												id="nicknameDupCheck" name="nickname_Check">
 										</div>
 <!-- 닉네임 안내메세지 -->
-										<div style="display: none; color: red; font-size: 15px;"
+										<div style="display: none; color: red; font-size: 13px;"
 											id="nickname_none">닉네임 입력이 필요합니다</div>
 
-										<div style="display: none; color: blue; font-size: 15px;"
+										<div style="display: none; color: blue; font-size: 13px;"
 											id="nickname_true" value="1">닉네임 사용 가능합니다.</div>
 
-										<div style="display: none; color: red; font-size: 15px;"
+										<div style="display: none; color: red; font-size: 13px;"
 											id="nickname_false" value="0">닉네임 중복입니다.</div>
 									</div>
 
@@ -240,8 +247,7 @@
 		crossorigin="anonymous">
 		
 	</script>
-	<script type="text/javascript"
-		src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+	<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
 
 
 	<!--우편 번호API-->
@@ -386,17 +392,43 @@
 				$("#email_false").css('display', 'inline');
 			}
 		}
+		
+			$("#password").change(function(){
+				pwRegular();
+			});
+		
+			 function pwRegular(){
+				//8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.
+				var regPW = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/i;
+				//패스워드가 비워 있음
+				if($("#password").val() ==""){
+					$("#pw_regular_true").css('display', 'none');
+					$("#pw_regular_false").css('display', 'none');
+					return false;
+				}
+				//정규표현식에 맞지않음
+				if((regPW.test($('#password').val())) != true){
+					$("#pw_regular_true").css('display', 'none');
+					$("#pw_regular_false").css('display', 'inline');
+					return false;
+				}
+				//정규표현식에 맞음
+					$("#pw_regular_true").css('display', 'inline');
+					$("#pw_regular_false").css('display', 'none');
+					return true;		
+			}
+
 
 		//비밀번호 확인
 		function PwCheck() {
-			if ($("#password").val() == "" && $("#pwCheck").val() == "") {
-				$("#pwCheck_false").css('display', 'none');
+			if ($("#password").val() == "" || $("#pwCheck").val() == "") {
 				$("#pwCheck_true").css('display', 'none');
+				$("#pwCheck_false").css('display', 'none');
 // 				$("#pwCheck_check").css('display', 'inline');
 				return false;
 			} else if ($("#password").val() == $("#pwCheck").val()) {
-				$("#pwCheck_false").css('display', 'none');
 				$("#pwCheck_true").css('display', 'inline');
+				$("#pwCheck_false").css('display', 'none');
 				$("#pwCheck_check").css('display', 'none');
 				return true;
 			} else {
@@ -406,6 +438,8 @@
 				return false;
 			}
 		}
+		
+		
 		//이메일 중복체크
 		$('#email').focusout(function(){
 			$.ajax({
@@ -518,6 +552,7 @@
 			PwCheck();
 		});
 		$('#password').focusout(function() {
+			pwRegular();
 			PwCheck();
 		});
 		//이메일 인증번호 맞는지 확인
@@ -538,7 +573,7 @@
 				}
 			});
 		}
-
+		
 		var nickNameStatus = false;	
 		var emailAuthStatus = false;
 		
@@ -556,6 +591,8 @@
 				&& window.nickNameStatus ==true 
  				// 이메일 중복확인
 				&& window.emailAuthStatus == true
+				
+
  			) {
 				alert("조건충족!! 가입해 주셔서 감사합니다. :)");
 				return true;
