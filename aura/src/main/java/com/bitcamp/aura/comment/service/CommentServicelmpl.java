@@ -22,8 +22,8 @@ public class CommentServicelmpl implements CommentService{
 	@Override
 	public String insert_Comment(MultipartHttpServletRequest comment) {
 		
-		System.out.println("내용 : " + comment.getParameter("comment"));
 		
+		String content = comment.getParameter("comment");
 		String root = comment.getSession().getServletContext().getRealPath("/");
 		String path = root + "resources/upload/";
 		
