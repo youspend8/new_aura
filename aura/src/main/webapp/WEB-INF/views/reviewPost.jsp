@@ -521,7 +521,7 @@
 						<label for="comment_file" class="filebox">
 							<a>
 								<img src="/img/addfile.png" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
-								<input type="file" id="comment_file" name="comment_file" multiple>
+								<input type="file" id="comment_file" name="comment_file" multiple accept="image/*">
 							</a>
 						</label>
 					</div>
@@ -536,7 +536,8 @@
 				<!-- 	               </div> -->
 
 				<div class="my-4 text-md-right text-center">
-					<input type="button" class="btn btn-elegant" value="등록하기" onclick="fileSubmit();">
+					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
+					
 				</div>
 			</form>
 		</div>
@@ -1159,25 +1160,51 @@
         
         function fileSubmit(){ // 멀티파트 파일 업로더
         	
+        	var comment = $('#comment').val();
+        	var comment_file = $('#comment_file').val();
+        	
         	var formData = new FormData($('#commentForm')[0]);
         	
-	        $.ajax({
-	            url : "/comment/write",
-				type : "post",
-				data : formData,
-				processData : false,
-				contentType : false,
-				
-				success: function(data){
-					
-				},
-				error : function(error) {
-					alert("파일업로드 실패");
-					console.log(error);
-					console.log(error.status);
-				}
-	        });
+        	if (comment == "") {
+        		alert('내용을 입력해주세요.');
+        	} else {
+        		$.ajax({
+       	            url : "/comment/write",
+       				type : "post",
+       				data : formData,
+       				processData : false,
+       				contentType : false,
+       				
+       				success: function(data){
+       					
+       				},
+       				error : function(error) {
+       					alert("파일업로드 실패");
+       					console.log(error);
+       					console.log(error.status);
+       				}
+       	        });
+        	}
+        	
+	        
         }
+        
+        $('#comment').on('keyup', function(){
+        	
+        	var comment = $('#comment').val();
+        	var comment_file = $('#comment_file').val();
+        	
+        	if(comment != ""){
+        		$('#comment_submit').removeAttr('disabled');
+            	$('#comment_submit').removeClass().addClass('btn btn-elegant');
+        	} else {
+        		$('#comment_submit').prop('disabled', true);
+            	$('#comment_submit').removeClass().addClass('btn btn-light');
+        	}
+        	
+        	
+        	
+        })
 		
     </script>
     

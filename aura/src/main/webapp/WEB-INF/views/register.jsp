@@ -368,7 +368,7 @@
 			}
 		}
 		//이메일 중복체크
-		$('#email').change(function(){
+		$('#email').focusout(function(){
 			$.ajax({
 				url : "/user/emailOverlap",
 				data : {
@@ -503,14 +503,14 @@
 
 		//마지막으로 이메일 인증번호, 비밀번호 맞고, 닉네임 중복X,성별 선택햇고,핸드폰 번호입력 값 다 있을때 회원 가입 시켜주기
 		function insert_Check() {
-			console.log('check')
+			console.log('check');
 			if (
-				$("#email_Check_num_true").text() == "인증번호가 일치합니다." && 
+				$('#email_true').css('display','inline') &&
+				$("#email_Check_num_true").css('display','inline') && 
 // 				$("#pwCheck_true").text() == "비밀번호가 일치합니다" &&
 				PwCheck() == true && 
-				$(':input[name=gender]:radio:checked').val() == 1 ||
-				$(':input[name=gender]:radio:checked').val() == 0 &&
-				$('#nickname_true').text() == "닉네임 사용 가능합니다."
+				($(':input[name=gender]:radio:checked').val() == 1 ||$(':input[name=gender]:radio:checked').val() == 0 ) &&
+				$('#nickname_true').css('display','inline')
 			) {
 				$('#join').removeAttr('disabled');
 				return true;

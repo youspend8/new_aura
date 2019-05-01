@@ -195,8 +195,8 @@ public class UserController {
 		System.out.println(userService.emailCode(email));
 		if(userService.getUsers_email(email) == null) {
 			//등록된 이메일을 찾앗는대 없을경우는 1 을 리턴해준다
-			return "1";
-		}else
+			return "0";
+		}
 		return userService.emailCode(email);
 	}
 	
@@ -208,4 +208,15 @@ public class UserController {
 		}else
 			return "false";
 	}
+	
+	@RequestMapping("/emailOverlap_2")
+	@ResponseBody
+	public String overlap_2(String email) {
+		if(userService.getUser_email(email) == null) {
+			return "true";
+		}else
+			return "false";
+	}
+	
+	
 }
