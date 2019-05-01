@@ -11,7 +11,7 @@ import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.service.ReviewService;
 
 @RestController
-@RequestMapping(value="/api/review/")
+@RequestMapping(value="/api/review")
 public class ReviewRestApi {
 	@Autowired
 	private ReviewService service;

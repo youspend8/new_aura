@@ -35,6 +35,10 @@ public class UserVO {
 	private String profile;
 	private String userId; 
 	private int ageRange;
+	private int comments;
+	private int goods;
+	private int bookmarks;
+	private int shares;
 	private String addr;
 	private String addr_code;
 	private String addr_Detail;
