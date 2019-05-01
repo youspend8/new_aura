@@ -128,7 +128,7 @@
 							<!-- 비밀번호 찾기 -->
 							<div id="pw_find" class="tabcontent" value="pw_find">
 								<div class="form-group">
-
+ㅣ
 										<!-- 휴대폰 인증으로 찾기-->
 										<div class="custom-control custom-radio">
 												<input type="radio" class="custom-control-input" id="defaultGroupExample3"
@@ -179,7 +179,7 @@
 												<div class="form-group" id="test4" style="display: none;">
 
 													<div class="md-form flex-column flex-sm-row" style="display: flex;">
-														<input type="text" class="form-control  col-sm-8 col-12" id="identified_email_pw">
+														<input type="text" class="form-control col-sm-8 col-12" id="identified_email_pw">
 														<label for="identified_email_pw">이메일 *</label>
 														<button class="btn btn-primary btn-sm" id="identified_number_idemail_pw" disabled>인증 받기</button>
 													</div>
@@ -214,7 +214,7 @@
 												</div>
 		
 												<div class="flex" style="display: none; color: red; font-size: 15px;"id="email_false">
-													이메일형식이 아닙니다.
+													적어주신 이메일이 존재하지 않습니다.
 												</div>
 												<div id="emailAuthCheck">
 												
@@ -228,54 +228,62 @@
 									다음 단계로
 								</button>
 
-								<div class="modal fade " id="pw_renew" tabindex="-1" role="dialog"
-									aria-labelledby="ModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document">
-										<div class="modal-content">
-											<div class="modal-header primary-color #4285F4">
-												<h5 class="modal-title white-text" id="exampleModalLabel">비밀번호 변경</h5>
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-
-
-											<div class="modal-body">
-												<div class="form-group text-center"
-													style="width :100%; padding: 0 1%; padding-top: 5%; ;">
-													<div class="md-form text-left" style="margin:0px;">
-														<input type="password" class="form-control" id="password_find">
-														<label for="password_find">비밀번호 *</label>
-													</div>
-													<div class="invalid-feedback">
-														비밀번호 입력이 필요합니다.
-													</div>
-
-													<div class="md-form text-left">
-														<input type="password" class="form-control"
-															id="password_find_confirm">
-														<label for="password_find_confirm">비밀번호 확인 *</label>
-													</div>
-													<div class="invalid-feedback">
-														비밀번호 입력이 필요합니다.
-													</div>
-
+								<div class="modal fade " id="pw_renew">
+									<form method="POST" action="/user/pwdChange">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header primary-color #4285F4">
+													<h5 class="modal-title white-text" id="exampleModalLabel">비밀번호 변경1111</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
 												</div>
-
-												<div id="lblErr" style="font-size :11px; margin-left:10px"> 암호를 입력하세요
+	
+	
+												<div class="modal-body">
+													<div class="form-group text-center"
+														style="width :100%; padding: 0 1%; padding-top: 5%; ;">
+														
+														<div style="margin:0px; display:none">
+															<input type="hidden" id="userEmail" name="email">
+															
+															<label for="email">이메일 *</label>
+														</div>
+														
+														<div class="md-form text-left" style="margin:0px;">
+															<input type="password" class="form-control" id="password_find">
+															<label for="password_find">비밀번호 *</label>
+														</div>
+														<div class="invalid-feedback">
+															비밀번호 입력이 필요합니다.
+														</div>
+	
+														<div class="md-form text-left">
+															<input type="password" class="form-control"
+																id="password_find_confirm" name="password">
+															<label for="password_find_confirm">비밀번호 확인 *</label>
+														</div>
+														<div class="invalid-feedback">
+															비밀번호 입력이 필요합니다.
+														</div>
+	
+													</div>
+	
+													<div id="lblErr" style="font-size :11px; margin-left:10px"> 암호를 입력하세요
+													</div>
+	
 												</div>
-
-
-											</div>
-											<div class="modal-footer flex " style="justify-content:center ">
-												<button type="button" class="btn btn-outline-primary waves-effect col-5"
-													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary col-7" id="duplicate">비밀번호
-													변경</button>
+												<div class="modal-footer flex " style="justify-content:center ">
+													<button type="button" class="btn btn-outline-primary waves-effect col-5"
+														data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary col-7" id="pwdChange" disabled>
+														비밀번호변경
+													</button>
+												</div>
 											</div>
 										</div>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -332,8 +340,10 @@
 			$('#password_find_confirm').keyup(function () {
 				if ($('#password_find').val() != $(this).val()) {
 					$('#lblErr').html('암호가 틀립니다.').css('color', 'red');
+					$('#pwdChange').attr('disabled',true);
 				} else {
 					$('#lblErr').text('암호가 맞습니다.').css('color', 'blue');
+					$('#pwdChange').removeAttr('disabled');
 				}
 			})
 		});
@@ -429,42 +439,6 @@
 			})
 		}
 
-// 		function emailCheck(Check_num) {
-// 			alert(Check_num);
-// 			$('#Certified').focusout(function() {
-// 				if (Check_num == $("#Certified").val()) {
-// 					$('#email_check_none').css('display', 'none');
-// 					$('#email_check_false').css('display', 'none');
-// 					$('#email_check_true').css('display', 'inline');
-// 					$('#email_false').css('display', 'none');
-// 					$('#email_true').css("display","none");
-// 					return true;
-// 				} else if($("#Certified") = ""){
-// 					$('#email_check_false').css('display', 'none');
-// 					$('#email_check_true').css('display', 'none');
-// 					$('#email_check_none').css('display', 'inline');
-// 					$('#email_false').css('display', 'none');
-// 					$('#email_true').css("display","none");
-// 					return false;
-// 				}else if(Check_num == "0"){
-// 					$('#email_check_false').css('display', 'none');
-// 					$('#email_check_true').css('display', 'none');
-// 					$('#email_check_none').css('display', 'none');
-// 					$('#email_false').css('display', 'inline');
-// 					$('#email_false').css('display', 'none');
-// 					$('#email_true').css("display","none");
-// 					return false;
-// 				}else{
-// 					$('#email_check_none').css('display', 'none');
-// 					$('#email_check_true').css('display', 'none');
-// 					$('#email_check_false').css('display', 'inline');
-// 					$('#email_false').css('display', 'none');
-// 					$('#email_true').css("display","none");
-// 					return false;
-// 				}
-// 			});
-// 		}
-		
 		//이메일 형식인지
 		$('#identified_email_pw').change(function(){
 			$.ajax({
@@ -486,18 +460,17 @@
 						$("#email_false").css('display', 'none');
 						$("#email_none").css('display','none');
 						$("#email_true").css('display', 'inline');
-						
+						$('#userEmail').attr('value', $('#identified_email_pw').val());
 						$('#identified_number_idemail_pw').removeAttr('disabled');
 					}else if(data == "false"){
 						$('#email_check_none').css('display', 'none');
 						$('#email_check_true').css('display', 'none');
 						$("#email_overlap").css('display','none');
 						$('#email_check_false').css('display', 'none');
-						$("#email_none").css('display','none');
-						$('#email_false').css('display', 'none');
 						$('#email_true').css("display","none");
-						$("#email_overlap").css('display','inline');
-						
+						$("#email_overlap").css('display','none');
+						$("#email_none").css('display','none');
+						$('#email_false').css('display', 'inline');
 					
 						return false;
 					}else{
@@ -526,7 +499,6 @@
 		$('#Certified').focusout(function() {
 			console.log($('#email_check_true').css('display') != "none"   );
 		})
-		
 		
 	</script>
 </body>
