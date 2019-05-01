@@ -179,7 +179,7 @@
 										<div class="d-flex justify-content-between">
 											<div class="md-form my-1">
 												<input type="text" class="form-control" id="addr_code"
-													name="addr_code" placeholder="우편번호">
+													name="addr_code" placeholder="우편번호" readonly="readonly">
 											</div>
 
 											<div class="md-form my-1">
@@ -560,8 +560,9 @@
 		
 		function insert_Check() {
 			console.log(window)
+		// 성별, 주소, 휴대폰번호
 			if (				
- 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() &&('#email_Check_num').val())
+ 				(($("#email").val() && $("#password").val()&& $("#pwCheck").val() && $("#name:").val() && $("#nickname").val() && ("#phone").val() &&("#add_code").val() ) !="")
  				&& (($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) != "") 
  				&& ($("#password").val() == $("#pwCheck").val()) 
  				&& window.nickNameStatus ==true 
