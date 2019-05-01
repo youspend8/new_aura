@@ -26,6 +26,13 @@
 				<input type="text" class="form-control" id="nickname"
 					name="nickname" required> <label for="nickname">Nickname</label>
 			</div>
+			<div class="md-form my-2" style="color:gray; font-size:15px;">
+				※닉네임에 공백은 들어갈수 없습니다.
+			</div>
+			<!--닉네임 중복 상자-->
+			<div id="Double_Check">
+			
+			</div>
 			<!-- 이메일 -->
 			<c:choose>
 				<c:when test="${userInfo.email==null}">
@@ -34,7 +41,7 @@
 							required> <label for="email">Email</label>
 					</div>
 				</c:when>
-
+	
 				<c:otherwise>
 					<input type="hidden" value="${userInfo.email }" name="email">
 				</c:otherwise>
@@ -67,10 +74,8 @@
 			<input type="hidden" value="${userInfo.profile }" name="profile">
 			<input type="hidden" value="${userInfo.userId }" name="userId">
 			<input type="hidden" value="${userInfo.name }" name="name">
-			<button type="submit" class="btn btn-primary my-3 w-50 align-self-center" >Submit</button>
+			<button type="submit" class="btn btn-primary my-3 w-50 align-self-center" id="join" disabled>가입 하기</button>
 		</form>
-
-
 	</div>
 
 	<!-- JQuery -->
@@ -81,5 +86,53 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="/js/mdb.min.js"></script>
+	
+	<script
+		src="https://code.jquery.com/jquery-3.4.0.js"
+		integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+		crossorigin="anonymous">
+	</script>
+	
+	<script>
+		$('#nickname').keyup(function(){
+			$.ajax({
+				url: "/user/nickNameCheck",
+				data : {
+					nickname : $('#nickname').val()
+				},
+				type : "POST",
+				dataType: "text",
+				success : function(data){
+					var reg_hanengnum = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]+$/;
+
+					var Double_Check = $('#Double_Check');
+					if(data == "true" && reg_hanengnum.test( $('#nickname').val())){
+						Double_Check.text('닉네임을 사용하실수 있습니다.');
+						Double_Check.css('color','blue').attr('font-size','15px');
+						$('#join').removeAttr('disabled');
+					}else{
+						Double_Check.text('공백이 존재하거나 이미 사용하고 있는 닉네임이 존재 합니다. ');
+						Double_Check.css('color','red').attr('font-size','15px');
+						$('#join').attr('disabled','true');
+					}
+				}
+			})
+		})
+		
+		function checkSpace(str) { 
+			if(str.search(/\s/) != -1) { 
+				return true; 
+			}else{ 
+				return false; 
+			} 
+		}
+		$('#nickname').keyup(function(){
+			console.log($('#nickname').val() == " ")
+		})
+	console.log($('#nickname').val() == 0)
+		
+		
+	</script>
+	
 </body>
 </html>
