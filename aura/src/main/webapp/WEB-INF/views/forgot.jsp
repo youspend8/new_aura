@@ -121,18 +121,16 @@
 												<div style="margin-bottom: 20px">로그인 하러가기</div>
 											</a>
 										</button>
-
 									</div>
 								</form>
 							</div>
 							<!-- 비밀번호 찾기 -->
 							<div id="pw_find" class="tabcontent" value="pw_find">
 								<div class="form-group">
-ㅣ
+
 										<!-- 휴대폰 인증으로 찾기-->
 										<div class="custom-control custom-radio">
-												<input type="radio" class="custom-control-input" id="defaultGroupExample3"
-													name="groupOfDefaultRadios" onclick="Radio_OnOff2('test3')" checked>
+												<input type="radio" class="custom-control-input" id="defaultGroupExample3" name="groupOfDefaultRadios" onclick="Radio_OnOff2('test3')" checked>
 												<label class="custom-control-label" for="defaultGroupExample3" >회원정보에 등록한
 													휴대전화로 인증</label>
 	

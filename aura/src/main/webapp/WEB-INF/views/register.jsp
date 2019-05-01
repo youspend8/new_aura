@@ -561,7 +561,7 @@
 		function insert_Check() {
 			console.log(window)
 			if (				
- 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() &&('#email_Check_num').val() && $('#phone').val() && $("#addr_code").val()) != "")
+ 				(($("#email").val() && $("#password").val() && $('#name').val() && $('#nickname').val() &&('#email_Check_num').val())
  				&& (($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) != "") 
  				&& ($("#password").val() == $("#pwCheck").val()) 
  				&& window.nickNameStatus ==true 

@@ -222,13 +222,13 @@ public class UserController {
 	}
 	
 	@RequestMapping("/pwdChange")
-	@ResponseBody
 	public String Changepwd(String email, String password) {
 		UserVO userVo = userService.getUserEmail(email);
 		userVo.setPassword(password);
 		System.out.println(userVo);
 		userService.modify(userVo);
-		return "main";
+		
+		return "redirect:/main";
 	}
 	
 }
