@@ -555,19 +555,30 @@
 // 	$(':input').change(function() {
 // 			insert_Check();
 // 				$('#join').removeAttr('disabled');
+
+// 	$(':input').change(function() {
+// // 	 				insert_Check();
+// 	 				})
 		var nickNameStatus = false;	
 		var emailAuthStatus = false;
 		
 		function insert_Check() {
 			console.log(window)
 		// 성별, 주소, 휴대폰번호
-			if (				
- 				(($("#email").val() && $("#password").val()&& $("#pwCheck").val() && $("#name:").val() && $("#nickname").val() && ("#phone").val() &&("#add_code").val() ) !="")
- 				&& (($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) != "") 
- 				&& ($("#password").val() == $("#pwCheck").val()) 
- 				&& window.nickNameStatus ==true 
- 				&& window.emailAuthStatus == true
+			if (
+				//이메일, 비밀번호,  비밀번호 확인 ,	이름, 닉네임, 핸드폰, 주소 코드
+ 				(($("#email").val() && $("#password").val()&& $("#pwCheck").val() && $("#name").val() && $("#nickname").val() && $("#phone").val() && $("#addr_code").val() ) !="")
+ 				// 성별 체크
+				&& (($(':input[name=gender]:radio:checked').val() == 1 || $(':input[name=gender]:radio:checked').val() == 0) != "") 
+ 				// 비번 같은지 여부 확인
+				&& ($("#password").val() == $("#pwCheck").val()) 
+ 				// 닉네임 중복확인
+				&& window.nickNameStatus ==true 
+ 				// 이메일 중복확인
+				&& window.emailAuthStatus == true
  			) {
+				alert("조건충족!!");
+//  				$('#join').removeAttr('disabled');
 
 				return true;
 			}else{
