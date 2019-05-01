@@ -94,8 +94,6 @@
 									</div>
 
 									<div class="view overlay col-3 p-0" onclick="location.href='https://accounts.google.com/o/oauth2/auth?client_id=965189490710-v4c0vpevad5c2m825dlombqvcv8l8evm.apps.googleusercontent.com&redirect_uri=http://localhost:8000/user/oauth/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile'">
-<!-- 									https://www.googleapis.com/auth/login -->
-<!-- 									https://www.googleapis.com/auth/userinfo.email -->
 										<a href="#">
 											<img src="/img/all_review_img/google.png"width="60px">
 										</a>								
