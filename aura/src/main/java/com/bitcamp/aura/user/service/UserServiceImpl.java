@@ -173,8 +173,8 @@ public class UserServiceImpl implements UserService {
 
 		    msg.setFrom(new InternetAddress(from));
 		    msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-		    msg.setSubject("제목 : ALL REVIEW EMAIL CHECK");
-		    msg.setText("안녕하세요  ALL Review 입니다. \n 인증번호 => \t"+random_Num +"입니다.");
+		    msg.setSubject("[ ALL REVIEW EMAIL 인증번호 ]");
+		    msg.setText("안녕하세요! ALL Review 입니다. \n 인증번호 =>  [  "+ random_Num +"  ] 입니다.");
 		    Transport.send(msg);
 
 		} catch (MessagingException e) {
