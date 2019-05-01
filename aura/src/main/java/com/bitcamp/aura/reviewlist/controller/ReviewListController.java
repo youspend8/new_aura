@@ -24,8 +24,6 @@ public class ReviewListController {
 	public String reviewPost(
 			@ModelAttribute ReviewListVO params) {
 		System.out.println("@@@@@@@@@@"+params);
-		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		params.setDate(sim.format(new Date()));
 		service.doReview(params);
 		return "1";
 	}

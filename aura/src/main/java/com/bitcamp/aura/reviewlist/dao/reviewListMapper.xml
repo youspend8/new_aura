@@ -18,6 +18,11 @@
 	<select id="selectByNum" parameterType="int" resultType="ReviewListVO">
 	
 	</select>
+	
+	<select id="selectByParams" parameterType="ReviewListSelectParamsVO" resultType="ReviewListVO">
+		select * from REIVIEW_LIST where REVIEW_POST_NUM=#{postNum} and type=#{reviewType}
+	</select>
+	
 	<select id="selectAllByParams" parameterType="ReviewListSelectParamsVO" resultType="ReviewListVO">
 	
 	</select>

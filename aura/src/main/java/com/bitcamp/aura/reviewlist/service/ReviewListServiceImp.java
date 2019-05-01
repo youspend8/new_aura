@@ -1,5 +1,7 @@
 package com.bitcamp.aura.reviewlist.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,11 @@ public class ReviewListServiceImp implements ReviewListService{
 	private ReviewListMapper reviewMapper;
 
 	@Override//insert하는놈(share, like, star)
-	public int doReview(ReviewListVO reviewListVo) {
-		System.out.println(reviewListVo);
-		reviewMapper.insert(reviewListVo);
+	public int doReview(ReviewListVO params) {
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		params.setDate(sim.format(new Date()));
+		
+		reviewMapper.insert(params);
 		return 0;
 	}
 

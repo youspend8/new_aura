@@ -15,6 +15,7 @@ public interface ReviewListMapper {
 	public int deleteByNum (int num);
 	public int deleteAllByParams (ReviewListSelectParamsVO params);
 	public ReviewListVO selectByNum(int num);
+	public ReviewListVO selectByParams(ReviewListSelectParamsVO params);
 	public List<ReviewListVO> selectAllByParams(ReviewListSelectParamsVO params);
 	public List<ReviewListVO> selectAll();
 }
