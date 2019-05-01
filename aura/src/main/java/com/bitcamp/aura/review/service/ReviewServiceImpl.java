@@ -1,5 +1,6 @@
 package com.bitcamp.aura.review.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bitcamp.aura.review.common.RestaurantCategory;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
 import com.bitcamp.aura.review.model.RestaurantSelectParamVO;
@@ -46,11 +48,12 @@ public class ReviewServiceImpl implements ReviewService {
 	public HashMap<String, Object> searchByNum(HashMap<String, Object> params) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> reviewInfo = mapper.selectByNum(params);
+		reviewInfo.put("CATEGORY", RestaurantCategory.values()[((BigDecimal)reviewInfo.get("CATEGORY")).intValue()]);
 		List<String> files = new ArrayList<>();
 		for (ReviewFileVO r : fileMapper.selectByPostNum((Integer)params.get("num"))) {
 			files.add(r.getFilePath());
 		}
-		reviewInfo.put("files", files);
+		reviewInfo.put("FILES", files);
 		return reviewInfo;
 	}
 

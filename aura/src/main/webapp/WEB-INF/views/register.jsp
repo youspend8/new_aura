@@ -601,6 +601,20 @@
 				return false;
 			}
 		}
+		
+		
+		
+//			if (				
+//		($("#email_true").css('display') == "inline") == true
+//		&& ($('#email_Check_num_true').css('display') == 'inline') == true
+//		&& ($('#pwCheck_true').css('display') == "inline") == true
+//		&& ($('#nickname_true').css('display') == "inline") == true
+//		&& ($('#defaultInline1').prop('checked') == true || $('#defaultInline2').prop("checked") == true)
+//	) {
+//		$('#join').removeAttr('disabled');
+//	}else{
+//		$('#join').attr('disabled','true');
+//	}
 	
 	</script>
 	<!-- end-->

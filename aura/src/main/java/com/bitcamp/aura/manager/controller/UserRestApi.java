@@ -3,6 +3,7 @@ package com.bitcamp.aura.manager.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,11 @@ public class UserRestApi {
 		return new Gson().toJson(service.getUser(nickname));
 	}
 	
+	@DeleteMapping(value="/{nickname}")
+	public boolean deleteUser(@PathVariable("nickname") String nickname) {
+		service.withdraw(nickname);
+		return true;
+	}
 	@GetMapping(value="/list")
 	public String list() {
 		List<UserVO> list = service.getAllUser();
