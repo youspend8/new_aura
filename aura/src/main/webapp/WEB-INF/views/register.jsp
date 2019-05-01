@@ -129,9 +129,10 @@
 										<div class="md-form" style="display: flex;">
 											<input type="text" class="form-control" id="nickname"
 												name="nickname" style="width: 69%;"> <label
-												for="nickname">닉네임 *</label> <input type="button"
-												class="btn btn-primary btn-sm" value="중복체크"
-												id="nicknameDupCheck" name="nickname_Check">
+												for="nickname">닉네임 *</label> 
+<!-- 												<input type="button" -->
+<!-- 												class="btn btn-primary btn-sm" value="중복체크" -->
+<!-- 												id="nicknameDupCheck" name="nickname_Check"> -->
 										</div>
 <!-- 닉네임 안내메세지 -->
 										<div style="display: none; color: red; font-size: 15px;"
@@ -392,7 +393,6 @@
 			if ($("#password").val() == "" && $("#pwCheck").val() == "") {
 				$("#pwCheck_false").css('display', 'none');
 				$("#pwCheck_true").css('display', 'none');
-// 				$("#pwCheck_check").css('display', 'inline');
 				return false;
 			} else if ($("#password").val() == $("#pwCheck").val()) {
 				$("#pwCheck_false").css('display', 'none');
@@ -463,7 +463,7 @@
 		})
 		
 		//닉네임 중복체크
-		$("#nicknameDupCheck").on("click", function() {
+		$("#nickname").focusout(function() {
 			$.ajax({
 				url : "/user/nickNameCheck", // 클라이언트가 요청을 보낼 서버의 URL 주소
 				data : {
@@ -552,35 +552,28 @@
 // 			} else{
 // 				return false;
 // 			}
+// 		if(insert_Check() == true){
+// 			console.log(insert_Check());
+// 			$('#join').removeAttr('disabled');
+// 		}else{
+// 			$('#join').attr('disabled','true');
+// 		}
+// 		$('#email').val() && $()
+// 		var nickNameStatus = false;	
+// 		var emailAuthStatus = false;
 
-	$(':input').change(function() {
-		
-		if(insert_Check() == true){
-			console.log(insert_Check());
-			$('#join').removeAttr('disabled');
-		}else
-			$('#join').attr('disabled',true);
-	})
-		var nickNameStatus = false;	
-		var emailAuthStatus = false;
-		
-		function insert_Check() {
-			console.log(window)
+
 			if (				
- 				$("#email").val() != "" 
- 				&& $("#email_true").css('display') == "inline"
- 				&& $('#email_Check_num_true').css('display') == 'inline' 
- 				&& $('#pwCheck_true').css('display') == "inline"
-				&& $('#nickname_true').css('display') == "inline"
-				&& $('.custom-control-input').checked == true
+ 				($("#email_true").css('display') == "inline") == true
+ 				&& ($('#email_Check_num_true').css('display') == 'inline') == true
+ 				&& ($('#pwCheck_true').css('display') == "inline") == true
+				&& ($('#nickname_true').css('display') == "inline") == true
+				&& ($('#defaultInline1').prop('checked') == true || $('#defaultInline2').prop("checked") == true)
  			) {
-				return true;
+				$('#join').removeAttr('disabled');
 			}else{
-				return false;
+				$('#join').attr('disabled','true');
 			}
-		}
-		
-		console.log($('.custom-control-input').checked == false);
 	
 	</script>
 	<!-- end-->
