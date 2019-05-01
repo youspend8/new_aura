@@ -82,7 +82,25 @@
 	</delete>
 	<select id="selectOne" parameterType="String" resultType="UserVO">
 		SELECT 
-			*
+			NICKNAME AS nickname,
+			EMAIL AS email,
+			PASSWORD AS password,
+			TEL AS tel,
+			NAME AS name,
+			SSN AS ssn,
+			GENDER AS gender,
+			ADDRESS AS address,
+			REG_DATE AS regDate,
+			REG_LOCATION AS regLocation,
+			DEL_DATE AS delDate,
+			ISADMIN AS isAdmin,
+			ACCESS_TOKEN AS accessToken,
+			REFRESH_TOKEN AS refreshToken,
+			PW_MISS_COUNT AS pwMissCount,
+			AUTHOR_TYPE AS authorType,
+			PROFILE AS profile,
+			USERID AS userId,
+			AGE_RANGE AS ageRange
 		FROM
 			USER_ACCOUNT
 		WHERE
@@ -90,7 +108,25 @@
 	</select>
 	<select id="selectOneUserid" parameterType="String" resultType="UserVO">
 		SELECT 
-			*
+			NICKNAME AS nickname,
+			EMAIL AS email,
+			PASSWORD AS password,
+			TEL AS tel,
+			NAME AS name,
+			SSN AS ssn,
+			GENDER AS gender,
+			ADDRESS AS address,
+			REG_DATE AS regDate,
+			REG_LOCATION AS regLocation,
+			DEL_DATE AS delDate,
+			ISADMIN AS isAdmin,
+			ACCESS_TOKEN AS accessToken,
+			REFRESH_TOKEN AS refreshToken,
+			PW_MISS_COUNT AS pwMissCount,
+			AUTHOR_TYPE AS authorType,
+			PROFILE AS profile,
+			USERID AS userId,
+			AGE_RANGE AS ageRange
 		FROM
 			USER_ACCOUNT
 		WHERE
@@ -98,7 +134,25 @@
 	</select>
 	<select id="selectOneEmail" parameterType="String" resultType="UserVO">
 		SELECT
-			*
+			NICKNAME AS nickname,
+			EMAIL AS email,
+			PASSWORD AS password,
+			TEL AS tel,
+			NAME AS name,
+			SSN AS ssn,
+			GENDER AS gender,
+			ADDRESS AS address,
+			REG_DATE AS regDate,
+			REG_LOCATION AS regLocation,
+			DEL_DATE AS delDate,
+			ISADMIN AS isAdmin,
+			ACCESS_TOKEN AS accessToken,
+			REFRESH_TOKEN AS refreshToken,
+			PW_MISS_COUNT AS pwMissCount,
+			AUTHOR_TYPE AS authorType,
+			PROFILE AS profile,
+			USERID AS userId,
+			AGE_RANGE AS ageRange
 		FROM
 			USER_ACCOUNT
 		WHERE
@@ -106,7 +160,25 @@
 	</select>
 	<select id="selectMany" parameterType="String" resultType="UserVO">
 		SELECT
-			* 
+			NICKNAME AS nickname,
+			EMAIL AS email,
+			PASSWORD AS password,
+			TEL AS tel,
+			NAME AS name,
+			SSN AS ssn,
+			GENDER AS gender,
+			ADDRESS AS address,
+			REG_DATE AS regDate,
+			REG_LOCATION AS regLocation,
+			DEL_DATE AS delDate,
+			ISADMIN AS isAdmin,
+			ACCESS_TOKEN AS accessToken,
+			REFRESH_TOKEN AS refreshToken,
+			PW_MISS_COUNT AS pwMissCount,
+			AUTHOR_TYPE AS authorType,
+			PROFILE AS profile,
+			USERID AS userId,
+			AGE_RANGE AS ageRange
 		FROM 
 			USER_ACCOUNT
 		WHERE
@@ -115,7 +187,25 @@
 	
 	<select id="selectAll" resultType="UserVO">
 		SELECT
-			*
+			NICKNAME AS nickname,
+			EMAIL AS email,
+			PASSWORD AS password,
+			TEL AS tel,
+			NAME AS name,
+			SSN AS ssn,
+			GENDER AS gender,
+			ADDRESS AS address,
+			REG_DATE AS regDate,
+			REG_LOCATION AS regLocation,
+			DEL_DATE AS delDate,
+			ISADMIN AS isAdmin,
+			ACCESS_TOKEN AS accessToken,
+			REFRESH_TOKEN AS refreshToken,
+			PW_MISS_COUNT AS pwMissCount,
+			AUTHOR_TYPE AS authorType,
+			PROFILE AS profile,
+			USERID AS userId,
+			AGE_RANGE AS ageRange
 		FROM
 			USER_ACCOUNT
 	</select>

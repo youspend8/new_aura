@@ -219,13 +219,13 @@
             </ol>
             <div class="carousel-inner evnetPan">
               <div class="carousel-item active">
-                <a href=".."><img src="img/event/이벤트1.jpg" class="d-block w-100" alt="..."></a>
+                <a href=".."><img src="/img/event/이벤트1.jpg" class="d-block w-100" alt="..."></a>
               </div>
               <div class="carousel-item evnetPan">
-                <img src="img/event/이벤트2.jpg" class="d-block w-100" alt="...">
+                <img src="/img/event/이벤트2.jpg" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item evnetPan">
-                <img src="img/event/이벤트3.jpg" class="d-block w-100" alt="...">
+                <img src="/img/event/이벤트3.jpg" class="d-block w-100" alt="...">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
