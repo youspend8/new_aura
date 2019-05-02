@@ -512,12 +512,14 @@
 
 		<div class="col-md-9 col-12 p-0 flex-column my-3">
 			<form id="commentForm" method="post" enctype="multipart/form-data">
-				<!--             		텍스트 영역			 -->
-				<!--             		텍스트 영역			 -->
+				<input id="review_post_num" name="review_post_num" type="text" value=${reviewInfo.NUM} style="display: none;">
+				<input id="nickname_post" name="nickname_post" type="text" value=${nickname} style="display: none;">
+				
 				<textarea rows="10" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
 
 				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
 				
+			</form>
 					<div class="mr-2" style="width: 20%;">
 						<label for="comment_file" class="filebox">
 							<a>
@@ -532,18 +534,12 @@
 					
 				</div>
 
-				<!-- 	               <div class="form-group d-md-none d-block"> -->
-				<!-- 	                   <input type="file" class="form-control-file my-1"> -->
-				<!-- 	               </div> -->
 				
-				<input id="review_post_num" name="review_post_num" type="text" value=${reviewInfo.NUM} style="display: none;">
-				<input id="nickname_post" name="nickname_post" type="text" value=${nickname} style="display: none;">
 				
 				<div class="my-4 text-md-right text-center">
 					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
 					
 				</div>
-			</form>
 			
 			
 		</div>
@@ -1167,9 +1163,13 @@
         function fileSubmit(){ // 멀티파트 파일 업로더
         	
         	var comment = $('#comment').val();
-        	var comment_file = $('#comment_file').val();
-        	
         	var formData = new FormData($('#commentForm')[0]);
+        	
+        	for (var index = 0; index < Object.keys(files).length; index++){
+        		//formData 공간에 files라는 이름으로 파일을 추가한다.
+                //동일명으로 계속 추가할 수 있다.'
+                formData.append('files',files[index]);
+        	}
         	
         	if (comment == "") {
         		alert('내용을 입력해주세요.');
@@ -1256,51 +1256,49 @@
 			$('#star4').removeClass().addClass('far fa-star');
 		})
 		
-		window.onload = function() {
-			var files = {};
-	        var previewIndex = 0;
-			
-			function addPreview(input) {
-				
-				if (input[0].files) {
-	                //파일 선택이 여러개였을 시의 대응
-	                for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
-	                    var file = input[0].files[fileIndex];
-	                    var reader = new FileReader();
-	                    
-	                    reader.onload = function(img) {
-	                        var imgNum = previewIndex++;
-	                        $("#comment_image")
-	                                .append(
-	                                        "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + imgNum +"\">"
-	                                                + "<img class=\"thumbnail w-100\" src=\"" + img.target.result + "\"\/>"
-	                                                + "<a value=\"" + imgNum + "\" onclick=\"deletePreview(this);\">"
-	                                                + "삭제" + "</a>" + "</div>");
-	                        files[imgNum] = file;
-	                    };
-	                    reader.readAsDataURL(file);
-	                }
-	            } else
-	                alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
-			}
-			
-			$('#comment_file').change(function() {
-				addPreview($(this)); //preview form 추가하기
-			});
-			
-	        function deletePreview(obj) {	// 미리보기 사진 삭제
-	            var imgNum = obj.attributes['value'].value;
-	        	alert(imgNum);
-	        	delete files[imgNum];
-	            $("#comment_image .preview-box[value=" + imgNum + "]").remove();
-	            resizeHeight();
-	        }
-        
-        
-		}
     </script>
     
-    
+<script>
+	var files = {};
+	var previewIndex = 0;
+	
+	function addPreview(input) {
+		
+		if (input[0].files) {
+	        //파일 선택이 여러개였을 시의 대응
+	        for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+	            var file = input[0].files[fileIndex];
+	            var reader = new FileReader();
+	            
+	            reader.onload = function(img) {
+	                var imgNum = previewIndex++;
+	                $("#comment_image")
+	                        .append(
+	                                "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + imgNum +"\">"
+	                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
+	                                        + "<a value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">"
+	                                        + "삭제" + "</a>" + "</div>");
+	                files[imgNum] = file;
+	            };
+	            reader.readAsDataURL(file);
+	        }
+	    } else
+	        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+	}
+	
+	$('#comment_file').change(function() {
+		addPreview($(this)); //preview form 추가하기
+	});
+	
+	function deletePreview(obj) {	// 미리보기 사진 삭제
+	var imgNum = obj.attributes['value'].value;
+	delete files[imgNum];
+	$("#comment_image .preview-box[value=" + imgNum + "]").remove();
+	resizeHeight();
+	}
+	
+	
+</script>
     
 <style>
 
@@ -1315,7 +1313,6 @@
 	border: 0;
 }
 </style>
-
 
 </body>
 </html>
