@@ -52,7 +52,9 @@
           
           	<c:choose> 
 	          	<c:when test="${nickname ne null}" >	          	 
-	          	  ${nickname}님     	
+	          	  ${nickname}님 &nbsp;
+	          	 
+	          	 <a href="/user/modifyInfo" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">회원수정</a>
 	          	</c:when>
 	          	<c:otherwise>
 	          	   <a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>          	
