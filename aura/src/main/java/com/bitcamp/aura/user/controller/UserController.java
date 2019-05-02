@@ -253,20 +253,44 @@ public class UserController {
 	}
 	
 	@RequestMapping("/modifyInfo")
-	public String InfoModify(@ModelAttribute UserVO uservo, HttpSession session,Model model) {
-		session.setAttribute("email", uservo.getEmail());
-		session.setAttribute("nickname", uservo.getNickname());
-		
-		userService.getUser((String)session.getAttribute("nickname"));
-		model.addAttribute("uservo", uservo);
-		 
+	public String InfoModify() {
+
 		return "modifyInfo";
 	}
 	
 	@RequestMapping("/modifySuccess")
-	public String ModifySuccess(Model model) {
-		return null;
+	public String ModifySuccess(
+					@ModelAttribute UserVO uservo,
+					HttpSession session,
+					String addr,
+					String addr_code,
+					String addr_Detail,
+					String address) {
+		
+		String nickname = (String)session.getAttribute("nickname");
+		System.out.println("1");
+		System.out.println("nickname : " + nickname);
+		System.out.println("2");
+		UserVO uservo1 = userService.getUser(nickname);
+		System.out.println("3");
+		System.out.println("user1 : "+ uservo1);
+		System.out.println("4");
+		uservo1.setPassword(uservo.getPassword());
+		uservo1.setName(uservo.getName());
+		uservo1.setTel(uservo.getTel());
+		
+		StringBuilder sb = new StringBuilder();
+		StringBuilder Addr_code = sb.append(uservo.getAddr_code()+"\t");
+		StringBuilder Addr = sb.append(uservo.getAddr()+"\t");
+		StringBuilder Addr_Detail = sb.append(uservo.getAddr_Detail()+"\t");
+		
+		uservo1.setAddress(sb.toString());
+
+		System.out.println("5");
+		userService.modify(uservo1);
+		System.out.println("6");
+		
+		return "redirect:/main";
+		
 	}
-	
-	
 }
