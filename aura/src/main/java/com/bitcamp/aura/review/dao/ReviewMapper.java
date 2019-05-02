@@ -12,7 +12,10 @@ import com.bitcamp.aura.review.model.ReviewVO;
 @Mapper
 public interface ReviewMapper {
 	public int insert(ReviewVO reviewVo);
-	public int update(ReviewVO reviewVo);
+	public int updateReview(ReviewVO reviewVo);
+	public int updateRestaurantReview(ReviewVO reviewVo);
+	public int updateHospitalReview(ReviewVO reviewVo);
+	public int updateDigitalReview(ReviewVO reviewVo);
 	public int delete(int num);
 	public List<RestaurantVO> selectRestaurantsByParams(RestaurantSelectParamVO params);
 	public List<ReviewVO> selectHospitalsByParams(RestaurantSelectParamVO params);

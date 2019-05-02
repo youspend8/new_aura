@@ -1,6 +1,5 @@
 package com.bitcamp.aura.user.model;
 
-
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;

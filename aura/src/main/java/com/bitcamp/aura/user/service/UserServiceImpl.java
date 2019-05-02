@@ -2,6 +2,9 @@ package com.bitcamp.aura.user.service;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -12,6 +15,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.print.attribute.HashAttributeSet;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.bitcamp.aura.manager.model.UserDelVO;
+import com.bitcamp.aura.manager.persist.UserDelRepository;
 import com.bitcamp.aura.user.dao.UserMapper;
 import com.bitcamp.aura.user.model.UserVO;
 
@@ -31,7 +37,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
-
+	@Autowired
+	private UserDelRepository userDelRepo;
+	
 	@Override
 	public boolean apiLoginCheck(String userid) {
 
@@ -103,6 +111,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void tempWithdraw(String nickname) {
+		// TODO Auto-generated method stub
+		UserVO user = userMapper.selectOne(nickname);
+		user.setDelDate(new SimpleDateFormat("yy/MM/dd").format(new Date()));
+		userDelRepo.save(new UserDelVO(nickname, new Date()));
+		userMapper.update(user);
+	}
+
+	@Override
+	public void withdrawRollback(String nickname) {
+		// TODO Auto-generated method stub
+		UserVO user = userMapper.selectOne(nickname);
+		user.setDelDate(null);
+		userMapper.update(user);
+		userDelRepo.deleteById(nickname);
+	}
+	
+	@Override
 	public UserVO getUser(String nickname) {
 		// TODO Auto-generated method stub
 		return userMapper.selectOne(nickname);
@@ -111,8 +137,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserVO> getUsers(String nickname) {
 		// TODO Auto-generated method stub
-		return userMapper.selectMany(nickname);
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("nickname", nickname);
+		return userMapper.selectByParams(params);
 	}
+	
 	@Override
 	public UserVO getUserEmail(String email) {
 		// TODO Auto-generated method stub
@@ -122,7 +151,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserVO> getUsersEmail(String email) {
 		// TODO Auto-generated method stub
-		return userMapper.selectMany(email);
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("email", email);
+		return userMapper.selectByParams(params);
 	}
 
 	@Override
@@ -182,4 +213,13 @@ public class UserServiceImpl implements UserService {
 		}
 		return random_Num;
 	}
+
+	@Override
+	public List<UserVO> getWithdrawUser() {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("isDel", true);
+		return userMapper.selectByParams(params);
+	}
+
 }
