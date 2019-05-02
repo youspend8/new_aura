@@ -453,13 +453,36 @@
 		</div>
 		<div class="col-12 d-flex justify-content-center my-4">
 			<a id="share" onclick="doReview(1)">
-				<i class="fas fa-share-alt"></i>
+			<c:choose>
+				<c:when test="${reviewInfo.isShare }">
+				<i class="fas fa-share-alt" value="${nickname}" style="color: blue"></i>
+				</c:when>
+				<c:otherwise>
+				<i class="fas fa-share-alt" value="${nickname}"></i>
+				</c:otherwise>
+			</c:choose>
 			</a>
 			<a id="share" onclick="doReview(2)">
-			<i class="far fa-star mx-4" ></i>
+				<c:choose>
+					<c:when test="${reviewInfo.isStar }">
+					    <i class="far fa-star mx-4" value="${nickname}" style="color: blue"></i>
+					</c:when>
+					<c:otherwise>
+						<i class="far fa-star mx-4" value="${nickname}"></i>
+					</c:otherwise>
+				</c:choose>
+		
 			</a>
 			<a id="share" onclick="doReview(3)">
-			<i class="far fa-thumbs-up"></i>
+			<c:choose>
+					<c:when test="${reviewInfo.isLike }">
+					    <i class="far fa-thumbs-up" value="${nickname}" style="color: blue"></i>
+					</c:when>
+					<c:otherwise>
+							<i class="far fa-thumbs-up" value="${nickname}"></i>
+					</c:otherwise>
+				</c:choose>
+		
 				</a>
 		</div>
 		<c:choose>
@@ -1038,23 +1061,57 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
 <script>
-    	function doReview(type) {
-	    	$.ajax({
-	    		url: '/reviewList/reviewPost', // 요청 할 주소 
-	    	    type: 'POST', // GET, PUT
-	    	    dataType: 'text', 
-	    	    data: {
-	    	    	postNum : ${reviewInfo.NUM},
-	    	    	nickname: '채훈22',
-	    	    	reviewType: type
-	    	    },
-	    	    success: function(data) {    
-    	        },
-    	       error : function (data) {
-    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
-	    	        return false;
-    	       }  // 전송할 데이터
-	    	})
+var flag1=true;
+var flag2=true;
+
+		$("#share i").click(function(e){
+			if(flag1){
+				flag1=false;
+				
+				if(e.target.getAttribute('value') == ''){
+					alert('해당기능은 회원만 이용가능합니다.')
+				}else{
+					if($(this).css("color")=='rgb(0, 0, 255)'){
+						$(this).css("color","black")
+					}else{
+						$(this).css("color","blue")
+					}
+				}
+				setTimeout(() => {
+					flag1=true;
+				}, 500);
+			}
+			
+		
+		})
+
+    	function doReview(type, nickname) {
+			if(flag2){
+				
+				flag2=false;
+				$.ajax({
+		    		url: '/reviewList/reviewPost', // 요청 할 주소 
+		    	    type: 'POST', // GET, PUT
+		    	    dataType: 'text', 
+		    	    data: {
+		    	    	postNum : ${reviewInfo.NUM},
+		    	    	nickname: '채훈22',
+		    	    	reviewType: type,
+		    	    	type: '${reviewInfo.TYPE}'
+		    	    },
+		    	    success: function(data) {
+		    	    	
+	    	        },
+	    	       error : function (data) {
+	    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+		    	        return false;
+	    	       }  // 전송할 데이터
+		    	})//ajax
+		    	setTimeout(() => {
+					flag2=true;
+				}, 500);
+			}
+	    
     	}
     
         $(document).ready(function() {

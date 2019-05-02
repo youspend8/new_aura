@@ -100,6 +100,10 @@
 		]]>
 	</select>
 	
+	<select id="selectOneForUpdateByNum" parameterType="int" resultType="ReviewVO">
+		select * from REVIEW where NUM=#{num}
+	</select>
+	
 	<select id="selectByNum" resultType="HashMap" parameterType="HashMap">
 		SELECT
 		    REVIEW.NUM AS num,
