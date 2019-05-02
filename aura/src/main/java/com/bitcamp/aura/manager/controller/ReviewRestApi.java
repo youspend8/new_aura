@@ -1,14 +1,17 @@
 package com.bitcamp.aura.manager.controller;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.service.ReviewService;
+import com.google.gson.Gson;
 
 @RestController
 @RequestMapping(value="/api/review")
@@ -40,5 +43,32 @@ public class ReviewRestApi {
 		
 		return sb.toString();
 //		return new Gson().toJson(review);
+	}
+	
+	@RequestMapping(value="/{num}/{type}")
+	public String getPost(
+			@PathVariable("num") int num,
+			@PathVariable("type") int type) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("num", num);
+		
+		HashMap<String, Object> review = service.searchByNum(params);
+		StringBuilder sb = new StringBuilder();
+		Gson gson = new Gson();
+		sb.append(gson.toJson(review));
+		
+//		sb.append("{\"num\": \"" + review.get("NUM") + "\",");
+//		sb.append("\"category\": \"" + review.get("CATEGORY") + "\",");
+//		sb.append("\"title\": \"" + review.get("TITLE") + "\",");
+//		sb.append("\"contents\": `" + (String)review.get("CONTENTS") + "`,");
+//		sb.append("\"addDate\": \"" + review.get("ADDDATE") + "\",");
+//		sb.append("\"goods\": \"" + review.get("GOODS") + "\",");
+//		sb.append("\"bookmark\": \"" + review.get("BOOKMARK") + "\",");
+//		sb.append("\"comments\": \"" + 0 + "\",");
+//		sb.append("\"readCount\": \"" + review.get("READCOUNT") + "\"}");
+		System.out.println(sb.toString());
+		
+		return sb.toString();
 	}
 }
