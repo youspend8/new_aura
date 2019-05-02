@@ -25,10 +25,11 @@
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper" style="width: 400px;">
-					<div class="brand">
 						<!-- 로고 -->
+					<div class="brand">
 						<a href="/main"> <img src="/img/all_review_img/All Review 로고.png" alt="bootstrap 4 login page" style="width: 150px;"></a>
 					</div>
+					
 					<div class="card fat">
 						<div class="card-body">
 							<!-- 회원가입 시작 -->
@@ -157,16 +158,13 @@
 										<div>성별*</div>
 										<div class="custom-control custom-radio custom-control-inline"
 											style="margin-left: 50px">
-											<input type="radio" class="custom-control-input"
-												id="defaultInline1" name="gender" value="1"> <label
-												class="custom-control-label" for="defaultInline1">남자</label>
+											<input type="radio" class="custom-control-input" id="defaultInline1" name="gender" value="1"> 
+											<label class="custom-control-label" for="defaultInline1">남자</label>
 										</div>
 
-										<div class="custom-control custom-radio custom-control-inline"
-											style="margin-left: 10px">
-											<input type="radio" class="custom-control-input"
-												id="defaultInline2" name="gender" value="0"> <label
-												class="custom-control-label" for="defaultInline2">여자</label>
+										<div class="custom-control custom-radio custom-control-inline" style="margin-left: 10px">
+											<input type="radio" class="custom-control-input" id="defaultInline2" name="gender" value="0"> 
+										<label class="custom-control-label" for="defaultInline2">여자</label>
 										</div>
 									</div>
 <!-- 6.휴대폰 번호 -->
