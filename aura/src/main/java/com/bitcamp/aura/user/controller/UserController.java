@@ -290,4 +290,10 @@ public class UserController {
 		return "redirect:/main";
 		
 	}
+	
+	@RequestMapping("/Mypage")
+	public String Mypage() {
+
+		return "MyPage";
+	}
 }
