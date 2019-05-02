@@ -17,14 +17,15 @@ public interface UserService {
 			String addr_Detail,
 			String address);
 	public void modify (UserVO userVo);
+	public void tempWithdraw (String nickname);
 	public void withdraw (String nickname);
+	public void withdrawRollback (String nickname);
 	public UserVO getUser (String nickname);
 	public List<UserVO> getUsers (String nickname);
 	public List<UserVO> getAllUser();
 	public String emailCode(String code);
 	public UserVO getUserEmail(String email);
 	public List<UserVO> getUsersEmail(String email);
-//	boolean logout(HttpSession session);
-//	public void logout(HttpSession session);
+	public List<UserVO> getWithdrawUser();
 	public void apiSession(HttpSession session, String userid);
 }

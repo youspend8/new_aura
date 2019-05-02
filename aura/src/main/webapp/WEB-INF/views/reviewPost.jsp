@@ -517,6 +517,7 @@
 				<textarea rows="10" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
 
 				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
+				
 					<div class="mr-2" style="width: 20%;">
 						<label for="comment_file" class="filebox">
 							<a>
@@ -543,19 +544,8 @@
 					
 				</div>
 			</form>
-			<script>
-				window.onload = function() {
-					document.getElementById('comment_file').onchange = function(e) {
-// 						console.log(e.target.files[0])
-
-						var reader = new FileReader();
-						reader.onload = function(f) {
-							document.getElementById('img22').setAttribute('src', f.target.result);
-						}
-						reader.readAsDataURL(e.target.files[0]);
-					}
-				}
-			</script>
+			
+			
 		</div>
 	</div>
 
@@ -1222,8 +1212,6 @@
         });
         
         
-//         뒤에 숫자 떼오기
-		
 		for (var i = 1; i <= 5; i++){
 			$('#star' + i).hover(function(){ // 별 마우스호버 이벤트
 	        	$(this).removeClass().addClass('fas fa-star');
@@ -1266,11 +1254,50 @@
 			$('#star2').removeClass().addClass('far fa-star');
 			$('#star3').removeClass().addClass('far fa-star');
 			$('#star4').removeClass().addClass('far fa-star');
-		});
+		})
 		
+		window.onload = function() {
+			var files = {};
+	        var previewIndex = 0;
+			
+			function addPreview(input) {
+				
+				if (input[0].files) {
+	                //파일 선택이 여러개였을 시의 대응
+	                for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+	                    var file = input[0].files[fileIndex];
+	                    var reader = new FileReader();
+	                    
+	                    reader.onload = function(img) {
+	                        var imgNum = previewIndex++;
+	                        $("#comment_image")
+	                                .append(
+	                                        "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + imgNum +"\">"
+	                                                + "<img class=\"thumbnail w-100\" src=\"" + img.target.result + "\"\/>"
+	                                                + "<a value=\"" + imgNum + "\" onclick=\"deletePreview(this);\">"
+	                                                + "삭제" + "</a>" + "</div>");
+	                        files[imgNum] = file;
+	                    };
+	                    reader.readAsDataURL(file);
+	                }
+	            } else
+	                alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+			}
+			
+			$('#comment_file').change(function() {
+				addPreview($(this)); //preview form 추가하기
+			});
+			
+	        function deletePreview(obj) {	// 미리보기 사진 삭제
+	            var imgNum = obj.attributes['value'].value;
+	        	alert(imgNum);
+	        	delete files[imgNum];
+	            $("#comment_image .preview-box[value=" + imgNum + "]").remove();
+	            resizeHeight();
+	        }
         
         
-        
+		}
     </script>
     
     
@@ -1288,7 +1315,6 @@
 	border: 0;
 }
 </style>
-
 
 
 </body>

@@ -158,7 +158,7 @@
 		WHERE
 			EMAIL = #{email, jdbcType=VARCHAR}
 	</select>
-	<select id="selectMany" parameterType="String" resultType="UserVO">
+	<select id="selectByParams" parameterType="java.util.HashMap" resultType="UserVO">
 		SELECT
 			NICKNAME AS nickname,
 			EMAIL AS email,
@@ -181,8 +181,16 @@
 			AGE_RANGE AS ageRange
 		FROM 
 			USER_ACCOUNT
-		WHERE
-			NICKNAME LIKE '%'||#{nickname, jdbcType=VARCHAR}||'%'
+		WHERE 
+			1 = 1 
+		<if test="nickname != null">
+			AND
+				NICKNAME LIKE '%'||#{nickname, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="isDel != null">
+			AND
+				DEL_DATE IS NOT NULL
+		</if>
 	</select>
 	
 	<select id="selectAll" resultType="UserVO">
