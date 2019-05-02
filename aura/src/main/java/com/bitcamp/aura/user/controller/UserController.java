@@ -1,6 +1,8 @@
 package com.bitcamp.aura.user.controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -251,15 +253,18 @@ public class UserController {
 	}
 	
 	@RequestMapping("/modifyInfo")
-	public String InfoModify(@ModelAttribute UserVO uservo, HttpSession session) {
-		String email = (String)session.getAttribute("email");
-		userService.getUser(email);
+	public String InfoModify(@ModelAttribute UserVO uservo, HttpSession session,Model model) {
+		session.setAttribute("email", uservo.getEmail());
+		session.setAttribute("nickname", uservo.getNickname());
+		
+		userService.getUser((String)session.getAttribute("nickname"));
+		model.addAttribute("uservo", uservo);
+		 
 		return "modifyInfo";
 	}
 	
 	@RequestMapping("/modifySuccess")
-	public String ModifySuccess(HttpSession session) {
-		
+	public String ModifySuccess(Model model) {
 		return null;
 	}
 	
