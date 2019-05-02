@@ -178,6 +178,21 @@
 <!-- 휴대폰번호 입력 안내메세지 -->
 										<div class="invalid-feedback">휴대폰번호 입력이 필요합니다</div>
 									</div>
+									
+									
+<!--연령확인 -->
+						<div>연령*</div>
+						<div class="form-group my-3 ml-3" style="font-size: 10px" >	
+						<div class="btn-group btn-group-toggle btn-group-sm  text-centerbalign-self-center" data-toggle="buttons">
+							<label class="btn btn-light-blue form-check-label active"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="1" checked>10대</label> 
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="2">20대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="3">30대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="4">40대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="5">50대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="6" >60대 이상</label>
+						</div>
+						</div>
+
 
 									<div class="form-group">
 <!-- 7. 주소 들어갈 곳  start-->
