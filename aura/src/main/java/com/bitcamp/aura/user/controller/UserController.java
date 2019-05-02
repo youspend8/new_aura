@@ -1,6 +1,5 @@
 package com.bitcamp.aura.user.controller;
 
-
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -263,17 +262,50 @@ public class UserController {
 	}
 	
 	@RequestMapping("/modifyInfo")
-	public String InfoModify(@ModelAttribute UserVO uservo, HttpSession session) {
-		String email = (String)session.getAttribute("email");
-		userService.getUser(email);
+	public String InfoModify() {
+
 		return "modifyInfo";
 	}
 	
 	@RequestMapping("/modifySuccess")
-	public String ModifySuccess(HttpSession session) {
+	public String ModifySuccess(
+					@ModelAttribute UserVO uservo,
+					HttpSession session,
+					String addr,
+					String addr_code,
+					String addr_Detail,
+					String address) {
 		
-		return null;
+		String nickname = (String)session.getAttribute("nickname");
+		System.out.println("1");
+		System.out.println("nickname : " + nickname);
+		System.out.println("2");
+		UserVO uservo1 = userService.getUser(nickname);
+		System.out.println("3");
+		System.out.println("user1 : "+ uservo1);
+		System.out.println("4");
+		uservo1.setPassword(uservo.getPassword());
+		uservo1.setName(uservo.getName());
+		uservo1.setTel(uservo.getTel());
+		
+		StringBuilder sb = new StringBuilder();
+		StringBuilder Addr_code = sb.append(uservo.getAddr_code()+"\t");
+		StringBuilder Addr = sb.append(uservo.getAddr()+"\t");
+		StringBuilder Addr_Detail = sb.append(uservo.getAddr_Detail()+"\t");
+		
+		uservo1.setAddress(sb.toString());
+
+		System.out.println("5");
+		userService.modify(uservo1);
+		System.out.println("6");
+		
+		return "redirect:/main";
+		
 	}
 	
-	
+	@RequestMapping("/Mypage")
+	public String Mypage() {
+
+		return "MyPage";
+	}
 }

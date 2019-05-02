@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +35,7 @@
 							<h4 class="card-title" style="margin: 0;">정보 수정</h4>
 							<hr style="border: solid 1px; color: rgb(190, 186, 186)">
 <!-- form으로 등록정보 보내기 -->
-							<form method="POST" class="my-login-validation" name="register_Form" onsubmit ="return modify_Check()" action="/user/register">
+							<form method="POST" class="my-login-validation" name="register_Form" onsubmit ="return modify_Check()" action="/user/modifySuccess">
 							
 						
 								<div>
@@ -305,9 +307,6 @@
 				return false;
 		}
 	</script>
-	
-	
-	
 	
 </body>
 </html>
