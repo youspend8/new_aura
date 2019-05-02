@@ -1,8 +1,5 @@
 package com.bitcamp.aura.user.controller;
 
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
