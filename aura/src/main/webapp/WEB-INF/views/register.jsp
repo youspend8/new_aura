@@ -65,8 +65,10 @@
 										<div class="md-form" style="display: flex;">
 											<input type="text" class="form-control" id="email_Check_num" name="email_Check_num" style="width: 50%;"> 
 												<label for="email_Check_num">이메일 인증 번호 *</label>
-										</div>
 
+										</div>
+									
+											
 <!-- 이메일 인증번호 메세지 -->
 										<div style="display: none; color: blue; font-size: 13px;"
 											id="email_Check_num_true" value="1">인증번호가 일치합니다.</div>
@@ -318,7 +320,10 @@
 						}
 					}).open();
 		}
+		
+		
 	</script>
+
 
 	<!--SMS  후대폰 본인인증 API-->
 	<script>
@@ -571,7 +576,9 @@
 		//이메일 인증번호 맞는지 확인
 
 		function emailCheck(Check_num) {
-			alert(Check_num);
+			alert("인증번호가 달려가고 있어요!! :)");
+			// 나중에 인증번호 삭제해야함!!
+			alert("emailcheck : "+Check_num);
 			$('#email_Check_num').focusout(function() {
 				if (Check_num == $("#email_Check_num").val()) {
 					$('#email_Check_num_false').css('display', 'none');
@@ -601,7 +608,7 @@
  				// 비번 같은지 여부 확인
 				&& ($("#password").val() == $("#pwCheck").val()) 
  				// 닉네임 중복확인
-				&& window.nickNameStatus ==true 
+				&& window.nickNameStatus == true 
  				// 이메일 중복확인
 				&& window.emailAuthStatus == true
 				
@@ -614,7 +621,8 @@
 				return false;
 			}
 		}
-		
+
+	
 		
 		
 //			if (				
