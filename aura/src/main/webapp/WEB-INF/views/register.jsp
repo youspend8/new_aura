@@ -25,10 +25,11 @@
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper" style="width: 400px;">
-					<div class="brand">
 						<!-- 로고 -->
+					<div class="brand">
 						<a href="/main"> <img src="/img/all_review_img/All Review 로고.png" alt="bootstrap 4 login page" style="width: 150px;"></a>
 					</div>
+					
 					<div class="card fat">
 						<div class="card-body">
 							<!-- 회원가입 시작 -->
@@ -64,8 +65,10 @@
 										<div class="md-form" style="display: flex;">
 											<input type="text" class="form-control" id="email_Check_num" name="email_Check_num" style="width: 50%;"> 
 												<label for="email_Check_num">이메일 인증 번호 *</label>
-										</div>
 
+										</div>
+									
+											
 <!-- 이메일 인증번호 메세지 -->
 										<div style="display: none; color: blue; font-size: 13px;"
 											id="email_Check_num_true" value="1">인증번호가 일치합니다.</div>
@@ -157,16 +160,13 @@
 										<div>성별*</div>
 										<div class="custom-control custom-radio custom-control-inline"
 											style="margin-left: 50px">
-											<input type="radio" class="custom-control-input"
-												id="defaultInline1" name="gender" value="1"> <label
-												class="custom-control-label" for="defaultInline1">남자</label>
+											<input type="radio" class="custom-control-input" id="defaultInline1" name="gender" value="1"> 
+											<label class="custom-control-label" for="defaultInline1">남자</label>
 										</div>
 
-										<div class="custom-control custom-radio custom-control-inline"
-											style="margin-left: 10px">
-											<input type="radio" class="custom-control-input"
-												id="defaultInline2" name="gender" value="0"> <label
-												class="custom-control-label" for="defaultInline2">여자</label>
+										<div class="custom-control custom-radio custom-control-inline" style="margin-left: 10px">
+											<input type="radio" class="custom-control-input" id="defaultInline2" name="gender" value="0"> 
+										<label class="custom-control-label" for="defaultInline2">여자</label>
 										</div>
 									</div>
 <!-- 6.휴대폰 번호 -->
@@ -180,6 +180,21 @@
 <!-- 휴대폰번호 입력 안내메세지 -->
 										<div class="invalid-feedback">휴대폰번호 입력이 필요합니다</div>
 									</div>
+									
+									
+<!--연령확인 -->
+						<div>연령*</div>
+						<div class="form-group my-3 ml-3" style="font-size: 10px" >	
+						<div class="btn-group btn-group-toggle btn-group-sm  text-centerbalign-self-center" data-toggle="buttons">
+							<label class="btn btn-light-blue form-check-label active"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="1" checked>10대</label> 
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="2">20대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="3">30대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="4">40대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="5">50대</label>
+							<label class="btn btn-light-blue"> <input type="radio"name="ageRange" class="form-check-label btn-sm" value="6" >60대 이상</label>
+						</div>
+						</div>
+
 
 									<div class="form-group">
 <!-- 7. 주소 들어갈 곳  start-->
@@ -305,7 +320,10 @@
 						}
 					}).open();
 		}
+		
+		
 	</script>
+
 
 	<!--SMS  후대폰 본인인증 API-->
 	<script>
@@ -556,7 +574,9 @@
 		//이메일 인증번호 맞는지 확인
 
 		function emailCheck(Check_num) {
-			alert(Check_num);
+			alert("인증번호가 달려가고 있어요!! :)");
+			// 나중에 인증번호 삭제해야함!!
+			alert("emailcheck : "+Check_num);
 			$('#email_Check_num').focusout(function() {
 				if (Check_num == $("#email_Check_num").val()) {
 					$('#email_Check_num_false').css('display', 'none');
@@ -598,7 +618,8 @@
 				return false;
 			}
 		}
-		
+
+	
 		
 		
 //			if (				
