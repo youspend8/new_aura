@@ -132,27 +132,18 @@
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary btn-block" id="join" >정보수정 완료</button>
 								</div>
-								<div class="mt-4 text-center">이미 가입하셨나요? <a href="/user/loginForm">로그인</a>
-								</div>
+								
 							</form>
 						</div>
 					</div>
-					<div class="footer">Copyright &copy; 2019 &mdash; Your All Review</div>
-					
+					<div class="footer text-center my-5">
+						<div>All_Review와 함께하고 싶지 않다면..<a href="/user/withdraw_click" style="color:blue"> 회원탈퇴</a></div>
+						<div>Copyright &copy; 2019 &mdash; Your All Review</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
-
-
-
-
-
-
-
-
-
 
 
 	<!-- JQuery -->
@@ -314,21 +305,6 @@
 				return false;
 		}
 	</script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

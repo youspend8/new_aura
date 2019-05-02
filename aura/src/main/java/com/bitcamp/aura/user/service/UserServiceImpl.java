@@ -113,6 +113,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void tempWithdraw(String nickname) {
 		// TODO Auto-generated method stub
+		System.out.println("닉네임 확인"+nickname);
 		UserVO user = userMapper.selectOne(nickname);
 		user.setDelDate(new SimpleDateFormat("yy/MM/dd").format(new Date()));
 		userDelRepo.save(new UserDelVO(nickname, new Date()));
