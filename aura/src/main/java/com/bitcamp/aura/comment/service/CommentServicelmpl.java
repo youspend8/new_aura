@@ -43,25 +43,24 @@ public class CommentServicelmpl implements CommentService{
 		CommentFileVO commentFileVO = new CommentFileVO();
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		
-		List<MultipartFile> fileList = comment.getFiles("comment_file");
+		List<MultipartFile> fileList = comment.getFiles("files");
 		
 		commentVo.setComment_Date(sim.format(new Date()));
 		commentVo.setComment_Contents(content);
 		commentVo.setReview_Post_Num(Integer.parseInt(review_Num));
 		
+		System.out.println("내용 : " + content); // 내용 찍어봄
+		
 		for (MultipartFile mf : fileList) {
-			
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             
             if (originFileName.equals("")) {	// 파일이 아무것도 안들어왔을 때
-            	
             	
             	
             } else { 	// 파일이 들어왔을 때
 //              long fileSize = mf.getSize(); // 파일 사이즈를 알고 싶다면 주석을 푸시오
 //              System.out.println("fileSize : " + fileSize);
             	
-            	System.out.println("originFileName : " + originFileName);
                 String safeFile = path + System.currentTimeMillis() + originFileName;
                 System.out.println(safeFile);
                 
