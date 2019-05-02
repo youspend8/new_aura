@@ -418,7 +418,6 @@
 					return true;		
 			}
 
-
 		//비밀번호 확인
 		function PwCheck() {
 			if ($("#password").val() == "" || $("#pwCheck").val() == "") {
@@ -438,7 +437,6 @@
 				return false;
 			}
 		}
-		
 		
 		//이메일 중복체크
 		$('#email').focusout(function(){
@@ -496,7 +494,7 @@
 		})
 		
 		//닉네임 중복체크
-		$("#nicknameDupCheck").on("click", function() {
+		$("#nicknameDupCheck").click(function() {
 			$.ajax({
 				url : "/user/nickNameCheck", // 클라이언트가 요청을 보낼 서버의 URL 주소
 				data : {
@@ -588,11 +586,10 @@
  				// 비번 같은지 여부 확인
 				&& ($("#password").val() == $("#pwCheck").val()) 
  				// 닉네임 중복확인
-				&& window.nickNameStatus ==true 
+				&& window.nickNameStatus == true 
  				// 이메일 중복확인
 				&& window.emailAuthStatus == true
 				
-
  			) {
 				alert("조건충족!! 가입해 주셔서 감사합니다. :)");
 				return true;

@@ -107,7 +107,6 @@ public class UserController {
 	    }
 		
 	}
-	//굿
 	
 	@RequestMapping("/oauth/facebook")
 	public ModelAndView facebook(HttpSession session, String code) {
@@ -185,11 +184,31 @@ public class UserController {
 	@RequestMapping("/nickNameCheck")
 	@ResponseBody
 	public String nickNameCheck(String nickname) {
+		
 		System.out.println("nickname : " + nickname);
-		if(userService.getUser(nickname) == null) {
-			return "true";
+		
+		for(int i = 0 ; i<nickname.length(); i++) {
+			if(nickname.charAt(i) == ' ') {
+	            return "false";
+			}else {
+				if(userService.getUser(nickname) == null) {
+					System.out.println("2 : "+ userService.getUser(nickname));
+					return "true";
+				}
+				return "false";
+			}
 		}
 		return "false";
+		
+		
+//		if(userService.getUser(nickname) == null) {
+//			System.out.println("2 : "+ userService.getUser(nickname));
+//			return "true";
+//		}
+//		System.out.println("1 : "+ userService.getUser(nickname));
+//		return "false";
+		
+		
 	}
 	
 	@RequestMapping("/emailCheck")
@@ -230,5 +249,20 @@ public class UserController {
 		
 		return "redirect:/main";
 	}
+	
+	@RequestMapping("/modifyInfo")
+	public String InfoModify(@ModelAttribute UserVO uservo, HttpSession session) {
+		session.setAttribute("email", uservo.getEmail());
+		session.setAttribute("nickname", uservo.getNickname());
+		userService.getUser((String)session.getAttribute("nickname"));
+		return "modifyInfo";
+	}
+	
+	@RequestMapping("/modifySuccess")
+	public String ModifySuccess() {
+		
+		return null;
+	}
+	
 	
 }
