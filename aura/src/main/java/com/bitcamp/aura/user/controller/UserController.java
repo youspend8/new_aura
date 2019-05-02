@@ -252,14 +252,13 @@ public class UserController {
 	
 	@RequestMapping("/modifyInfo")
 	public String InfoModify(@ModelAttribute UserVO uservo, HttpSession session) {
-		session.setAttribute("email", uservo.getEmail());
-		session.setAttribute("nickname", uservo.getNickname());
-		userService.getUser((String)session.getAttribute("nickname"));
+		String email = (String)session.getAttribute("email");
+		userService.getUser(email);
 		return "modifyInfo";
 	}
 	
 	@RequestMapping("/modifySuccess")
-	public String ModifySuccess() {
+	public String ModifySuccess(HttpSession session) {
 		
 		return null;
 	}
