@@ -110,12 +110,14 @@ public class KakaoLoginAPI implements KakaoLogin{
 			
 			//가입방식(카카오)			
 			userInfo.setRegLocation(4);
-			
+			System.out.println(element);
 			//아이디
 			userInfo.setUserId(element.getAsJsonObject().get("id").getAsString());
 			
 			//프로필
-			userInfo.setProfile(element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image").getAsString());
+			if (element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image") != null) {
+				userInfo.setProfile(element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image").getAsString());
+			}
 			
 			//이메일 정보 
 			if(kakao_account.getAsJsonObject().get("has_email").getAsBoolean()) {

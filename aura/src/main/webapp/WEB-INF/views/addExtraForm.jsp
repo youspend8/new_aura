@@ -122,7 +122,6 @@
 						<input type="hidden" value="${userInfo.name }" name="name">
 						<input type="hidden" value="${userInfo.ageRange}" name="ageRange">
 						
-						
 						<div class="form-grou my-20">
 						<button type="submit" class="btn btn-primary btn-block" id="join" disabled>가입 하기</button>
 						</div>		

@@ -1,6 +1,5 @@
 package com.bitcamp.aura.user.controller;
 
-
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -80,7 +79,7 @@ public class UserController {
 	
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("userid");
+		session.removeAttribute("email");
 		session.removeAttribute("nickname");
 		return "redirect:/main";
 	}
@@ -91,6 +90,18 @@ public class UserController {
 		return "forgot";
 	}
 	
+	@RequestMapping(value="/withdraw_click")
+	public String withdraw_click() {
+		return "withdraw_user";
+	}
+	
+	@RequestMapping(value="/withdraw_user")
+	public String withdraw_user(HttpSession session, String nickname) {
+		userService.tempWithdraw(nickname);
+		session.removeAttribute("email");
+		session.removeAttribute("nickname");
+		return "redirect:/main";
+	}
 	@RequestMapping(value="/oauth/naver")
 	public ModelAndView naverLogin(HttpSession session, String code, String state) throws IOException {
 		ModelAndView model = new ModelAndView();
@@ -107,7 +118,6 @@ public class UserController {
 	    }
 		
 	}
-	//굿
 	
 	@RequestMapping("/oauth/facebook")
 	public ModelAndView facebook(HttpSession session, String code) {
@@ -185,11 +195,31 @@ public class UserController {
 	@RequestMapping("/nickNameCheck")
 	@ResponseBody
 	public String nickNameCheck(String nickname) {
+		
 		System.out.println("nickname : " + nickname);
-		if(userService.getUser(nickname) == null) {
-			return "true";
+		
+		for(int i = 0 ; i<nickname.length(); i++) {
+			if(nickname.charAt(i) == ' ') {
+	            return "false";
+			}else {
+				if(userService.getUser(nickname) == null) {
+					System.out.println("2 : "+ userService.getUser(nickname));
+					return "true";
+				}
+				return "false";
+			}
 		}
 		return "false";
+		
+		
+//		if(userService.getUser(nickname) == null) {
+//			System.out.println("2 : "+ userService.getUser(nickname));
+//			return "true";
+//		}
+//		System.out.println("1 : "+ userService.getUser(nickname));
+//		return "false";
+		
+		
 	}
 	
 	@RequestMapping("/emailCheck")
@@ -231,4 +261,51 @@ public class UserController {
 		return "redirect:/main";
 	}
 	
+	@RequestMapping("/modifyInfo")
+	public String InfoModify() {
+
+		return "modifyInfo";
+	}
+	
+	@RequestMapping("/modifySuccess")
+	public String ModifySuccess(
+					@ModelAttribute UserVO uservo,
+					HttpSession session,
+					String addr,
+					String addr_code,
+					String addr_Detail,
+					String address) {
+		
+		String nickname = (String)session.getAttribute("nickname");
+		System.out.println("1");
+		System.out.println("nickname : " + nickname);
+		System.out.println("2");
+		UserVO uservo1 = userService.getUser(nickname);
+		System.out.println("3");
+		System.out.println("user1 : "+ uservo1);
+		System.out.println("4");
+		uservo1.setPassword(uservo.getPassword());
+		uservo1.setName(uservo.getName());
+		uservo1.setTel(uservo.getTel());
+		
+		StringBuilder sb = new StringBuilder();
+		StringBuilder Addr_code = sb.append(uservo.getAddr_code()+"\t");
+		StringBuilder Addr = sb.append(uservo.getAddr()+"\t");
+		StringBuilder Addr_Detail = sb.append(uservo.getAddr_Detail()+"\t");
+		
+		uservo1.setAddress(sb.toString());
+
+		System.out.println("5");
+		userService.modify(uservo1);
+		System.out.println("6");
+		
+		return "redirect:/main";
+		
+	}
+	
+	@RequestMapping("/Mypage")
+	public String Mypage() {
+
+		return "MyPage";
+	}
 }
