@@ -28,4 +28,5 @@ public interface UserService {
 	public List<UserVO> getUsersEmail(String email);
 	public List<UserVO> getWithdrawUser();
 	public void apiSession(HttpSession session, String userid);
+
 }

@@ -79,7 +79,7 @@ public class UserController {
 	
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("userid");
+		session.removeAttribute("email");
 		session.removeAttribute("nickname");
 		return "redirect:/main";
 	}
@@ -90,6 +90,18 @@ public class UserController {
 		return "forgot";
 	}
 	
+	@RequestMapping(value="/withdraw_click")
+	public String withdraw_click() {
+		return "withdraw_user";
+	}
+	
+	@RequestMapping(value="/withdraw_user")
+	public String withdraw_user(HttpSession session, String nickname) {
+		userService.tempWithdraw(nickname);
+		session.removeAttribute("email");
+		session.removeAttribute("nickname");
+		return "redirect:/main";
+	}
 	@RequestMapping(value="/oauth/naver")
 	public ModelAndView naverLogin(HttpSession session, String code, String state) throws IOException {
 		ModelAndView model = new ModelAndView();

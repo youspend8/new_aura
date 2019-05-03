@@ -8,7 +8,7 @@
 		insert into REVIEW_LIST values(#{postNum}, #{nickname},#{reviewType},#{date},null)
 	</insert>
 	<delete id="deleteByNum" parameterType="int">
-	
+	 delete from REVIEW_LIST where REVIEW_NUM=#{num}
 	</delete>
 	<delete id="deleteAllByParams" parameterType="ReviewListSelectParamsVO">
 		
@@ -18,10 +18,23 @@
 	<select id="selectByNum" parameterType="int" resultType="ReviewListVO">
 	
 	</select>
+	
+	<select id="selectByParams" parameterType="ReviewListSelectParamsVO" resultMap="ReviewListVOMap">
+		select * from REVIEW_LIST where REVIEW_POST_NUM=#{postNum} and REVIEW_TYPE=#{reviewType} and NICKNAME=#{nickname}
+	</select>
+	
 	<select id="selectAllByParams" parameterType="ReviewListSelectParamsVO" resultType="ReviewListVO">
 	
 	</select>
 	<select id="selectAll" resultType="ReviewListVO">
 	
 	</select>
+	
+	<resultMap type="ReviewListVO" id="ReviewListVOMap">
+	 <result property="postNum" column="REVIEW_POST_NUM"/>
+	 <result property="num" column="REVIEW_NUM"/>
+	 <result property="nickname" column="NICKNAME"/>
+	 <result property="reviewType" column="REVIEW_TYPE"/>
+	 <result property="date" column="REVIEW_DATE"/>
+	</resultMap>
 </mapper>
