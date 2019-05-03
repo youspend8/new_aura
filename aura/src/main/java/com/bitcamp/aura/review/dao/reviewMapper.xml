@@ -42,8 +42,9 @@
 		]]>
 	</insert>
 	
-	<update id="update" parameterType="ReviewVO">
-		
+	<update id="updateReview" parameterType="ReviewVO">
+		update REVIEW set TITLE=#{title}, CONTENTS=#{contents}, STARS=#{stars}, GOODS=#{goods}, 
+		BOOKMARK=${bookmark},SHARES=#{shares}, READ_COUNT=#{readCount}, ADD_DATE=#{addDate}, TYPE=#{type}, COMMENTS=#{comments} where NUM=#{num}
 	</update>
 	
 	<delete id="delete" parameterType="int">
@@ -101,7 +102,8 @@
 	</select>
 	
 	<select id="selectOneForUpdateByNum" parameterType="int" resultType="ReviewVO">
-		select * from REVIEW where NUM=#{num}
+		select NUM as num,TITLE as title, CONTENTS as contents, STARS as stars, GOODS as goods, 
+		BOOKMARK as bookmark,SHARES as shares, READ_COUNT as readCount, ADD_DATE as addDate, TYPE as type, COMMENTS as comments from REVIEW where NUM=#{num}
 	</select>
 	
 	<select id="selectByNum" resultType="HashMap" parameterType="HashMap">

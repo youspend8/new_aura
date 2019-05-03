@@ -37,25 +37,34 @@ public class ReviewListServiceImp implements ReviewListService{
 		ReviewListVO review =reviewMapper.selectByParams(param);
 		System.out.println(review);
 	
-		ReviewVO reviewUpdate; 
+		ReviewVO reviewUpdate=reviewMapperForUpdate.selectOneForUpdateByNum(params.getPostNum()); 
 		if(review==null) {
 			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			params.setDate(sim.format(new Date()));
 			reviewMapper.insert(params);
-			System.out.println(params.getPostNum());
 			
-			reviewUpdate=reviewMapperForUpdate.selectOneForUpdateByNum(params.getPostNum());
 			
 				if(params.getReviewType()==1) {
 					reviewUpdate.setShares(reviewUpdate.getShares()+1);
 				}else if(params.getReviewType()==2) {
-					reviewUpdate.setStars(reviewUpdate.getStars()+1);
+					reviewUpdate.setBookmark(reviewUpdate.getBookmark()+1);
 				}else {
 					reviewUpdate.setGoods(reviewUpdate.getGoods()+1);
 				}
+				reviewMapperForUpdate.updateReview(reviewUpdate);
 			
 		}else {
 			reviewMapper.deleteByNum(review.getNum());
+			
+				if(params.getReviewType()==1) {
+					reviewUpdate.setShares(reviewUpdate.getShares()-1);
+				}else if(params.getReviewType()==2) {
+					reviewUpdate.setBookmark(reviewUpdate.getBookmark()-1);
+				}else {
+					reviewUpdate.setGoods(reviewUpdate.getGoods()-1);
+				}
+				
+				reviewMapperForUpdate.updateReview(reviewUpdate);
 		}
 		
 	

@@ -363,7 +363,7 @@
 
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
 <div class="container d-flex flex-wrap p-md-5 px-2 py-4" style="border-bottom: 2px solid; border-top: 2px solid; border-color: #dadee6">
-	<div class="col-12 text-center">
+	<div class="col-12 text-left ml-4" style="font-size: 30px; font-weight: bold;">
 		${reviewInfo.TITLE}
 	</div>
 	<div class="col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap">
@@ -373,7 +373,7 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
 					<div class="d-flex">
-						<c:forEach var="file" items="${reviewInfo.files}">
+						<c:forEach var="file" items="${reviewInfo.FILES}">
 							<div class="card-body p-1 col-4">
 								<img class="w-100" src="${file}" style="width: 100%; height: 200px">
 							</div>
@@ -447,10 +447,11 @@
 		</div>
 	</div>
 	<div
-		class="col-4 d-md-flex d-none flex-wrap align-items-center justify-content-center">
+		class="col-4 d-md-flex d-none flex-wrap align-items-start justify-content-center">
 		<div class="col-12">
-			<img class="main-review-photo w-100"
-				src="https://picsum.photos/350/300?image=1040">
+		<div id="map" style="width:100%; height:250px;"></div>
+			<!-- <img class="main-review-photo w-100"
+				src="https://picsum.photos/350/300?image=1040"> -->
 		</div>
 		<div class="col-12 d-flex justify-content-center my-4">
 			<a id="share" onclick="doReview(1)">
@@ -1075,7 +1076,45 @@
 
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
 
+// 지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('${reviewInfo.ADDR}', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${reviewInfo.TITLE}</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>
 <script>
 var flag1=true;
 var flag2=true;
