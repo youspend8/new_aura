@@ -291,7 +291,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping("/Mypage")
+	@RequestMapping("/mypage")
 	public String Mypage() {
 
 		return "MyPage";
