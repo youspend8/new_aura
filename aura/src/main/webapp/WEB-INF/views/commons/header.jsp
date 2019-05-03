@@ -16,6 +16,7 @@
     <link href="/css/mdb.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
 	<link href="/css/style.css" rel="stylesheet">
+	<jsp:include page="/WEB-INF/views/modal/favorite_modal.jsp"></jsp:include>
 </head>
 <body>
   <div class="container" id="header">
@@ -40,13 +41,12 @@
 
 
 
-
       <div class="d-lg-none col-md-5"></div>
 
       <div class="col-lg-3 col-12 pl-lg-4 pl-md-0 pr-0 order-1 order-lg-1">
         <ul class="d-flex justify-content-end justify-content-lg-end  pt-3 flex-wrap" style="padding: 0">
           <li>
-            <i class="fas fa-user-alt" style="font-size: 1rem;"></i>
+             <a href="#" class="fas fa-user-alt" style="font-size: 1rem;" data-target="#fullHeightModalRight" data-toggle="modal"></a>
           </li>
           <li class="deconone">
           
@@ -55,6 +55,10 @@
 	          	  ${nickname}님 &nbsp;
 	          	 
 	          	 <a href="/user/modifyInfo" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">회원수정</a>
+	          	 
+	          	
+	          	 
+	          	 
 	          	</c:when>
 	          	<c:otherwise>
 	          	   <a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>          	
