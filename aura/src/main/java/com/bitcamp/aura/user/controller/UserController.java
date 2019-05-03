@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -288,5 +289,15 @@ public class UserController {
 		session.setAttribute("email", uservo1.getEmail());
 		
 		return "redirect:/main";
+	}
+	@RequestMapping("/Infocheck")
+	@ResponseBody
+	public String InfoCheck(HttpSession session, String password) {
+		String EamilCheck = (String)session.getAttribute("email");
+		UserVO uservo = userService.getUserEmail(EamilCheck);
+		if(uservo.getPassword().equals(password) ) {
+			return "true";
+		}
+		return "false";
 	}
 }
