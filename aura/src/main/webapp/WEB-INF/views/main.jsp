@@ -6,10 +6,10 @@
 	<title>All Review</title>
 	
 	<div id="header">
-		<a href="/main" class="brand_logo" style="margin: 55px 0;">
+		<a href="/main" class="brand_logo">
 			<img src="/img/logo/logo.png" width="130px" class="pt-1">
 		</a>
-		<div id="search_form" class="search_form">
+		<div id="search_form" class="search_form col-md-6 col-12 p-0">
 			<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">
 				<select class="form-control search_select" name="type">
 					<option value="1">음식점</option>
@@ -32,12 +32,21 @@
 			var origin_search_form = $('#origin_search_form');
 			var search_form = $('#search_form');
 			
-			if (window.scrollY > '200') {
+			console.log(window.scrollY)
+			if (window.scrollY > 200) {
 				isSearchFormInNav = true;
 				nav_search_form.append(origin_search_form);
+				$('#navigation').css({
+					'position': 'sticky',
+					'top': 0
+				})
 			} else if (window.scrollY <= 200) {
 				isSearchFormInNav = false;
 				search_form.append(origin_search_form);
+				$('#navigation').css({
+					'position': 'sticky',
+					'top': 0
+				})
 			}
 		}
 	</script>
