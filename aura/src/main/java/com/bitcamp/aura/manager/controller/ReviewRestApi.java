@@ -1,11 +1,11 @@
 package com.bitcamp.aura.manager.controller;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bitcamp.aura.manager.util.FileUpload;
 import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.google.gson.Gson;
@@ -23,8 +22,6 @@ import com.google.gson.Gson;
 public class ReviewRestApi {
 	@Autowired
 	private ReviewService service;
-	@Autowired
-	private FileUpload fileUpload;
 	
 	@RequestMapping(value="/list")
 	public String list() throws ParseException {
@@ -54,8 +51,9 @@ public class ReviewRestApi {
 	
 	@PostMapping(value="/")
 	public String write(
-			@RequestParam("file") MultipartFile[] multipartFiles) throws IOException {
-		fileUpload.uploadFiles(multipartFiles);
+			@RequestParam HashMap<String, Object> params,
+			@RequestParam("file") MultipartFile[] multipartFiles) {
+		service.writeReview(params, multipartFiles);
 		return "true";
 	}
 	

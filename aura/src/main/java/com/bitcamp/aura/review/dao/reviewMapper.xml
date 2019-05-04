@@ -4,42 +4,55 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.bitcamp.aura.review.dao.ReviewMapper">
-	<insert id="insert" parameterType="ReviewVO">
-		<![CDATA[
-			INSERT ALL
-			    INTO REVIEW 
-		    VALUES (
-		    	null,
-		    	#{title, jdbcType=VARCHAR},
-		    	#{contents, jdbcType=VARCHAR},
-		    	0,
-		    	0,
-		    	0,
-		    	0,
-		    	0,
-		    	#{addDate, jdbcType=VARCHAR},
-		    	#{type, jdbcType=NUMERIC}
-		    )
-		    INTO PLACE_REVIEW
-		    VALUES (
-		    	null,
-		    	#{address, jdbcType=VARCHAR},
-		    	#{tel, jdbcType=VARCHAR},
-		    	#{serviceTime, jdbcType=VARCHAR},
-		    	#{waitingTime, jdbcType=VARCHAR}
-		    )
-		    INTO RESTAURANT_REVIEW
-		    VALUES (
-		    	null,
-		    	#{category, jdbcType=NUMERIC},
-		    	#{delivery, jdbcType=NUMERIC},
-		    	#{takeOut, jdbcType=NUMERIC},
-		    )
-			SELECT
-			    *
-			FROM
-			    DUAL;
-		]]>
+	<insert id="insert" parameterType="java.util.HashMap">
+		<selectKey keyProperty="num" resultType="int" order="BEFORE">
+			SELECT REVIEW_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT 
+			ALL
+	    INTO REVIEW (
+			NUM, TITLE, CONTENTS, STARS, GOODS, BOOKMARK, SHARES, READ_COUNT, ADD_DATE, TYPE, COMMENTS
+		)
+	    VALUES (
+	    	#{num, jdbcType=NUMERIC},
+	    	#{title, jdbcType=VARCHAR},
+	    	#{contents, jdbcType=VARCHAR},
+	    	0,
+	    	0,
+	    	0,
+	    	0,
+	    	0,
+	    	#{addDate, jdbcType=VARCHAR},
+	    	#{type, jdbcType=NUMERIC},
+	    	0
+	    )
+	    INTO PLACE_REVIEW (
+	    	NUM, ADDRESS1, TEL, SERVICE_TIME, WAITING_TIME, ADDRESS2, ADDRESS3, DETAIL_ADDR
+	    )
+	    VALUES (
+	    	#{num, jdbcType=NUMERIC},
+	    	#{address1, jdbcType=VARCHAR},
+	    	#{tel, jdbcType=VARCHAR},
+	    	#{serviceTime, jdbcType=VARCHAR},
+	    	#{waitingTime, jdbcType=VARCHAR},
+	    	#{address2, jdbcType=VARCHAR},
+	    	#{address3, jdbcType=VARCHAR},
+	    	#{detaileAddr, jdbcType=VARCHAR}
+	    )
+	    INTO RESTAURANT_REVIEW(
+	    	NUM, RESTAURANT_CATEGORY, RESTAURANT_DELIVERY, RESTAURANT_TAKEOUT, RESTAURANT_MENU
+	    )
+	    VALUES (
+	    	#{num, jdbcType=NUMERIC},
+	    	#{category, jdbcType=NUMERIC},
+	    	#{delivery, jdbcType=NUMERIC},
+	    	#{takeOut, jdbcType=NUMERIC},
+	    	#{menu, jdbcType=VARCHAR}
+	    )
+		SELECT
+		    *
+		FROM
+		    DUAL
 	</insert>
 	
 	<update id="updateReview" parameterType="ReviewVO">

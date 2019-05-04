@@ -3,11 +3,14 @@ package com.bitcamp.aura.review.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.bitcamp.aura.review.model.RestaurantSelectParamVO;
 import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewVO;
 
 public interface ReviewService {
+	public int writeReview(HashMap<String, Object> params, MultipartFile[] multipartFiles);
 	public List<RestaurantVO> searchRestaurants(RestaurantSelectParamVO params);
 	public List<ReviewVO> searchDigitals(RestaurantSelectParamVO params);
 	public List<ReviewVO> searchHospitals(RestaurantSelectParamVO params);
