@@ -93,7 +93,7 @@
 <!-- footer 버튼 구성       -->
      <div class="modal-footer justify-content-center">      
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/user/logout'">로그아웃</button>
      </div>
      </div>
     </div>

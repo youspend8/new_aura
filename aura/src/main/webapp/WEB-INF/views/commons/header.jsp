@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,63 +20,48 @@
 	<jsp:include page="/WEB-INF/views/modal/favorite_modal.jsp"></jsp:include>
 </head>
 <body>
-  <div class="container" id="header">
-    <header class="row m-0 justify-content-center pb-md-4" style=" border-bottom: 1px solid #e3e6ea">
-      <a href="/main" class="col-12 col-lg-3 col-md-3 pt-2 pt-md-3 mt-lg-5 text-center text-md-right order-2 order-lg-1">
-        <img src="/img/logo/logo.png" width="130px" class="pt-1">
-      </a>
-
-      <div class="pt-2 pt-md-3 pl-0 pl-md-0 mt-lg-5 pr-0 pb-3 pb-md-3 col-lg-6 col-md-7 d-flex align-items-center order-2 order-lg-1">
-        <form class="form-check-inline w-100" action="/review/search">
-        	<select class="form-control w-25" style="border-radius: 5%" name="type">
-        		<option value="1">음식점</option>
-        		<option value="2">병원</option>
-        		<option value="3">전자제품</option>
-        	</select>
-          <input class="form-control ml-3 w-100" type="text" name="keyword" placeholder="Search" style="border-radius: 400px; ">
+    <header class="navigation">
+		<a href="/main" style="width: 15%;">
+			<img class="navigation_brand_logo" src="/img/logo/logo2.png">
+		</a>
 		
-          	<button type="submit" class="fas text-dark ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
-        </form>
-      </div>
-
-
-
-
-      <div class="d-lg-none col-md-5"></div>
-
-      <div class="col-lg-3 col-12 pl-lg-4 pl-md-0 pr-0 order-1 order-lg-1">
-        <ul class="d-flex justify-content-end justify-content-lg-end  pt-3 flex-wrap" style="padding: 0">
-          <li>
-             <a href="#" class="fas fa-user-alt" style="font-size: 1rem;" data-target="#fullHeightModalRight" data-toggle="modal"></a>
-          </li>
-          <li class="deconone">
-          
-          	<c:choose> 
-	          	<c:when test="${nickname ne null}" >	          	 
-	          	  ${nickname}님 &nbsp;
-	          	 
-	          	 <a href="/user/modifyInfo" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">회원수정</a>
-	          	 
-	          	
-	          	 
-	          	 
-	          	</c:when>
-	          	<c:otherwise>
-	          	   <a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>          	
-	          	</c:otherwise>
-          	</c:choose>
-          </li>
-          <li class="deconone">
-          	<c:choose>
-          		<c:when test = "${nickname eq null}">
-          		<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a>
-          		</c:when>
-          		<c:otherwise>
-          		   <a href="/user/logout" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">로그아웃</a>
-          		</c:otherwise>
-          	</c:choose>
-          </li>
-        </ul>
-      </div>
+		<div id="navigation_search_form" class="navigation_search_form">
+			<c:set var="currentPage" value="${pageContext.request.requestURI}" />
+		
+			<c:if test="${!fn:contains(currentPage,'main.jsp')}">
+			<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">
+				<select class="form-control search_select" name="type">
+					<option value="1">음식점</option>
+					<option value="2">병원</option>
+					<option value="3">전자제품</option>
+				</select>
+				
+				<input class="form-control search_input" type="text" name="keyword" placeholder="Search" autocomplete="off">
+			
+				<button type="submit" class="fas text-white ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
+			</form>
+			</c:if>
+		</div>
+		
+		<ul class="social_content">
+			<c:choose> 
+				<c:when test="${nickname ne null}">	          	
+					<li class="w-100">
+						<a href="#" class="fas fa-user-alt text-dark text-center" style="font-size: 1rem;" data-target="#fullHeightModalRight" data-toggle="modal">
+							${nickname}님 
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="w-50">
+						<a href="/user/loginForm" class="text-dark text-center">로그인</a>   
+					</li>       	
+				</c:otherwise>
+			</c:choose>
+			<c:if test = "${nickname eq null}">
+				<li class="w-50">
+					<a href="/user/registerForm" class="text-dark text-center">회원가입</a>
+				</li>
+			</c:if>
+		</ul>
     </header>
-  </div>
