@@ -1,7 +1,6 @@
 package com.bitcamp.aura.review.service;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,9 +34,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int writeReview(HashMap<String, Object> params, MultipartFile[] multipartFiles) {
 		// TODO Auto-generated method stub
-		params.put("addDate", new SimpleDateFormat("yy/MM/dd").format(new Date()));
 		params.put("addDate", new Date());
-		System.out.println(params);
 		mapper.insert(params);
 		int result = (int)params.get("num");
 		fileUpload.uploadFiles(result, multipartFiles);
