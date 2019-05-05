@@ -65,7 +65,7 @@
 		}
 		
 		.navigation {
-			height: 50px;
+			height: 60px;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -114,17 +114,12 @@
 			#header {
 				height: 300px;
 			}
-			.register_button,
-			.navigation_brand_logo,
-			.user_nickname {
+			.navigation_brand_logo {
 				display: none;
 			}
-			
 			.user_icon {
-				font-size: 30px;
-				padding-left: 10px;
+				font-size: 25px;
 			}
-			
 			.brand_logo {
 				margin: 30px 0;
 			}
@@ -132,6 +127,17 @@
 				width: 100%;
 			}
 		}
+		
+		.container {
+			max-width: 70%;
+			margin: 0 auto;
+		}
+		@media (max-width: 1199.98px) {
+			.container {
+				max-width: 100%;
+			}
+		}
+		
 	</style>
 </head>
 <body>
@@ -144,17 +150,17 @@
 			<c:set var="currentPage" value="${pageContext.request.requestURI}" />
 		
 			<c:if test="${!fn:contains(currentPage,'main.jsp')}">
-			<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">
-				<select class="form-control search_select" name="type">
-					<option value="1">음식점</option>
-					<option value="2">병원</option>
-					<option value="3">전자제품</option>
-				</select>
+				<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">
+					<select class="form-control search_select" name="type">
+						<option value="1">음식점</option>
+						<option value="2">병원</option>	
+						<option value="3">전자제품</option>
+					</select>
+					
+					<input class="form-control search_input" type="text" name="keyword" placeholder="Search" autocomplete="off">
 				
-				<input class="form-control search_input" type="text" name="keyword" placeholder="Search" autocomplete="off">
-			
-				<button type="submit" class="fas text-white ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
-			</form>
+					<button type="submit" class="fas text-white ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
+				</form>
 			</c:if>
 		</div>
 		
@@ -163,18 +169,19 @@
 				<c:when test="${nickname ne null}">	          	
 					<li class="w-100">
 						<a href="#" class="fas fa-user-alt text-dark text-center user_icon" data-target="#fullHeightModalRight" data-toggle="modal">
-							<span class="user_nickname">${nickname}님</span>
+							<span class="user_nickname d-s">${nickname}님</span>
 						</a>
 					</li>
 				</c:when>
 				<c:otherwise>
 					<li class="login_button">
-						<a href="/user/loginForm" class="text-dark text-center">로그인</a>   
-					</li>       	
+						<a href="/user/loginForm" class="d-md-flex d-none text-dark text-center">로그인</a>
+						<a href="/user/loginForm" class="d-md-none d-flex fas fa-user-alt text-dark text-center user_icon"></a>
+					</li>
 				</c:otherwise>
 			</c:choose>
 			<c:if test = "${nickname eq null}">
-				<li class="register_button">
+				<li class="register_button d-md-flex d-none">
 					<a href="/user/registerForm" class="text-dark text-center">회원가입</a>
 				</li>
 			</c:if>

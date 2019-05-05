@@ -5,377 +5,36 @@
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>석촌호수 - All Review</title>
 
-
-<!-- 카테고리 선택 -->
-<div class="d-flex container p-0 flex-wrap justify-content-center">
-	<div class="btn-group col-4 m-0 px-0">
-		<button id="restaurant-button" type="button"
-			class="btn btn-dark btn-lg px-1 dropdown-toggle">맛집</button>
-
-		<!-- <div id="restaurant-category" class="restaurant-category">
-                <div class="restaurant-category-button" style="
-                    display: flex;
-                    width: 25%;
-                    flex-direction: column;
-                ">
-                    <button id="general-button" type="button" class="btn btn-light d-flex px-1 justify-content-center">종합병원
-                        <i class="fas fa-caret-right ml-4 align-self-center"></i>
-                    </button>
-                    <button id="special-button" type="button" class="btn btn-light d-flex px-1 justify-content-center">전문병원
-                        <i class="fas fa-caret-right ml-4 align-self-center"></i>
-                    </button>
-                </div>
-                <div id="general-restaurant" class="general-restaurant">
-                    <ul class="general-category">
-                        <li>l
-                            <i class="fas fa-square"></i>
-                            정형외과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            내과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            이비인후과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            방사선과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            비뇨기과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            내과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            외과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            신경외과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            산부인과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            안과
-                        </li>
-                    </ul>
-                    
-                </div>
-                <div id="special-restaurant" class="special-restaurant">
-                    <ul class="special-category">
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div> -->
-	</div>
-
-	<div class="hospital-group btn-group col-4 m-0 px-0">
-		<button id="hospital-button" type="button"
-			class="btn btn-dark btn-lg px-1 dropdown-toggle">병원</button>
-
-		<div id="hospital-category" class="hospital-category">
-			<button id="general-button" type="button"
-				class="btn btn-dark justify-content-center px-1 d-flex w-100">
-				종합병원 <i class="fas fa-caret-right ml-1 align-self-center"></i>
-			</button>
-
-			<button id="special-button" type="button"
-				class="btn btn-dark justify-content-center px-1 d-flex w-100">
-				전문병원 <i class="fas fa-caret-right ml-1 align-self-center"></i>
-			</button>
-		</div>
-
-		<ul class="general-category" id="general-category">
-			<li>
-				<button type="button" class="btn btn-dark px-0">정형외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">내과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">이비인후과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">방사선과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">비뇨기과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">내과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">신경외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">산부인과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">안과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">정형외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">내과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">이비인후과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">방사선과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">비뇨기과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">내과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">신경외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">산부인과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">안과</button>
-			</li>
-		</ul>
-
-		<ul class="special-category" id="special-category">
-			<li>
-				<button type="button" class="btn btn-dark px-0">한의원</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">내과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">신경외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">산부인과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">안과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">정형외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">내과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">이비인후과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">방사선과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">비뇨기과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">내과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">신경외과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">산부인과</button>
-			</li>
-			<li>
-				<button type="button" class="btn btn-dark px-0">안과</button>
-			</li>
-		</ul>
-	</div>
-
-	<div class="btn-group col-4 m-0 px-0">
-		<button id="elect-button" type="button"
-			class="btn btn-dark btn-lg px-1 dropdown-toggle">전자제품</button>
-
-		<!-- <div id="hospital-category" class="hospital-category">
-                <div class="hosipital-category-button" style="
-                    display: flex;
-                    width: 25%;
-                    flex-direction: column;
-                ">
-                    <button id="general-button" type="button" class="btn btn-light d-flex px-1 justify-content-center">종합병원
-                        <i class="fas fa-caret-right ml-4 align-self-center"></i>
-                    </button>
-                    <button id="special-button" type="button" class="btn btn-light d-flex px-1 justify-content-center">전문병원
-                        <i class="fas fa-caret-right ml-4 align-self-center"></i>
-                    </button>
-                </div>
-                <div id="general-elect" class="general-elect">
-                    <ul class="general-category">
-                        <li>
-                            <i class="fas fa-square"></i>
-                            정형외과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            내과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            이비인후과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            방사선과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            비뇨기과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            내과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            외과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            신경외과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            산부인과
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            안과
-                        </li>
-                    </ul>
-                    
-                </div>
-                <div id="special-elect" class="special-elect">
-                    <ul class="special-category">
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                        <li>
-                            <i class="fas fa-square"></i>
-                            example
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div> -->
-	</div>
-
-</div>
-
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
-<div class="container d-flex flex-wrap p-md-5 px-2 py-4" style="border-bottom: 2px solid; border-top: 2px solid; border-color: #dadee6">
-	<div class="col-12 text-left ml-4" style="font-size: 30px; font-weight: bold;">
+<div class="container d-flex flex-wrap p-md-5 px-1 py-4" style="border-bottom: 2px solid; border-color: #dadee6">
+	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
 		${reviewInfo.TITLE}
+		<span class="badge badge-pill badge-success" style="font-size: 20px; margin-left: 3px;">
+	    	<c:choose>
+				<c:when test="${review.category eq 1}">
+					한식
+				</c:when>
+				<c:when test="${review.category eq 2}">
+					양식
+				</c:when>
+				<c:when test="${review.category eq 16}">
+					호프
+				</c:when>
+				<c:otherwise>
+					기타분류
+				</c:otherwise>
+    	</c:choose>
+		</span>
 	</div>
-	<div class="col-md-8 col-12 d-flex justify-content-center align-items-start flex-wrap">
+	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
 		<!-- 리뷰 사진 캐러셀 -->
-		<div id="carousel-example-2" class="carousel slide col-12"
-			data-ride="carousel">
+		<div id="carousel-example-2" class="carousel slide col-12 mb-3" data-ride="carousel">
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
 					<div class="d-flex">
 						<c:forEach var="file" items="${reviewInfo.FILES}">
 							<div class="card-body p-1 col-4">
-								<img class="w-100" src="${file}" style="width: 100%; height: 200px">
+								<img class="w-100" src="${file}" style="width: 100%; height: 300px">
 							</div>
 						</c:forEach>
 					</div>
@@ -395,46 +54,86 @@
 				</a>
 			</c:if>
 		</div>
+		
+		<div class="col-4 p-0 d-md-flex d-none flex-wrap align-items-start justify-content-center">
+			<div class="col-12">
+				<div id="map" style="width:100%; height:250px;"></div>
+				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
+			</div>
+			<div class="col-12 d-flex justify-content-center my-4">
+				<a id="share" onclick="doReview(1)">
+				<c:choose>
+					<c:when test="${reviewInfo.isShare }">
+						<i class="fas fa-share-alt" value="${nickname}" style="color: blue"></i>
+					</c:when>
+					<c:otherwise>
+						<i class="fas fa-share-alt" value="${nickname}"></i>
+					</c:otherwise>
+				</c:choose>
+				</a>
+				<a id="share" onclick="doReview(2)">
+					<c:choose>
+						<c:when test="${reviewInfo.isStar }">
+						    <i class="far fa-star mx-4" value="${nickname}" style="color: blue"></i>
+						</c:when>
+						<c:otherwise>
+							<i class="far fa-star mx-4" value="${nickname}"></i>
+						</c:otherwise>
+					</c:choose>
+			
+				</a>
+				<a id="share" onclick="doReview(3)">
+					<c:choose>
+						<c:when test="${reviewInfo.isLike }">
+						    <i class="far fa-thumbs-up" value="${nickname}" style="color: blue"></i>
+						</c:when>
+						<c:otherwise>
+							<i class="far fa-thumbs-up" value="${nickname}"></i>
+						</c:otherwise>
+					</c:choose>
+				</a>
+			</div>
+			<c:choose>
+				<c:when test="${nickname ne null}">
+					<button type="button" id="review_write_pc" class="btn btn-dark review-write">리뷰 작성하기</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" id="review_write_login" class="btn btn-dark review-write">리뷰 작성하기</button>
+				</c:otherwise>
+			</c:choose>
+		</div>
 		<!-- 리뷰 상세 설명 -->
-		<div class="d-flex flex-wrap col-12">
-			<p class="col-12 p-0 my-1">
-				<span> ■ 연락처 : </span> <span> ${reviewInfo.TEL} </span>
-			</p>
-			<p class="col-12 p-0 my-1">
-				<span> ■ 주소 : </span> <span> ${reviewInfo.ADDR} </span>
-			</p>
-			<p class="col-12 p-0 my-1">
-				<span> ■ 운영 시간 </span>
-				<p class="ml-4 my-1">
-					<div>
-						${reviewInfo.SERVICETIME}
-					</div>
-				</p>
-			</p>
-			<p class="col-12 p-0 my-1">
-				<span> ■ 세부 정보 : </span> 
-				<span class="review-explanation-2  col-18">
+		<div class="d-flex flex-wrap col-8">
+			<div class="col-12 p-0 my-1">
+				<i class="col-1 fas fa-phone"></i>
+				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.TEL}</span>
+			</div>
+			<div class="col-12 p-0 my-1">
+				<i class="col-1 far fa-clock"></i>
+				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.SERVICETIME}</span>
+			</div>
+			<div class="col-12 d-flex flex-row p-0 my-1">
+				<i class="col-1 pt-1 fas fa-utensils"></i>
+				<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
+					<c:forEach var="menu" items="${menu}"  varStatus="num">
+						<div class="col-5 p-0 m-0">
+							${menu.name}
+						</div>
+						<div class="col-5 p-0 m-0">
+							${String.format("%,3d", Integer.parseInt(menu.price))}원
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-12 d-flex flex-row p-0 my-1">
+				<i class="col-1 pt-1 far fa-comment-alt"></i> 
+				<div class="col-11 pl-1 font-weight-bold review-explanation-2">
 					${reviewInfo.CONTENTS}				
-				</span>
-			</p>
-			<p class="col-12 p-0 my-1">
-				<span> ■ 메뉴 : </span> 
-				
-			</p>
-			
-				<p class="col-12 p-0 my-1 ml-lg-3">
-
-				<c:forEach var="menu" items="${menu}"  varStatus="num">
-					<span>${num.index+1}. ${menu.name}</span>
-					<span>( ${String.format("%,3d", Integer.parseInt(menu.price))} 원 )</span><br>
-				</c:forEach>
-				</p>
-			
-			
+				</div>
+			</div>
 		</div>
 <!-- 		점수		 -->
-		<div
-			class="d-md-none col-12 d-flex justify-content-between align-items-center p-0 ">
+		<div class="d-md-none col-4 d-flex justify-content-between align-items-center p-0 ">
 			<div class="col-6 d-flex align-items-center justify-content-center">
 				<i class="fas fa-share-alt"></i> 
 				<i class="far fa-star mx-4"></i>
@@ -445,56 +144,6 @@
 					class="btn btn-dark review-write px-3">리뷰 작성하기</button>
 			</div>
 		</div>
-	</div>
-	<div
-		class="col-4 d-md-flex d-none flex-wrap align-items-start justify-content-center">
-		<div class="col-12">
-		<div id="map" style="width:100%; height:250px;"></div>
-			<!-- <img class="main-review-photo w-100"
-				src="https://picsum.photos/350/300?image=1040"> -->
-		</div>
-		<div class="col-12 d-flex justify-content-center my-4">
-			<a id="share" onclick="doReview(1)">
-			<c:choose>
-				<c:when test="${reviewInfo.isShare }">
-				<i class="fas fa-share-alt" value="${nickname}" style="color: blue"></i>
-				</c:when>
-				<c:otherwise>
-				<i class="fas fa-share-alt" value="${nickname}"></i>
-				</c:otherwise>
-			</c:choose>
-			</a>
-			<a id="share" onclick="doReview(2)">
-				<c:choose>
-					<c:when test="${reviewInfo.isStar }">
-					    <i class="far fa-star mx-4" value="${nickname}" style="color: blue"></i>
-					</c:when>
-					<c:otherwise>
-						<i class="far fa-star mx-4" value="${nickname}"></i>
-					</c:otherwise>
-				</c:choose>
-		
-			</a>
-			<a id="share" onclick="doReview(3)">
-			<c:choose>
-					<c:when test="${reviewInfo.isLike }">
-					    <i class="far fa-thumbs-up" value="${nickname}" style="color: blue"></i>
-					</c:when>
-					<c:otherwise>
-							<i class="far fa-thumbs-up" value="${nickname}"></i>
-					</c:otherwise>
-				</c:choose>
-		
-				</a>
-		</div>
-		<c:choose>
-			<c:when test="${nickname ne null}">
-				<button type="button" id="review_write_pc" class="btn btn-dark review-write">리뷰 작성하기</button>
-			</c:when>
-			<c:otherwise>
-				<button type="button" id="review_write_login" class="btn btn-dark review-write">리뷰 작성하기</button>
-			</c:otherwise>
-		</c:choose>
 	</div>
 </div>
 
@@ -1157,42 +806,7 @@ var flag2=true;
     
         $(document).ready(function() {
             var state = false;
-            var generalHospitalState = false;
-            var specialHospitalState = false;
 
-            $('#hospital-button').on('click', function() {
-                if (state == true) {
-                    $('#hospital-category').css('visibility', 'hidden');
-                    hideSpecialCategory();
-                    hideGeneralCategory();
-                    specialHospitalState = false;
-                    generalHospitalState = false;
-                    
-                } else {
-                    $('#hospital-category').css('visibility', 'visible');
-                }
-                state = !state;
-            });
-
-            $('#general-button').on('mouseover', function() {
-                showGeneralCategory();
-                generalHospitalState = !generalHospitalState;
-
-                if (specialHospitalState == true) {
-                    hideSpecialCategory();
-                    specialHospitalState = !specialHospitalState;
-                }
-            });
-
-            $('#special-button').on('mouseover', function() {
-                showSpecialCategory();
-                specialHospitalState = !specialHospitalState;
-
-                if (generalHospitalState == true) {
-                    hideGeneralCategory();
-                    generalHospitalState = !generalHospitalState;
-                }
-            });
             
             $('#review_write_pc').on('click', () => {
                 $('#write_form').animate({
@@ -1223,38 +837,7 @@ var flag2=true;
             	alert('로그인이 필요합니다.');
             });
             
-            
-            $(document).on('click', (e) => {
-                var target = e.target.id;
-                if (target == 'general-button' || target == 'special-button'
-                    || target == 'hospital-button') {
-                    
-                } else {
-                    
-                    $('#hospital-category').css('visibility', 'hidden');
-                    hideSpecialCategory();
-                    hideGeneralCategory();
-                    specialHospitalState = false;
-                    generalHospitalState = false;
-                    state = false;
-                }
-            });
-            
         });
-        
-        function showGeneralCategory() {
-            $('#general-category').css('visibility', 'visible');
-        }
-        function hideGeneralCategory() {
-            $('#general-category').css('visibility', 'hidden');
-        }
-        
-        function showSpecialCategory() {
-            $('#special-category').css('visibility', 'visible');
-        }
-        function hideSpecialCategory() {
-            $('#special-category').css('visibility', 'hidden');
-        }
         
         function fileSubmit(){ // 멀티파트 파일 업로더
         	
