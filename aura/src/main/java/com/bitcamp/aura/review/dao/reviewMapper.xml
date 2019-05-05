@@ -39,16 +39,29 @@
 	    	#{address3, jdbcType=VARCHAR},
 	    	#{detaileAddr, jdbcType=VARCHAR}
 	    )
-	    INTO RESTAURANT_REVIEW(
-	    	NUM, RESTAURANT_CATEGORY, RESTAURANT_DELIVERY, RESTAURANT_TAKEOUT, RESTAURANT_MENU
-	    )
-	    VALUES (
-	    	#{num, jdbcType=NUMERIC},
-	    	#{category, jdbcType=NUMERIC},
-	    	#{delivery, jdbcType=NUMERIC},
-	    	#{takeOut, jdbcType=NUMERIC},
-	    	#{menu, jdbcType=VARCHAR}
-	    )
+	    <if test="type == 1">
+		    INTO RESTAURANT_REVIEW(
+		    	NUM, RESTAURANT_CATEGORY, RESTAURANT_DELIVERY, RESTAURANT_TAKEOUT, RESTAURANT_MENU
+		    )
+		    VALUES (
+		    	#{num, jdbcType=NUMERIC},
+		    	#{restaurantCategory, jdbcType=NUMERIC},
+		    	#{delivery, jdbcType=NUMERIC},
+		    	#{takeOut, jdbcType=NUMERIC},
+		    	#{menu, jdbcType=VARCHAR}
+		    )
+	    </if>
+	    <if test="type == 2">
+		    INTO HOSPITAL_REVIEW (
+		    	NUM, HOSPITAL_CATEGORY, MEDICAL_CATEGORY, SUB_MEDICAL_CATEGORY
+		    )
+		    VALUES (
+		    	#{num, jdbcType=NUMERIC},
+		    	#{hospitalCategory, jdbcType=NUMERIC},
+		    	#{medicalCategory, jdbcType=NUMERIC},
+		    	#{subMedicalCategory, jdbcType=VARCHAR}
+		    )
+	    </if>
 		SELECT
 		    *
 		FROM
@@ -64,15 +77,55 @@
 		
 	</delete>
 	
-	<select id="selectHospitalsByParams" parameterType="RestaurantSelectParamVO" resultType="HospitalVo">
+	<select id="selectHospitalsByParams" parameterType="SearchParams" resultType="HospitalVo">
+		SELECT
+		    REVIEW.NUM AS num,
+		    REVIEW.TITLE AS title,
+		    REVIEW.CONTENTS AS contents,
+		    REVIEW.STARS AS stars,
+		    REVIEW.GOODS AS goods,
+		    REVIEW.BOOKMARK AS bookmark,
+		    REVIEW.SHARES AS shares,
+		    REVIEW.READ_COUNT AS readCount,
+		    REVIEW.ADD_DATE AS addDate,
+		    REVIEW.TYPE AS type,
+		    PLACE_REVIEW.ADDRESS1 AS address1,
+		    PLACE_REVIEW.ADDRESS2 AS address2,
+		    PLACE_REVIEW.ADDRESS3 AS address3,
+		    PLACE_REVIEW.DETAIL_ADDR AS addr,
+		    PLACE_REVIEW.TEL AS tel,
+		    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
+		    PLACE_REVIEW.WAITING_TIME AS waitingTime,
+		    HOSPITAL_REVIEW.NUM AS category,
+		    HOSPITAL_REVIEW.HOSPITAL_CATEGORY AS hospitalCategory,
+		    HOSPITAL_REVIEW.MEDICAL_CATEGORY AS medicalCategory,
+		    HOSPITAL_REVIEW.SUB_MEDICAL_CATEGORY AS subCategory
+		FROM 
+		    REVIEW
+        INNER JOIN 
+            PLACE_REVIEW
+        ON
+            REVIEW.NUM = PLACE_REVIEW.NUM
+        INNER JOIN
+            HOSPITAL_REVIEW
+        ON
+            PLACE_REVIEW.NUM = HOSPITAL_REVIEW.NUM
+        INNER JOIN 
+            HOSPITAL_CATEGORY
+        ON
+            HOSPITAL_REVIEW.HOSPITAL_CATEGORY = HOSPITAL_CATEGORY.CATEGORY_NUM
+        INNER JOIN 
+            MEDICAL_CATEGORY
+        ON
+            HOSPITAL_REVIEW.MEDICAL_CATEGORY = MEDICAL_CATEGORY.CATEGORY_NUM
+        ORDER BY REVIEW.NUM DESC
+	</select>
+	
+	<select id="selectDigitalsByParams" parameterType="SearchParams" resultType="DigitalVO">
 	
 	</select>
 	
-	<select id="selectDigitalsByParams" parameterType="RestaurantSelectParamVO" resultType="DigitalVO">
-	
-	</select>
-	
-	<select id="selectRestaurantsByParams" parameterType="RestaurantSelectParamVO" resultType="RestaurantVO">
+	<select id="selectRestaurantsByParams" parameterType="SearchParams" resultType="RestaurantVO">
 		<![CDATA[
 			SELECT
 			    REVIEW.NUM AS num,
@@ -110,7 +163,7 @@
 	            RESTAURANT_CATEGORY
 	        ON
 	            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
-	        ORDER BY REVIEW.NUM
+       		ORDER BY REVIEW.NUM DESC
 		]]>
 	</select>
 	

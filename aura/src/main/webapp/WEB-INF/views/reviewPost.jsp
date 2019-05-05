@@ -23,7 +23,7 @@
 				<c:otherwise>
 					기타분류
 				</c:otherwise>
-    	</c:choose>
+    		</c:choose>
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
@@ -115,14 +115,23 @@
 			<div class="col-12 d-flex flex-row p-0 my-1">
 				<i class="col-1 pt-1 fas fa-utensils"></i>
 				<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
-					<c:forEach var="menu" items="${menu}"  varStatus="num">
-						<div class="col-5 p-0 m-0">
-							${menu.name}
-						</div>
-						<div class="col-5 p-0 m-0">
-							${String.format("%,3d", Integer.parseInt(menu.price))}원
-						</div>
-					</c:forEach>
+					<c:if test="${type eq 1}">
+						<c:forEach var="menu" items="${menu}"  varStatus="num">
+							<div class="col-5 p-0 m-0">
+								${menu.name}
+							</div>
+							<div class="col-5 p-0 m-0">
+								${String.format("%,3d", Integer.parseInt(menu.price))}원
+							</div>
+						</c:forEach>
+					</c:if>
+					<c:if test="${type eq 2}">
+						<c:forEach var="sub" items="${sub}"  varStatus="num">
+							<div class="col-5 p-0 m-0">
+								${sub.intValue()}
+							</div>
+						</c:forEach>
+					</c:if>
 				</div>
 			</div>
 			<div class="col-12 d-flex flex-row p-0 my-1">

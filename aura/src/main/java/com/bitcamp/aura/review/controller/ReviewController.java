@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bitcamp.aura.review.model.RestaurantSelectParamVO;
+import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
 import com.bitcamp.aura.reviewlist.service.ReviewListServiceImp;
@@ -28,22 +28,39 @@ public class ReviewController {
 	private ReviewListServiceImp listService;
 
 	@RequestMapping(value = "/post")
-	public String post(int num, int type, Model model, HttpSession session) {
+	public String post(Model model,
+			@RequestParam("num") int num,
+			@RequestParam("type") int type, HttpSession session) {
 		HashMap<String, Object> params = new HashMap<>();
 		params.put("type", type);
 		params.put("num", num);
 		HashMap<String, Object> reviewInfo = service.searchByNum(params);
+		System.out.println(reviewInfo);
 
+		switch (type) {
+			case 1: {
+				model.addAttribute("menu", new Gson()
+						.fromJson((String) reviewInfo.get("MENU"), HashMap.class)
+						.get("menu"));
+				break;
+			}
+			case 2: {
+				model.addAttribute("sub", new Gson()
+						.fromJson((String) reviewInfo.get("SUBCATEGORY"), HashMap.class)
+						.get("subCategory"));
+			}
+		}
+					
 		ReviewListSelectParamsVO params2 = new ReviewListSelectParamsVO();
 		boolean isShare = false;
 		boolean isStar = false;
 		boolean isLike = false;
+		
 		if (session.getAttribute("nickname") == null) {
-
+			
 		} else {
 			params2.setNickname((String) session.getAttribute("nickname"));
 			params2.setPostNum(num);
-			System.out.println("게시글번호:" + num);
 			params2.setReviewType(1);
 			isShare = listService.isShare(params2);
 			params2.setReviewType(2);
@@ -56,11 +73,8 @@ public class ReviewController {
 		reviewInfo.put("isShare", isShare);
 		reviewInfo.put("isLike", isLike);
 		model.addAttribute("reviewInfo", reviewInfo);
-
-		Gson gson = new Gson();
-		HashMap<String, Object> list = gson.fromJson((String) reviewInfo.get("MENU"), HashMap.class);
-		model.addAttribute("menu", list.get("menu"));
-
+		model.addAttribute("type", type);
+		model.addAttribute("num", num);
 		return "reviewPost";
 	}
 
@@ -71,15 +85,17 @@ public class ReviewController {
 	}
 
 	@RequestMapping(value = "/search")
-	public String search(Model model, @RequestParam("type") int type, @RequestParam("keyword") String keyword,
-			@ModelAttribute RestaurantSelectParamVO modelParams) {
+	public String search(Model model,
+			@RequestParam("type") int type,
+			@RequestParam("keyword") String keyword,
+			@ModelAttribute SearchParams params) {
 
 		if (type == 1) {
-			model.addAttribute("list", service.searchRestaurants(modelParams));
+			model.addAttribute("list", service.searchRestaurants(params));
 		} else if (type == 2) {
-			model.addAttribute("list", service.searchHospitals(modelParams));
+			model.addAttribute("list", service.searchHospitals(params));
 		} else if (type == 3) {
-			model.addAttribute("list", service.searchDigitals(modelParams));
+			model.addAttribute("list", service.searchDigitals(params));
 		}
 		model.addAttribute("type", type);
 		model.addAttribute("keyword", keyword);

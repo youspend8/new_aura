@@ -1,4 +1,4 @@
-package com.bitcamp.aura.manager.model;
+package com.bitcamp.aura.user.model;
 
 import java.util.Date;
 

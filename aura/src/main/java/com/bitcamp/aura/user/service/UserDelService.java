@@ -1,8 +1,8 @@
-package com.bitcamp.aura.manager.service;
+package com.bitcamp.aura.user.service;
 
 import java.util.List;
 
-import com.bitcamp.aura.manager.model.UserDelVO;
+import com.bitcamp.aura.user.model.UserDelVO;
 
 public interface UserDelService {
 	public UserDelVO create(UserDelVO userDelVo);

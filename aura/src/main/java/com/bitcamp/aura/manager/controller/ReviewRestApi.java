@@ -43,18 +43,16 @@ public class ReviewRestApi {
 			}
 		}
 		sb.append("]");
-		System.out.println(sb.toString());
-		
 		return sb.toString();
 //		return new Gson().toJson(review);
 	}
 	
 	@PostMapping(value="/")
-	public String write(
+	public boolean write(
 			@RequestParam HashMap<String, Object> params,
 			@RequestParam("file") MultipartFile[] multipartFiles) {
-		service.writeReview(params, multipartFiles);
-		return "true";
+		
+		return service.writeReview(params, multipartFiles) == 1 ? true : false;
 	}
 	
 	@RequestMapping(value="/{num}/{type}")
@@ -69,18 +67,7 @@ public class ReviewRestApi {
 		StringBuilder sb = new StringBuilder();
 		Gson gson = new Gson();
 		sb.append(gson.toJson(review));
-		
-//		sb.append("{\"num\": \"" + review.get("NUM") + "\",");
-//		sb.append("\"category\": \"" + review.get("CATEGORY") + "\",");
-//		sb.append("\"title\": \"" + review.get("TITLE") + "\",");
-//		sb.append("\"contents\": `" + (String)review.get("CONTENTS") + "`,");
-//		sb.append("\"addDate\": \"" + review.get("ADDDATE") + "\",");
-//		sb.append("\"goods\": \"" + review.get("GOODS") + "\",");
-//		sb.append("\"bookmark\": \"" + review.get("BOOKMARK") + "\",");
-//		sb.append("\"comments\": \"" + 0 + "\",");
-//		sb.append("\"readCount\": \"" + review.get("READCOUNT") + "\"}");
 		System.out.println(sb.toString());
-		
 		return sb.toString();
 	}
 }

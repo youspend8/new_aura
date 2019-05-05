@@ -1,4 +1,4 @@
-package com.bitcamp.aura.manager.service;
+package com.bitcamp.aura.user.service;
 
 import java.util.List;
 import java.util.stream.Collector;
@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bitcamp.aura.manager.model.UserDelVO;
-import com.bitcamp.aura.manager.persist.UserDelRepository;
+import com.bitcamp.aura.user.model.UserDelVO;
+import com.bitcamp.aura.user.persist.UserDelRepository;
 
 @Service
 @Transactional

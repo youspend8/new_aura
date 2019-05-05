@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bitcamp.aura.review.common.RestaurantCategory;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
-import com.bitcamp.aura.review.model.RestaurantSelectParamVO;
+import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewFileVO;
 import com.bitcamp.aura.review.model.ReviewVO;
@@ -35,26 +35,26 @@ public class ReviewServiceImpl implements ReviewService {
 	public int writeReview(HashMap<String, Object> params, MultipartFile[] multipartFiles) {
 		// TODO Auto-generated method stub
 		params.put("addDate", new Date());
-		mapper.insert(params);
-		int result = (int)params.get("num");
-		fileUpload.uploadFiles(result, multipartFiles);
-		return 1;
+		int result = mapper.insert(params);
+		int num = (int)params.get("num");
+		fileUpload.uploadFiles(num, multipartFiles);
+		return result;
 	}
 	
 	@Override
-	public List<ReviewVO> searchDigitals(RestaurantSelectParamVO params) {
+	public List<ReviewVO> searchDigitals(SearchParams params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ReviewVO> searchHospitals(RestaurantSelectParamVO params) {
+	public List<ReviewVO> searchHospitals(SearchParams params) {
 		// TODO Auto-generated method stub
-		return null;
+		return setSearchFile(mapper.selectHospitalsByParams(params));
 	}
 	
 	@Override
-	public List<RestaurantVO> searchRestaurants(RestaurantSelectParamVO params) {
+	public List<RestaurantVO> searchRestaurants(SearchParams params) {
 		// TODO Auto-generated method stub
 		return setSearchFile(mapper.selectRestaurantsByParams(params));
 	}
