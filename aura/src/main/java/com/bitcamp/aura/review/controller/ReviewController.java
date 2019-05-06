@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ import com.google.gson.Gson;
 @RequestMapping(value = "/review")
 public class ReviewController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
+	
 	@Autowired
 	private ReviewService service;
 
@@ -35,7 +39,6 @@ public class ReviewController {
 		params.put("type", type);
 		params.put("num", num);
 		HashMap<String, Object> reviewInfo = service.searchByNum(params);
-		System.out.println(reviewInfo);
 
 		switch (type) {
 			case 1: {
@@ -48,9 +51,16 @@ public class ReviewController {
 				model.addAttribute("sub", new Gson()
 						.fromJson((String) reviewInfo.get("SUBCATEGORY"), HashMap.class)
 						.get("subCategory"));
+				break;
 			}
 		}
-					
+
+		logger.info(new StringBuilder()
+					.append("read/")
+					.append((String) session.getAttribute("nickname") + "/")
+					.append(num)
+					.toString());
+		
 		ReviewListSelectParamsVO params2 = new ReviewListSelectParamsVO();
 		boolean isShare = false;
 		boolean isStar = false;
@@ -88,8 +98,16 @@ public class ReviewController {
 	public String search(Model model,
 			@RequestParam("type") int type,
 			@RequestParam("keyword") String keyword,
-			@ModelAttribute SearchParams params) {
-
+			@ModelAttribute SearchParams params,
+			HttpSession session) {
+		
+		logger.info(new StringBuilder()
+					.append("search/")
+					.append((String) session.getAttribute("nickname") + "/")
+					.append(type + "/")
+					.append(keyword)
+					.toString());
+		
 		if (type == 1) {
 			model.addAttribute("list", service.searchRestaurants(params));
 		} else if (type == 2) {

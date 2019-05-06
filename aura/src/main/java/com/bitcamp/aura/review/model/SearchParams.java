@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @Service
 @ToString
 @NoArgsConstructor
@@ -15,7 +17,6 @@ import lombok.ToString;
 public class SearchParams {
 	private int type;
 	private String keyword;
-	private String title;
 	private String orderStars;
 	private String orderPop;
 	private String[] address1;
