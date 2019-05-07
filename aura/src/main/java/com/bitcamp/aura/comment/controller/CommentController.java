@@ -37,31 +37,7 @@ public class CommentController {
 			@RequestParam HashMap<String, Object> params,
 			@RequestParam("files") MultipartFile[] multipartFiles) throws IOException {
 		System.out.println(params);
-		
-//		Arrays.asList(multipartFiles).forEach(file -> System.out.println(file));
-//		
-//		File file = new File(new StringBuilder()
-//				.append("C:/app/")
-//				.append(System.currentTimeMillis() + "_")
-//				.append(multipartFiles[0].getOriginalFilename())
-//				.toString());
-//		
-//		byte[] b = multipartFiles[0].getBytes();
-//		FileOutputStream fs = new FileOutputStream(file);
-//		fs.write(b);
-//		fs.flush();
-		
-//		System.out.println(file);
-		
-		
-//		Iterator<String> files = multi.getFileNames();
-//		
-//		while(files.hasNext()) {
-//			String up = files.next();
-//			MultipartFile mfile=multi.getFile(up);
-//			System.out.println(mfile.getOriginalFilename());
-//		}
-////		commentService.insert_Comment(comment);
+	
 		
 		return "main";
 	}
