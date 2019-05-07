@@ -32,6 +32,8 @@ public class UserController {
 	@Autowired
 	UserServiceImpl userService;
 	
+	
+	
 	@Autowired
 	private NaverLoginAPI naverLogin;
 	@Autowired
