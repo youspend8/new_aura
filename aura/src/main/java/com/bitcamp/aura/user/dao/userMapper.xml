@@ -105,6 +105,7 @@
 			USER_ACCOUNT
 		WHERE
 			NICKNAME = #{nickname, jdbcType=VARCHAR}
+			
 	</select>
 	<select id="selectOneUserid" parameterType="String" resultType="UserVO">
 		SELECT 

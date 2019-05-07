@@ -5,9 +5,17 @@
     
 <mapper namespace="com.bitcamp.aura.review.dao.ReviewFileMapper">
 	<insert id="insert" parameterType="ReviewFileVO">
-		<![CDATA[
-		
-		]]>
+		INSERT INTO
+			REVIEW_FILE (
+				NUM,
+				REVIEW_POST_NUM,
+				REVIEW_FILE
+			)
+		VALUES (
+			null,
+			#{postNum, jdbcType=NUMERIC},
+			#{filePath, jdbcType=VARCHAR}
+		)
 	</insert>
 	<update id="update" parameterType="ReviewFileVO">
 		<![CDATA[

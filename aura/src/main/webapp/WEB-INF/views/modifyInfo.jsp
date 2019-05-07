@@ -68,32 +68,20 @@
 <!-- 3. 이름 입력 -->
 									<div class="form-group">
 										<div class="md-form">
-											<input type="text" class="form-control" id="name" name="name">
+											<input type="text" class="form-control" id="name" name="name" value="${uservo.name }">
 											<label for="name">이름 *</label>
 										</div>
 										<div class="invalid-feedback">이름 입력이 필요합니다</div>
 									</div>
 
 <!-- 4. 닉네임입력 -->
-									<div class="form-group">
-										<div class="md-form" style="display: flex;">
-											<input type="text" class="form-control" id="nickname" name="nickname" style="width: 69%;"> 
-												<label for="nickname">닉네임 *</label>
-											<input type="button"class="btn btn-primary btn-sm" value="중복체크"id="nicknameDupCheck" name="nickname_Check">
-												
-										</div>
-										
-										<div id="nickname_msg" style="font-size: 15px;">
-									
-										</div>
-<!-- 닉네임 안내메세지 -->
-									</div>
+
 <!-- 6.휴대폰 번호 -->
 									<div class="form-group">
 										<div class="d-flex justify-content-between">
 											<div class="md-form my-1">
-												<input type="text" class="form-control" id="phone"
-													name="tel"> <label for="phone">휴대폰 번호 *</label>
+												<input type="text" class="form-control" id="phone"name="tel" value="${uservo.tel }"> 
+													<label for="phone">휴대폰 번호 *</label>
 											</div>
 										</div>
 <!-- 휴대폰번호 입력 안내메세지 -->
@@ -105,7 +93,7 @@
 										<div class="d-flex justify-content-between">
 											<div class="md-form my-1">
 												<input type="text" class="form-control" id="addr_code"
-													name="addr_code" placeholder="우편번호" readonly="readonly">
+													name="addr_code" placeholder="우편번호" readonly="readonly" value="${uservo.addr_code }">
 											</div>
 
 											<div class="md-form my-1">
@@ -121,7 +109,7 @@
 
 										<div class="md-form">
 											<input type="text" class="form-control my-1" id="addr_Detail"
-												name="addr_Detail"> <label for="addr_Detail">상세주소</label>
+												name="addr_Detail" value="${uservo.address }"> <label for="addr_Detail">상세주소</label>
 										</div>
 
 										<input type="hidden" class="form-control my-1" id="addr_refer" name="addr_refer">
@@ -255,52 +243,21 @@
 			DoubleCheck();
 		})
 		
-		$('#nicknameDupCheck').click(function(){
-			 $.ajax({
-				 url : "/user/nickNameCheck",
-				 data : {
-					 nickname : $('#nickname').val()
-				 },
-				 type : "POST",
-				 dataType : "text",
-				 success : function(data){
-					 //공백 정규식
-					var pattern = /\s/g;
-					var nickname_msg = $('#nickname_msg');
-					if(data == "true"){
-						nickname_msg.css('color','blue').text("닉네임사용 가능합니다.");
-						nickNameStatus = true;
-					}else if(data == null){
-						nickname_msg.css('color','red').text("닉네임사용 입력해주세요");
-						nickNameStatus = false;
-					}
-					else{
-						nickname_msg.css('color','red').text("닉네임이 사용중입니다.");	
-						nickNameStatus = false;
-					}
-				 }
-			 })
-		})
 		
-		
-		var nickNameStatus = false;
 		var passwordStatus = false;
 		var DoubleStatus = false;
 		
 		function modify_Check(){
 			if( 
 					$('#password').val() == $('#pwCheck').val() && 
-					window.nickNameStatus  == true &&
 					window.passwordStatus == true
 			){
 				alert('정보수정 완료');
-				console.log(nickNameStatus == true);
 				console.log(passwordStatus == true);
 				console.log(DoubleStatus == true);
 				return true;
 			}else
 				alert('정보수정 실패');
-				console.log(nickNameStatus == true);
 				console.log(passwordStatus == true);
 				console.log(DoubleStatus == true);
 			

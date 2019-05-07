@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/js/popper.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -16,62 +18,172 @@
     <link href="/css/mdb.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
 	<link href="/css/style.css" rel="stylesheet">
+	<jsp:include page="/WEB-INF/views/modal/favorite_modal.jsp"></jsp:include>
+	
+	<style type="text/css">
+		#background {
+			width: 100%;
+			height: 500px;
+			background-image: url('/img/main/full_background.jpg');
+			position: fixed;
+			top : 0;
+			z-index: 0;
+		}
+		
+		#header {
+			height: 500px;
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			display: flex;
+			flex-flow: column;
+			align-items: center;
+		}
+		
+		.search_form {
+			text-align: center;
+		}
+		
+		.search_select {
+			width: 35%;
+			height: 50px;
+			border-bottom-left-radius: 400px;
+			border-top-left-radius: 400px;
+			border: 4px solid orange;
+			border-right: 0px;
+		}
+		
+		.search_input {
+			height: 50px;
+			border-bottom-right-radius: 400px;
+			border-top-right-radius: 400px;
+			border: 4px solid orange;
+		}
+		
+		.search_select > option {
+			width: 50%;
+		}
+		
+		.navigation {
+			height: 60px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			position: sticky;
+ 			position: -webkit-sticky;
+			width: 100%;
+			top: 0;
+			z-index: 100;
+			background-color: orange;
+			padding: 0;
+			align-items: center;
+		}
+		
+		.social_content {
+			width: 15%;
+			margin: 0;
+			display: flex;
+			flex-flow: row;
+			padding: 13px 0;
+		}
+		
+		.navigation_brand_logo {
+			width: 60%;
+			padding: 0 5%;
+		}
+		
+		.brand_logo {
+			margin: 55px 0;
+		}
+		
+		.register_button,
+		.login_button {
+			margin: 0;
+			display: flex;
+			align-items: center;
+			vertical-align: middle;
+			justify-content: center;
+			text-align: center;
+			width: 50%;
+			font-size: 1rem;
+			font-weight: 800;
+		}
+		
+		@media (max-width: 768.9px) {
+			#background,
+			#header {
+				height: 300px;
+			}
+			.navigation_brand_logo {
+				display: none;
+			}
+			.user_icon {
+				font-size: 25px;
+			}
+			.brand_logo {
+				margin: 30px 0;
+			}
+			.login_button {
+				width: 100%;
+			}
+		}
+		
+		.container {
+			max-width: 70%;
+			margin: 0 auto;
+		}
+		@media (max-width: 1199.98px) {
+			.container {
+				max-width: 100%;
+			}
+		}
+		
+	</style>
 </head>
 <body>
-  <div class="container" id="header">
-    <header class="row m-0 justify-content-center pb-md-4" style=" border-bottom: 1px solid #e3e6ea">
-      <a href="/main" class="col-12 col-lg-3 col-md-3 pt-2 pt-md-3 mt-lg-5 text-center text-md-right order-2 order-lg-1">
-        <img src="/img/logo/logo.png" width="130px" class="pt-1">
-      </a>
-
-      <div class="pt-2 pt-md-3 pl-0 pl-md-0 mt-lg-5 pr-0 pb-3 pb-md-3 col-lg-6 col-md-7 d-flex align-items-center order-2 order-lg-1">
-        <form class="form-check-inline w-100" action="/review/search">
-        	<select class="form-control w-25" style="border-radius: 5%" name="type">
-        		<option value="1">음식점</option>
-        		<option value="2">병원</option>
-        		<option value="3">전자제품</option>
-        	</select>
-          <input class="form-control ml-3 w-100" type="text" name="keyword" placeholder="Search" style="border-radius: 400px; ">
+    <header class="navigation" id="navigation">
+		<a href="/main" style="width: 15%;">
+			<img class="navigation_brand_logo" src="/img/logo/logo2.png">
+		</a>
 		
-          	<button type="submit" class="fas text-dark ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
-        </form>
-      </div>
-
-
-
-
-
-      <div class="d-lg-none col-md-5"></div>
-
-      <div class="col-lg-3 col-12 pl-lg-4 pl-md-0 pr-0 order-1 order-lg-1">
-        <ul class="d-flex justify-content-end justify-content-lg-end  pt-3 flex-wrap" style="padding: 0">
-          <li>
-            <i class="fas fa-user-alt" style="font-size: 1rem;"></i>
-          </li>
-          <li class="deconone">
-          
-          	<c:choose> 
-	          	<c:when test="${nickname ne null}" >	          	 
-	          	  ${nickname}님 &nbsp;
-	          	 
-	          	 <a href="/user/modifyInfo" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">회원수정</a>
-	          	</c:when>
-	          	<c:otherwise>
-	          	   <a href="/user/loginForm" class="text-dark p-3 pt-5" style="font-size: 0.7rem; padding: 0;">로그인</a>          	
-	          	</c:otherwise>
-          	</c:choose>
-          </li>
-          <li class="deconone">
-          	<c:choose>
-          		<c:when test = "${nickname eq null}">
-          		<a href="/user/registerForm" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">회원가입</a>
-          		</c:when>
-          		<c:otherwise>
-          		   <a href="/user/logout" class="text-dark p-3" style="font-size: 0.7rem; padding: 0;">로그아웃</a>
-          		</c:otherwise>
-          	</c:choose>
-          </li>
-        </ul>
-      </div>
+		<div id="navigation_search_form" class="col-md-6 col-11 p-0">
+			<c:set var="currentPage" value="${pageContext.request.requestURI}" />
+		
+			<c:if test="${!fn:contains(currentPage,'main.jsp')}">
+				<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">
+					<select class="form-control search_select" name="type">
+						<option value="1">음식점</option>
+						<option value="2">병원</option>	
+						<option value="3">전자제품</option>
+					</select>
+					
+					<input class="form-control search_input" type="text" name="keyword" placeholder="Search" autocomplete="off">
+				
+					<button type="submit" class="fas text-white ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
+				</form>
+			</c:if>
+		</div>
+		
+		<ul class="social_content col-md-2 col-1">
+			<c:choose> 
+				<c:when test="${nickname ne null}">	          	
+					<li class="w-100">
+						<a href="#" class="fas fa-user-alt text-dark text-center user_icon" data-target="#fullHeightModalRight" data-toggle="modal">
+							<span class="user_nickname d-s">${nickname}님</span>
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li class="login_button">
+						<a href="/user/loginForm" class="d-md-flex d-none text-dark text-center">로그인</a>
+						<a href="/user/loginForm" class="d-md-none d-flex fas fa-user-alt text-dark text-center user_icon"></a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			<c:if test = "${nickname eq null}">
+				<li class="register_button d-md-flex d-none">
+					<a href="/user/registerForm" class="text-dark text-center">회원가입</a>
+				</li>
+			</c:if>
+		</ul>
     </header>
-  </div>

@@ -2,6 +2,7 @@ package com.bitcamp.aura.review.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,14 +10,16 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bitcamp.aura.review.common.RestaurantCategory;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
-import com.bitcamp.aura.review.model.RestaurantSelectParamVO;
+import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewFileVO;
 import com.bitcamp.aura.review.model.ReviewVO;
+import com.bitcamp.aura.review.util.FileUpload;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -25,21 +28,33 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper mapper;
 	@Autowired
 	private ReviewFileMapper fileMapper;
-
+	@Autowired
+	private FileUpload fileUpload;
+	
 	@Override
-	public List<ReviewVO> searchDigitals(RestaurantSelectParamVO params) {
+	public int writeReview(HashMap<String, Object> params, MultipartFile[] multipartFiles) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ReviewVO> searchHospitals(RestaurantSelectParamVO params) {
-		// TODO Auto-generated method stub
-		return null;
+		params.put("addDate", new Date());
+		int result = mapper.insert(params);
+		int num = (int)params.get("num");
+		fileUpload.uploadFiles(num, multipartFiles);
+		return result;
 	}
 	
 	@Override
-	public List<RestaurantVO> searchRestaurants(RestaurantSelectParamVO params) {
+	public List<ReviewVO> searchDigitals(SearchParams params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ReviewVO> searchHospitals(SearchParams params) {
+		// TODO Auto-generated method stub
+		return setSearchFile(mapper.selectHospitalsByParams(params));
+	}
+	
+	@Override
+	public List<RestaurantVO> searchRestaurants(SearchParams params) {
 		// TODO Auto-generated method stub
 		return setSearchFile(mapper.selectRestaurantsByParams(params));
 	}
@@ -76,4 +91,5 @@ public class ReviewServiceImpl implements ReviewService {
 		System.out.println(list);
 		return StreamSupport.stream(list.spliterator(), true).collect(Collectors.toList());
 	}
+
 }

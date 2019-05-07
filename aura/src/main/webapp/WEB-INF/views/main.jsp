@@ -5,256 +5,195 @@
 	<jsp:include page="/WEB-INF/views/commons/header.jsp"></jsp:include>
 	<title>All Review</title>
 	
-  <div class="container first_container">
+	<div id="header">
+		<a href="/main" class="brand_logo">
+			<img src="/img/logo/logo.png" width="130px" class="pt-1">
+		</a>
+		<div id="search_form" class="search_form col-md-6 col-12 p-0">
+			<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">
+				<select class="form-control search_select" name="type">
+					<option value="1">음식점</option>
+					<option value="2">병원</option>
+					<option value="3">전자제품</option>
+				</select>
+				
+				<input class="form-control search_input" type="text" name="keyword" placeholder="Search" autocomplete="off">
+			
+				<button type="submit" class="fas text-white ml-2 fa-search" style="font-size: 20px; background-color: transparent; border: 0px transparent solid;"></button>
+			</form>
+		</div>
+		<div style="height: 100px;"></div>
+	</div>
+	
+	<script>
+		document.onscroll = function() {
+			var isSearchFormInNav = false;
+			var nav_search_form = $('#navigation_search_form');
+			var origin_search_form = $('#origin_search_form');
+			var search_form = $('#search_form');
+			
+			console.log(window.scrollY)
+			if (window.scrollY > 200) {
+				isSearchFormInNav = true;
+				nav_search_form.append(origin_search_form);
+				$('#navigation').css({
+					'position': 'sticky',
+					'top': 0
+				})
+			} else if (window.scrollY <= 200) {
+				isSearchFormInNav = false;
+				search_form.append(origin_search_form);
+				$('#navigation').css({
+					'position': 'sticky',
+					'top': 0
+				})
+			}
+		}
+	</script>
+<!--   <div class="container first_container"> -->
+<!--     <section class="row m-0 w-100 h-100"> -->
+<!--       첫번째 캐러 -->
+<!--       <div class="col-lg-8 col-md-12 p-0 h-100"> -->
 
-    <section class="row m-0 w-100 h-100">
-      <!-- 첫번째 캐러 -->
-      <div class="col-lg-8 col-md-12 p-0 h-100">
+<!--         <div style="height: 1px; position: absolute; z-index: 2;"> -->
+<!--           Navbar -->
+<!--           <nav class="mb-1 m-2  navbar-expand navbar-dark"> -->
+<!--             <div class="collapse navbar-collapse" id="navbarSupportedContent-555"> -->
+<!--               <ul class="navbar-nav mr-auto"> -->
 
-        <div style="height: 1px; position: absolute; z-index: 2;">
-          <!--Navbar -->
-          <nav class="mb-1 m-2  navbar-expand navbar-dark">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-              <ul class="navbar-nav mr-auto">
+<!--                 <li class="nav-item dropdown"> -->
+<!--                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown" -->
+<!--                     aria-haspopup="true" aria-expanded="false">병원 -->
+<!--                   </a> -->
+<!--                   <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555"> -->
+<!--                     <a class="dropdown-item" href="#">Action</a> -->
+<!--                     <a class="dropdown-item" href="#">Another action</a> -->
+<!--                     <a class="dropdown-item" href="#">Something else here</a> -->
+<!--                   </div> -->
+<!--                 </li> -->
+<!--                 <li class="nav-item dropdown"> -->
+<!--                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown" -->
+<!--                     aria-haspopup="true" aria-expanded="false">맛집 -->
+<!--                   </a> -->
+<!--                   <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555"> -->
+<!--                     <a class="dropdown-item" href="#">Action</a> -->
+<!--                     <a class="dropdown-item" href="#">Another action</a> -->
+<!--                     <a class="dropdown-item" href="#">Something else here</a> -->
+<!--                   </div> -->
+<!--                 </li> -->
+<!--                 <li class="nav-item dropdown"> -->
+<!--                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown" -->
+<!--                     aria-haspopup="true" aria-expanded="false">Dropdown -->
+<!--                   </a> -->
+<!--                   <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555"> -->
+<!--                     <a class="dropdown-item" href="#">Action</a> -->
+<!--                     <a class="dropdown-item" href="#">sdfsdfsdfsdfsdn</a> -->
+<!--                     <a class="dropdown-item" href="#">Something else here</a> -->
+<!--                   </div> -->
+<!--                 </li> -->
+<!--               </ul> -->
 
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">병원
-                  </a>
-                  <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">맛집
-                  </a>
-                  <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Dropdown
-                  </a>
-                  <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">sdfsdfsdfsdfsdn</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li>
-              </ul>
-
-            </div>
-          </nav>
-          <!--/.Navbar -->
-        </div>
-
-
-        <!--Carousel Wrapper-->
-        <div id="carousel-example-2" class="carousel slide carousel-fade d-inline-block h-100" data-ride="carousel"
-          data-interval="2000">
-          <!--Indicators-->
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-2" data-slide-to="1"></li>
-            <li data-target="#carousel-example-2" data-slide-to="2"></li>
-          </ol>
-          <!--/.Indicators-->
-          <!--Slides-->
-          <div class="carousel-inner h-100" role="listbox">
-            <div class="carousel-item active">
-              <div class="view">
-                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"
-                  alt="First slide" >
-                <div class="mask rgba-black-light"></div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <!--Mask color-->
-              <div class="view">
-                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg"
-                  alt="Second slide">
-                <div class="mask rgba-black-strong"></div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <!--Mask color-->
-              <div class="view">
-                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg"
-                  alt="Third slide">
-                <div class="mask rgba-black-slight"></div>
-              </div>
-            </div>
-          </div>
-          <!--/.Slides-->
-          <!--Controls-->
-          <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-          <!--/.Controls-->
-        </div>
-      </div>
+<!--             </div> -->
+<!--           </nav> -->
+<!--           /.Navbar -->
+<!--         </div> -->
 
 
-      <!-- 랭킹시작 -->
-      <div class="col-lg-4 col-md-12 p-0 d-flex flex-wrap">
-
-        <div class="col-lg-12 col-md-6 d-flex flex-wrap bg-dark rank_section"
-          style="padding: 0; overflow: hidden;">
-          <!--랭킹  -->
-
-          <ul class="col-lg-12 d-flex text-center h-lg-50 h-md-100 m-0 p-0">
-            <li>
-              <a href="#" class="text-dark" style="font-weight: bold;">별점 순위</a>
-              <ul class="m-0 p-0 text-left">
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">1.</span>
-                    별점 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">2.</span>
-                    전자기기 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">3.</span>
-                    별점 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">4.</span>
-                    맛집 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">5.</span>
-                    전자기기 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">6.</span>
-                    전자기기 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">7.</span>
-                    맛집 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">8.</span>
-                    맛집 순위
-                  </a>
-                </li>
-                <li class="col-12">
-                  <a href="#" class="text-dark" style="font-size: 10px;">
-                    <span style="font-size: 10px; margin-right: 3px; font-weight: 700">9.</span>
-                    맛집 순위
-                  </a>
-                </li>
+<!--         Carousel Wrapper -->
+<!--         <div id="carousel-example-2" class="carousel slide carousel-fade d-inline-block h-100" data-ride="carousel" -->
+<!--           data-interval="2000"> -->
+<!--           Indicators -->
+<!--           <ol class="carousel-indicators"> -->
+<!--             <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li> -->
+<!--             <li data-target="#carousel-example-2" data-slide-to="1"></li> -->
+<!--             <li data-target="#carousel-example-2" data-slide-to="2"></li> -->
+<!--           </ol> -->
+<!--           /.Indicators -->
+<!--           Slides -->
+<!--           <div class="carousel-inner h-100" role="listbox"> -->
+<!--             <div class="carousel-item active"> -->
+<!--               <div class="view"> -->
+<!--                 <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" -->
+<!--                   alt="First slide" > -->
+<!--                 <div class="mask rgba-black-light"></div> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--             <div class="carousel-item"> -->
+<!--               Mask color -->
+<!--               <div class="view"> -->
+<!--                 <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg" -->
+<!--                   alt="Second slide"> -->
+<!--                 <div class="mask rgba-black-strong"></div> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--             <div class="carousel-item"> -->
+<!--               Mask color -->
+<!--               <div class="view"> -->
+<!--                 <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg" -->
+<!--                   alt="Third slide"> -->
+<!--                 <div class="mask rgba-black-slight"></div> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--           /.Slides -->
+<!--           Controls -->
+<!--           <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev"> -->
+<!--             <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--             <span class="sr-only">Previous</span> -->
+<!--           </a> -->
+<!--           <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next"> -->
+<!--             <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--             <span class="sr-only">Next</span> -->
+<!--           </a> -->
+<!--           /.Controls -->
+<!--         </div> -->
+<!--       </div> -->
 
 
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="text-dark" style="font-weight: bold">맛집 순위</a>
+<!--         2nd 광고판~ -->
+<!--         <div class="col-lg-12 col-md-6 m-0 p-0 evnetPan" style="background: burlywood;"> -->
+<!--           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false"> -->
+<!--             <ol class="carousel-indicators"> -->
+<!--               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li> -->
+<!--               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
+<!--               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
+<!--             </ol> -->
+<!--             <div class="carousel-inner evnetPan"> -->
+<!--               <div class="carousel-item active"> -->
+<!--                 <a href=".."><img src="/img/event/이벤트1.jpg" class="d-block w-100" alt="..."></a> -->
+<!--               </div> -->
+<!--               <div class="carousel-item evnetPan"> -->
+<!--                 <img src="/img/event/이벤트2.jpg" class="d-block w-100" alt="..."> -->
+<!--               </div> -->
+<!--               <div class="carousel-item evnetPan"> -->
+<!--                 <img src="/img/event/이벤트3.jpg" class="d-block w-100" alt="..."> -->
+<!--               </div> -->
+<!--             </div> -->
+<!--             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> -->
+<!--               <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--               <span class="sr-only">Previous</span> -->
+<!--             </a> -->
+<!--             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> -->
+<!--               <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--               <span class="sr-only">Next</span> -->
+<!--             </a> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--         2nd 광고판~end -->
+<!--       </div> -->
 
-              <ul class="m-0 p-0">
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">별점 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">맛집 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">전자기기 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">별점 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">맛집 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">전자기기 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">전자기기 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">맛집 순위</a></li>
+<!--     </section> -->
+<!--     //광고판있는 줄 끝 -->
 
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="text-dark" style="font-weight: bold">전자기기 순위</a>
-
-              <ul class="m-0 p-0">
-                <li class="col-12"><a href="#" class="text-dark " style="font-size: 10px;">별점 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">맛집 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">전자기기 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">별점 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">맛집 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">전자기기 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">전자기기 순위</a></li>
-                <li class="col-12"><a href="#" class="text-dark" style="font-size: 10px;">맛집 순위</a></li>
-
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <!-- 랭킹시작 끝-->
-
-        <!-- 2nd 광고판~ -->
-        <div class="col-lg-12 col-md-6 m-0 p-0 evnetPan" style="background: burlywood;">
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner evnetPan">
-              <div class="carousel-item active">
-                <a href=".."><img src="/img/event/이벤트1.jpg" class="d-block w-100" alt="..."></a>
-              </div>
-              <div class="carousel-item evnetPan">
-                <img src="/img/event/이벤트2.jpg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item evnetPan">
-                <img src="/img/event/이벤트3.jpg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-        </div>
-        <!-- 2nd 광고판~end -->
-      </div>
-
-    </section>
-    <!-- //광고판있는 줄 끝 -->
-
-  </div>
-
-  <hr />
-
-
-
+<!--   </div> -->
 
   <!-- 인기리뷰시작 -->
-
-  <div class="container ">
-    <div class="mt-5 " style="font-weight: bold; padding-left: 7%; ">인기리뷰</div>
+  
+  	<div id="background"></div>
+<div style="z-index: 1; background-color: white;
+			position: relative;">
+  <div class="container">
+    <h5 class="pt-4 m-0" style="font-weight: bold; padding-left: 7%; ">인기리뷰</h5>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
 
       <div class="carousel-inner">
@@ -1836,5 +1775,5 @@
       </div>
     </div>
   </div>
-  
+</div>
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>

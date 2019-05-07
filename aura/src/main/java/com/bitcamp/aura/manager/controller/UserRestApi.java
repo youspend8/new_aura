@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bitcamp.aura.manager.util.JsonFormatConverter;
 import com.bitcamp.aura.user.model.UserVO;
 import com.bitcamp.aura.user.service.UserService;
 import com.google.gson.Gson;
@@ -36,14 +37,7 @@ public class UserRestApi {
 		List<UserVO> list = userService.getAllUser();
 		list.forEach(user -> {
 			if (user.getDelDate() != null) {
-				try {
-					user.setDelDate(new SimpleDateFormat("yyyy-MM-dd")
-							.format(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-									.parse(user.getDelDate())));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				new JsonFormatConverter().dateFormatConverter(user);
 			}
 		});
 		
@@ -79,14 +73,7 @@ public class UserRestApi {
 		List<UserVO> list = userService.getWithdrawUser();
 		list.forEach(user -> {
 			if (user.getDelDate() != null) {
-				try {
-					user.setDelDate(new SimpleDateFormat("yyyy-MM-dd")
-							.format(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-									.parse(user.getDelDate())));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				new JsonFormatConverter().dateFormatConverter(user);
 			}
 		});
 		return new Gson().toJson(list);

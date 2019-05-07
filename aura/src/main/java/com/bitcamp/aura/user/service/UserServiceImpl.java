@@ -23,10 +23,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.bitcamp.aura.manager.model.UserDelVO;
-import com.bitcamp.aura.manager.persist.UserDelRepository;
 import com.bitcamp.aura.user.dao.UserMapper;
+import com.bitcamp.aura.user.model.UserDelVO;
 import com.bitcamp.aura.user.model.UserVO;
+import com.bitcamp.aura.user.persist.UserDelRepository;
 
 @Service
 @Transactional
