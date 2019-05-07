@@ -56,6 +56,14 @@
 		FROM
 			USER_COMMENT
 	</select>
+	
+	<select id="selectAllByNum" parameterType="int" resultType="CommentVO">
+		SELECT
+			*
+		FROM
+			USER_COMMENT
+			where REVIEW_POST_NUM=#{postNum} order by COMMENT_DATE
+	</select>
 
 
 

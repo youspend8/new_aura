@@ -20,7 +20,7 @@ public class CommentVO {
     private String nickname;
     private String comment_Contents;
     private int comment_Like;
-    private int comment_Score;
+    private float comment_Score;
     private String comment_Date;
     private int comment_Num;
 }
