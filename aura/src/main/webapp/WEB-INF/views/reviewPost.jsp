@@ -1261,10 +1261,8 @@ var flag2=true;
         	var comment = $('#comment').val();
         	var formData = new FormData($('#commentForm')[0]);
         	
-        	for (var index = 0; index < Object.keys(files).length; index++){
-        		//formData 공간에 files라는 이름으로 파일을 추가한다.
-                //동일명으로 계속 추가할 수 있다.'
-                formData.append('files',files[index]);
+        	for (var a in files) {
+        		formData.append('files', files[a]);
         	}
         	
         	if (comment == "") {
