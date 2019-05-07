@@ -201,7 +201,6 @@
 
 				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
 				
-			</form>
 					<div class="mr-2" style="width: 20%;">
 						<label for="comment_file" class="filebox">
 							<a>
@@ -211,10 +210,8 @@
 						</label>
 					</div>
 					
-					
-					
-					
 				</div>
+			</form>
 
 				
 				
@@ -848,38 +845,7 @@ var flag2=true;
             
         });
         
-        function fileSubmit(){ // 멀티파트 파일 업로더
-        	
-        	var comment = $('#comment').val();
-        	var formData = new FormData($('#commentForm')[0]);
-        	
-        	for (var index = 0; index < Object.keys(files).length; index++){
-        		//formData 공간에 files라는 이름으로 파일을 추가한다.
-                //동일명으로 계속 추가할 수 있다.'
-                formData.append('files',files[index]);
-        	}
-        	
-        	if (comment == "") {
-        		alert('내용을 입력해주세요.');
-        	} else {
-        		$.ajax({
-       	            url : "/comment/write",
-       				type : "post",
-       				data : formData,
-       				processData : false,
-       				contentType : false,
-       				
-       				success: function(data){
-       					
-       				},
-       				error : function(error) {
-       					alert("파일업로드 실패");
-       					console.log(error);
-       					console.log(error.status);
-       				}
-       	        });
-        	}
-        }
+        
         
         
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
@@ -949,14 +915,22 @@ var flag2=true;
 <script>
 	var files = {};
 	var previewIndex = 0;
+	var test = 0;
 	
 	function addPreview(input) {
 		
-		if (input[0].files) {
+		image_Exists : if (input[0].files) {
 	        //파일 선택이 여러개였을 시의 대응
 	        for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 	            var file = input[0].files[fileIndex];
 	            var reader = new FileReader();
+	            
+	            for (var i = 0; i < test; i++){
+	            	if (files[i].name == input[0].files[fileIndex].name){
+	            		alert(input[0].files[fileIndex].name + ' 는 이미 업로드된 이미지입니다.');
+	            		break image_Exists;
+	            	}
+	            };
 	            
 	            reader.onload = function(img) {
 	                var imgNum = previewIndex++;
@@ -966,8 +940,14 @@ var flag2=true;
 	                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
 	                                        + "<a value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">"
 	                                        + "삭제" + "</a>" + "</div>");
-	                files[imgNum] = file;
+	                
+// 	                files[imgNum] = file; 이 슈벌놈이 바깥 for문 다돌고 이거 들어와서 또 따로 for문 돔
+	                
+// 	                alert(fileIndex);
+// 	                console.dir(files[imgNum]);
 	            };
+	            files[test] = file;
+	            test++;
 	            reader.readAsDataURL(file);
 	        }
 	    } else
@@ -978,12 +958,52 @@ var flag2=true;
 		addPreview($(this)); //preview form 추가하기
 	});
 	
+	
+	
 	function deletePreview(obj) {	// 미리보기 사진 삭제
 	var imgNum = obj.attributes['value'].value;
 	delete files[imgNum];
 	$("#comment_image .preview-box[value=" + imgNum + "]").remove();
 	resizeHeight();
 	}
+	
+	
+	
+	function fileSubmit(){ // 멀티파트 파일 업로더
+    	
+    	var comment = $('#comment').val();
+    	var formData = new FormData($('#commentForm')[0]);
+    	
+    	for (var index = 0; index < Object.keys(files).length; index++){
+    		//formData 공간에 files라는 이름으로 파일을 추가한다.
+            //동일명으로 계속 추가할 수 있다.'
+//             alert(Object.keys(files).length);
+//     		alert(files[index]);
+            formData.append('files',files[index]);
+//     		console.dir(files[index]);
+    	}
+    	
+    	if (comment == "") {
+    		alert('내용을 입력해주세요.');
+    	} else {
+    		$.ajax({
+   	            url : "/comment/write",
+   				type : "post",
+   				data : formData,
+   				processData : false,
+   				contentType : false,
+   				
+   				success: function(data){
+   					
+   				},
+   				error : function(error) {
+   					alert("파일업로드 실패");
+   					console.log(error);
+   					console.log(error.status);
+   				}
+   	        });
+    	}
+    }
 	
 	
 </script>

@@ -61,7 +61,7 @@ public class CommentServicelmpl implements CommentService{
 //              long fileSize = mf.getSize(); // 파일 사이즈를 알고 싶다면 주석을 푸시오
 //              System.out.println("fileSize : " + fileSize);
             	
-                String safeFile = path + System.currentTimeMillis() + originFileName;
+                String safeFile = path + System.currentTimeMillis() + "\t" + originFileName;
                 System.out.println(safeFile);
                 
                 try {
