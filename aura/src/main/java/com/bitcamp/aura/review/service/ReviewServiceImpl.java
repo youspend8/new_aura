@@ -67,7 +67,7 @@ public class ReviewServiceImpl implements ReviewService {
 			list = mapper.selectHospitalsByParams(params);
 		}
 		
-		List<String> addrList = StreamSupport.stream(list.spliterator(), true)
+		List<String> addrList =	list.stream()
 									.map(item -> ((PlaceVO) item).getAddr())
 									.collect(Collectors.toList());
 		return addrList;
@@ -102,8 +102,8 @@ public class ReviewServiceImpl implements ReviewService {
 					.collect(Collectors.toList());
 			((ReviewVO) review).setFiles(files);
 		});
-		System.out.println(list);
-		return StreamSupport.stream(list.spliterator(), true).collect(Collectors.toList());
+		
+		return list;
 	}
 
 }

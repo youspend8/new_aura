@@ -2,6 +2,7 @@ package com.bitcamp.aura.review.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,14 +11,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bitcamp.aura.comment.dao.CommentMapper;
 import com.bitcamp.aura.comment.model.CommentVO;
 import com.bitcamp.aura.comment.service.CommentServicelmpl;
+import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
@@ -106,7 +108,7 @@ public class ReviewController {
 		return "reviewPost";
 	}
 
-	@RequestMapping(value = "/search")
+	@GetMapping(value = "/search")
 	public String search(Model model,
 			@ModelAttribute SearchParams params,
 			HttpSession session) {
@@ -122,6 +124,14 @@ public class ReviewController {
 		model.addAttribute("type", params.getType());
 		model.addAttribute("keyword", params.getKeyword());
 		return "/reviewList";
+	}
+	
+	@GetMapping(value="/search/more")
+	@ResponseBody
+	public List<ReviewVO> searchMore(
+			@ModelAttribute SearchParams params) {
+		
+		return service.search(params);
 	}
 	
 	@RequestMapping(value = "/search/address")
