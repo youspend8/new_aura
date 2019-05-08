@@ -867,38 +867,6 @@ var flag2=true;
             
         });
         
-        function fileSubmit(){ // 멀티파트 파일 업로더
-        	
-        	var comment = $('#comment').val();
-        	var formData = new FormData($('#commentForm')[0]);
-        	
-        	for (var a in files) {
-        		formData.append('files', files[a]);
-        	}
-        	
-        	if (comment == "") {
-        		alert('내용을 입력해주세요.');
-        	} else {
-        		$.ajax({
-       	            url : "/comment/write",
-       				type : "post",
-       				data : formData,
-       				processData : false,
-       				contentType : false,
-       				
-       				success: function(data){
-       					
-       				},
-       				error : function(error) {
-       					alert("파일업로드 실패");
-       					console.log(error);
-       					console.log(error.status);
-       				}
-       	        });
-        	}
-        };
-        
-        
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
         	var comment = $('#comment').val();
