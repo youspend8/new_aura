@@ -934,7 +934,9 @@ var flag2=true;
 <script>
 	var files = new Array();
 	var previewIndex = 0;
+	var deleteIndex = 0;
 	var test = 0;
+	var j = 0;
 	
 	function addPreview(input) {
 		
@@ -953,30 +955,36 @@ var flag2=true;
 	            
 	            reader.onload = function(img) {
 	            	var imgNum = previewIndex++;
-	                $("#comment_image")
-	                        .append(
-	                                "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + imgNum +"\">"
-	                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
-	                                        + "<a id=\"" + imgNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
-	                                        + "삭제" + "</a>" + "</div>");
-	                console.dir(img.target);
+	            	var deleteNum = deleteIndex++;
+	            	
+            		if (files[i].name != null) {
+            			$("#comment_image")
+                        .append(
+                                "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
+                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
+                                        + "<a id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                        + "삭제" + "</a>" + "</div>");
+            			alert('gdgd');
+            		}
+	            	
 	            };
+	            
 	            files[test] = file;
 	            test++;
 	            reader.readAsDataURL(file);
+	            console.dir(input[0].files[fileIndex]);
 	        }
 	    } else
-	        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+	        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책 세우지 않았음
 	}
 	
 	$('#comment_file').change(function() {
-		addPreview($(this)); //preview form 추가하기
+		addPreview($(this));
 	});
 	
 	function deletePreview(obj) {	// 미리보기 사진 삭제
-	var imgNumber = obj.attributes['id'].value;
+	var deleteNum = obj.attributes['id'].value;
 	var imgId = obj.attributes['value'].value;
-// 	delete files[imgNum];
 	
 	for (var i in files){
 		if(files[i].name == imgId){
@@ -986,8 +994,7 @@ var flag2=true;
 		}
 	};
 	
-	$("#comment_image .preview-box[value=" + imgNumber + "]").remove();
-// 	resizeHeight();
+	$("#comment_image .preview-box[value=" + deleteNum + "]").remove();
 	}
 	
 	
@@ -997,18 +1004,8 @@ var flag2=true;
     	var comment = $('#comment').val();
     	var formData = new FormData($('#commentForm')[0]);
     	
-//     	for (var sys in Object.keys(files)){
-//     		formData.append('files',files[sys]);
-//     	}
-    	
-    	
     	for (var index = 0; index < Object.keys(files).length; index++){
-    		//formData 공간에 files라는 이름으로 파일을 추가한다.
-            //동일명으로 계속 추가할 수 있다.'
-//             alert(Object.keys(files).length);
-//     		alert(files[index]);
             formData.append('files',files[index]);
-//     		console.dir(files[index]);
     	}
     	
     	if (comment == "") {
