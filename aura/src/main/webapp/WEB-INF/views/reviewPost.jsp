@@ -867,38 +867,6 @@ var flag2=true;
             
         });
         
-        function fileSubmit(){ // 멀티파트 파일 업로더
-        	
-        	var comment = $('#comment').val();
-        	var formData = new FormData($('#commentForm')[0]);
-        	
-        	for (var a in files) {
-        		formData.append('files', files[a]);
-        	}
-        	
-        	if (comment == "") {
-        		alert('내용을 입력해주세요.');
-        	} else {
-        		$.ajax({
-       	            url : "/comment/write",
-       				type : "post",
-       				data : formData,
-       				processData : false,
-       				contentType : false,
-       				
-       				success: function(data){
-       					
-       				},
-       				error : function(error) {
-       					alert("파일업로드 실패");
-       					console.log(error);
-       					console.log(error.status);
-       				}
-       	        });
-        	}
-        };
-        
-        
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
         	var comment = $('#comment').val();
@@ -964,9 +932,11 @@ var flag2=true;
     </script>
     
 <script>
-	var files = {};
+	var files = new Array();
 	var previewIndex = 0;
+	var deleteIndex = 0;
 	var test = 0;
+	var j = 0;
 	
 	function addPreview(input) {
 		
@@ -984,38 +954,47 @@ var flag2=true;
 	            };
 	            
 	            reader.onload = function(img) {
-	                var imgNum = previewIndex++;
-	                $("#comment_image")
-	                        .append(
-	                                "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + imgNum +"\">"
-	                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
-	                                        + "<a value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">"
-	                                        + "삭제" + "</a>" + "</div>");
-	                
-// 	                files[imgNum] = file; 이 슈벌놈이 바깥 for문 다돌고 이거 들어와서 또 따로 for문 돔
-	                
-// 	                alert(fileIndex);
-// 	                console.dir(files[imgNum]);
+	            	var imgNum = previewIndex++;
+	            	var deleteNum = deleteIndex++;
+	            	
+            		if (files[i].name != null) {
+            			$("#comment_image")
+                        .append(
+                                "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
+                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
+                                        + "<a id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                        + "삭제" + "</a>" + "</div>");
+            			alert('gdgd');
+            		}
+	            	
 	            };
+	            
 	            files[test] = file;
 	            test++;
 	            reader.readAsDataURL(file);
+	            console.dir(input[0].files[fileIndex]);
 	        }
 	    } else
-	        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책은 세우지 않았다.
+	        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책 세우지 않았음
 	}
 	
 	$('#comment_file').change(function() {
-		addPreview($(this)); //preview form 추가하기
+		addPreview($(this));
 	});
 	
-	
-	
 	function deletePreview(obj) {	// 미리보기 사진 삭제
-	var imgNum = obj.attributes['value'].value;
-	delete files[imgNum];
-	$("#comment_image .preview-box[value=" + imgNum + "]").remove();
-	resizeHeight();
+	var deleteNum = obj.attributes['id'].value;
+	var imgId = obj.attributes['value'].value;
+	
+	for (var i in files){
+		if(files[i].name == imgId){
+			files.splice(i, 1);
+			test--;
+			previewIndex--;
+		}
+	};
+	
+	$("#comment_image .preview-box[value=" + deleteNum + "]").remove();
 	}
 	
 	
@@ -1026,12 +1005,7 @@ var flag2=true;
     	var formData = new FormData($('#commentForm')[0]);
     	
     	for (var index = 0; index < Object.keys(files).length; index++){
-    		//formData 공간에 files라는 이름으로 파일을 추가한다.
-            //동일명으로 계속 추가할 수 있다.'
-//             alert(Object.keys(files).length);
-//     		alert(files[index]);
             formData.append('files',files[index]);
-//     		console.dir(files[index]);
     	}
     	
     	if (comment == "") {

@@ -50,7 +50,9 @@ public class CommentServicelmpl implements CommentService{
 		commentVo.setComment_Contents(content);
 		commentVo.setReview_Post_Num(Integer.parseInt(review_Num));
 		
-		System.out.println("내용 : " + content); // 내용 찍어봄
+		System.out.println("게시글 번호 : " + review_Num);
+		System.out.println("댓글 작성자 닉네임 : " + nickname);
+		System.out.println("댓글 내용 : " + content);
 		
 		for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
