@@ -16,10 +16,12 @@ import com.bitcamp.aura.review.common.RestaurantCategory;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
 import com.bitcamp.aura.review.model.SearchParams;
+import com.bitcamp.aura.review.model.PlaceVO;
 import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewFileVO;
 import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.util.FileUpload;
+import com.sun.mail.imap.protocol.Item;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -42,21 +44,33 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public List<ReviewVO> searchDigitals(SearchParams params) {
+	public List<ReviewVO> search(SearchParams params) {
 		// TODO Auto-generated method stub
-		return null;
+		List<ReviewVO> list = new ArrayList<>();
+		if (params.getType() == 1) {
+			list = mapper.selectRestaurantsByParams(params);
+		} else if (params.getType() == 2) {
+			list = mapper.selectHospitalsByParams(params);
+		} else if (params.getType() == 3) {
+			list = mapper.selectDigitalsByParams(params);
+		}
+		return setSearchFile(list);
 	}
 
 	@Override
-	public List<ReviewVO> searchHospitals(SearchParams params) {
+	public List<String> searchAddress(SearchParams params) {
 		// TODO Auto-generated method stub
-		return setSearchFile(mapper.selectHospitalsByParams(params));
-	}
-	
-	@Override
-	public List<RestaurantVO> searchRestaurants(SearchParams params) {
-		// TODO Auto-generated method stub
-		return setSearchFile(mapper.selectRestaurantsByParams(params));
+		List<ReviewVO> list = new ArrayList<>();
+		if (params.getType() == 1) {
+			list = mapper.selectRestaurantsByParams(params);
+		} else if (params.getType() == 2) {
+			list = mapper.selectHospitalsByParams(params);
+		}
+		
+		List<String> addrList = StreamSupport.stream(list.spliterator(), true)
+									.map(item -> ((PlaceVO) item).getAddr())
+									.collect(Collectors.toList());
+		return addrList;
 	}
 
 	@Override

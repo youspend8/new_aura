@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.aura.comment.dao.CommentMapper;
 import com.bitcamp.aura.comment.model.CommentVO;
@@ -107,28 +108,29 @@ public class ReviewController {
 
 	@RequestMapping(value = "/search")
 	public String search(Model model,
-			@RequestParam("type") int type,
-			@RequestParam("keyword") String keyword,
 			@ModelAttribute SearchParams params,
 			HttpSession session) {
 		
 		logger.info(new StringBuilder()
 					.append("search/")
 					.append((String) session.getAttribute("nickname") + "/")
-					.append(type + "/")
-					.append(keyword)
+					.append(params.getType() + "/")
+					.append(params.getKeyword())
 					.toString());
 		
-		if (type == 1) {
-			model.addAttribute("list", service.searchRestaurants(params));
-		} else if (type == 2) {
-			model.addAttribute("list", service.searchHospitals(params));
-		} else if (type == 3) {
-			model.addAttribute("list", service.searchDigitals(params));
-		}
-		model.addAttribute("type", type);
-		model.addAttribute("keyword", keyword);
-
+		model.addAttribute("list", service.search(params));
+		model.addAttribute("type", params.getType());
+		model.addAttribute("keyword", params.getKeyword());
 		return "/reviewList";
+	}
+	
+	@RequestMapping(value = "/search/address")
+	@ResponseBody
+	public String getAddress(
+			@RequestParam("type") int type,
+			@RequestParam("keyword") String keyword,
+			@ModelAttribute SearchParams params) {
+
+		return new Gson().toJson(service.searchAddress(params));
 	}
 }

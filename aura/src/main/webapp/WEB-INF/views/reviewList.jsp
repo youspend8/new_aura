@@ -5,7 +5,6 @@
 	<jsp:include page="/WEB-INF/views/commons/header.jsp" />
 	<title>검색결과 - ALL Review</title>
 	
-
 	<div style="margin: 0 auto; width: 100%; max-width: 800px;">
 		<!-- 게시글 -->
 		<div class="col-12">
@@ -41,7 +40,9 @@
 	
 			<!-- 지도 -->
 			<div class="col-12 board_list_map">
-			    <img src="/img/지도.png" style="width:100%; height:100%;">
+				<div id="map" class="w-100" style="height:400px;"></div>
+				
+<!-- 			    <img src="/img/지도.png" style="width:100%; height:100%;"> -->
 			</div>
 			
 			<div class="my-5" style="border-bottom: rgb(217, 217, 217) solid 1px;">
@@ -1551,6 +1552,7 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6060ab38dd0e3fd90aaea5e539c8172e&libraries=services"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 내용 더 보기
@@ -1578,4 +1580,58 @@
 				$('html').animate({scrollTop : 0})
 			});
 		});
+
+		$(function() {
+			$.ajax({
+				url: '/review/search/address',
+				type: 'get',
+				dataType: 'json',
+				data: {
+					type: '${type}',
+					keyword: '${keyword}'
+				},
+				success: function(data) {
+					getCoords(data);
+				}
+			})
+		});
+		
+		function getCoords(data) {
+			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+			var options = { //지도를 생성할 때 필요한 기본 옵션
+				center: new daum.maps.LatLng(37.49581788064077, 127.03051440129362), //지도의 중심좌표.
+				level: 3 //지도의 레벨(확대, 축소 정도)
+			};
+			var map = new daum.maps.Map(container, options);
+
+			var geocoder = new daum.maps.services.Geocoder();
+			var bounds = new daum.maps.LatLngBounds();    
+			
+			var callback = function(result, status) {
+			    if (status === daum.maps.services.Status.OK) {
+					var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+				    var imageSize = new daum.maps.Size(24, 35); 
+				    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+				    
+				    var point = new daum.maps.LatLng(result[0].y, result[0].x);
+				    // 마커를 생성합니다
+				    var marker = new daum.maps.Marker({
+				        map: map,
+				        position: point,
+				        image : markerImage
+				    });
+				    
+					marker.setMap(map);
+				    bounds.extend(point);
+			    }
+			};
+			
+			for (var i = 0; i < data.length; i++) {
+				geocoder.addressSearch(data[i], callback);
+			}
+			
+			setTimeout(() => {
+				map.setBounds(bounds);
+			}, 200);
+		}
 	</script>
