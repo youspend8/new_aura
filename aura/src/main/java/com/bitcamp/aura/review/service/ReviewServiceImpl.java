@@ -74,6 +74,12 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	public ReviewVO searchOne(int num) {
+		// TODO Auto-generated method stub
+		return mapper.selectOneForUpdateByNum(num);
+	}
+
+	@Override
 	public HashMap<String, Object> searchByNum(HashMap<String, Object> params) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> reviewInfo = mapper.selectByNum(params);
@@ -105,5 +111,4 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return list;
 	}
-
 }

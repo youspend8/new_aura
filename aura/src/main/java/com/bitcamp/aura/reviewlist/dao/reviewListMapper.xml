@@ -15,8 +15,11 @@
 	</delete>
 	
 
-	<select id="selectByNum" parameterType="int" resultType="ReviewListVO">
+	<select id="selectByPostNum" parameterType="int" resultType="ReviewListVO">
 	
+	</select>
+	<select id="selectByNickname" parameterType="String" resultMap="ReviewListVOMap">
+	    select * from REVIEW_LIST where NICKNAME=#{nickname}
 	</select>
 	
 	<select id="selectByParams" parameterType="ReviewListSelectParamsVO" resultMap="ReviewListVOMap">
@@ -27,7 +30,7 @@
 	
 	</select>
 	<select id="selectAll" resultType="ReviewListVO">
-	
+		select * from REVIEW_LIST
 	</select>
 	
 	<resultMap type="ReviewListVO" id="ReviewListVOMap">

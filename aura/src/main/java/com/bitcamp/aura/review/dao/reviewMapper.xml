@@ -194,8 +194,22 @@
 	</select>
 	
 	<select id="selectOneForUpdateByNum" parameterType="int" resultType="ReviewVO">
-		select NUM as num,TITLE as title, CONTENTS as contents, STARS as stars, GOODS as goods, 
-		BOOKMARK as bookmark,SHARES as shares, READ_COUNT as readCount, ADD_DATE as addDate, TYPE as type, COMMENTS as comments from REVIEW where NUM=#{num}
+		select 
+			NUM as num,
+			TITLE as title,
+			CONTENTS as contents,
+			STARS as stars,
+			GOODS as goods, 
+			BOOKMARK as bookmark,
+			SHARES as shares,
+			READ_COUNT as readCount,
+			ADD_DATE as addDate,
+			TYPE as type,
+			COMMENTS as comments 
+		FROM
+			REVIEW
+		WHERE
+			NUM = #{num}
 	</select>
 	
 	<select id="selectByNum" resultType="HashMap" parameterType="HashMap">

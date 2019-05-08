@@ -42,7 +42,7 @@
 									<div class="form-group">
 										<div class="md-form">
 											<input type="password" class="form-control" id="password" name="password"> 
-											<label for="password">비밀번호*</label>
+											<label for="password">새 비밀번호*</label>
 										</div>
 										
 										<div style="display: none; color: green; font-size: 13px;" id="pw_regular_true"> 보안에 안전한 비밀번호 입니다. :)</div>
@@ -55,7 +55,7 @@
 									<div class="form-group">
 										<div class="md-form">
 											<input type="password" class="form-control" id="pwCheck" name="pwCheck"> 
-											<label for="pwCheck">비밀번호 확인*</label>
+											<label for="pwCheck">새 비밀번호 확인*</label>
 										</div>
 										
 <!-- 비밀번호 안내메세지 -->
