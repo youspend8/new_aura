@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.bitcamp.aura.review.model.SearchParams;
-import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewVO;
+import com.bitcamp.aura.review.model.SearchParams;
 
 @Mapper
 public interface ReviewMapper {
