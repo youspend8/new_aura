@@ -1,5 +1,6 @@
 package com.bitcamp.aura.review.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bitcamp.aura.comment.dao.CommentMapper;
+import com.bitcamp.aura.comment.model.CommentVO;
+import com.bitcamp.aura.comment.service.CommentServicelmpl;
 import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
@@ -30,6 +34,9 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewListServiceImp listService;
+	
+	@Autowired
+	private CommentServicelmpl commentService;
 
 	@RequestMapping(value = "/post")
 	public String post(Model model,
@@ -62,6 +69,9 @@ public class ReviewController {
 					.toString());
 		
 		ReviewListSelectParamsVO params2 = new ReviewListSelectParamsVO();
+		ArrayList<CommentVO> commentList =(ArrayList<CommentVO>) commentService.selectAllByNum(num);
+		for(CommentVO c: commentList)
+			System.out.println(c);
 		boolean isShare = false;
 		boolean isStar = false;
 		boolean isLike = false;
@@ -85,6 +95,7 @@ public class ReviewController {
 		model.addAttribute("reviewInfo", reviewInfo);
 		model.addAttribute("type", type);
 		model.addAttribute("num", num);
+		model.addAttribute("commentList", commentList);
 		return "reviewPost";
 	}
 

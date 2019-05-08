@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>석촌호수 - All Review</title>
@@ -503,6 +504,7 @@
 		</div>
 
 		<!-- strat -->
+		
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active"
 			id="home">
 			<div
@@ -513,7 +515,8 @@
 						src="https://picsum.photos/300/300?image=1081">
 				</div>
 
-				<div class="w-100 text-center" style="margin-top: 0px">유저 닉네임2
+				<div class="w-100 text-center" style="margin-top: 0px">${commentList[0].nickname }
+				
 				</div>
 			</div>
 
@@ -550,23 +553,42 @@
 			</div>
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Maiores, quam ipsum! Expedita nesciunt repellat officia deserunt
-					incidunt libero sequi possimus pariatur, fugiat magnam, repellendus
-					ipsa mollitia in explicabo vitae quos.</div>
-
+				<div class>${commentList[0].comment_Contents } </div>
+				<fmt:parseNumber var="score" integerOnly="true" value="${commentList[0].comment_Score }"></fmt:parseNumber>
+					
 				<div class=" col-5 p-0 d-flex flex-wrap">
-					<i class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i>
+					<c:forEach begin="1" end="${score }">
+						<i class="fas fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+					</c:forEach>
+					<c:choose>
+					
+						<c:when test="${commentList[0].comment_Score-score>=0.5 }">
+							<i class="fas fa-star-half-alt" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+							<fmt:parseNumber var="score2" integerOnly="true" value="${5-commentList[0].comment_Score }" />
+							
+							<c:forEach begin="1" end="${score2 }">
+								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<fmt:parseNumber var="score2" value="${5-commentList[0].comment_Score }" pattern="0"/>
+							<c:forEach begin="1" end="${score2+1 }">
+								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+							</c:forEach>
+						</c:otherwise>
+						
+					</c:choose>
+					
 				</div>
 			</div>
+			
 			<div
 				class="d-flex col-2 flex-column align-items-center justify-content-center">
 				<i class="far fa-heart" style="font-size: 40px"></i>
-				<p class="heart-number">87.451</p>
+				<p class="heart-number">
+				<fmt:formatNumber value="${commentList[0].comment_Like }" pattern="#,###"/>
+				</p>
 			</div>
 		</div>
 
@@ -845,7 +867,36 @@ var flag2=true;
             
         });
         
-        
+        function fileSubmit(){ // 멀티파트 파일 업로더
+        	
+        	var comment = $('#comment').val();
+        	var formData = new FormData($('#commentForm')[0]);
+        	
+        	for (var a in files) {
+        		formData.append('files', files[a]);
+        	}
+        	
+        	if (comment == "") {
+        		alert('내용을 입력해주세요.');
+        	} else {
+        		$.ajax({
+       	            url : "/comment/write",
+       				type : "post",
+       				data : formData,
+       				processData : false,
+       				contentType : false,
+       				
+       				success: function(data){
+       					
+       				},
+       				error : function(error) {
+       					alert("파일업로드 실패");
+       					console.log(error);
+       					console.log(error.status);
+       				}
+       	        });
+        	}
+        };
         
         
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)

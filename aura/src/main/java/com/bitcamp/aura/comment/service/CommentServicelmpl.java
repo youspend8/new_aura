@@ -3,6 +3,7 @@ package com.bitcamp.aura.comment.service;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -100,6 +101,13 @@ public class CommentServicelmpl implements CommentService{
 	public String selectAll_Comment() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<CommentVO> selectAllByNum(int postNum) {
+		ArrayList<CommentVO> list = (ArrayList<CommentVO>) commentMapper.selectAllByNum(postNum);
+			
+		return list;
 	}
 
 }

@@ -15,4 +15,5 @@ public interface CommentMapper {
 	public int delete (String nickname);
 	public CommentVO selectOne (String nickname);
 	public List<CommentVO> selectAll();
+	public List<CommentVO> selectAllByNum(int postNum);
 }
