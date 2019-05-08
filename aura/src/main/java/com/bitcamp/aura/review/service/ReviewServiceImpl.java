@@ -16,10 +16,12 @@ import com.bitcamp.aura.review.common.RestaurantCategory;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
 import com.bitcamp.aura.review.model.SearchParams;
+import com.bitcamp.aura.review.model.PlaceVO;
 import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewFileVO;
 import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.util.FileUpload;
+import com.sun.mail.imap.protocol.Item;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -42,21 +44,39 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public List<ReviewVO> searchDigitals(SearchParams params) {
+	public List<ReviewVO> search(SearchParams params) {
 		// TODO Auto-generated method stub
-		return null;
+		List<ReviewVO> list = new ArrayList<>();
+		if (params.getType() == 1) {
+			list = mapper.selectRestaurantsByParams(params);
+		} else if (params.getType() == 2) {
+			list = mapper.selectHospitalsByParams(params);
+		} else if (params.getType() == 3) {
+			list = mapper.selectDigitalsByParams(params);
+		}
+		return setSearchFile(list);
 	}
 
 	@Override
-	public List<ReviewVO> searchHospitals(SearchParams params) {
+	public List<String> searchAddress(SearchParams params) {
 		// TODO Auto-generated method stub
-		return setSearchFile(mapper.selectHospitalsByParams(params));
+		List<ReviewVO> list = new ArrayList<>();
+		if (params.getType() == 1) {
+			list = mapper.selectRestaurantsByParams(params);
+		} else if (params.getType() == 2) {
+			list = mapper.selectHospitalsByParams(params);
+		}
+		
+		List<String> addrList =	list.stream()
+									.map(item -> ((PlaceVO) item).getAddr())
+									.collect(Collectors.toList());
+		return addrList;
 	}
-	
+
 	@Override
-	public List<RestaurantVO> searchRestaurants(SearchParams params) {
+	public ReviewVO searchOne(int num) {
 		// TODO Auto-generated method stub
-		return setSearchFile(mapper.selectRestaurantsByParams(params));
+		return mapper.selectOneForUpdateByNum(num);
 	}
 
 	@Override
@@ -88,8 +108,7 @@ public class ReviewServiceImpl implements ReviewService {
 					.collect(Collectors.toList());
 			((ReviewVO) review).setFiles(files);
 		});
-		System.out.println(list);
-		return StreamSupport.stream(list.spliterator(), true).collect(Collectors.toList());
+		
+		return list;
 	}
-
 }

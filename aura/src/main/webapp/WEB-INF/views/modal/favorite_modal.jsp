@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <div class="modal" id="modal1">
     	<div class="modal-dialog">
     		<div class="modal-content">
@@ -23,21 +23,22 @@
   <div class="classic-tabs ">
 
   <ul class="nav tabs-orange" id="myClassicTabOrange" role="tablist">
-   <li class="nav-item ml-3">
-      <a class="nav-link waves-light text-center" id="follow-tab-classic-orange" data-toggle="tab" href="#follow-classic-orange"
-        role="tab" aria-controls="follow-classic-orange" aria-selected="false"><i class="fas fa-heart fa-2x  pb-2 text-center"
-          aria-hidden="true"></i><br>오늘 뭐 봤지</a>
+   <li class="nav-item ml-3" id="todayDo" style="font-color:red">
+      <a class="nav-link waves-light text-center" id="follow-tab-classic-orange" data-toggle="tab"  href="/reviewList/modal_review" style="color:#ee5253"
+        role="tab" aria-controls="follow-classic-orange" aria-selected="false"><i class="fas fa-heart fa-2x  pb-2 text-center" 
+          aria-hidden="true"></i><br>타임라인 </a>
+                    
     </li>
-    <li class="nav-item">
-      <a class="nav-link waves-light text-center" id="awesome-tab-classic-orange" data-toggle="tab" href="#awesome-classic-orange"
+    <li class="nav-item"  style="color:yellow">
+      <a class="nav-link waves-light text-center" id="awesome-tab-classic-orange" data-toggle="tab" href="/reviewList/modal_review" style="color:#feca57"
         role="tab" aria-controls="awesome-classic-orange" aria-selected="false"><i class="fas fa-star fa-2x pb-2"
           aria-hidden="true"></i><br>즐겨찾기</a>
     </li>
    
     <li class="nav-item">
       <a class="nav-link  waves-light active show text-center" id="profile-tab-classic-orange " data-toggle="modal" data-target="#modalLoginForm" href="#profile-classic-orange"
-        role="tab" aria-controls="profile-classic-orange" aria-selected="true">
-        <i class="fas fa-user fa-2x pb-2" style="font-size : 10px" aria-hidden="true"></i><br>회원수정<br>페이지 이동</a>
+        role="tab" aria-controls="profile-classic-orange" aria-selected="true" style="color:#1dd1a1">
+        <i class="fas fa-user fa-2x pb-2" aria-hidden="true"></i><br>회원수정<br>페이지 이동</a>
           
          <!--start-->
           <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
@@ -45,9 +46,6 @@
 			    <div class="modal-content">
 			      <div class="modal-header text-center">
 			        <h4 class="modal-title w-100 font-weight-bold">비밀 번호를 입력해주세요</h4>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
 			      </div>
 			      <form method="POST" name="infoCheck" action="/user/modifyInfo"onsubmit="return InfoCheckDouble()">
 				      <div class="modal-body mx-3">
@@ -55,10 +53,10 @@
 <!-- 					         	비밀 번호를 입력해주세요 -->
 <!-- 					        </div> -->
 					
-					        <div class="md-form mb-4">
-					          <i class="fas fa-lock prefix grey-text"></i>
-					          <input type="password" id="defaultForm-pass" class="form-control">
-					        </div>
+				        <div class="md-form pr-5">
+				        	<i class="fas fa-lock prefix grey-text"></i>
+				          <input type="password" id="defaultForm-pass" class="form-control">
+				        </div>
 			     	 </div>
 			      <div class="modal-footer d-flex justify-content-center">
 			        <button type="submit" class="btn btn-primary btn-block" id="InfoCheck_Modify" >확 인</button>
@@ -78,15 +76,12 @@
      <div class="modal-body">
         <div class="tab-content card" id="myClassicTabContentOrange">
         <div class="tab-pane fade" id="follow-classic-orange" role="tabpanel" aria-labelledby="follow-tab-classic-orange">
-	      <p> 오늘 뭐보았지</p>
 		</div>
 		<div class="tab-pane fade" id="awesome-classic-orange" role="tabpanel" aria-labelledby="awesome-tab-classic-orange">
 	         <p> 즐겨찾기 한내용 </p>
 	    </div>  
 
-		<div class="tab-pane fade" id="profile-tab-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
-	         <p> 즐겨찾기 한내용 </p>
-	    </div>  
+	
      </div> 
      </div>
 <!-- Classic tabs -->   
@@ -95,11 +90,115 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="location.href='/user/logout'">로그아웃</button>
      </div>
+
      </div>
     </div>
   </div>
 <!-- Full Height Modal Right -->
 
+
+<script>
+
+//	$('#myClassicTabContentOrange').text();
+
+//	console.log(data[2].num);
+
+//	for(var i in data){
+//		$('#follow-classic-orange').append('<span>data[i].date</span>');
+//		$('#follow-classic-orange').append('<span>data[i].num</span>');
+//		$('#follow-classic-orange').append('<span>data[i].reviewType</span>');
+//		$('#follow-classic-orange').append('<span>data[i].postNum</span><br>');
+
+//	}
+// 			var table = $('<table>');
+// 			var tableEnd = $('</table>');
+// 			var tr = $('<tr>');
+// 			var trEnd = $('</tr>');
+// 			var tr = $('<tr>');
+// 			var trEnd = $('</tr>');
+// 			$('#myClassicTabContentOrange').append('날짜').append('번호').append('타입').append('포스트').append('<br>');				
+// 			div.append($('#myClassicTabContentOrange').append(span).append(data[i].date).append(spanEnd).append(' '));
+// 			$('#myClassicTabContentOrange').append(span).append(data[i].num).append(spanEnd).append(' ');
+// 			$('#myClassicTabContentOrange').append(span).append(data[i].reviewType).append(spanEnd).append(' ');
+// 			$('#myClassicTabContentOrange').append(span).append(data[i].postNum).append(spanEnd).append('<br>');
+// <i class="fas fa-share-alt"><i class="far fa-star mx-4"><i class="far fa-thumbs-up">
+
+$('#follow-tab-classic-orange').on('click', function(){
+	$.ajax({
+		url : "/reviewList/modal_review",
+		type :"GET",	
+		success : function(data){
+			$('#myClassicTabContentOrange').empty();
+
+			var span = $('<span>');
+			var spanEnd = $('</span>');
+
+			for(var i in data){
+
+				var div = $('<div>');
+				div.css({
+					'text-align': 'center',
+					'font-size': '13px',
+					'border-bottom': '0.5px solid #c7ecee',
+					'height': '40px',
+					'margin-bottom' : '10px',
+				})
+				
+				var img = ((data[i].reviewType == 1) ? '<i class="fas fa-share-alt mx-1"> ': ((data[i].reviewType == 2) ? '<i class="far fa-star mx-1"> ' : '<i class="far fa-thumbs-up mx-1">'));
+				var str = '<b>'+data[i].title +'</b>을 <b>'+ ((data[i].reviewType == 1) ? '공유하기': ((data[i].reviewType == 2) ? '즐겨찾기 ' : '좋아요 '))+'</b>하셨습니다.<br> >> '+ data[i].date;
+				div.append(img).append(str);
+				$('#myClassicTabContentOrange').append(div);
+			}
+		},
+		error : function(){
+			alert("에러발생했습니다")
+		}
+
+	});
+});
+
+</script>
+
+<script>
+$('#awesome-tab-classic-orange').on('click', function(){
+	$.ajax({
+		url : "/reviewList/modal_review",
+		type :"GET",	
+		success : function(data){
+			var span = $('<span>');
+			var spanEnd = $('</span>');
+			$('#myClassicTabContentOrange').empty();
+
+			for(var i in data){
+				var div = $('<div>');
+				div.css({
+					'text-align': 'center',
+					'font-size': '13px',
+					'border-bottom': '0.5px solid #c7ecee',
+					'height': '40px',
+					'margin-bottom' : '10px',
+				});
+				
+				if(data[i].reviewType == 2){
+					var img =  '<i class="far fa-star mx-1"> ';
+					var str = '게시글 <b>'+data[i].postNum +'번</b>을 <b>즐겨찾기 </b>하셨습니다.<br> >> '+ data[i].date;
+					div.append(img).append(str);
+					$('#myClassicTabContentOrange').append(div);
+				}else if(data[i].postNum == null){
+					var str = '즐겨찾기한 목록이 없습니다.';
+					div.append(str);
+			    	$('#myClassicTabContentOrange').append(div);
+				}			
+			}
+		},
+		error : function(){
+			alert("에러발생했습니다")
+		}
+	
+		
+	});
+});
+</script>
 
 <script>
 function InfoCheckDouble(){
@@ -125,18 +224,19 @@ function InfoCheckDouble(){
 	})
 }
 
-var checkdata = false;
-$('#defaultForm-pass').keyup(function(){
-	InfoCheckDouble();
-})
-$('#InfoCheck_Modify').click(function(){
-	if( checkdata == true){
-		return true;
-	}else{
-		alert('틀렷습니다.');
-		return false;
-	}
-});
+
+	var checkdata = false;
+	$('#defaultForm-pass').keyup(function(){
+		InfoCheckDouble();
+	})
+	$('#InfoCheck_Modify').click(function(){
+		if( checkdata == true){
+			return true;
+		}else{
+			alert('틀렷습니다.');
+			return false;
+		}
+	});
 
 </script>
 

@@ -23,4 +23,6 @@ public class SearchParams {
 	private String[] address2;
 	private String[] address3;
 	private int category;
+	private int start;
+	private int end;
 }

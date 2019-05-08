@@ -132,52 +132,84 @@
 	
 	<select id="selectRestaurantsByParams" parameterType="SearchParams" resultType="RestaurantVO">
 		SELECT
-		    REVIEW.NUM AS num,
-		    REVIEW.TITLE AS title,
-		    REVIEW.CONTENTS AS contents,
-		    REVIEW.STARS AS stars,
-		    REVIEW.GOODS AS goods,
-		    REVIEW.BOOKMARK AS bookmark,
-		    REVIEW.SHARES AS shares,
-		    REVIEW.READ_COUNT AS readCount,
-		    REVIEW.ADD_DATE AS addDate,
-		    REVIEW.TYPE AS type,
-		    PLACE_REVIEW.ADDRESS1 AS address1,
-		    PLACE_REVIEW.ADDRESS2 AS address2,
-		    PLACE_REVIEW.ADDRESS3 AS address3,
-		    PLACE_REVIEW.DETAIL_ADDR AS addr,
-		    PLACE_REVIEW.TEL AS tel,
-		    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
-		    PLACE_REVIEW.WAITING_TIME AS waitingTime,
-		    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
-		    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
-		    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut,
-		    RESTAURANT_REVIEW.RESTAURANT_MENU AS menu
-		FROM 
-		    REVIEW 
-        INNER JOIN 
-            PLACE_REVIEW
-        ON
-            REVIEW.NUM = PLACE_REVIEW.NUM
-        INNER JOIN
-            RESTAURANT_REVIEW
-        ON
-            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
-        INNER JOIN 
-            RESTAURANT_CATEGORY
-        ON
-            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
-        WHERE 1 = 1
-        <if test="keyword != null">
-	        AND
-	        	REVIEW.TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
-        </if> 
-   		ORDER BY REVIEW.NUM DESC
+			*
+		FROM (
+			SELECT
+				ROWNUM rnum,
+				REVIEW.*
+			FROM (
+				SELECT
+				    REVIEW.NUM AS num,
+				    REVIEW.TITLE AS title,
+				    REVIEW.CONTENTS AS contents,
+				    REVIEW.STARS AS stars,
+				    REVIEW.GOODS AS goods,
+				    REVIEW.BOOKMARK AS bookmark,
+				    REVIEW.SHARES AS shares,
+				    REVIEW.READ_COUNT AS readCount,
+				    REVIEW.ADD_DATE AS addDate,
+				    REVIEW.TYPE AS type,
+				    PLACE_REVIEW.ADDRESS1 AS address1,
+				    PLACE_REVIEW.ADDRESS2 AS address2,
+				    PLACE_REVIEW.ADDRESS3 AS address3,
+				    PLACE_REVIEW.DETAIL_ADDR AS addr,
+				    PLACE_REVIEW.TEL AS tel,
+				    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
+				    PLACE_REVIEW.WAITING_TIME AS waitingTime,
+				    RESTAURANT_REVIEW.RESTAURANT_CATEGORY AS category,
+				    RESTAURANT_REVIEW.RESTAURANT_DELIVERY AS delivery,
+				    RESTAURANT_REVIEW.RESTAURANT_TAKEOUT AS takeOut,
+				    RESTAURANT_REVIEW.RESTAURANT_MENU AS menu
+				FROM 
+				    REVIEW 
+		        INNER JOIN 
+		            PLACE_REVIEW
+		        ON
+		            REVIEW.NUM = PLACE_REVIEW.NUM
+		        INNER JOIN
+		            RESTAURANT_REVIEW
+		        ON
+		            PLACE_REVIEW.NUM = RESTAURANT_REVIEW.NUM
+		        INNER JOIN 
+		            RESTAURANT_CATEGORY
+		        ON
+		            RESTAURANT_REVIEW.RESTAURANT_CATEGORY = RESTAURANT_CATEGORY.CATEGORY_NUM
+		        <if test="keyword != null">
+			        AND
+			        	REVIEW.TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		        </if> 
+		   		ORDER BY REVIEW.NUM DESC
+			) REVIEW
+		)
+		WHERE 
+			1 = 1
+			<if test="start == 0">
+				AND
+					rnum BETWEEN 1 AND 5
+			</if>
+			<if test="start != 0">
+				AND
+					rnum BETWEEN #{start} AND #{end}
+		    </if>
 	</select>
 	
 	<select id="selectOneForUpdateByNum" parameterType="int" resultType="ReviewVO">
-		select NUM as num,TITLE as title, CONTENTS as contents, STARS as stars, GOODS as goods, 
-		BOOKMARK as bookmark,SHARES as shares, READ_COUNT as readCount, ADD_DATE as addDate, TYPE as type, COMMENTS as comments from REVIEW where NUM=#{num}
+		select 
+			NUM as num,
+			TITLE as title,
+			CONTENTS as contents,
+			STARS as stars,
+			GOODS as goods, 
+			BOOKMARK as bookmark,
+			SHARES as shares,
+			READ_COUNT as readCount,
+			ADD_DATE as addDate,
+			TYPE as type,
+			COMMENTS as comments 
+		FROM
+			REVIEW
+		WHERE
+			NUM = #{num}
 	</select>
 	
 	<select id="selectByNum" resultType="HashMap" parameterType="HashMap">
