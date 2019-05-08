@@ -96,10 +96,10 @@
 			</div>
 			<c:choose>
 				<c:when test="${nickname ne null}">
-					<button type="button" id="review_write_pc" class="btn btn-dark review-write">리뷰 작성하기</button>
+					<button type="button" id="review_write_pc" class="btn btn-warning review-write">리뷰 작성하기</button>
 				</c:when>
 				<c:otherwise>
-					<button type="button" id="review_write_login" class="btn btn-dark review-write">리뷰 작성하기</button>
+					<button type="button" id="review_write_login" class="btn btn-warning review-write">리뷰 작성하기</button>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -166,7 +166,7 @@
 		class="col-12 flex-md-row flex-wrap justify-content-center"
 		style="display: none; height: 0px; border-bottom: 2px solid #dadee6;">
 		<button id="review_write_cancel" type="button"
-			class="btn btn-primary col-12 text-center py-3 m-0 mb-3">
+			class="btn btn-light col-12 text-center py-3 m-0 mb-3">
 			댓글 작성창 접기 <i class="fas fa-arrow-up"></i>
 		</button>
 
@@ -184,19 +184,20 @@
 			<div class="d-flex flex-wrap text-left mt-4">
 				<div class="star-box">
 <!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
-					<a class="far fa-star" id="star1" name="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star2" name="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star3" name="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star4" name="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star5" name="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
 				</div>
 			</div>
 		</div>	
 
 		<div class="col-md-9 col-12 p-0 flex-column my-3">
 			<form id="commentForm" method="post" enctype="multipart/form-data">
-				<input id="review_post_num" name="review_post_num" type="text" value=${reviewInfo.NUM} style="display: none;">
-				<input id="nickname_post" name="nickname_post" type="text" value=${nickname} style="display: none;">
+				<input id="review_post_num" name="review_post_num" value=${reviewInfo.NUM} style="display: none;">
+				<input id="nickname_post" name="nickname_post" value=${nickname} style="display: none;">
+				<input id="grade" name="grade" value="0" style="display: none;">
 				
 				<textarea rows="10" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
 
@@ -206,7 +207,7 @@
 						<label for="comment_file" class="filebox">
 							<a>
 								<img src="/img/addfile.png" id="img22" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
-								<input type="file" id="comment_file" name="comment_file" multiple accept="image/*">
+								<input type="file" id="comment_file" name="comment_file" accept="image/*">
 							</a>
 						</label>
 					</div>
@@ -518,6 +519,33 @@
 				<div class="w-100 text-center" style="margin-top: 0px">${commentList[0].nickname }
 				
 				</div>
+				<fmt:parseNumber var="score" integerOnly="true" value="${commentList[0].comment_Score }"></fmt:parseNumber>
+					
+				<div class=" col-12 p-0 d-flex justify-content-center">
+					<c:forEach begin="1" end="${score }">
+						<i class="fas fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+					</c:forEach>
+					<c:choose>
+					
+						<c:when test="${commentList[0].comment_Score-score>=0.5 }">
+							<i class="fas fa-star-half-alt" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+							<fmt:parseNumber var="score2" integerOnly="true" value="${5-commentList[0].comment_Score }" />
+							
+							<c:forEach begin="1" end="${score2 }">
+								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<fmt:parseNumber var="score2" value="${5-commentList[0].comment_Score }" pattern="0"/>
+							<c:forEach begin="1" end="${score2+1 }">
+								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+							</c:forEach>
+						</c:otherwise>
+						
+					</c:choose>
+					
+				</div>
 			</div>
 
 			<div
@@ -554,33 +582,7 @@
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
 				<div class>${commentList[0].comment_Contents } </div>
-				<fmt:parseNumber var="score" integerOnly="true" value="${commentList[0].comment_Score }"></fmt:parseNumber>
-					
-				<div class=" col-5 p-0 d-flex flex-wrap">
-					<c:forEach begin="1" end="${score }">
-						<i class="fas fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
-					</c:forEach>
-					<c:choose>
-					
-						<c:when test="${commentList[0].comment_Score-score>=0.5 }">
-							<i class="fas fa-star-half-alt" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
-							<fmt:parseNumber var="score2" integerOnly="true" value="${5-commentList[0].comment_Score }" />
-							
-							<c:forEach begin="1" end="${score2 }">
-								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
-							</c:forEach>
-						</c:when>
-						
-						<c:otherwise>
-							<fmt:parseNumber var="score2" value="${5-commentList[0].comment_Score }" pattern="0"/>
-							<c:forEach begin="1" end="${score2+1 }">
-								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
-							</c:forEach>
-						</c:otherwise>
-						
-					</c:choose>
-					
-				</div>
+				
 			</div>
 			
 			<div
@@ -591,7 +593,10 @@
 				</p>
 			</div>
 		</div>
+<!-- 		끝 부분 -->
 
+
+		
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active"
 			id="home">
 			<div
@@ -874,7 +879,7 @@ var flag2=true;
         	
         	if(comment != ""){
         		$('#comment_submit').removeAttr('disabled');
-            	$('#comment_submit').removeClass().addClass('btn btn-primary');
+            	$('#comment_submit').removeClass().addClass('btn btn-warning');
         	} else {
         		$('#comment_submit').prop('disabled', true);
             	$('#comment_submit').removeClass().addClass('btn btn-light');
@@ -885,49 +890,90 @@ var flag2=true;
         });
         
         
-		for (var i = 1; i <= 5; i++){
-			$('#star' + i).hover(function(){ // 별 마우스호버 이벤트
-	        	$(this).removeClass().addClass('fas fa-star');
-	        }, function(){
-	        		$(this).removeClass().addClass('far fa-star');
-	        	});
-		}
+// 		for (var i = 1; i <= 5; i++){
+// 			$('#star' + i).hover(function(){ // 별 마우스호버 이벤트
+// 	        	$(this).removeClass().addClass('fas fa-star');
+// 	        }, function(){
+// 	        		$(this).removeClass().addClass('far fa-star');
+// 	        	});
+// 		}
 		
-		$('#star2').hover(function(){
+		$('#star1').click(function(){
+			$('#grade').val('1');
 			$('#star1').removeClass().addClass('fas fa-star');
-		}, function(){
-			$('#star1').removeClass().addClass('far fa-star');
+			$('#star2').removeClass().addClass('far fa-star');
+			$('#star3').removeClass().addClass('far fa-star');
+			$('#star4').removeClass().addClass('far fa-star');
+			$('#star5').removeClass().addClass('far fa-star');
 		});
 		
-		$('#star3').hover(function(){
+		$('#star2').click(function(){
+			$('#grade').val('2');
 			$('#star1').removeClass().addClass('fas fa-star');
 			$('#star2').removeClass().addClass('fas fa-star');
-		}, function(){
-			$('#star1').removeClass().addClass('far fa-star');
-			$('#star2').removeClass().addClass('far fa-star');
+			$('#star3').removeClass().addClass('far fa-star');
+			$('#star4').removeClass().addClass('far fa-star');
+			$('#star5').removeClass().addClass('far fa-star');
+			
 		});
 		
-		$('#star4').hover(function(){
+		$('#star3').click(function(){
+			$('#grade').val('3');
 			$('#star1').removeClass().addClass('fas fa-star');
 			$('#star2').removeClass().addClass('fas fa-star');
 			$('#star3').removeClass().addClass('fas fa-star');
-		}, function(){
-			$('#star1').removeClass().addClass('far fa-star');
-			$('#star2').removeClass().addClass('far fa-star');
-			$('#star3').removeClass().addClass('far fa-star');
+			$('#star4').removeClass().addClass('far fa-star');
+			$('#star5').removeClass().addClass('far fa-star');
 		});
 		
-		$('#star5').hover(function(){
+		$('#star4').click(function(){
+			$('#grade').val('4');
 			$('#star1').removeClass().addClass('fas fa-star');
 			$('#star2').removeClass().addClass('fas fa-star');
 			$('#star3').removeClass().addClass('fas fa-star');
 			$('#star4').removeClass().addClass('fas fa-star');
-		}, function(){
-			$('#star1').removeClass().addClass('far fa-star');
-			$('#star2').removeClass().addClass('far fa-star');
-			$('#star3').removeClass().addClass('far fa-star');
-			$('#star4').removeClass().addClass('far fa-star');
-		})
+			$('#star5').removeClass().addClass('far fa-star');
+		});
+		
+		$('#star5').click(function(){
+			$('#grade').val('5');
+			$('#star1').removeClass().addClass('fas fa-star');
+			$('#star2').removeClass().addClass('fas fa-star');
+			$('#star3').removeClass().addClass('fas fa-star');
+			$('#star4').removeClass().addClass('fas fa-star');
+			$('#star5').removeClass().addClass('fas fa-star');
+		});
+		
+		
+		
+		
+		
+// 		$('#star3').click(function(){
+// 			$('#star1').removeClass().addClass('fas fa-star');
+// 			$('#star2').removeClass().addClass('fas fa-star');
+// 		});
+		
+// 		$('#star4').hover(function(){
+// 			$('#star1').removeClass().addClass('fas fa-star');
+// 			$('#star2').removeClass().addClass('fas fa-star');
+// 			$('#star3').removeClass().addClass('fas fa-star');
+// 		}, function(){
+// 			$('#star1').removeClass().addClass('far fa-star');
+// 			$('#star2').removeClass().addClass('far fa-star');
+// 			$('#star3').removeClass().addClass('far fa-star');
+// 		});
+		
+// 		$('#star5').hover(function(){
+// 			$('#star1').removeClass().addClass('fas fa-star');
+// 			$('#star2').removeClass().addClass('fas fa-star');
+// 			$('#star3').removeClass().addClass('fas fa-star');
+// 			$('#star4').removeClass().addClass('fas fa-star');
+// 		}, function(){
+// 			$('#star1').removeClass().addClass('far fa-star');
+// 			$('#star2').removeClass().addClass('far fa-star');
+// 			$('#star3').removeClass().addClass('far fa-star');
+// 			$('#star4').removeClass().addClass('far fa-star');
+// 		})
 		
     </script>
     
@@ -941,10 +987,16 @@ var flag2=true;
 	function addPreview(input) {
 		
 		image_Exists : if (input[0].files) {
+			
 	        //파일 선택이 여러개였을 시의 대응
 	        for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
 	            var file = input[0].files[fileIndex];
 	            var reader = new FileReader();
+	            
+	            if (files.length >= 4){
+					alert('최대 4개까지 이미지를 등록 할 수 있습니다.');
+					break image_Exists;
+				}
 	            
 	            for (var i = 0; i < test; i++){
 	            	if (files[i].name == input[0].files[fileIndex].name){
@@ -953,6 +1005,10 @@ var flag2=true;
 	            	}
 	            };
 	            
+	            files[test] = file;
+	            reader.readAsDataURL(file);
+	            test++;
+	            
 	            reader.onload = function(img) {
 	            	var imgNum = previewIndex++;
 	            	var deleteNum = deleteIndex++;
@@ -960,19 +1016,14 @@ var flag2=true;
             		if (files[i].name != null) {
             			$("#comment_image")
                         .append(
-                                "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
-                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
-                                        + "<a id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
-                                        + "삭제" + "</a>" + "</div>");
-            			alert('gdgd');
+                                "<div class=\"preview-box mr-2 view overlay\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
+                                        + "<img class=\"thumbnail w-100 img-fluid\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
+                                        + "<div class=\"mask flex-center waves-effect waves-light rgba-red-strong\" style=\"height:159.13px;\">"
+                                        + "<a style=\"font-size:19px;\" class=\"white-text\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                        + "삭제" + "</a>" + "</div>" + "</div>");
             		}
 	            	
 	            };
-	            
-	            files[test] = file;
-	            test++;
-	            reader.readAsDataURL(file);
-	            console.dir(input[0].files[fileIndex]);
 	        }
 	    } else
 	        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책 세우지 않았음
@@ -1000,13 +1051,17 @@ var flag2=true;
 	
 	
 	function fileSubmit(){ // 멀티파트 파일 업로더
-    	
+		
+		 if($('#grade').val() == 0){
+         	return alert('별점을 주세요');
+         };
+		
     	var comment = $('#comment').val();
     	var formData = new FormData($('#commentForm')[0]);
     	
     	for (var index = 0; index < Object.keys(files).length; index++){
             formData.append('files',files[index]);
-    	}
+    	};
     	
     	if (comment == "") {
     		alert('내용을 입력해주세요.');
@@ -1044,6 +1099,11 @@ var flag2=true;
 	overflow: hidden;
 	clip: rect(0, 0, 0, 0);
 	border: 0;
+}
+
+#comment:focus {
+    border: 1px solid #ffb833;
+    box-shadow: 0 0 0 0.2rem #ffdb99;
 }
 </style>
 
