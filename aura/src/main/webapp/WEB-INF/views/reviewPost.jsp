@@ -913,7 +913,7 @@ var flag2=true;
     </script>
     
 <script>
-	var files = {};
+	var files = new Array();
 	var previewIndex = 0;
 	var test = 0;
 	
@@ -933,18 +933,14 @@ var flag2=true;
 	            };
 	            
 	            reader.onload = function(img) {
-	                var imgNum = previewIndex++;
+	            	var imgNum = previewIndex++;
 	                $("#comment_image")
 	                        .append(
 	                                "<div class=\"preview-box mr-2\" style=\"width:20%;\" value=\"" + imgNum +"\">"
 	                                        + "<img class=\"thumbnail w-100\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
-	                                        + "<a value=\"" + imgNum + "\" onclick=\"deletePreview(this)\">"
+	                                        + "<a id=\"" + imgNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
 	                                        + "삭제" + "</a>" + "</div>");
-	                
-// 	                files[imgNum] = file; 이 슈벌놈이 바깥 for문 다돌고 이거 들어와서 또 따로 for문 돔
-	                
-// 	                alert(fileIndex);
-// 	                console.dir(files[imgNum]);
+	                console.dir(img.target);
 	            };
 	            files[test] = file;
 	            test++;
@@ -958,13 +954,21 @@ var flag2=true;
 		addPreview($(this)); //preview form 추가하기
 	});
 	
-	
-	
 	function deletePreview(obj) {	// 미리보기 사진 삭제
-	var imgNum = obj.attributes['value'].value;
-	delete files[imgNum];
-	$("#comment_image .preview-box[value=" + imgNum + "]").remove();
-	resizeHeight();
+	var imgNumber = obj.attributes['id'].value;
+	var imgId = obj.attributes['value'].value;
+// 	delete files[imgNum];
+	
+	for (var i in files){
+		if(files[i].name == imgId){
+			files.splice(i, 1);
+			test--;
+			previewIndex--;
+		}
+	};
+	
+	$("#comment_image .preview-box[value=" + imgNumber + "]").remove();
+// 	resizeHeight();
 	}
 	
 	
@@ -973,6 +977,11 @@ var flag2=true;
     	
     	var comment = $('#comment').val();
     	var formData = new FormData($('#commentForm')[0]);
+    	
+//     	for (var sys in Object.keys(files)){
+//     		formData.append('files',files[sys]);
+//     	}
+    	
     	
     	for (var index = 0; index < Object.keys(files).length; index++){
     		//formData 공간에 files라는 이름으로 파일을 추가한다.
