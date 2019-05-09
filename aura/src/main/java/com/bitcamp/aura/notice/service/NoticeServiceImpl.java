@@ -19,8 +19,10 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Autowired
 	private NoticeFileRepository repo;
+	
 	@Autowired
 	private NoticeMapper noticemapper;
+	
 	@Autowired
 	private FileUpload fileUpload;
 	

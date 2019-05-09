@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bitcamp.aura.notice.model.NoticeVO;
+import com.bitcamp.aura.notice.service.NoticeService;
 import com.bitcamp.aura.review.service.ReviewService;
 
 @RestController
 @RequestMapping(value="/api/notice")
 public class NoticeRestApi {
 	
+	
 	@Autowired
-	private ReviewService service;
+	private NoticeService service;
 	
 	@RequestMapping(value="/write")
 	public boolean getAnno(
@@ -24,11 +27,10 @@ public class NoticeRestApi {
 			@RequestBody String contents,
 			@RequestParam("file") MultipartFile[] multipartFiles) {
 		
-		HashMap<String, Object> params = new HashMap<>();
+		NoticeVO noticevo = new NoticeVO();
+		noticevo.setTitle(title);
+		noticevo.setContents(contents);
 		
-		params.put("title", title);
-		params.put("contents", contents);
-		
-		return service.writeReview(params, multipartFiles) == 1 ? true : false;
+		return service.writeNotice(noticevo, multipartFiles) == 1 ? true : false;
 	}
 }
