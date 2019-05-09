@@ -31,4 +31,18 @@ public class NoticeRestApi {
 		
 		return service.writeReview(params, multipartFiles) == 1 ? true : false;
 	}
+	
+	@RequestMapping(value="/writeTest")
+	public boolean getNotice(
+			@RequestBody String title,
+			@RequestBody String contents,
+			@RequestParam("file") MultipartFile[] multipartFiles) {
+		
+		HashMap<String, Object> params = new HashMap<>();
+		
+		params.put("title", title);
+		params.put("contents", contents);
+		
+		return service.writeReview(params, multipartFiles) == 1 ? true : false;
+	}
 }

@@ -39,7 +39,7 @@
 							</div>
 						</c:if>
 						<c:forEach var="index" begin="0" end="${reviewInfo.FILES.size() / 3}" step="3">
-							<c:forEach var="j" begin="${index}" end="${index + 3}">
+							<c:forEach var="j" begin="${index}" end=${index + 3}>
 								<div class="card-body p-1 col-4">
 									<c:if test="${reviewInfo.FILES[j] != null}">
 										<img class="w-100" src="${reviewInfo.FILES[j]}" style="width: 100%; height: 300px">

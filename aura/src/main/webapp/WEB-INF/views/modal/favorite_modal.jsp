@@ -64,7 +64,6 @@
 			</div>
 		</div>
         <!--end-->
-          
     </li>
    </ul>
   </div>
@@ -154,7 +153,6 @@ $('#follow-tab-classic-orange').on('click', function(){
 
 	});
 });
-
 </script>
 
 <script>

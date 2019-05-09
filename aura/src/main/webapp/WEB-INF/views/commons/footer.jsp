@@ -15,10 +15,10 @@
         <div class="col-md-4 mx-auto">
 
           <!-- Content -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-          <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet,
-            consectetur
-            adipisicing elit.</p>
+           <img src="/img/logo/noback.jpg" style= "width:200px">
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">회사 주소</h5>
+          <p>비트캠프 서초점 All Review</p>
+            
 
         </div>
         <!-- Grid column -->
@@ -29,20 +29,20 @@
         <div class="col-md-2 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">정보</h5>
 
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
+              <a href="#!">회사 소개</a>
             </li>
             <li>
-              <a href="#!">Link 2</a>
+              <a href="#!">투자 정보</a>
             </li>
             <li>
-              <a href="#!">Link 3</a>
+              <a href="#!">광고 문의</a>
             </li>
             <li>
-              <a href="#!">Link 4</a>
+              <a href="#!">All Review 전문리뷰단 채용</a>
             </li>
           </ul>
 
@@ -55,20 +55,23 @@
         <div class="col-md-2 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">주목</h5>
 
           <ul class="list-unstyled">
             <li>
-              <a href="#!">Link 1</a>
+              <a href="#!">공지 사항</a>
             </li>
             <li>
-              <a href="#!">Link 2</a>
+              <a href="#!">이용 약관</a>
             </li>
             <li>
-              <a href="#!">Link 3</a>
+              <a href="#!">개인정보처리방침</a>
             </li>
             <li>
-              <a href="#!">Link 4</a>
+              <a href="#!">위치기반 서비스 이용약관</a>
+            </li>
+              <li>
+              <a href="#!">문의하기</a>
             </li>
           </ul>
 
@@ -81,22 +84,22 @@
         <div class="col-md-2 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+<!--           <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5> -->
 
-          <ul class="list-unstyled">
-            <li>
-              <a href="#!">Link 1</a>
-            </li>
-            <li>
-              <a href="#!">Link 2</a>
-            </li>
-            <li>
-              <a href="#!">Link 3</a>
-            </li>
-            <li>
-              <a href="#!">Link 4</a>
-            </li>
-          </ul>
+<!--           <ul class="list-unstyled"> -->
+<!--             <li> -->
+<!--               <a href="#!">Link 1</a> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--               <a href="#!">Link 2</a> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--               <a href="#!">Link 3</a> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--               <a href="#!">Link 4</a> -->
+<!--             </li> -->
+<!--           </ul> -->
 
         </div>
         <!-- Grid column -->
