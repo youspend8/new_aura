@@ -529,6 +529,9 @@
 			<div
 				class=" col-2 d-flex flex-wrap justify-content-center align-items-center"
 				style="width: 100%; display: flex;">
+				
+<%-- 				<c:forEach var="commentList"> --%>
+				
 				<div style="width: 65%; height: 75px;">
 				<c:choose>
 					<c:when test="${commentList[0].profile ne null }">
@@ -552,11 +555,11 @@
 					<c:forEach begin="1" end="${5-commentList[0].comment_Score }">
 						<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
 					</c:forEach>
-					
-					
-					
-					
 				</div>
+				
+<%-- 				</c:forEach> --%>
+				
+				
 			</div>
 
 			<div
@@ -964,6 +967,7 @@ var flag2=true;
    				contentType : false,
    				
    				success: function(data){
+   					$('#comment').val('');
    					$('#grade').val('0')
    					location.reload();
    				},
