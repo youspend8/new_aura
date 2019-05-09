@@ -49,9 +49,7 @@
 			      </div>
 			      <form method="POST" name="infoCheck" action="/user/modifyInfo"onsubmit="return InfoCheckDouble()">
 				      <div class="modal-body mx-3">
-<!-- 					        <div class="md-form mb-5" style="font: 20px;"> -->
-<!-- 					         	비밀 번호를 입력해주세요 -->
-<!-- 					        </div> -->
+
 					
 				        <div class="md-form pr-5">
 				        	<i class="fas fa-lock prefix grey-text"></i>
@@ -181,7 +179,7 @@ $('#awesome-tab-classic-orange').on('click', function(){
 				
 				if(data[i].reviewType == 2){
 					var img =  '<i class="far fa-star mx-1"> ';
-					var str = '게시글 <b>'+data[i].postNum +'번</b>을 <b>즐겨찾기 </b>하셨습니다.<br> >> '+ data[i].date;
+					var str = '<b>'+data[i].title +'</b>을 <b>즐겨찾기 </b>하셨습니다.<br> >> '+ data[i].date;
 					div.append(img).append(str);
 					$('#myClassicTabContentOrange').append(div);
 				}else if(data[i].postNum == null){

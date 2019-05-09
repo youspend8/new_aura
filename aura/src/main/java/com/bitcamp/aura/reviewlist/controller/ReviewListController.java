@@ -58,7 +58,7 @@ public class ReviewListController {
 			item.setTitle(reviewService.searchOne(item.getPostNum()).getTitle());
 		});
 				
-		System.out.println("reviewListVo"+reviewListVo); //리뷰리스트의  List의 내용은 넘어옴
+//		System.out.println("reviewListVo"+reviewListVo); //리뷰리스트의  List의 내용은 넘어옴
 		
 		return reviewListVo;
 		
