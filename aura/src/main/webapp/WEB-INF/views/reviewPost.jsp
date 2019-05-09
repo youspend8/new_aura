@@ -952,7 +952,8 @@ var flag2=true;
    				contentType : false,
    				
    				success: function(data){
-   					
+   					$('#grade').val('0')
+   					location.reload();
    				},
    				error : function(error) {
    					alert("파일업로드 실패");

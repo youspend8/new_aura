@@ -48,14 +48,12 @@ public class CommentServicelmpl implements CommentService{
 		List<MultipartFile> fileList = comment.getFiles("files");
 		
 		commentVo.setReview_Post_Num(Integer.parseInt(review_Num));
+		commentVo.setNickname(nickname);
 		commentVo.setComment_Date(sim.format(new Date()));
 		commentVo.setComment_Contents(content);
 		commentVo.setComment_Score(Integer.parseInt(grade));
 		
-		System.out.println("게시글 번호 : " + review_Num);
-		System.out.println("댓글 작성자 닉네임 : " + nickname);
-		System.out.println("댓글 내용 : " + content);
-		System.out.println("부여한 점수 : " + grade);
+		commentMapper.insert(commentVo);
 		
 		for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -68,11 +66,13 @@ public class CommentServicelmpl implements CommentService{
 //              System.out.println("fileSize : " + fileSize);
             	
             	String fileName = System.currentTimeMillis() + " " + originFileName;
-                String safeFile = path + fileName;
-                
-                System.out.println(fileName);
-                System.out.println(safeFile);
-                
+            	String safeFile = path + fileName;
+            	
+            	commentFileVO.setComment_Num(commentVo.getComment_Num());
+            	commentFileVO.setComment_File(fileName);
+            	
+            	commentMapper.insert_File(commentFileVO);
+            	
                 try {
                     mf.transferTo(new File(safeFile)); // 파일 저장
                 } catch (IllegalStateException e) {
