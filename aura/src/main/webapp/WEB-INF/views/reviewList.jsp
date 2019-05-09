@@ -56,23 +56,28 @@
 			      		<div class="view overlay zoom" style="width: 100%; height: 100%">
 			        		<!-- 사진 캐러셀 -->
 			        		<a href="/review/post?num=${review.num}&type=${review.type}">
-								<div id="searchCarousel${i.index}" class="carousel slide carousel-fade" data-ride="carousel">
-								  <div class="carousel-inner">
-								  	<c:forEach var="file" items="${review.files}" varStatus="j">
-									    <div class="carousel-item ${j.index == 0 ? 'active' : ''}">
-									      <img src="${file}" style="width:100%; height: 250px;">
-									    </div>
-								  	</c:forEach>
-								  </div>
-								  <a class="carousel-control-prev" href="#searchCarousel${i.index}" role="button" data-slide="prev">
-								    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								    <span class="sr-only">Previous</span>
-								  </a>
-								  <a class="carousel-control-next" href="#searchCarousel${i.index}" role="button" data-slide="next">
-								    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-								    <span class="sr-only">Next</span>
-								  </a>
-								</div>
+							  	<c:if test="${review.files.size() == 0}">
+							      <img src="/img/NoImg.jpg" style="width:40%; height: 250px; margin: 0 auto">
+							  	</c:if>
+							  	<c:if test="${review.files.size() != 0}">
+									<div id="searchCarousel${i.index}" class="carousel slide carousel-fade" data-ride="carousel">
+									  <div class="carousel-inner">
+										  	<c:forEach var="file" items="${review.files}" varStatus="j">
+											    <div class="carousel-item ${j.index == 0 ? 'active' : ''}">
+											      <img src="${file}" style="width:100%; height: 250px;">
+											    </div>
+										  	</c:forEach>
+									  </div>
+									  <a class="carousel-control-prev" href="#searchCarousel${i.index}" role="button" data-slide="prev">
+									    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									    <span class="sr-only">Previous</span>
+									  </a>
+									  <a class="carousel-control-next" href="#searchCarousel${i.index}" role="button" data-slide="next">
+									    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+									    <span class="sr-only">Next</span>
+									  </a>
+									</div>
+							  	</c:if>
 							</a>
 						</div>
 					</div>
