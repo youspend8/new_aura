@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bitcamp.aura.review.common.RestaurantCategory;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
-import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.model.PlaceVO;
-import com.bitcamp.aura.review.model.RestaurantVO;
 import com.bitcamp.aura.review.model.ReviewFileVO;
 import com.bitcamp.aura.review.model.ReviewVO;
+import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.util.FileUpload;
-import com.sun.mail.imap.protocol.Item;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -58,7 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<String> searchAddress(SearchParams params) {
+	public List<HashMap<String, Object>> searchAddress(SearchParams params) {
 		// TODO Auto-generated method stub
 		List<ReviewVO> list = new ArrayList<>();
 		if (params.getType() == 1) {
@@ -67,10 +64,16 @@ public class ReviewServiceImpl implements ReviewService {
 			list = mapper.selectHospitalsByParams(params);
 		}
 		
-		List<String> addrList =	list.stream()
-									.map(item -> ((PlaceVO) item).getAddr())
-									.collect(Collectors.toList());
-		return addrList;
+		List<HashMap<String, Object>> reviewList = new ArrayList<>();
+		
+		list.stream().forEach(item -> {
+			HashMap<String, Object> review = new HashMap<>();
+			review.put("addr", ((PlaceVO)item).getAddr());
+			review.put("title", item.getTitle());
+			reviewList.add(review);		
+		});
+		
+		return reviewList;
 	}
 
 	@Override

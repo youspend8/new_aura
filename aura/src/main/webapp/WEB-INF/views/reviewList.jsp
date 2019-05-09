@@ -128,13 +128,13 @@
 				</div>
 			</c:forEach>
 		</div>
-		
 		<div class="my-3" style="border-bottom: rgb(217, 217, 217) solid 1px;"></div>
-		<div id="review_more" class="d-flex col-12 justify-content-center align-items-center bg-light py-3 my-5">
-		    <a class="text-center" style="text-decoration: none">
+		<div id="review_more" class="d-flex col-12 justify-content-center align-items-center bg-white py-3 my-5">
+		    <a id="more_button" class="text-center" style="text-decoration: none">
 		        <img src="/img/more.png" style="width: 20%; border-radius: 100%; border: 1px solid gray">
 		        <span class="ml-2 text-dark">검색결과 더보기</span>
 		    </a>
+			<div id="bar" style="display: none;"></div>
 		</div>
 	</div>
   
@@ -145,6 +145,7 @@
 	<jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6060ab38dd0e3fd90aaea5e539c8172e&libraries=services"></script>
+	<script type="text/javascript" src="/js/radialprogress.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 내용 더 보기
@@ -174,10 +175,12 @@
 			
 			var start = 1;
 			
+			var bar = new RadialProgress(document.getElementById("bar"),{indeterminate:true,colorBg:"white",colorFg:"red",thick:5});
+			
 			$('#review_more').click(e => {
-				console.log(start)
+				$('#bar').show();
+				$('#more_button').hide();
 				start += 5;
-				console.log(start)
 				$.ajax({
 					url: '/review/search/more',
 					type: 'get',
@@ -190,6 +193,9 @@
 					},
 					success: function(data) {
 						console.log(data)
+						if (data.length == 0) {
+							$('#review_more').text('더 이상 불러올 리뷰글이 없습니다.');
+						}
 						data.forEach((item, index) => {
 							var files = '';
 						  	item.files.forEach(function(file, index) {
@@ -254,6 +260,9 @@
 							document.getElementById('content').innerHTML += list;
 						});
 					}
+				}).done(function() {
+					$('#bar').hide();
+					$('#more_button').show();
 				})
 			});
 		});
@@ -297,19 +306,32 @@
 				        position: point,
 				        image : markerImage
 				    });
-				    
+
 					marker.setMap(map);
 				    bounds.extend(point);
 			    }
 			};
-			
+
 			for (var i = 0; i < data.length; i++) {
-				geocoder.addressSearch(data[i], callback);
+				geocoder.addressSearch(data[i].addr, callback);			  
 			}
 			
 			setTimeout(() => {
 				map.setBounds(bounds);
 			}, 200);
 		}
-		
+
+		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+		function makeOverListener(map, marker, infowindow) {
+		    return function() {
+		        infowindow.open(map, marker);
+		    };
+		}
+
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+		    return function() {
+		        infowindow.close();
+		    };
+		}
 	</script>

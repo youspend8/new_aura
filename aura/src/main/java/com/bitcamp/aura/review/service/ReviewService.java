@@ -12,7 +12,7 @@ import com.bitcamp.aura.review.model.ReviewVO;
 public interface ReviewService {
 	public int writeReview(HashMap<String, Object> params, MultipartFile[] multipartFiles);
 	public List<ReviewVO> search(SearchParams params);
-	public List<String> searchAddress(SearchParams params);
+	public List<HashMap<String, Object>> searchAddress(SearchParams params);
 	public HashMap<String, Object> searchByNum(HashMap<String, Object> params);
 	public List<ReviewVO> searchAll();
 	public ReviewVO searchOne(int num);
