@@ -13,4 +13,5 @@ public interface NoticeService {
 	public HashMap<String, Object> searchByNum(HashMap<String, Object> params);
 	public NoticeVO searchOne(int num);
 	public List<NoticeVO> searchAll();
+	public <T> List<T> setSearchFile(List<T> list);
 }
