@@ -33,10 +33,22 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
 					<div class="d-flex">
-						<c:forEach var="file" items="${reviewInfo.FILES}">
-							<div class="card-body p-1 col-4">
-								<img class="w-100" src="${file}" style="width: 100%; height: 300px">
+						<c:if test="${reviewInfo.FILES.size() == 0}">
+							<div class="card-body p-1 col-12 text-center">
+								<img src="/img/NoImg.jpg" style="width: 12%; height: 250px;">
 							</div>
+						</c:if>
+						<c:forEach var="index" begin="0" end="${reviewInfo.FILES.size() / 3}" step="3">
+							<c:forEach var="j" begin="${index}" end="${index + 3}">
+								<div class="card-body p-1 col-4">
+									<c:if test="${reviewInfo.FILES[j] != null}">
+										<img class="w-100" src="${reviewInfo.FILES[j]}" style="width: 100%; height: 300px">
+									</c:if>
+									<c:if test="${reviewInfo.FILES[j] == null}">
+										<img src="/img/NoImg.jpg" style="width: 30%; height: 300px">
+									</c:if>
+								</div>
+							</c:forEach>
 						</c:forEach>
 					</div>
 				</div>
