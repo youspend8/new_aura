@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+ <mapper namespace="com.bitcamp.aura.notice.dao.NoticeMapper">
+ 	
+ 	<insert id="insert" parameterType="NoticeVO">
+ 		INSERT INTO BOARD(
+ 			NUM,
+ 			TITLE,
+ 			CONTENTS,
+ 			WRITER_DATE,
+ 			ISNOTICE
+ 		)
+ 		VALUES(
+			#{num, jdbcType=NUMERIC},
+			#{title, jdbcType=VARCHAR},
+			#{contents, jdbcType=VARCHAR},
+			#{writerDate, jdbcType=VARCHAR},
+			#{isNotice, jdbcType=NUMERIC}
+ 		)
+ 	</insert>
+ 
+ 	<update id="update" parameterType="NoticeVO">
+ 		UPDATE 
+			BOARD
+		SET
+			NUM = #{num, jdbcType=NUMERIC},
+ 			TITLE = #{title, jdbcType=VARCHAR},
+ 			CONTENTS = #{contents, jdbcType=VARCHAR},
+ 			WRITER_DATE = #{writerDate, jdbcType=VARCHAR},
+ 			ISNOTICE = #{isNotice, jdbcType=NUMERIC}
+		WHERE
+			NUM = #{num, jdbcType=NUMERIC}
+ 	</update>
+ 
+ 	<delete id="delete" parameterType="int">
+ 		DELETE FROM
+ 			BOARD
+ 		WHERE
+ 			NUM = #{num, jdbcType=NUMERIC}
+ 	</delete>
+ 
+ 	<select id="selectOne" parameterType="String" resultType="NoticeVO">
+ 		SELECT
+ 			*
+ 		FROM
+ 			BOARD
+ 		WHERE
+ 			NUM = #{num, jdbcType=NUMERIC}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectAll" resultType="NoticeVO">
+		SELECT 
+			* 
+		FORM
+			 BOARD
+ 	</select>
+ </mapper>

@@ -70,7 +70,8 @@
 	
 	<update id="updateReview" parameterType="ReviewVO">
 		update REVIEW set TITLE=#{title}, CONTENTS=#{contents}, STARS=#{stars}, GOODS=#{goods}, 
-		BOOKMARK=${bookmark},SHARES=#{shares}, READ_COUNT=#{readCount}, ADD_DATE=#{addDate}, TYPE=#{type}, COMMENTS=#{comments} where NUM=#{num}
+		BOOKMARK=${bookmark},SHARES=#{shares}, READ_COUNT=#{readCount}, TYPE=#{type}, COMMENTS=#{comments} where NUM=#{num}
+<!-- 			update REVIEW set  GOODS=#{goods},BOOKMARK=${bookmark},SHARES=#{shares}	where NUM=#{num} -->
 	</update>
 	
 	<delete id="delete" parameterType="int">
