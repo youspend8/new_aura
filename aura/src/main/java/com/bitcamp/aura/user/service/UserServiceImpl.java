@@ -51,8 +51,11 @@ public class UserServiceImpl implements UserService {
 		UserVO apiUser = userMapper.selectOneUserid(userid);
 		session.setAttribute("nickname", apiUser.getNickname());
 		session.setAttribute("email", apiUser.getEmail());
+		session.setAttribute("profile", apiUser.getProfile());
+		
 		System.out.println("닉네임 테스트: " + apiUser.getNickname());
 		System.out.println("유저 아이디 :" + apiUser.getEmail());
+		System.out.println("유저 프로필 + " + apiUser.getProfile());
 	}
 	
 	@Override
@@ -65,8 +68,11 @@ public class UserServiceImpl implements UserService {
 			if (originUser.getPassword().equals(password)) {
 				session.setAttribute("nickname", originUser.getNickname());
 				session.setAttribute("email", originUser.getEmail());
+				session.setAttribute("profile", originUser.getProfile());
+				
 				System.out.println("닉네임 값:" + session.getAttribute("nickname"));
 				System.out.println("AR가입 회원 email:" + session.getAttribute("email"));
+				System.out.println("유저 프로필 : " + originUser.getProfile());
 				return true;
 			}
 		}

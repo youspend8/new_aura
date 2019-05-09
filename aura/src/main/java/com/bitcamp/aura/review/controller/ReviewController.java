@@ -24,6 +24,8 @@ import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
 import com.bitcamp.aura.reviewlist.service.ReviewListServiceImp;
+import com.bitcamp.aura.user.service.UserDelService;
+import com.bitcamp.aura.user.service.UserService;
 import com.google.gson.Gson;
 
 @Controller
@@ -31,6 +33,9 @@ import com.google.gson.Gson;
 public class ReviewController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private ReviewService service;
@@ -72,9 +77,12 @@ public class ReviewController {
 					.toString());
 		
 		ReviewListSelectParamsVO params2 = new ReviewListSelectParamsVO();
-		ArrayList<CommentVO> commentList =(ArrayList<CommentVO>) commentService.selectAllByNum(num);
-		for(CommentVO c: commentList)
-			System.out.println(c);
+		List<CommentVO> commentList = commentService.selectAllByNum(num);
+		
+		commentList.forEach(item -> {
+			item.setProfile(userService.getUser(item.getNickname()).getProfile());
+		});
+		
 		boolean isShare = false;
 		boolean isStar = false;
 		boolean isLike = false;

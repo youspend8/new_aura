@@ -28,33 +28,47 @@
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
-		<!-- 리뷰 사진 캐러셀 -->
-		<div id="carousel-example-2" class="carousel slide col-12 mb-3" data-ride="carousel">
-			<div class="carousel-inner" role="listbox">
-				<div class="carousel-item active">
-					<div class="d-flex">
-						<c:forEach var="file" items="${reviewInfo.FILES}">
-							<div class="card-body p-1 col-4">
-								<img class="w-100" src="${file}" style="width: 100%; height: 300px">
-							</div>
-						</c:forEach>
-					</div>
-				</div>
+		<c:if test="${reviewInfo.FILES.size() == 0}">
+			<div class="card-body p-1 col-12 text-center">
+				<img src="/img/NoImg.jpg" style="width: 10%; height: 250px;">
 			</div>
-			
-			<c:if test="${reviewInfo.files.size() > 3}">
-				<!--Controls-->
-				<a class="carousel-control-prev" href="#carousel-example-2"
-					role="button" data-slide="prev"> <span
-					class="carousel-control-prev-icon" aria-hidden="true"
-					style="color: white;"></span>
-				</a> <a class="carousel-control-next review-photo-button-right"
-					href="#carousel-example-2" role="button" data-slide="next"> <span
-					class="carousel-control-next-icon" aria-hidden="true"
-					style="color: white;"></span>
-				</a>
-			</c:if>
-		</div>
+		</c:if>
+		<c:if test="${reviewInfo.FILES.size() != 0}">
+			<!-- 리뷰 사진 캐러셀 -->
+			<div id="carousel-example-2" class="carousel slide col-12 mb-3" data-ride="carousel">
+				<div class="carousel-inner" role="listbox">
+					<c:forEach var="index" begin="0" end="${reviewInfo.FILES.size() / 3}">
+						<div class="carousel-item ${index == 0 ? 'active' : ''}">
+							<div class="d-flex">
+								<c:forEach var="j" begin="${index}" end="${index + 2}">
+									<div class="card-body text-center p-1 col-4">
+										<c:if test="${reviewInfo.FILES[j] != null}">
+											<img class="w-100" src="${reviewInfo.FILES[j]}" style="width: 100%; height: 300px">
+										</c:if>
+										<c:if test="${reviewInfo.FILES[j] == null}">
+											<img src="/img/NoImg.jpg" style="width: 30%; height: 300px">
+										</c:if>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				
+				<c:if test="${reviewInfo.FILES.size() > 3}">
+					<!--Controls-->
+					<a class="carousel-control-prev" href="#carousel-example-2"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"
+						style="color: white;"></span>
+					</a> <a class="carousel-control-next review-photo-button-right"
+						href="#carousel-example-2" role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"
+						style="color: white;"></span>
+					</a>
+				</c:if>
+			</div>
+		</c:if>
 		
 		<div class="col-4 p-0 d-md-flex d-none flex-wrap align-items-start justify-content-center">
 			<div class="col-12">
@@ -174,10 +188,16 @@
 			class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
 			<h4 class="my-3 font-weight-bold w-100" id="review_write">리뷰 작성</h4>
 			<div class="w-50">
-				<img class="rounded-circle w-100"
-					src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg">
+				<c:choose>
+					<c:when test="${profile ne null }">
+						<img class="rounded-circle w-100 h-100" src=${profile }>
+					</c:when>
+					<c:otherwise>
+						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
+					</c:otherwise>
+				</c:choose>
+				
 			</div>
-			
 <!-- 			세션 유저의 닉네임 넣기 			-->
 			<div class="w-100 my-3" id="nickname">${nickname}</div>
 
@@ -511,39 +531,32 @@
 			<div
 				class=" col-2 d-flex flex-wrap justify-content-center align-items-center"
 				style="width: 100%; display: flex;">
-				<div class="w-50">
-					<img class="rounded-circle w-100"
-						src="https://picsum.photos/300/300?image=1081">
+				<div style="width: 65%; height: 75px;">
+				<c:choose>
+					<c:when test="${commentList[0].profile ne null }">
+						<img class="rounded-circle w-100 h-100" src=${commentList[0].profile }>
+					</c:when>
+					<c:otherwise>
+						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
+					</c:otherwise>
+				</c:choose>
 				</div>
 
 				<div class="w-100 text-center" style="margin-top: 0px">${commentList[0].nickname }
 				
 				</div>
-				<fmt:parseNumber var="score" integerOnly="true" value="${commentList[0].comment_Score }"></fmt:parseNumber>
+				
 					
 				<div class=" col-12 p-0 d-flex justify-content-center">
-					<c:forEach begin="1" end="${score }">
+					<c:forEach begin="1" end="${commentList[0].comment_Score }">
 						<i class="fas fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
 					</c:forEach>
-					<c:choose>
+					<c:forEach begin="1" end="${5-commentList[0].comment_Score }">
+						<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
+					</c:forEach>
 					
-						<c:when test="${commentList[0].comment_Score-score>=0.5 }">
-							<i class="fas fa-star-half-alt" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
-							<fmt:parseNumber var="score2" integerOnly="true" value="${5-commentList[0].comment_Score }" />
-							
-							<c:forEach begin="1" end="${score2 }">
-								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
-							</c:forEach>
-						</c:when>
-						
-						<c:otherwise>
-							<fmt:parseNumber var="score2" value="${5-commentList[0].comment_Score }" pattern="0"/>
-							<c:forEach begin="1" end="${score2+1 }">
-								<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
-							</c:forEach>
-						</c:otherwise>
-						
-					</c:choose>
+					
+					
 					
 				</div>
 			</div>
@@ -597,140 +610,17 @@
 
 
 		
-		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active"
-			id="home">
-			<div
-				class=" col-2 d-flex flex-wrap justify-content-center align-items-center"
-				style="width: 100%; display: flex;">
-				<div class="w-50">
-					<img class="rounded-circle w-100"
-						src="https://picsum.photos/300/300?image=1081">
-				</div>
+<!-- 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" -->
+<!-- 			id="home"> -->
 
-				<div class="w-100 text-center" style="margin-top: 0px">유저 닉네임2
-				</div>
-			</div>
 
-			<div
-				class="col-2 d-flex justify-content-center align-items-center p-0">
-				<!-- 유저들이 올린리뷰 후기 사진0-->
-				<div id="carouselExampleFade-2" class="carousel slide carousel-fade"
-					data-ride="carousel">
-					<div class="carousel-inner user-picture">
-						<div class="carousel-item active">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=230">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=240">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=280">
-						</div>
-					</div>
-					<a class="user-photo-button-left carousel-control-prev"
-						href="#carouselExampleFade-2" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="user-photo-button-right carousel-control-next"
-						href="#carouselExampleFade-2" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
-				<!-- 유저들이 올린리뷰 후기 사진0 End-->
-			</div>
+<!-- 		</div> -->
 
-			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Maiores, quam ipsum! Expedita nesciunt repellat officia deserunt
-					incidunt libero sequi possimus pariatur, fugiat magnam, repellendus
-					ipsa mollitia in explicabo vitae quos.</div>
-
-				<div class=" col-5 p-0 d-flex flex-wrap">
-					<i class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i>
-				</div>
-			</div>
-			<div
-				class="d-flex col-2 flex-column align-items-center justify-content-center">
-				<i class="far fa-heart" style="font-size: 40px"></i>
-				<p class="heart-number">87.451</p>
-			</div>
-		</div>
-
-		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active"
-			id="home">
-			<div
-				class=" col-2 d-flex flex-wrap justify-content-center align-items-center"
-				style="width: 100%; display: flex;">
-				<div class="w-50">
-					<img class="rounded-circle w-100"
-						src="https://picsum.photos/300/300?image=1081">
-				</div>
-
-				<div class="w-100 text-center" style="margin-top: 0px">유저 닉네임2
-				</div>
-			</div>
-
-			<div
-				class="col-2 d-flex justify-content-center align-items-center p-0">
-				<!-- 유저들이 올린리뷰 후기 사진0-->
-				<div id="carouselExampleFade-3" class="carousel slide carousel-fade"
-					data-ride="carousel">
-					<div class="carousel-inner user-picture">
-						<div class="carousel-item active">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=230">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=240">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=280">
-						</div>
-					</div>
-					<a class="user-photo-button-left carousel-control-prev"
-						href="#carouselExampleFade-3" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="user-photo-button-right carousel-control-next"
-						href="#carouselExampleFade-3" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
-				<!-- 유저들이 올린리뷰 후기 사진0 End-->
-			</div>
-
-			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					Maiores, quam ipsum! Expedita nesciunt repellat officia deserunt
-					incidunt libero sequi possimus pariatur, fugiat magnam, repellendus
-					ipsa mollitia in explicabo vitae quos.</div>
-
-				<div class=" col-5 p-0 d-flex flex-wrap">
-					<i class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i> <i
-						class="far fa-star" style="font-size: 20px;"></i>
-				</div>
-			</div>
-			<div
-				class="d-flex col-2 flex-column align-items-center justify-content-center">
-				<i class="far fa-heart" style="font-size: 40px"></i>
-				<p class="heart-number">87.451</p>
-			</div>
-		</div>
-	</div>
+<!-- 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" -->
+<!-- 			id="home"> -->
+			
+<!-- 		</div> -->
+		
 	<div id="review_more"
 		class="d-flex col-12 justify-content-center align-items-center bg-light py-3 my-4">
 		<a class="text-center" href="#" style="text-decoration: none"> <img
@@ -1076,7 +966,8 @@ var flag2=true;
    				contentType : false,
    				
    				success: function(data){
-   					
+   					$('#grade').val('0')
+   					location.reload();
    				},
    				error : function(error) {
    					alert("파일업로드 실패");
