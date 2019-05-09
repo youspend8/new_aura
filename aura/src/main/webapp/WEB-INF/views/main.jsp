@@ -30,7 +30,7 @@
 	</script>
 	<div id="header">
 		<a href="/main" class="brand_logo">
-			<img src="/img/logo/logo.png" width="130px" class="pt-1">
+			<img src="/img/logo/blacklogo.png" width="130px" class="pt-1">
 		</a>
 		<div id="search_form" class="search_form col-md-6 col-12 p-0">
 			<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">

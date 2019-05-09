@@ -24,7 +24,7 @@
 				<div class="card-wrapper">
 					<div class="brand">
 						<a href="/user/loginForm">
-							<img src="/img/all_review_img/All Review 로고.png" alt="bootstrap 4 login page"
+							<img src="/img/logo/blacklogo.png" alt="bootstrap 4 login page"
 								style="width:150px">
 						</a>
 					</div>

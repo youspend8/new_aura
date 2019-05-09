@@ -15,10 +15,8 @@
         <div class="col-md-4 mx-auto">
 
           <!-- Content -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-          <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet,
-            consectetur
-            adipisicing elit.</p>
+          <img src="/img/logo/whitelogo.png"><br>
+          <p>모든 것을 리뷰하는 날까지 All Review는 계속 됩니다.!!</p>
 
         </div>
         <!-- Grid column -->
