@@ -7,15 +7,18 @@
  <mapper namespace="com.bitcamp.aura.notice.dao.NoticeMapper">
  	
  	<insert id="insert" parameterType="NoticeVO">
+ 		<selectKey keyProperty="num" resultType="int" order="AFTER">
+ 			SELECT BOARD_SEQ.CURRVAL FROM DUAL
+ 		</selectKey>
  		INSERT INTO BOARD(
  			NUM,
  			TITLE,
  			CONTENTS,
- 			WRITER_DATE,
+ 			WRITE_DATE,
  			ISNOTICE
  		)
  		VALUES(
-			#{num, jdbcType=NUMERIC},
+			null,
 			#{title, jdbcType=VARCHAR},
 			#{contents, jdbcType=VARCHAR},
 			#{writerDate, jdbcType=VARCHAR},
@@ -30,7 +33,7 @@
 			NUM = #{num, jdbcType=NUMERIC},
  			TITLE = #{title, jdbcType=VARCHAR},
  			CONTENTS = #{contents, jdbcType=VARCHAR},
- 			WRITER_DATE = #{writerDate, jdbcType=VARCHAR},
+ 			WRITE_DATE = #{writerDate, jdbcType=VARCHAR},
  			ISNOTICE = #{isNotice, jdbcType=NUMERIC}
 		WHERE
 			NUM = #{num, jdbcType=NUMERIC}
@@ -43,7 +46,7 @@
  			NUM = #{num, jdbcType=NUMERIC}
  	</delete>
  
- 	<select id="selectOne" parameterType="String" resultType="NoticeVO">
+ 	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
  		SELECT
  			*
  		FROM
@@ -56,7 +59,7 @@
  	<select id="selectAll" resultType="NoticeVO">
 		SELECT 
 			* 
-		FORM
+		FROM
 			 BOARD
  	</select>
  </mapper>
