@@ -11,20 +11,7 @@
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
 		${reviewInfo.TITLE}
 		<span class="badge badge-pill badge-success" style="font-size: 20px; margin-left: 3px;">
-	    	<c:choose>
-				<c:when test="${review.category eq 1}">
-					한식
-				</c:when>
-				<c:when test="${review.category eq 2}">
-					양식
-				</c:when>
-				<c:when test="${review.category eq 16}">
-					호프
-				</c:when>
-				<c:otherwise>
-					기타분류
-				</c:otherwise>
-    		</c:choose>
+			${reviewInfo.CATEGORY}
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
