@@ -27,7 +27,7 @@
 				<div class="card-wrapper" style="width: 400px;">
 						<!-- 로고 -->
 					<div class="brand">
-						<a href="/main"> <img src="/img/all_review_img/All Review 로고.png" alt="bootstrap 4 login page" style="width: 150px;"></a>
+						<a href="/main"> <img src="/img/logo/blacklogo.png" alt="bootstrap 4 login page" style="width: 150px;"></a>
 					</div>
 					
 					<div class="card fat">

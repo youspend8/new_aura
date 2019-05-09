@@ -151,7 +151,7 @@
 <body>
     <header class="navigation" id="navigation">
 		<a href="/main" style="width: 15%;">
-			<img class="navigation_brand_logo" src="/img/logo/logo2.png">
+			<img class="navigation_brand_logo" src="/img/logo/whitelogo2.png">
 		</a>
 		
 		<div id="navigation_search_form" class="col-md-6 col-11 p-0">

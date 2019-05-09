@@ -15,10 +15,9 @@
         <div class="col-md-4 mx-auto">
 
           <!-- Content -->
-           <img src="/img/logo/noback.jpg" style= "width:200px">
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">회사 주소</h5>
-          <p>비트캠프 서초점 All Review</p>
-            
+  
+          <img src="/img/logo/whitelogo.png"><br>
+          <p>모든 것을 리뷰하는 날까지 All Review는 계속 됩니다.!!</p>
 
         </div>
         <!-- Grid column -->
