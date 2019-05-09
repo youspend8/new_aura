@@ -6,23 +6,36 @@
 <mapper namespace="com.bitcamp.aura.comment.dao.CommentMapper">
 
 	<insert id="insert" parameterType="CommentVO">
-		INSERT INTO USER_COMMENT (
-			REVIEW_POST_NUM,
-			NICKNAME,
-			COMMENT_CONTENTS,
-			COMMENT_LIKE,
-			COMMENT_SCORE,
-			COMMENT_DATE,
-			COMMENT_NUM
+		<selectKey order="AFTER" keyProperty="comment_Num" resultType="int" >
+			SELECT USER_COMMENT_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+			INSERT INTO USER_COMMENT (
+				REVIEW_POST_NUM,
+				NICKNAME,
+				COMMENT_CONTENTS,
+				COMMENT_LIKE,
+				COMMENT_SCORE,
+				COMMENT_DATE,
+				COMMENT_NUM
+			)
+			VALUES (
+				#{review_Post_Num, jdbcType=NUMERIC},
+				#{nickname, jdbcType=VARCHAR},
+				#{comment_Contents, jdbcType=VARCHAR},
+				#{comment_Like, jdbcType=NUMERIC},
+				#{comment_Score, jdbcType=NUMERIC},
+				#{comment_Date, jdbcType=VARCHAR},
+				null
+			)
+	</insert>
+	<insert id="insert_File" parameterType="CommentFileVO">
+		INSERT INTO COMMENT_FILE (
+			COMMENT_NUM,
+			COMMENT_FILE
 		)
 		VALUES (
-			#{review_post_num, jdbcType=NUMERIC},
-			#{nickname, jdbcType=VARCHAR},
-			#{comment_contents, jdbcType=VARCHAR},
-			#{comment_like, jdbcType=NUMERIC},
-			#{comment_score, jdbcType=NUMERIC},
-			#{comment_Date, jdbcType=VARCHAR},
-			#{comment_num, jdbcType=NUMERIC}
+			#{comment_Num, jdbcType=NUMERIC},
+			#{comment_File, jdbcType=VARCHAR}
 		)
 	</insert>
 	<update id="update" parameterType="CommentVO">
