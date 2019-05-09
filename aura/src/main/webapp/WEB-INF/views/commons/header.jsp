@@ -21,6 +21,9 @@
 	<jsp:include page="/WEB-INF/views/modal/favorite_modal.jsp"></jsp:include>
 	
 	<style type="text/css">
+		.fade {
+		  	transition: opacity 0.4s linear;
+		}
 		#background {
 			width: 100%;
 			height: 500px;

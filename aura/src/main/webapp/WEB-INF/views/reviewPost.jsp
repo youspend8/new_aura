@@ -765,11 +765,14 @@ geocoder.addressSearch('${reviewInfo.ADDR}', function(result, status) {
      if (status === daum.maps.services.Status.OK) {
 
         var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
+        var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+	    var imageSize = new daum.maps.Size(24, 35); 
+	    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new daum.maps.Marker({
             map: map,
-            position: coords
+            position: coords,
+	        image : markerImage
         });
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
