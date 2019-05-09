@@ -28,45 +28,47 @@
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
-		<!-- 리뷰 사진 캐러셀 -->
-		<div id="carousel-example-2" class="carousel slide col-12 mb-3" data-ride="carousel">
-			<div class="carousel-inner" role="listbox">
-				<div class="carousel-item active">
-					<div class="d-flex">
-						<c:if test="${reviewInfo.FILES.size() == 0}">
-							<div class="card-body p-1 col-12 text-center">
-								<img src="/img/NoImg.jpg" style="width: 12%; height: 250px;">
-							</div>
-						</c:if>
-						<c:forEach var="index" begin="0" end="${reviewInfo.FILES.size() / 3}" step="3">
-							<c:forEach var="j" begin="${index}" end="${index + 3}">
-								<div class="card-body p-1 col-4">
-									<c:if test="${reviewInfo.FILES[j] != null}">
-										<img class="w-100" src="${reviewInfo.FILES[j]}" style="width: 100%; height: 300px">
-									</c:if>
-									<c:if test="${reviewInfo.FILES[j] == null}">
-										<img src="/img/NoImg.jpg" style="width: 30%; height: 300px">
-									</c:if>
-								</div>
-							</c:forEach>
-						</c:forEach>
-					</div>
-				</div>
+		<c:if test="${reviewInfo.FILES.size() == 0}">
+			<div class="card-body p-1 col-12 text-center">
+				<img src="/img/NoImg.jpg" style="width: 10%; height: 250px;">
 			</div>
-			
-			<c:if test="${reviewInfo.files.size() > 3}">
-				<!--Controls-->
-				<a class="carousel-control-prev" href="#carousel-example-2"
-					role="button" data-slide="prev"> <span
-					class="carousel-control-prev-icon" aria-hidden="true"
-					style="color: white;"></span>
-				</a> <a class="carousel-control-next review-photo-button-right"
-					href="#carousel-example-2" role="button" data-slide="next"> <span
-					class="carousel-control-next-icon" aria-hidden="true"
-					style="color: white;"></span>
-				</a>
-			</c:if>
-		</div>
+		</c:if>
+		<c:if test="${reviewInfo.FILES.size() != 0}">
+			<!-- 리뷰 사진 캐러셀 -->
+			<div id="carousel-example-2" class="carousel slide col-12 mb-3" data-ride="carousel">
+				<div class="carousel-inner" role="listbox">
+					<c:forEach var="index" begin="0" end="${reviewInfo.FILES.size() / 3}">
+						<div class="carousel-item ${index == 0 ? 'active' : ''}">
+							<div class="d-flex">
+								<c:forEach var="j" begin="${index}" end="${index + 2}">
+									<div class="card-body text-center p-1 col-4">
+										<c:if test="${reviewInfo.FILES[j] != null}">
+											<img class="w-100" src="${reviewInfo.FILES[j]}" style="width: 100%; height: 300px">
+										</c:if>
+										<c:if test="${reviewInfo.FILES[j] == null}">
+											<img src="/img/NoImg.jpg" style="width: 30%; height: 300px">
+										</c:if>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				
+				<c:if test="${reviewInfo.FILES.size() > 3}">
+					<!--Controls-->
+					<a class="carousel-control-prev" href="#carousel-example-2"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"
+						style="color: white;"></span>
+					</a> <a class="carousel-control-next review-photo-button-right"
+						href="#carousel-example-2" role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"
+						style="color: white;"></span>
+					</a>
+				</c:if>
+			</div>
+		</c:if>
 		
 		<div class="col-4 p-0 d-md-flex d-none flex-wrap align-items-start justify-content-center">
 			<div class="col-12">
