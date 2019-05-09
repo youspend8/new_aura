@@ -820,19 +820,18 @@ var flag2=true;
 		    	    type: 'POST', // GET, PUT
 		    	    dataType: 'text', 
 		    	    data: {
-		    	    	postNum : ${reviewInfo.NUM},
-		    	    	nickname: '채훈22',
+		    	    	postNum : '${reviewInfo.NUM}',
+		    	    	nickname: nickname,
 		    	    	reviewType: type,
 		    	    	type: '${reviewInfo.TYPE}'
 		    	    },
 		    	    success: function(data) {
-		    	    	
 	    	        },
 	    	       error : function (data) {
 	    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
 		    	        return false;
 	    	       }  // 전송할 데이터
-		    	})//ajax
+		    	})
 		    	setTimeout(() => {
 					flag2=true;
 				}, 500);

@@ -1,4 +1,4 @@
-package com.bitcamp.aura.review.util;
+package com.bitcamp.aura.notice.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bitcamp.aura.notice.model.NoticeFileVO;
-import com.bitcamp.aura.notice.persist.NoticeFileRepository;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.model.ReviewFileVO;
 
@@ -22,8 +20,6 @@ public class FileUpload {
 
 	@Autowired
 	private ReviewFileMapper mapper;
-	@Autowired
-	private NoticeFileRepository repo;
 	
 	public void uploadFiles(int postNum, MultipartFile[] multipartFiles) {
 		ReviewFileVO reviewFile = new ReviewFileVO();
@@ -32,16 +28,6 @@ public class FileUpload {
 		Arrays.asList(multipartFiles).forEach(file -> {
 			reviewFile.setFilePath(upload(file));
 			mapper.insert(reviewFile);
-		});
-	}
-	
-	public void uploadNotice(int postNum, MultipartFile[] multipartFiles) {
-		NoticeFileVO noticeFile = new NoticeFileVO();
-		noticeFile.setPostNum(postNum);
-		
-		Arrays.asList(multipartFiles).forEach(file -> {
-			noticeFile.setName(upload(file));
-			repo.save(noticeFile);
 		});
 	}
 	
