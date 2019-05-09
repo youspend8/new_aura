@@ -11,6 +11,6 @@ public interface NoticeMapper {
 	public int insert(NoticeVO noticevo);
 	public int update(NoticeVO noticevo);
 	public int delete(int num);
-	public List<NoticeVO> selectOne(String writerDate);
+	public List<NoticeVO> selectOne(int num);
 	public List<NoticeVO> selectAll();
 }

@@ -9,9 +9,7 @@ import com.bitcamp.aura.notice.model.NoticeVO;
 
 public interface NoticeService {
 	
-	public int writeNotice(HashMap<String, Object> params, MultipartFile[] multipartFiles);
-	public HashMap<String, Object> searchByNum(HashMap<String, Object> params);
-	public NoticeVO searchOne(int num);
+	public int writeNotice(NoticeVO noticevo, MultipartFile[] multipartFiles);
+	public List<NoticeVO> searchOne(int num);
 	public List<NoticeVO> searchAll();
-	public <T> List<T> setSearchFile(List<T> list);
 }
