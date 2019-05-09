@@ -172,7 +172,7 @@
 				<c:when test="${nickname ne null}">	          	
 					<li class="w-100">
 						<a href="#" class="fas fa-user-alt text-dark text-center user_icon" data-target="#fullHeightModalRight" data-toggle="modal">
-							<span class="user_nickname d-s">${nickname}님</span>
+							<span class="user_nickname d-md-inline-block d-none">${nickname}님</span>
 						</a>
 					</li>
 				</c:when>
