@@ -5,6 +5,29 @@
 	<jsp:include page="/WEB-INF/views/commons/header.jsp"></jsp:include>
 	<title>All Review</title>
 	
+	<script>
+		$(function() {
+			var index = 1;
+			var images = [
+				'/img/main/full_background.jpg',
+				'/img/main/full_background2.png',
+				'/img/main/full_background3.png',
+				'/img/main/full_background4.png'
+			];
+			setInterval(() => {
+				$('#background').attr('class', 'fade hide')
+				setTimeout(() => {
+					$('#background').attr('class', 'fade show')
+					$('#background').css({
+						'background-image': 'url(' + images[index] + ')'
+					})
+					if (index++ == 3) {
+						index = 0;
+					}
+				}, 500);
+			}, 4000);
+		});
+	</script>
 	<div id="header">
 		<a href="/main" class="brand_logo">
 			<img src="/img/logo/logo.png" width="130px" class="pt-1">
