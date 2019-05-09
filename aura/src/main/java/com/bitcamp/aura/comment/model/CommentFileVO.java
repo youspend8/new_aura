@@ -16,6 +16,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Alias(value="commentFileVo")
 public class CommentFileVO {
-	private int comment_num;
-	private String comment_file;
+	private int comment_Num;
+	private String comment_File;
 }

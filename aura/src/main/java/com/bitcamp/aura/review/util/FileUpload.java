@@ -3,7 +3,9 @@ package com.bitcamp.aura.review.util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,13 +38,15 @@ public class FileUpload {
 	}
 	
 	public void uploadNotice(int postNum, MultipartFile[] multipartFiles) {
-		NoticeFileVO noticeFile = new NoticeFileVO();
-		noticeFile.setPostNum(postNum);
-		
+		List<NoticeFileVO> fileList = new ArrayList<>();
 		Arrays.asList(multipartFiles).forEach(file -> {
+			NoticeFileVO noticeFile = new NoticeFileVO();
+			noticeFile.setPostNum(postNum);
 			noticeFile.setName(upload(file));
-			repo.save(noticeFile);
+			fileList.add(noticeFile);
 		});
+		
+		repo.saveAll(fileList);
 	}
 	
 	public String upload(MultipartFile multipartFile) {

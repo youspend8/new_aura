@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    
+    <property name="LOG_PATH_NAME" value="logs/" />
+ 
+    <appender name="USER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH_NAME}/user_%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> 
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F.%M] : %m%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="REVIEW_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH_NAME}/review_%d{yyyyMMdd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> 
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F.%M] : %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%d{yyyy-MM-dd}] [%d{HH:mm:ss.SSS}] [%p] [%c{1}] %F:%L [%m]%n</pattern>
+        </layout>
+    </appender>
+
+	<logger name="com.bitcamp.aura">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="com.bitcamp.aura.review" level="INFO">
+		<appender-ref ref="REVIEW_FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger name="com.bitcamp.aura.user" level="INFO">
+		<appender-ref ref="USER_FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+</configuration>
+
+
