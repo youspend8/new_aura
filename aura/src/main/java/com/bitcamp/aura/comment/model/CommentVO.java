@@ -23,4 +23,5 @@ public class CommentVO {
     private float comment_Score;
     private String comment_Date;
     private int comment_Num;
+    private String profile;
 }
