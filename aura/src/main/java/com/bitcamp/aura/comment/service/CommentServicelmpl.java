@@ -30,6 +30,7 @@ public class CommentServicelmpl implements CommentService{
 		String review_Num = comment.getParameter("review_post_num");
 		String nickname = comment.getParameter("nickname_post");
 		String content = comment.getParameter("comment");
+		String grade = comment.getParameter("grade");
 		
 		String root = comment.getSession().getServletContext().getRealPath("/");
 		String path = root + "resources/upload/";
@@ -46,13 +47,15 @@ public class CommentServicelmpl implements CommentService{
 		
 		List<MultipartFile> fileList = comment.getFiles("files");
 		
+		commentVo.setReview_Post_Num(Integer.parseInt(review_Num));
 		commentVo.setComment_Date(sim.format(new Date()));
 		commentVo.setComment_Contents(content);
-		commentVo.setReview_Post_Num(Integer.parseInt(review_Num));
+		commentVo.setComment_Score(Integer.parseInt(grade));
 		
 		System.out.println("게시글 번호 : " + review_Num);
 		System.out.println("댓글 작성자 닉네임 : " + nickname);
 		System.out.println("댓글 내용 : " + content);
+		System.out.println("부여한 점수 : " + grade);
 		
 		for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
@@ -64,7 +67,10 @@ public class CommentServicelmpl implements CommentService{
 //              long fileSize = mf.getSize(); // 파일 사이즈를 알고 싶다면 주석을 푸시오
 //              System.out.println("fileSize : " + fileSize);
             	
-                String safeFile = path + System.currentTimeMillis() + "\t" + originFileName;
+            	String fileName = System.currentTimeMillis() + " " + originFileName;
+                String safeFile = path + fileName;
+                
+                System.out.println(fileName);
                 System.out.println(safeFile);
                 
                 try {
