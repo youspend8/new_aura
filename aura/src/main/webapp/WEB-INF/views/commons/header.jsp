@@ -132,8 +132,13 @@
 		}
 		
 		.container {
-			max-width: 70%;
+			max-width: 80%;
 			margin: 0 auto;
+		}
+		@media (max-width: 1300px) {
+			.container {
+				max-width: 100%;
+			}
 		}
 		@media (max-width: 1199.98px) {
 			.container {
