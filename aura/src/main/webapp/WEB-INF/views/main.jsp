@@ -30,7 +30,7 @@
 	</script>
 	<div id="header">
 		<a href="/main" class="brand_logo">
-			<img src="/img/logo/logo.png" width="130px" class="pt-1">
+			<img src="/img/logo/blacklogo.png" width="130px" class="pt-1">
 		</a>
 		<div id="search_form" class="search_form col-md-6 col-12 p-0">
 			<form class="form-check-inline w-100" id="origin_search_form" action="/review/search">
@@ -73,768 +73,58 @@
 			}
 		}
 	</script>
-<!--   <div class="container first_container"> -->
-<!--     <section class="row m-0 w-100 h-100"> -->
-<!--       첫번째 캐러 -->
-<!--       <div class="col-lg-8 col-md-12 p-0 h-100"> -->
-
-<!--         <div style="height: 1px; position: absolute; z-index: 2;"> -->
-<!--           Navbar -->
-<!--           <nav class="mb-1 m-2  navbar-expand navbar-dark"> -->
-<!--             <div class="collapse navbar-collapse" id="navbarSupportedContent-555"> -->
-<!--               <ul class="navbar-nav mr-auto"> -->
-
-<!--                 <li class="nav-item dropdown"> -->
-<!--                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown" -->
-<!--                     aria-haspopup="true" aria-expanded="false">병원 -->
-<!--                   </a> -->
-<!--                   <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555"> -->
-<!--                     <a class="dropdown-item" href="#">Action</a> -->
-<!--                     <a class="dropdown-item" href="#">Another action</a> -->
-<!--                     <a class="dropdown-item" href="#">Something else here</a> -->
-<!--                   </div> -->
-<!--                 </li> -->
-<!--                 <li class="nav-item dropdown"> -->
-<!--                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown" -->
-<!--                     aria-haspopup="true" aria-expanded="false">맛집 -->
-<!--                   </a> -->
-<!--                   <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555"> -->
-<!--                     <a class="dropdown-item" href="#">Action</a> -->
-<!--                     <a class="dropdown-item" href="#">Another action</a> -->
-<!--                     <a class="dropdown-item" href="#">Something else here</a> -->
-<!--                   </div> -->
-<!--                 </li> -->
-<!--                 <li class="nav-item dropdown"> -->
-<!--                   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown" -->
-<!--                     aria-haspopup="true" aria-expanded="false">Dropdown -->
-<!--                   </a> -->
-<!--                   <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555"> -->
-<!--                     <a class="dropdown-item" href="#">Action</a> -->
-<!--                     <a class="dropdown-item" href="#">sdfsdfsdfsdfsdn</a> -->
-<!--                     <a class="dropdown-item" href="#">Something else here</a> -->
-<!--                   </div> -->
-<!--                 </li> -->
-<!--               </ul> -->
-
-<!--             </div> -->
-<!--           </nav> -->
-<!--           /.Navbar -->
-<!--         </div> -->
-
-
-<!--         Carousel Wrapper -->
-<!--         <div id="carousel-example-2" class="carousel slide carousel-fade d-inline-block h-100" data-ride="carousel" -->
-<!--           data-interval="2000"> -->
-<!--           Indicators -->
-<!--           <ol class="carousel-indicators"> -->
-<!--             <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li> -->
-<!--             <li data-target="#carousel-example-2" data-slide-to="1"></li> -->
-<!--             <li data-target="#carousel-example-2" data-slide-to="2"></li> -->
-<!--           </ol> -->
-<!--           /.Indicators -->
-<!--           Slides -->
-<!--           <div class="carousel-inner h-100" role="listbox"> -->
-<!--             <div class="carousel-item active"> -->
-<!--               <div class="view"> -->
-<!--                 <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" -->
-<!--                   alt="First slide" > -->
-<!--                 <div class="mask rgba-black-light"></div> -->
-<!--               </div> -->
-<!--             </div> -->
-<!--             <div class="carousel-item"> -->
-<!--               Mask color -->
-<!--               <div class="view"> -->
-<!--                 <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg" -->
-<!--                   alt="Second slide"> -->
-<!--                 <div class="mask rgba-black-strong"></div> -->
-<!--               </div> -->
-<!--             </div> -->
-<!--             <div class="carousel-item"> -->
-<!--               Mask color -->
-<!--               <div class="view"> -->
-<!--                 <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg" -->
-<!--                   alt="Third slide"> -->
-<!--                 <div class="mask rgba-black-slight"></div> -->
-<!--               </div> -->
-<!--             </div> -->
-<!--           </div> -->
-<!--           /.Slides -->
-<!--           Controls -->
-<!--           <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev"> -->
-<!--             <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
-<!--             <span class="sr-only">Previous</span> -->
-<!--           </a> -->
-<!--           <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next"> -->
-<!--             <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
-<!--             <span class="sr-only">Next</span> -->
-<!--           </a> -->
-<!--           /.Controls -->
-<!--         </div> -->
-<!--       </div> -->
-
-
-<!--         2nd 광고판~ -->
-<!--         <div class="col-lg-12 col-md-6 m-0 p-0 evnetPan" style="background: burlywood;"> -->
-<!--           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false"> -->
-<!--             <ol class="carousel-indicators"> -->
-<!--               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li> -->
-<!--               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
-<!--               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
-<!--             </ol> -->
-<!--             <div class="carousel-inner evnetPan"> -->
-<!--               <div class="carousel-item active"> -->
-<!--                 <a href=".."><img src="/img/event/이벤트1.jpg" class="d-block w-100" alt="..."></a> -->
-<!--               </div> -->
-<!--               <div class="carousel-item evnetPan"> -->
-<!--                 <img src="/img/event/이벤트2.jpg" class="d-block w-100" alt="..."> -->
-<!--               </div> -->
-<!--               <div class="carousel-item evnetPan"> -->
-<!--                 <img src="/img/event/이벤트3.jpg" class="d-block w-100" alt="..."> -->
-<!--               </div> -->
-<!--             </div> -->
-<!--             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> -->
-<!--               <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
-<!--               <span class="sr-only">Previous</span> -->
-<!--             </a> -->
-<!--             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> -->
-<!--               <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
-<!--               <span class="sr-only">Next</span> -->
-<!--             </a> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--         2nd 광고판~end -->
-<!--       </div> -->
-
-<!--     </section> -->
-<!--     //광고판있는 줄 끝 -->
-
-<!--   </div> -->
-
   <!-- 인기리뷰시작 -->
   
   	<div id="background"></div>
-<div style="z-index: 1; background-color: white;
-			position: relative;">
+<div style="z-index: 1; background-color: white; position: relative;">
   <div class="container">
-    <h5 class="pt-4 m-0" style="font-weight: bold; padding-left: 7%; ">인기리뷰</h5>
+    <h5 class="pt-4 m-0 text-center text-danger" style="font-weight: bold;">Popular Review</h5>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
 
       <div class="carousel-inner">
 
-        <div class="carousel-item active">
-          <div class="d-flex flex-wrap w-100 justify-content-center tl">
-			<c:forEach items="${reviewVo}" var="review">
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="/review/post?num=${review.num}&type=${review.type}">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">${review.title}</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    ${review.contents}
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="${review.files[0]}" alt="" />
-                </div>
-
-              </div>
-            </div>
-			</c:forEach>
+	<c:forEach var="i" begin="0" end="${reviewVo.size() / 6}">
+		<div class="carousel-item ${i == 0 ? 'active' : ''}">
+			<div class="d-flex flex-wrap w-100 justify-content-center tl">
+				<c:forEach var="j" begin="${i * 6}" end="${i * 6 + 5}">
+					<div class="win">
+						<div class="card-jisung">
+							<a href="/review/post?num=${reviewVo[j].num}&type=${reviewVo[j].type}">
+								<div class="cardtitle">
+									<span class="text-primary" style="font-size: 70%;">${reviewVo[j].title}</span>
+									<span class="text-dark" style="font-size: 70%;">${reviewVo[j].type}</span><br>
+									<i class="fas fa-star" style="color: red;"></i>
+									<i class="fas fa-star" style="color: red;"></i>
+									<i class="fas fa-star" style="color: red;"></i>
+									<i class="fas fa-star" style="color: red; "></i>
+									<i class="fas fa-star-half" style="color: red;"></i>
+								</div>
+							</a>
+							
+							<div class="cardcontent">
+								<div style="height: 90%; overflow: hidden;">
+									${reviewVo[j].contents}
+								</div>
+									<a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
+									read more...
+								</a>
+							</div>
+							
+							<div class="cardpic bg-white text-center">
+								<c:if test="${reviewVo[j].files.size() eq 0 }">
+									<img src="/img/NoImg.jpg" style="width: 50%;" />
+								</c:if>
+								<c:if test="${reviewVo[j].files.size() ne 0 }">
+									<img src="${reviewVo[j].files[0]}" />
+								</c:if>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</c:forEach>
 			
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="/review/post">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/230" alt="" />
-                </div>
-
-              </div>
-            </div>
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="/review/post">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/240" alt="" />
-                </div>
-
-              </div>
-            </div>
-
-            <div class="win d-none d-lg-inline-block ">
-
-
-              <div class="card-jisung" id="bb">
-                <a href="/review/post">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 100%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-                <div class="cardcontent">
-                  <div href=""
-                    style="display: inline-block; text-decoration: none; color: white; height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 90%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/250" alt="" />
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="d-flex flex-wrap w-100 justify-content-center tl">
-
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/211" alt="" />
-                </div>
-
-              </div>
-            </div>
-
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/212" alt="" />
-                </div>
-
-              </div>
-            </div>
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/213" alt="" />
-                </div>
-
-              </div>
-            </div>
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/214" alt="" />
-                </div>
-
-              </div>
-            </div>
-
-            <div class="win d-none d-lg-inline-block ">
-
-
-              <div class="card-jisung" id="bb">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 100%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-                <div class="cardcontent">
-                  <div href=""
-                    style="display: inline-block; text-decoration: none; color: white; height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 90%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/245" alt="" />
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="d-flex flex-wrap w-100 justify-content-center tl">
-
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/210" alt="" />
-                </div>
-
-              </div>
-            </div>
-
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/210" alt="" />
-                </div>
-
-              </div>
-            </div>
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/210" alt="" />
-                </div>
-
-              </div>
-            </div>
-            <div class="win">
-
-              <div class="card-jisung">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 70%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-
-                <div class="cardcontent">
-                  <div style="height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/210" alt="" />
-                </div>
-
-              </div>
-            </div>
-
-            <div class="win d-none d-lg-inline-block ">
-
-
-              <div class="card-jisung" id="bb">
-                <a href="">
-                  <div class="cardtitle">
-                    <span class="text-primary" style="font-size: 100%;">테스트</span>
-                    <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red;"></i>
-                    <i class="fas fa-star" style="color: red; "></i>
-                    <i class="fas fa-star-half" style="color: red;"></i>
-                  </div>
-                </a>
-
-                <div class="cardcontent">
-                  <div href=""
-                    style="display: inline-block; text-decoration: none; color: white; height: 90%; overflow: hidden;">
-                    sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                    quaerat
-                    sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                    error.onsectetur
-                    adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                    commodi
-                    eius
-                    esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                    ipsum
-                    eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                    Quod,
-                    error.
-                  </div>
-                  <a href="" style="display: inline-block; height: 90%; overflow: hidden; float: right;">
-                    read more...
-                  </a>
-                </div>
-
-                <div class="cardpic">
-                  <img class="" src="https://picsum.photos/240" alt="" />
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <a class="carousel-control-prev pop-review-prev-button" href="#carouselExampleControls" role="button"
         data-slide="prev">
         <i class="fas fa-chevron-left" style="color: black"></i>
@@ -843,6 +133,7 @@
         data-slide="next">
         <i class="fas fa-chevron-right " style="color: black"></i>
       </a>
+      </div>
     </div>
   </div>
 
@@ -851,678 +142,51 @@
   
   <!-- 최신리뷰시작 -->
   <div class="container ">
-      <div class="mt-5 " style="font-weight: bold; padding-left: 7%; ">최신리뷰</div>
+    <h5 class="pt-4 m-0 text-center text-danger" style="font-weight: bold;">New Review</h5>
       <div id="carouselExampleControls2" class="carousel slide" data-ride="carousel" data-interval="false">
-  
         <div class="carousel-inner">
-  
-          <div class="carousel-item active">
-            <div class="d-flex flex-wrap w-100 justify-content-center tl">
-  
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="/review/post">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/110" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-  
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="/review/post">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/228" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="/review/post">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/330" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="/review/post">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/219" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-  
-              <div class="win d-none d-lg-inline-block ">
-  
-  
-                <div class="card-jisung" id="bb">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 100%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-                  <div class="cardcontent">
-                    <div href=""
-                      style="display: inline-block; text-decoration: none; color: white; height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 90%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/251" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="d-flex flex-wrap w-100 justify-content-center tl">
-  
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/291" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-  
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/212" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/213" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/214" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-  
-              <div class="win d-none d-lg-inline-block ">
-  
-  
-                <div class="card-jisung" id="bb">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 100%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-                  <div class="cardcontent">
-                    <div href=""
-                      style="display: inline-block; text-decoration: none; color: white; height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 90%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/245" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="d-flex flex-wrap w-100 justify-content-center tl">
-  
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/210" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-  
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/210" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/210" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-              <div class="win">
-  
-                <div class="card-jisung">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 70%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-  
-                  <div class="cardcontent">
-                    <div style="height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/210" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-  
-              <div class="win d-none d-lg-inline-block ">
-  
-  
-                <div class="card-jisung" id="bb">
-                  <a href="">
-                    <div class="cardtitle">
-                      <span class="text-primary" style="font-size: 100%;">테스트</span>
-                      <span class="text-dark" style="font-size: 70%;">cafe & bag </span><br>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red;"></i>
-                      <i class="fas fa-star" style="color: red; "></i>
-                      <i class="fas fa-star-half" style="color: red;"></i>
-                    </div>
-                  </a>
-  
-                  <div class="cardcontent">
-                    <div href=""
-                      style="display: inline-block; text-decoration: none; color: white; height: 90%; overflow: hidden;">
-                      sdsd Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque asperiores eos, ipsum eaque ut
-                      quaerat
-                      sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex. Quod,
-                      error.onsectetur
-                      adipisicing elit. Neque asperiores eos, ipsum eaque ut quaerat sunt nobis repudiandae officiis
-                      commodi
-                      eius
-                      esse enim soluta quasi unde iusto ex. Quod, error.onsectetur adipisicing elit. Neque asperiores eos,
-                      ipsum
-                      eaque ut quaerat sunt nobis repudiandae officiis commodi eius esse enim soluta quasi unde iusto ex.
-                      Quod,
-                      error.
-                    </div>
-                    <a href="" style="display: inline-block; height: 90%; overflow: hidden; float: right;">
-                      read more...
-                    </a>
-                  </div>
-  
-                  <div class="cardpic">
-                    <img class="" src="https://picsum.photos/240" alt="" />
-                  </div>
-  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+			<c:forEach var="i" begin="0" end="${reviewVo.size() / 6}">
+				<div class="carousel-item ${i == 0 ? 'active' : ''}">
+					<div class="d-flex flex-wrap w-100 justify-content-center tl">
+						<c:forEach var="j" begin="${i * 6}" end="${i * 6 + 5}">
+							<div class="win">
+								<div class="card-jisung">
+									<a href="/review/post?num=${reviewVo[j].num}&type=${reviewVo[j].type}">
+										<div class="cardtitle">
+											<span class="text-primary" style="font-size: 70%;">${reviewVo[j].title}</span>
+											<span class="text-dark" style="font-size: 70%;">${reviewVo[j].type}</span><br>
+											<i class="fas fa-star" style="color: red;"></i>
+											<i class="fas fa-star" style="color: red;"></i>
+											<i class="fas fa-star" style="color: red;"></i>
+											<i class="fas fa-star" style="color: red; "></i>
+											<i class="fas fa-star-half" style="color: red;"></i>
+										</div>
+									</a>
+									
+									<div class="cardcontent">
+										<div style="height: 90%; overflow: hidden;">
+											${reviewVo[j].contents}
+										</div>
+											<a href="" style="display: inline-block; height: 10%; overflow: hidden; float: right;">
+											read more...
+										</a>
+									</div>
+									
+									<div class="cardpic bg-white text-center">
+										<c:if test="${reviewVo[j].files.size() eq 0 }">
+											<img src="/img/NoImg.jpg" style="width: 50%;" />
+										</c:if>
+										<c:if test="${reviewVo[j].files.size() ne 0 }">
+											<img src="${reviewVo[j].files[0]}" />
+										</c:if>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
         <a class="carousel-control-prev pop-review-prev-button" href="#carouselExampleControls2" role="button"
           data-slide="prev">
           <i class="fas fa-chevron-left" style="color: black"></i>
@@ -1533,41 +197,37 @@
         </a>
       </div>
     </div>
-
   <hr />
 
-<br>
+  <br>
 
   <!-- 최신리뷰끝 -->
-
 
   <!-- 추천 밑 테마 -->
   <div class="container">
 
-    <div class="row justify-content-lg-between justify-content-center">
+    <div class="row justify-content-center">
 
-      <div class="col-11  col-md-11 col-lg-4">
+      <div class="col-11 col-md-11 col-lg-4 pl-5">
         <div class="pb-4" style="font-weight: 900; padding-left: 1%">오늘의 All Review 추천</div>
         <!-- Classic tabs -->
         <div class="classic-tabs border-bottom">
-          <ul id="today_review" class="nav navbar bg-dark p-0 justify-content-start" id="myClassicTab" role="tablist">
-            <li class="nav-item col-4 col-lg-auto text-center p-0">
+          <ul id="today_review" class="nav navbar bg-dark p-0 justify-content-start" id="myClassicTab">
+            <li class="nav-item col-4 text-center orange p-0">
               <a class="nav-link today_item active waves-light show text-white" id="profile-tab-classic"
-                data-toggle="tab" href="#profile-classic" role="tab" aria-controls="profile-classic"
-                aria-selected="true">병원</a>
+                data-toggle="tab" href="#profile-classic">병원</a>
             </li>
-            <li class="nav-item col-4 col-lg-auto text-center p-0">
+            <li class="nav-item col-4 text-center orange p-0">
               <a class="nav-link today_item waves-light text-white" id="follow-tab-classic" data-toggle="tab"
-                href="#follow-classic" role="tab" aria-controls="follow-classic" aria-selected="false">맛집</a>
+                href="#follow-classic">맛집</a>
             </li>
-            <li class="nav-item col-4 col-lg-auto text-center p-0">
+            <li class="nav-item col-4 text-center orange p-0">
               <a class="nav-link today_item waves-light text-white" id="contact-tab-classic" data-toggle="tab"
-                href="#contact-classic" role="tab" aria-controls="contact-classic" aria-selected="false">전자기기</a>
+                href="#contact-classic">전자기기</a>
             </li>
           </ul>
           <div class="tab-content rounded-bottom" id="myClassicTabContent">
-            <div class="tab-pane fade active show" id="profile-classic" role="tabpanel"
-              aria-labelledby="profile-tab-classic">
+            <div class="tab-pane active" id="profile-classic">
 
               <ul class="row flex-wrap pl-2 pt-4">
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
@@ -1630,7 +290,7 @@
 
             </div>
 
-            <div class="tab-pane fade" id="follow-classic" role="tabpanel" aria-labelledby="follow-tab-classic">
+            <div class="tab-pane fade" id="follow-classic">
               <ul class="row flex-wrap pl-2 pt-4">
 
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
@@ -1691,7 +351,7 @@
 
               </ul>
             </div>
-            <div class="tab-pane fade" id="contact-classic" role="tabpanel" aria-labelledby="contact-tab-classic">
+            <div class="tab-pane fade" id="contact-classic">
               <ul class="row flex-wrap pl-2 pt-4">
 
                 <a href="#" style="color: black;" class="col-md-6 col-lg-12">
@@ -1758,10 +418,9 @@
 
       </div>
 
-      <div
-        class="thema-flex col-md-12 col-12 col-lg-8 d-flex ml-0 mb-5 p-lg-0 flex-wrap justify-content-lg-end justify-content-center">
-        <div class="w-100 pl-4 pt-5 pt-lg-0 pl-lg-5 ml-lg-3 ml-4" style="font-weight: 900; ">테마별 리뷰</div>
-
+      <div class="thema-flex col-md-12 col-12 col-lg-8 d-flex flex-row flex-wrap justify-content-center align-items-start">
+        <div class="col-11" style="font-weight: 800;">테마별 리뷰</div>
+        
         <div class="first_recommand col-5 p-0" style="background-image: url('/img/테마별사진/img.jpg');">
           <a href="#">
             <div class="recommand_box justify-content-center align-items-center row m-0 h-100 w-100">

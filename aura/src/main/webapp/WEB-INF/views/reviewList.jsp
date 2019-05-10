@@ -99,20 +99,9 @@
 						<div class="my-1 align-middle">
 						    <i class="fas fa-heart"></i>
 						    <span>
-						    	<c:choose>
-									<c:when test="${review.category eq 1}">
-										한식
-									</c:when>
-									<c:when test="${review.category eq 2}">
-										양식
-									</c:when>
-									<c:when test="${review.category eq 16}">
-										호프
-									</c:when>
-									<c:otherwise>
-										기타분류
-									</c:otherwise>
-						    	</c:choose>
+					    		<c:forEach var="cate" items="${restCategory}" varStatus="i">
+									<c:if test="${review.category eq i.index}">${cate.name}</c:if>
+					    		</c:forEach>
 							</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder">
@@ -152,6 +141,25 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6060ab38dd0e3fd90aaea5e539c8172e&libraries=services"></script>
 	<script type="text/javascript" src="/js/radialprogress.js"></script>
 	<script type="text/javascript">
+		var categoryList = [
+			'뷔페',
+			'한식',
+			'양식',
+			'중식',
+			'일식',
+			'분식',
+			'카페',
+			'치킨',
+			'피자',
+			'중국집',
+			'족발·보쌈',
+			'도시락',
+			'패스트푸드',
+			'테이크아웃',
+			'프랜차이즈',
+			'맥주',
+			'호프'
+		];
 		$(document).ready(function(){
 			// 내용 더 보기
 			$('contents').each(function(){
@@ -213,9 +221,11 @@
 								'<div class="col-md-6 col-12">' +
 						      		'<div class="view overlay zoom" style="width: 100%; height: 100%">' +
 						        		'<a href="/review/post?num=' + item.num + '&type=' + item.type + '">' +
-											'<div id="searchCarousel${i.index}" class="carousel slide carousel-fade" data-ride="carousel">' +
+						        			(item.files.length == 0 ?
+										    '<img src="/img/NoImg.jpg" style="width:40%; height: 250px; margin: 0 auto">' :
+											'<div id="searchCarousel' + item.num + '" class="carousel slide carousel-fade" data-ride="carousel">' +
 											  '<div class="carousel-inner">' +
-											  	files +
+											    files +
 											  '</div>' +
 											  '<a class="carousel-control-prev" href="#searchCarousel' + item.num + '" role="button" data-slide="prev">' +
 											    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
@@ -225,7 +235,7 @@
 											    '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
 											    '<span class="sr-only">Next</span>' +
 											  '</a>' +
-											'</div>' +
+											'</div>') +
 										'</a>' +
 									'</div>' +
 								'</div>' +
@@ -243,8 +253,7 @@
 									'</div>' +
 									'<div class="my-1 align-middle">' +
 									    '<i class="fas fa-heart"></i>' +
-									    '<span>' +
-										'</span>' +
+									    '<span> ' + categoryList[item.category] + '</span>' +
 									'</div>' +
 									'<div class="my-2" style="font-weight:bolder">' +
 										'<i class="fas fa-phone"></i>' +

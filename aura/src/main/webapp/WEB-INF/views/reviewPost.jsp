@@ -11,26 +11,40 @@
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
 		${reviewInfo.TITLE}
 		<span class="badge badge-pill badge-success" style="font-size: 20px; margin-left: 3px;">
-	    	<c:choose>
-				<c:when test="${review.category eq 1}">
-					한식
-				</c:when>
-				<c:when test="${review.category eq 2}">
-					양식
-				</c:when>
-				<c:when test="${review.category eq 16}">
-					호프
-				</c:when>
-				<c:otherwise>
-					기타분류
-				</c:otherwise>
-    		</c:choose>
+			${reviewInfo.CATEGORY}
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
+<<<<<<< HEAD
+		<!-- 리뷰 사진 캐러셀 -->
+		<div id="carousel-example-2" class="carousel slide col-12 mb-3" data-ride="carousel">
+			<div class="carousel-inner" role="listbox">
+				<div class="carousel-item active">
+					<div class="d-flex">
+						<c:if test="${reviewInfo.FILES.size() == 0}">
+							<div class="card-body p-1 col-12 text-center">
+								<img src="/img/NoImg.jpg" style="width: 12%; height: 250px;">
+							</div>
+						</c:if>
+						<c:forEach var="index" begin="0" end="${reviewInfo.FILES.size() / 3}" step="3">
+							<c:forEach var="j" begin="${index}" end=${index + 3}>
+								<div class="card-body p-1 col-4">
+									<c:if test="${reviewInfo.FILES[j] != null}">
+										<img class="w-100" src="${reviewInfo.FILES[j]}" style="width: 100%; height: 300px">
+									</c:if>
+									<c:if test="${reviewInfo.FILES[j] == null}">
+										<img src="/img/NoImg.jpg" style="width: 30%; height: 300px">
+									</c:if>
+								</div>
+							</c:forEach>
+						</c:forEach>
+					</div>
+				</div>
+=======
 		<c:if test="${reviewInfo.FILES.size() == 0}">
 			<div class="card-body p-1 col-12 text-center">
 				<img src="/img/NoImg.jpg" style="width: 10%; height: 250px;">
+>>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
 			</div>
 		</c:if>
 		<c:if test="${reviewInfo.FILES.size() != 0}">
@@ -70,9 +84,9 @@
 			</div>
 		</c:if>
 		
-		<div class="col-4 p-0 d-md-flex d-none flex-wrap align-items-start justify-content-center">
-			<div class="col-12">
-				<div id="map" style="width:100%; height:250px;"></div>
+		<div class="col-md-4 col-12 p-0 d-flex flex-wrap align-items-start justify-content-center order-2 order-md-1">
+			<div class="col-md-12 col-8">
+				<div id="map" class="my-4" style="width:100%; height:250px;"></div>
 				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
 			</div>
 			<div class="col-12 d-flex justify-content-center my-4">
@@ -118,7 +132,7 @@
 			</c:choose>
 		</div>
 		<!-- 리뷰 상세 설명 -->
-		<div class="d-flex flex-wrap col-8">
+		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
 			<div class="col-12 p-0 my-1">
 				<i class="col-1 fas fa-phone"></i>
 				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.TEL}</span>
@@ -132,11 +146,13 @@
 				<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
 					<c:if test="${type eq 1}">
 						<c:forEach var="menu" items="${menu}"  varStatus="num">
-							<div class="col-5 p-0 m-0">
-								${menu.name}
-							</div>
-							<div class="col-5 p-0 m-0">
-								${String.format("%,3d", Integer.parseInt(menu.price))}원
+							<div class="col-md-6 col-12 p-0 d-flex">
+								<div class="col-8 p-0 m-0">
+									${menu.name}
+								</div>
+								<div class="col-4 p-0 m-0 text-center">
+									${String.format("%,3d", Integer.parseInt(menu.price))}원
+								</div>
 							</div>
 						</c:forEach>
 					</c:if>
@@ -156,18 +172,6 @@
 				</div>
 			</div>
 		</div>
-<!-- 		점수		 -->
-		<div class="d-md-none col-4 d-flex justify-content-between align-items-center p-0 ">
-			<div class="col-6 d-flex align-items-center justify-content-center">
-				<i class="fas fa-share-alt"></i> 
-				<i class="far fa-star mx-4"></i>
-				<i class="far fa-thumbs-up"></i>
-			</div>
-			<div class="col-6 d-flex align-items-center justify-content-end p-0">
-				<button type="button" id="review_write_mobile"
-					class="btn btn-dark review-write px-3">리뷰 작성하기</button>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -176,16 +180,14 @@
 <div class="container d-flex flex-wrap">
 
 	<!-- 댓글 작성 양식 -->
-	<div id="write_form"
-		class="col-12 flex-md-row flex-wrap justify-content-center"
+	<div id="write_form" class="col-12 flex-md-row flex-wrap justify-content-center"
 		style="display: none; height: 0px; border-bottom: 2px solid #dadee6;">
 		<button id="review_write_cancel" type="button"
 			class="btn btn-light col-12 text-center py-3 m-0 mb-3">
 			댓글 작성창 접기 <i class="fas fa-arrow-up"></i>
 		</button>
 
-		<div
-			class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
+		<div class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
 			<h4 class="my-3 font-weight-bold w-100" id="review_write">리뷰 작성</h4>
 			<div class="w-50">
 				<c:choose>
@@ -636,6 +638,7 @@
 	</div>
 </div>
 
+</div>
 
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />

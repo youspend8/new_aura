@@ -35,7 +35,7 @@
 					<div class="brand">
 					<!-- 로그인 화면 로고이미지	 -->
 					<a href="/main">
-						<img src="/img/all_review_img/All Review 로고.png" alt="logo" style="width:150px;">
+						<img src="/img/logo/blacklogo.png" alt="logo" style="width:150px;">
 					</a>
 					</div>
 

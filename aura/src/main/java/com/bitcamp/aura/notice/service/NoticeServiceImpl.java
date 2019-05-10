@@ -2,6 +2,7 @@ package com.bitcamp.aura.notice.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class NoticeServiceImpl implements NoticeService{
 		return result;
 	}
 	@Override
-	public List<NoticeVO> searchOne(int num) {
+	public HashMap<NoticeVO, Object> searchOne(int num) {
 		
 		return noticemapper.selectOne(num);
 	}
