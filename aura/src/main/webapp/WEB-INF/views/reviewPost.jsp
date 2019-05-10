@@ -5,6 +5,7 @@
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
 <div class="container d-flex flex-wrap p-md-5 px-1 py-4" style="border-bottom: 2px solid; border-color: #dadee6">
@@ -62,14 +63,14 @@
 				<div id="map" class="my-4" style="width:100%; height:250px;"></div>
 				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
 			</div>
-			<div class="col-12 d-flex justify-content-center my-4">
+			<div class="col-12 d-flex justify-content-center my-4"> 
 				<a id="share" onclick="doReview(1)">
 				<c:choose>
 					<c:when test="${reviewInfo.isShare }">
-						<i class="fas fa-share-alt" id="aa" value="${nickname}" style="color: green"></i>
+						<i class="fas fa-share-alt" id="aa" value="${nickname}" style="color: green" data-toggle="modal" data-target="#basicExampleModal"></i>
 					</c:when>
 					<c:otherwise>
-						<i class="fas fa-share-alt" id="aa" value="${nickname}"></i>
+						<i class="fas fa-share-alt" id="aa" value="${nickname}" data-toggle="modal" data-target="#basicExampleModal"></i>
 					</c:otherwise>
 				</c:choose>
 				</a>
@@ -94,6 +95,33 @@
 						</c:otherwise>
 					</c:choose>
 				</a>
+				<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal"> -->
+<!--   Launch demo modal -->
+<!-- </button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <a href="javascript:;" id="kakao-link-btn"> 
+		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" /> <!-- 톡 이미지 부분이고, 전 kakaolink_btn_small.png로 불러왔습니다.   -->
+		</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 			</div>
 			<c:choose>
 				<c:when test="${nickname ne null}">
@@ -104,6 +132,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+		${reviewInfo}
 		<!-- 리뷰 상세 설명 -->
 		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
 			<div class="col-12 p-0 my-1">
@@ -309,7 +338,7 @@
 
 				<div
 					class="d-flex col-5 flex-column align-items-center justify-content-center">
-					<i class="far fa-heart" style="font-size: 30px"></i>
+					<i class="fas fa-heart" style="font-size: 30px"></i>
 					<p>87.451</p>
 				</div>
 			</div>
@@ -491,8 +520,7 @@
 					<p class="text-center">4.5</p>
 				</div>
 
-				<div
-					class="d-flex col-5 flex-column align-items-center justify-content-center">
+				<div class="d-flex col-5 flex-column align-items-center justify-content-center">
 					<i class="far fa-heart" style="font-size: 30px"></i>
 					<p>87.451</p>
 				</div>
@@ -573,18 +601,29 @@
 			</div>
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div class>${commentList.comment_Contents } </div>
+				<div class>${commentList.comment_Contents }</div>
 				
 			</div>
 			
 			<div
 				class="d-flex col-2 flex-column align-items-center justify-content-center">
-				<i class="far fa-heart" style="font-size: 40px"></i>
+				<i class="fas fa-heart heartCl"  style="font-size: 40px"></i>
 				<p class="heart-number">
 				<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 				</p>
 			</div>
 		</div>
+		<script type="text/javascript">
+			$('.heartCl').click(function(){
+				if($(this).css('color')=='rgb(33, 37, 41)'){
+					$(this).css('color','rgb(255, 0, 0)')//빨강
+				}else{
+					$(this).css('color','rgb(33, 37, 41)')//검정
+				}
+				
+			})
+		
+		</script>
 	</c:forEach>
 <!-- 		끝 부분 -->
 
@@ -657,6 +696,41 @@ geocoder.addressSearch('${reviewInfo.ADDR}', function(result, status) {
     } 
 });    
 </script>
+<script type="text/javascript">
+
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('cec5c87f0e6a1c8fc2daedbc6a4c7d6b');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',  // 컨테이너는 아까 위에 버튼이 쓰여진 부분 id 
+      objectType: 'feed',
+      content: {  // 여기부터 실제 내용이 들어갑니다. 
+        title: '${reviewInfo.TITLE}', // 본문 제목
+        description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',  // 본문 바로 아래 들어가는 영역?
+        imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png', // 이미지
+        link: {
+          mobileWebUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}',
+          webUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}'
+        }
+      },
+      social: {  /* 공유하면 소셜 정보도 같이 줄 수 있는데, 이 부분은 기반 서비스마다 적용이 쉬울수도 어려울 수도 있을듯 합니다. 전 연구해보고 안되면 제거할 예정 (망할 google  blogger...) */
+        likeCount: ${reviewInfo.GOODS},
+         commentCount: 45,
+        sharedCount: ${reviewInfo.SHARES}
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}',
+            webUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}'
+          }
+        }
+ 
+      ]
+    });
+
+</script> 
 <script>
 var flag1=true;
 var flag2=true;
@@ -665,14 +739,19 @@ var flag2=true;
 			if(flag1){
 				flag1=false;
 				
-				if(e.target.getAttribute('value') == ''){
+			if($(this).attr('value')=='' && ($(this).attr('id')=='bb'||$(this).attr('id')=='cc')){
+		
 					alert('해당기능은 회원만 이용가능합니다.')
+					$(this).attr("data-toggle","")
+					
 				}else{
+				
 					if($(this).css("color")!="rgb(33, 37, 41)"){
+						$(this).attr("data-toggle","")
 						$(this).css("color","rgb(33, 37, 41)")
 					}else{
 						if($(this).attr('id')=='aa'){
-							
+						
 							$(this).css("color","green")
 							
 						}
@@ -690,8 +769,9 @@ var flag2=true;
 					
 				}
 				setTimeout(() => {
+					$(this).attr("data-toggle","modal")
 					flag1=true;
-				}, 500);
+				}, 300);
 			}
 			
 		
@@ -720,7 +800,7 @@ var flag2=true;
 		    	})
 		    	setTimeout(() => {
 					flag2=true;
-				}, 500);
+				}, 300);
 			}
 	    
     	}
@@ -976,6 +1056,7 @@ var flag2=true;
     }
 	
 </script>
+
     
 <style>
 
