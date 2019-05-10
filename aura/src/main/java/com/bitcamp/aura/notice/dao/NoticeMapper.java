@@ -13,6 +13,6 @@ public interface NoticeMapper {
 	public int insert(NoticeVO noticevo);
 	public int update(NoticeVO noticevo);
 	public int delete(int num);
-	public HashMap<NoticeVO, Object> selectOne(int num);
+	public HashMap<String, Object> selectOne(int num);
 	public List<NoticeVO> selectAll();
 }
