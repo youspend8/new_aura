@@ -580,7 +580,7 @@
 
 		<!-- strat -->
 		
-	<c:forEach var="commentList" items="${commentList }">
+	<c:forEach var="commentList" items="${commentList }" varStatus="status">
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active"
 			id="home">
 			
@@ -615,39 +615,43 @@
 					</c:forEach>
 				</div>
 				
-				
-				
 			</div>
-
-			<div
-				class="col-2 d-flex justify-content-center align-items-center p-0">
+			
+			<div class="col-2 d-flex justify-content-center align-items-center p-0">
 				<!-- 유저들이 올린리뷰 후기 사진0-->
-				<div id="carouselExampleFade-1" class="carousel slide carousel-fade"
-					data-ride="carousel">
-					<div class="carousel-inner user-picture">
-<!-- 						<div class="carousel-item active"> -->
-<!-- 							<img class="d-block w-100 user-review-img" -->
-<!-- 								src="https://picsum.photos/200/200?image=230"> -->
-<!-- 						</div> -->
-<!-- 						<div class="carousel-item"> -->
-<!-- 							<img class="d-block w-100 user-review-img" -->
-<!-- 								src="https://picsum.photos/200/200?image=240"> -->
-<!-- 						</div> -->
-<!-- 						<div class="carousel-item"> -->
-<!-- 							<img class="d-block w-100 user-review-img" -->
-<!-- 								src="https://picsum.photos/200/200?image=280"> -->
-<!-- 						</div> -->
+				<c:if test="${commentList.files[0] ne null }">
+					<div id="carouselExampleFade-${status.index }" class="carousel slide carousel-fade"
+						data-ride="carousel">
+						<div class="carousel-inner user-picture" style="width:168px; height:123px;">
+							
+								<div class="carousel-item active">
+									<img class="d-block user-review-img" style="width:168px; height:123px;"
+											src="${commentList.files[0].comment_File}">
+								</div>
+	
+								<c:forEach var="files" items="${commentList.files }" begin="1">
+									<c:if test="${files ne null}">
+										<div class="carousel-item">
+													<img class="d-block user-review-img" style="width:168px; height:123px;"
+														src="${files.comment_File}">
+										</div>
+									</c:if>
+								</c:forEach>
+							
+						</div>
+						
+						<a class="user-photo-button-left carousel-control-prev"
+							href="#carouselExampleFade-${status.index }" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="user-photo-button-right carousel-control-next"
+							href="#carouselExampleFade-${status.index }" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
 					</div>
-					<a class="user-photo-button-left carousel-control-prev"
-						href="#carouselExampleFade-1" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="user-photo-button-right carousel-control-next"
-						href="#carouselExampleFade-1" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
+				</c:if>
 				<!-- 유저들이 올린리뷰 후기 사진0 End-->
 			</div>
 

@@ -48,7 +48,11 @@
  
  	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
  		SELECT
- 			*
+ 			NUM AS num,
+			TITLE AS title,
+			WRITE_DATE AS writerDate,
+			CONTENTS AS contents,
+			ISNOTICE AS isNotice
  		FROM
  			BOARD
  		WHERE
@@ -58,7 +62,11 @@
  	
  	<select id="selectAll" resultType="NoticeVO">
 		SELECT 
-			* 
+ 			NUM AS num,
+			TITLE AS title,
+			WRITE_DATE AS writerDate,
+			CONTENTS AS contents,
+			ISNOTICE AS isNotice
 		FROM
 			 BOARD
  	</select>

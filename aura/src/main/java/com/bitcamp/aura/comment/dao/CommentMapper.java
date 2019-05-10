@@ -16,6 +16,7 @@ public interface CommentMapper {
 //	public int update_Comment_File (CommentFileVO comment);
 	public int delete (String nickname);
 	public CommentVO selectOne (String nickname);
+	public List<CommentFileVO> selectFilesByNum(int num);
 	public List<CommentVO> selectAll();
 	public List<CommentVO> selectAllByNum(int postNum);
 }
