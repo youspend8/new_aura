@@ -143,7 +143,22 @@
 				    REVIEW.NUM AS num,
 				    REVIEW.TITLE AS title,
 				    REVIEW.CONTENTS AS contents,
-				    REVIEW.STARS AS stars,
+				    NVL((
+					    SELECT
+					        AVG(COMMENT_SCORE)
+					    FROM
+					        USER_COMMENT
+					    WHERE
+					        USER_COMMENT.REVIEW_POST_NUM = REVIEW.NUM
+				    ), 0) AS stars,
+				    (
+					    SELECT
+					        COUNT(COMMENT_NUM)
+					    FROM
+					        USER_COMMENT
+					    WHERE
+					        USER_COMMENT.REVIEW_POST_NUM = REVIEW.NUM
+				    ) AS starCount,
 				    REVIEW.GOODS AS goods,
 				    REVIEW.BOOKMARK AS bookmark,
 				    REVIEW.SHARES AS shares,
@@ -196,8 +211,10 @@
 		        <if test="keyword != null">
 			        AND
 			        	REVIEW.TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
-		        </if> 
-		   		ORDER BY REVIEW.NUM DESC
+		        </if>
+		        <if test="restGroup != null and restGroup.equals('score')">
+		   			ORDER BY stars DESC
+		        </if>
 			) REVIEW
 		)
 		WHERE 
