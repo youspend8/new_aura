@@ -17,12 +17,12 @@ import lombok.ToString;
 public class SearchParams {
 	private int type;
 	private String keyword;
-	private String orderStars;
-	private String orderPop;
-	private String[] address1;
-	private String[] address2;
-	private String[] address3;
-	private int category;
+	private String restGroup;
+	private String hospitalGroup;
+	private String[] restLoc;
+	private String[] hosLoc;
+	private int[] restCategory;
+	private int medCategory;
 	private int start;
 	private int end;
 }
