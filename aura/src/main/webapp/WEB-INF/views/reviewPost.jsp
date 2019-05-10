@@ -79,20 +79,20 @@
 				<a id="share" onclick="doReview(1)">
 				<c:choose>
 					<c:when test="${reviewInfo.isShare }">
-						<i class="fas fa-share-alt" value="${nickname}" style="color: blue"></i>
+						<i class="fas fa-share-alt" id="aa" value="${nickname}" style="color: green"></i>
 					</c:when>
 					<c:otherwise>
-						<i class="fas fa-share-alt" value="${nickname}"></i>
+						<i class="fas fa-share-alt" id="aa" value="${nickname}"></i>
 					</c:otherwise>
 				</c:choose>
 				</a>
 				<a id="share" onclick="doReview(2)">
 					<c:choose>
 						<c:when test="${reviewInfo.isStar }">
-						    <i class="far fa-star mx-4" value="${nickname}" style="color: blue"></i>
+						    <i class="fas fa-star mx-4" id="bb" value="${nickname}" style="color: yellow"></i>
 						</c:when>
 						<c:otherwise>
-							<i class="far fa-star mx-4" value="${nickname}"></i>
+							<i class="fas fa-star mx-4" id="bb" value="${nickname}"></i>
 						</c:otherwise>
 					</c:choose>
 			
@@ -100,10 +100,10 @@
 				<a id="share" onclick="doReview(3)">
 					<c:choose>
 						<c:when test="${reviewInfo.isLike }">
-						    <i class="far fa-thumbs-up" value="${nickname}" style="color: blue"></i>
+						    <i class="fas fa-thumbs-up" id="cc" value="${nickname}" style="color: blue"></i>
 						</c:when>
 						<c:otherwise>
-							<i class="far fa-thumbs-up" value="${nickname}"></i>
+							<i class="fas fa-thumbs-up" id="cc" value="${nickname}"></i>
 						</c:otherwise>
 					</c:choose>
 				</a>
@@ -687,11 +687,26 @@ var flag2=true;
 				if(e.target.getAttribute('value') == ''){
 					alert('해당기능은 회원만 이용가능합니다.')
 				}else{
-					if($(this).css("color")=='rgb(0, 0, 255)'){
-						$(this).css("color","black")
+					if($(this).css("color")!="rgb(33, 37, 41)"){
+						$(this).css("color","rgb(33, 37, 41)")
 					}else{
-						$(this).css("color","blue")
+						if($(this).attr('id')=='aa'){
+							
+							$(this).css("color","green")
+							
+						}
+						if($(this).attr('id')=='bb'){
+							
+							$(this).css("color","yellow")
+						
+						}
+						if($(this).attr('id')=='cc'){
+							
+							$(this).css("color","blue")
+						
+						}
 					}
+					
 				}
 				setTimeout(() => {
 					flag1=true;
