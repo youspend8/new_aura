@@ -78,8 +78,14 @@
 		WHERE
 			REVIEW_POST_NUM=#{postNum} order by COMMENT_DATE
 	</select>
-
-
+	<select id="selectFilesByNum" parameterType="int" resultType="CommentFileVo">
+		SELECT
+			*
+		FROM
+			COMMENT_FILE
+		WHERE
+			COMMENT_NUM = #{num}
+	</select>
 
 
 
