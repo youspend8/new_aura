@@ -75,7 +75,8 @@
 			*
 		FROM
 			USER_COMMENT
-			where REVIEW_POST_NUM=#{postNum} order by COMMENT_DATE
+		WHERE
+			REVIEW_POST_NUM=#{postNum} order by COMMENT_DATE
 	</select>
 
 
