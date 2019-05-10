@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
-<title>석촌호수 - All Review</title>
+<title>${reviewInfo.TITLE} - All Review</title>
 
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
 <div class="container d-flex flex-wrap p-md-5 px-1 py-4" style="border-bottom: 2px solid; border-color: #dadee6">
@@ -15,36 +15,9 @@
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
-<<<<<<< HEAD
-		<!-- 리뷰 사진 캐러셀 -->
-		<div id="carousel-example-2" class="carousel slide col-12 mb-3" data-ride="carousel">
-			<div class="carousel-inner" role="listbox">
-				<div class="carousel-item active">
-					<div class="d-flex">
-						<c:if test="${reviewInfo.FILES.size() == 0}">
-							<div class="card-body p-1 col-12 text-center">
-								<img src="/img/NoImg.jpg" style="width: 12%; height: 250px;">
-							</div>
-						</c:if>
-						<c:forEach var="index" begin="0" end="${reviewInfo.FILES.size() / 3}" step="3">
-							<c:forEach var="j" begin="${index}" end=${index + 3}>
-								<div class="card-body p-1 col-4">
-									<c:if test="${reviewInfo.FILES[j] != null}">
-										<img class="w-100" src="${reviewInfo.FILES[j]}" style="width: 100%; height: 300px">
-									</c:if>
-									<c:if test="${reviewInfo.FILES[j] == null}">
-										<img src="/img/NoImg.jpg" style="width: 30%; height: 300px">
-									</c:if>
-								</div>
-							</c:forEach>
-						</c:forEach>
-					</div>
-				</div>
-=======
 		<c:if test="${reviewInfo.FILES.size() == 0}">
 			<div class="card-body p-1 col-12 text-center">
 				<img src="/img/NoImg.jpg" style="width: 10%; height: 250px;">
->>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
 			</div>
 		</c:if>
 		<c:if test="${reviewInfo.FILES.size() != 0}">
