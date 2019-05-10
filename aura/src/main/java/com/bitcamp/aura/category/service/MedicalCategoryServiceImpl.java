@@ -1,5 +1,11 @@
 package com.bitcamp.aura.category.service;
 
+import com.bitcamp.aura.category.model.HospitalCategoryVO;
+import com.bitcamp.aura.category.model.MedicalCategoryVO;
+import com.bitcamp.aura.category.persist.HospitalCategoryRepository;
+import com.bitcamp.aura.category.persist.MedicalCategoryRepository;
+import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -10,32 +16,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bitcamp.aura.category.model.BadCategoryVO;
-import com.bitcamp.aura.category.persist.BadCategoryRepository;
-
 @Service
 @Transactional
-public class BadCategoryServiceImpl implements BadCategoryService {
+public class MedicalCategoryServiceImpl implements MedicalCategoryService {
 
 	@Autowired
-	private BadCategoryRepository repo;
-
+	private MedicalCategoryRepository repo;
+	
 	@Override
-	public BadCategoryVO create(BadCategoryVO badCateVo) {
+	public MedicalCategoryVO create(MedicalCategoryVO medCateVo) {
 		// TODO Auto-generated method stub
-		return repo.save(badCateVo);
+		return repo.save(medCateVo);
 	}
 
 	@Override
-	public Iterable<BadCategoryVO> createAll(Iterable<BadCategoryVO> iterator) {
+	public Iterable<MedicalCategoryVO> createAll(Iterable<MedicalCategoryVO> iterator) {
 		// TODO Auto-generated method stub
 		return repo.saveAll(iterator);
 	}
 
 	@Override
-	public BadCategoryVO update(BadCategoryVO badCateVo) {
+	public MedicalCategoryVO update(MedicalCategoryVO medCateVo) {
 		// TODO Auto-generated method stub
-		return repo.save(badCateVo);
+		return repo.save(medCateVo);
 	}
 
 	@Override
@@ -51,15 +54,16 @@ public class BadCategoryServiceImpl implements BadCategoryService {
 	}
 
 	@Override
-	public BadCategoryVO read(int num) {
+	public MedicalCategoryVO read(int num) {
 		// TODO Auto-generated method stub
 		return repo.findById(num).orElseThrow(() -> new EntityNotFoundException());
 	}
 
 	@Override
-	public List<BadCategoryVO> readAll() {
+	public List<MedicalCategoryVO> readAll() {
 		// TODO Auto-generated method stub
 		return StreamSupport.stream(repo.findAll().spliterator(), true)
 				.collect(Collectors.toList());
 	}
+
 }

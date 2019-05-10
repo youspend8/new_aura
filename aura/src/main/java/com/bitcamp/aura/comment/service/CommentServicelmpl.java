@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.bitcamp.aura.comment.dao.CommentMapper;
 import com.bitcamp.aura.comment.model.CommentFileVO;
 import com.bitcamp.aura.comment.model.CommentVO;
+import com.bitcamp.aura.review.util.FileUpload;
 
 @Service
 @Transactional
@@ -32,14 +34,7 @@ public class CommentServicelmpl implements CommentService {
 		String content = comment.getParameter("comment");
 		String grade = comment.getParameter("grade");
 		
-		String root = comment.getSession().getServletContext().getRealPath("/");
-		String path = root + "resources/upload/";
-		
-		File dir = new File(path);
-		
-		if (!dir.isDirectory()) {
-			dir.mkdirs();
-		}
+		File file = new File("");
 		
 		CommentVO commentVo = new CommentVO();
 		CommentFileVO commentFileVO = new CommentFileVO();
@@ -65,8 +60,10 @@ public class CommentServicelmpl implements CommentService {
 //              long fileSize = mf.getSize(); // 파일 사이즈를 알고 싶다면 주석을 푸시오
 //              System.out.println("fileSize : " + fileSize);
             	
-            	String fileName = System.currentTimeMillis() + " " + originFileName;
-            	String safeFile = path + fileName;
+            	
+            	
+            	String fileName = "/files/" + System.currentTimeMillis() + " " + originFileName;
+            	String safeFile = file.getAbsolutePath() + FileUpload.PATH + fileName;
             	
             	commentFileVO.setComment_Num(commentVo.getComment_Num());
             	commentFileVO.setComment_File(fileName);
@@ -116,6 +113,12 @@ public class CommentServicelmpl implements CommentService {
 		ArrayList<CommentVO> list = (ArrayList<CommentVO>) commentMapper.selectAllByNum(postNum);
 			
 		return list;
+	}
+
+	@Override
+	public List<CommentFileVO> selectFilesByNum(int num) {
+		// TODO Auto-generated method stub
+		return commentMapper.selectFilesByNum(num);
 	}
 
 }

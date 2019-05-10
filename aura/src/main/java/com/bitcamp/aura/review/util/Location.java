@@ -9,14 +9,14 @@ public class Location {
 		HashMap<String, List<String>> category = new HashMap<>();
 		List<String> gangnam = Arrays.asList(GANGNAM);
 		List<String> gangbuk = Arrays.asList(GANGBUK);
-		List<String> gunggi = Arrays.asList(GUNGGI);
+		List<String> gyeonggi = Arrays.asList(GYEONGGI);
 		List<String> busan = Arrays.asList(BUSAN);
 		List<String> jeju = Arrays.asList(JEJU);
-		category.put("서울-강남", gangnam);
-		category.put("서울-강북", gangbuk);
-		category.put("경기도", gunggi);
-		category.put("부산", busan);
-		category.put("제주", jeju);
+		category.put("gangnam", gangnam);
+		category.put("gangbuk", gangbuk);
+		category.put("gyeonggi", gyeonggi);
+		category.put("busan", busan);
+		category.put("jeju", jeju);
 		
 		return category;
 	}
@@ -25,60 +25,87 @@ public class Location {
 			"가로수",
 			"강남",
 			"강동구",
-			"개포/수서/일원",
+			"개포",
+			"일원",
+			"수서",
 			"관악구",
-			"교대/서초",
+			"교대",
+			"서초",
 			"구로구",
 			"금천구",
 			"논현동",
 			"대치동",
 			"도곡동",
-			"동작/사당",
-			"등촌/강서",
-			"목동/양천",
-			"방배/반포/잠원",
+			"동작",
+			"사당",
+			"등촌",
+			"강서",
+			"목동",
+			"양천",
+			"방배",
+			"반포",
+			"잠원",
 			"방이동",
 			"삼성동",
 			"서래마을",
-			"송파/가락",
-			"신사/압구정",
-			"신천/잠실",
+			"송파",
+			"가락",
+			"신사",
+			"압구정",
+			"신천",
+			"잠실",
 			"양재동",
 			"여의도",
-			"역삼/선릉",
+			"역삼",
+			"선릉",
 			"영등포구",
 			"청담동"
 	};
 	
 	public static final String[] GANGBUK = {
-			"건대/군자/광진",
+			"건대",
+			"군자",
+			"광진",
 			"광화문",
 			"노원구",
-			"대학로/혜화",
+			"대학로",
+			"혜화",
 			"동대문구",
 			"동부이촌동",
-			"마포/공덕",
-			"명동/남산",
-			"삼청/인사",
-			"상암/성산",
+			"마포",
+			"공덕",
+			"명동",
+			"남산",
+			"삼청",
+			"인사",
+			"상암",
+			"성산",
 			"서대문구",
 			"성북구",
-			"수유/도봉/강북",
-			"시청/남대문",
-			"신촌/이대",
+			"수유",
+			"도봉",
+			"강북",
+			"남대문",
+			"시청",
+			"신촌",
+			"이대",
 			"연남동",
-			"왕십리/성동",
-			"용산/숙대",
+			"왕십리",
+			"성동",
+			"용산",
+			"숙대",
 			"은평구",
-			"이태원/한남동",
+			"이태원",
+			"한남동",
 			"종로",
 			"중구",
 			"중랑구",
-			"합정/망원",
+			"합정",
+			"망원",
 			"홍대"
 	};
 
-	public static final String[] GUNGGI = {
+	public static final String[] GYEONGGI = {
 			"가평군",
 			"고양시",
 			"과천시",

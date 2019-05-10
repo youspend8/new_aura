@@ -1,6 +1,8 @@
 package com.bitcamp.aura.comment.model;
 
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -24,4 +26,5 @@ public class CommentVO {
     private String comment_Date;
     private int comment_Num;
     private String profile;
+    private List<CommentFileVO> files;
 }
