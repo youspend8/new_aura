@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitcamp.aura.category.service.MedicalCategoryService;
 import com.bitcamp.aura.category.service.RestaurantCategoryService;
 import com.bitcamp.aura.comment.model.CommentVO;
 import com.bitcamp.aura.comment.service.CommentServicelmpl;
@@ -43,6 +44,8 @@ public class ReviewController {
 	private CommentServicelmpl commentService;
 	@Autowired
 	private RestaurantCategoryService restCateService;
+	@Autowired
+	private MedicalCategoryService medCateService;
 	
 	@RequestMapping(value = "/post")
 	public String post(Model model,
@@ -118,6 +121,7 @@ public class ReviewController {
 	public String search(Model model,
 			@ModelAttribute SearchParams params,
 			HttpSession session) {
+		System.out.println("params : " + params);
 		
 		logger.info(new StringBuilder()
 					.append("search/")
@@ -130,7 +134,8 @@ public class ReviewController {
 		model.addAttribute("type", params.getType());
 		model.addAttribute("keyword", params.getKeyword());
 		model.addAttribute("restCategory", restCateService.readAll());
-		model.addAttribute("locationCate", new Location().locationList());
+		model.addAttribute("medCategory", medCateService.readAll());
+		model.addAttribute("locationCate", new Location()	.locationList());
 		return "/reviewList";
 	}
 	
