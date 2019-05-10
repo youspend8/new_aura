@@ -150,7 +150,7 @@
 </head>
 <body>
     <header class="navigation" id="navigation">
-		<a href="/main" style="width: 15%;">
+		<a href="/main" style="width: 11%;">
 			<img class="navigation_brand_logo" src="/img/logo/whitelogo2.png">
 		</a>
 		

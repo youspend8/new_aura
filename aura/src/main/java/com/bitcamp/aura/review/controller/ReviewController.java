@@ -22,6 +22,7 @@ import com.bitcamp.aura.comment.service.CommentServicelmpl;
 import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.service.ReviewService;
+import com.bitcamp.aura.review.util.Location;
 import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
 import com.bitcamp.aura.reviewlist.service.ReviewListServiceImp;
 import com.bitcamp.aura.user.service.UserService;
@@ -129,6 +130,7 @@ public class ReviewController {
 		model.addAttribute("type", params.getType());
 		model.addAttribute("keyword", params.getKeyword());
 		model.addAttribute("restCategory", restCateService.readAll());
+		model.addAttribute("locationCate", new Location().locationList());
 		return "/reviewList";
 	}
 	
