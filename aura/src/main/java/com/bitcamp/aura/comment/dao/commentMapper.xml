@@ -76,7 +76,7 @@
 		FROM
 			USER_COMMENT
 		WHERE
-			REVIEW_POST_NUM=#{postNum} order by COMMENT_DATE
+			REVIEW_POST_NUM=#{postNum} ORDER BY COMMENT_NUM
 	</select>
 	<select id="selectFilesByNum" parameterType="int" resultType="CommentFileVo">
 		SELECT
