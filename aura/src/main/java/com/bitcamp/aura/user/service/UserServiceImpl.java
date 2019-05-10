@@ -52,6 +52,8 @@ public class UserServiceImpl implements UserService {
 		session.setAttribute("nickname", apiUser.getNickname());
 		session.setAttribute("email", apiUser.getEmail());
 		session.setAttribute("profile", apiUser.getProfile());
+		session.setAttribute("regLocation", apiUser.getRegLocation());
+
 		
 		System.out.println("닉네임 테스트: " + apiUser.getNickname());
 		System.out.println("유저 아이디 :" + apiUser.getEmail());
@@ -69,6 +71,7 @@ public class UserServiceImpl implements UserService {
 				session.setAttribute("nickname", originUser.getNickname());
 				session.setAttribute("email", originUser.getEmail());
 				session.setAttribute("profile", originUser.getProfile());
+				session.setAttribute("regLocation", originUser.getRegLocation());
 				
 				System.out.println("닉네임 값:" + session.getAttribute("nickname"));
 				System.out.println("AR가입 회원 email:" + session.getAttribute("email"));

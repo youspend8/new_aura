@@ -58,6 +58,8 @@ public class UserController {
 	public String loginResult(HttpSession session, String email, String password) {
 		System.out.println("Eamil :"+ email);
 		System.out.println("password :"+ password);
+//		System.out.println("regLocation :"+ session.getAttribute("regLocation"));
+
 		if(email == null || password == null)
 			return "redirect:/user/login";
 
@@ -84,6 +86,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("email");
 		session.removeAttribute("nickname");
+		session.removeAttribute("regLocation");
 		return "redirect:/main";
 	}
 	
@@ -103,6 +106,7 @@ public class UserController {
 		userService.tempWithdraw(nickname);
 		session.removeAttribute("email");
 		session.removeAttribute("nickname");
+		session.removeAttribute("regLocation");
 		return "redirect:/main";
 	}
 	@RequestMapping(value="/oauth/naver")
@@ -184,8 +188,11 @@ public class UserController {
 	public String oauth_reg (@ModelAttribute UserVO uservo, HttpSession session) {
 		session.setAttribute("nickname", uservo.getNickname());
 		session.setAttribute("email", uservo.getEmail());
+		session.setAttribute("regLocation", uservo.getRegLocation());
 		System.out.println("닉네임 : " + uservo.getNickname());
 		System.out.println("유저 아이디 :" + uservo.getEmail());
+		System.out.println("유저 레그 로케이션:" + uservo.getRegLocation());
+		
 		
 		if(userService.snsLogin(uservo) == true) { //DB에 중복값 X => insert
 			return "redirect:/main";
@@ -254,6 +261,21 @@ public class UserController {
 		return "redirect:/main";
 	}
 	
+	
+//	@RequestMapping("/checkUser")
+//	@ResponseBody
+//	public boolean checkUser(HttpSession session) {
+//		String nickname = (String)session.getAttribute("nickname");
+//		UserVO userVo = userService.getUser(nickname);
+//		int num = userVo.getRegLocation();
+//		if(num == 1) {
+//			return true;			
+//		}
+//		return false;
+//	}
+	
+	
+	
 	@RequestMapping("/modifyInfo")
 	public String InfoModify(Model model,HttpSession session) {
 	String nickname = (String)session.getAttribute("nickname");
@@ -289,6 +311,8 @@ public class UserController {
 		userService.modify(uservo1);
 		session.setAttribute("nickname", uservo1.getNickname());
 		session.setAttribute("email", uservo1.getEmail());
+		session.setAttribute("regLocation", uservo1.getRegLocation());
+
 		
 		return "redirect:/main";
 	}
