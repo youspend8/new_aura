@@ -1,9 +1,13 @@
 package com.bitcamp.aura.notice.service;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,9 +42,15 @@ public class NoticeServiceImpl implements NoticeService{
 		return result;
 	}
 	@Override
-	public HashMap<NoticeVO, Object> searchOne(int num) {
-		
-		return noticemapper.selectOne(num);
+	public HashMap<String, Object> searchOne(int num) {
+		HashMap<String, Object> notice = noticemapper.selectOne(num);
+		notice.put("FILES", StreamSupport.stream(repo.findAll().spliterator(), true)
+									.filter(n -> {
+										return n.getPostNum() == ((BigDecimal)notice.get("NUM")).intValue();
+									})
+									.map(f -> f.getName())
+									.collect(Collectors.toList()));
+		return notice;
 	}
 	@Override
 	public List<NoticeVO> searchAll() {

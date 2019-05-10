@@ -2,6 +2,7 @@ package com.bitcamp.aura.review.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -82,6 +83,11 @@ public class ReviewController {
 		
 		commentList.forEach(item -> {
 			item.setProfile(userService.getUser(item.getNickname()).getProfile());
+//			item.setFiles(commentService.selectFilesByNum(item.getComment_Num())
+//					.stream()
+//					.map(i -> i.getComment_File())
+//					.collect(Collectors.toList()));
+			item.setFiles(commentService.selectFilesByNum(item.getComment_Num()));
 		});
 		
 		boolean isShare = false;
