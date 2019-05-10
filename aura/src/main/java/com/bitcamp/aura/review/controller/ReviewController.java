@@ -1,6 +1,5 @@
 package com.bitcamp.aura.review.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,35 +16,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitcamp.aura.category.service.RestaurantCategoryService;
 import com.bitcamp.aura.comment.model.CommentVO;
 import com.bitcamp.aura.comment.service.CommentServicelmpl;
 import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.service.ReviewService;
+import com.bitcamp.aura.review.util.Location;
 import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
 import com.bitcamp.aura.reviewlist.service.ReviewListServiceImp;
-import com.bitcamp.aura.user.service.UserDelService;
 import com.bitcamp.aura.user.service.UserService;
 import com.google.gson.Gson;
 
 @Controller
 @RequestMapping(value = "/review")
 public class ReviewController {
-
 	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
 	
 	@Autowired
 	private UserService userService;
-	
 	@Autowired
 	private ReviewService service;
-
 	@Autowired
 	private ReviewListServiceImp listService;
-	
 	@Autowired
 	private CommentServicelmpl commentService;
-
+	@Autowired
+	private RestaurantCategoryService restCateService;
+	
 	@RequestMapping(value = "/post")
 	public String post(Model model,
 			@RequestParam("num") int num,
@@ -131,6 +129,8 @@ public class ReviewController {
 		model.addAttribute("list", service.search(params));
 		model.addAttribute("type", params.getType());
 		model.addAttribute("keyword", params.getKeyword());
+		model.addAttribute("restCategory", restCateService.readAll());
+		model.addAttribute("locationCate", new Location().locationList());
 		return "/reviewList";
 	}
 	

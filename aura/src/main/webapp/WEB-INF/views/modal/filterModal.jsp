@@ -1,42 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-
-
-
-	
 	<!-- Modal -->
 	<div id="exampleModalPopovers" style="font-size: 15px;" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel">
 		<div class="modal-dialog" role="document">
+			<form method="GET" action="/ttt">
 			<div class="modal-content">
 				<div class="modal-body">
-	
-					<ul class="nav nav-tabs" id="myTab" role="tablist">
-					    <li class="nav-item">
-					        <a class="nav-link active text-dark" id="home-tab" style="font-weight: bold;" data-toggle="tab" href="#home" role="tab" aria-controls="맛집"
-					    aria-selected="true">맛집</a>
-					</li>
-					<li class="nav-item">
-					    <a class="nav-link text-dark" id="profile-tab" style="font-weight: bold;" data-toggle="tab" href="#profile" role="tab" aria-controls="병원"
-					    aria-selected="false">병원</a>
-					</li>
-					<!-- <li class="nav-item">
-					    <a class="nav-link text-dark" id="contact-tab" style="font-weight: bold;" data-toggle="tab" href="#contact" role="tab" aria-controls="전자제품"
-					    aria-selected="false">전자제품</a>
-					</li> -->
-					</ul>
+					<div class="btn-group btn-group-toggle nav nav-tabs" data-toggle="buttons" id="myTab" role="tablist">
+						<a class="btn btn-warning active nav-link col-4" id="home-tab" data-toggle="tab" href="#home">
+							<input type="radio" name="type" value="1" checked>맛집
+						</a>
+						<a class="btn btn-warning nav-link col-4" id="profile-tab" data-toggle="tab" href="#profile">
+							<input type="radio" name="type" value="2">병원
+						</a>
+						<a class="btn btn-warning nav-link col-4" id="contact-tab" data-toggle="tab" href="#contact">
+							<input type="radio" name="type" value="3">전자제품
+						</a>
+					</div>
 					<div class="tab-content" id="myTabContent">
-					      
-					    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					    <div class="tab-pane fade show active" id="home" role="tabpanel">
 					        <div class="pt-3">
 					            <b style="font-size:18px;">검색 필터</b>
 					          <div class="custom-control custom-radio d-flex justify-content-around py-2">
 					              <b>
-					                  <input type="radio" class="custom-control-input" id="grade1" name="restaurant_group" checked>
+					                  <input type="radio" class="custom-control-input" id="grade1" name="restGroup" value="score" checked>
 					                  <label class="custom-control-label" for="grade1">평점순</label>
 					              </b>
 					              <b>
-					                  <input type="radio" class="custom-control-input" id="grade2" name="restaurant_group">
+					                  <input type="radio" class="custom-control-input" id="grade2" name="restGroup" value="pop">
 					                  <label class="custom-control-label" for="grade2">인기순</label>
 					              </b>
 					          </div>
@@ -49,29 +41,31 @@
 					          <!-- Default checked -->
 					          <div class="custom-control custom-checkbox d-flex justify-content-around py-2">
 					              <b>
-					                  <input type="checkbox" class="custom-control-input" id="defaultChecked1">
+					                  <input type="checkbox" class="custom-control-input" id="defaultChecked1"
+					                  	name="restPrice" value="0">
 					                  <label class="custom-control-label" for="defaultChecked1">만원미만</label>
 					              </b>
 					              <b>
-					                  <input type="checkbox" class="custom-control-input" id="defaultChecked2">
+					                  <input type="checkbox" class="custom-control-input" id="defaultChecked2"
+					                  	name="restPrice" value="10000">
 					                  <label class="custom-control-label" for="defaultChecked2">1만원대</label>
 					              </b>
 					              <b>
-					                  <input type="checkbox" class="custom-control-input" id="defaultChecked3">
+					                  <input type="checkbox" class="custom-control-input" id="defaultChecked3"
+					                  	name="restPrice" value="20000">
 					                  <label class="custom-control-label" for="defaultChecked3">2만원대</label>
 					              </b>
 					              <b>
-					                  <input type="checkbox" class="custom-control-input" id="defaultChecked4">
+					                  <input type="checkbox" class="custom-control-input" id="defaultChecked4"
+					                  	name="restPrice" value="30000">
 					                  <label class="custom-control-label" for="defaultChecked4">3만원대</label>
 					              </b>
 					          </div>
 					          <hr>
 					      </div>
 					
-					      <div class="pt-1">
-					              <div class="pb-3">
-					                  <b style="font-size:18px;">지역</b>
-					              </div>
+					      <div class="pt-1 pb-3">
+				                  <b style="font-size:18px;">지역</b>
 					
 					              <ul class="nav nav-tabs" id="myTab" role="tablist">
 					                  <li class="nav-item">
@@ -99,7 +93,7 @@
 					                      aria-selected="false">더보기</a>
 					                  </li> -->
 					              </ul>
-					                    <div class="tab-content" id="myTabContent">
+			                    		<div class="tab-content" id="myTabContent">
 					                      <div class="tab-pane fade show active custom-control custom-checkbox px-0 py-2" id="seoul-b" role="tabpanel" aria-labelledby="seoul-b-tab">
 					                          <table class="w-100">
 					                              <tbody>
@@ -1400,8 +1394,9 @@
 					</div>
 				</div>
 	          
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				<button type="submit" class="btn btn-primary">필터적용</button>
 	  		</div>
+			</form>
 		</div>
 	</div>

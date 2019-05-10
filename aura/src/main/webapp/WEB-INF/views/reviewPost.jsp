@@ -4,27 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
-<title>석촌호수 - All Review</title>
+<title>${reviewInfo.TITLE} - All Review</title>
 
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
 <div class="container d-flex flex-wrap p-md-5 px-1 py-4" style="border-bottom: 2px solid; border-color: #dadee6">
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
 		${reviewInfo.TITLE}
 		<span class="badge badge-pill badge-success" style="font-size: 20px; margin-left: 3px;">
-	    	<c:choose>
-				<c:when test="${review.category eq 1}">
-					한식
-				</c:when>
-				<c:when test="${review.category eq 2}">
-					양식
-				</c:when>
-				<c:when test="${review.category eq 16}">
-					호프
-				</c:when>
-				<c:otherwise>
-					기타분류
-				</c:otherwise>
-    		</c:choose>
+			${reviewInfo.CATEGORY}
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
@@ -70,9 +57,9 @@
 			</div>
 		</c:if>
 		
-		<div class="col-4 p-0 d-md-flex d-none flex-wrap align-items-start justify-content-center">
-			<div class="col-12">
-				<div id="map" style="width:100%; height:250px;"></div>
+		<div class="col-md-4 col-12 p-0 d-flex flex-wrap align-items-start justify-content-center order-2 order-md-1">
+			<div class="col-md-12 col-8">
+				<div id="map" class="my-4" style="width:100%; height:250px;"></div>
 				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
 			</div>
 			<div class="col-12 d-flex justify-content-center my-4">
@@ -118,7 +105,7 @@
 			</c:choose>
 		</div>
 		<!-- 리뷰 상세 설명 -->
-		<div class="d-flex flex-wrap col-8">
+		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
 			<div class="col-12 p-0 my-1">
 				<i class="col-1 fas fa-phone"></i>
 				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.TEL}</span>
@@ -132,11 +119,13 @@
 				<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
 					<c:if test="${type eq 1}">
 						<c:forEach var="menu" items="${menu}"  varStatus="num">
-							<div class="col-5 p-0 m-0">
-								${menu.name}
-							</div>
-							<div class="col-5 p-0 m-0">
-								${String.format("%,3d", Integer.parseInt(menu.price))}원
+							<div class="col-md-6 col-12 p-0 d-flex">
+								<div class="col-8 p-0 m-0">
+									${menu.name}
+								</div>
+								<div class="col-4 p-0 m-0 text-center">
+									${String.format("%,3d", Integer.parseInt(menu.price))}원
+								</div>
 							</div>
 						</c:forEach>
 					</c:if>
@@ -156,18 +145,6 @@
 				</div>
 			</div>
 		</div>
-<!-- 		점수		 -->
-		<div class="d-md-none col-4 d-flex justify-content-between align-items-center p-0 ">
-			<div class="col-6 d-flex align-items-center justify-content-center">
-				<i class="fas fa-share-alt"></i> 
-				<i class="far fa-star mx-4"></i>
-				<i class="far fa-thumbs-up"></i>
-			</div>
-			<div class="col-6 d-flex align-items-center justify-content-end p-0">
-				<button type="button" id="review_write_mobile"
-					class="btn btn-dark review-write px-3">리뷰 작성하기</button>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -176,16 +153,14 @@
 <div class="container d-flex flex-wrap">
 
 	<!-- 댓글 작성 양식 -->
-	<div id="write_form"
-		class="col-12 flex-md-row flex-wrap justify-content-center"
+	<div id="write_form" class="col-12 flex-md-row flex-wrap justify-content-center"
 		style="display: none; height: 0px; border-bottom: 2px solid #dadee6;">
 		<button id="review_write_cancel" type="button"
 			class="btn btn-light col-12 text-center py-3 m-0 mb-3">
 			댓글 작성창 접기 <i class="fas fa-arrow-up"></i>
 		</button>
 
-		<div
-			class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
+		<div class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
 			<h4 class="my-3 font-weight-bold w-100" id="review_write">리뷰 작성</h4>
 			<div class="w-50">
 				<c:choose>
@@ -526,15 +501,20 @@
 
 		<!-- strat -->
 		
+	<c:forEach var="commentList" items="${commentList }">
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active"
 			id="home">
+			
+			
 			<div
 				class=" col-2 d-flex flex-wrap justify-content-center align-items-center"
 				style="width: 100%; display: flex;">
+				
+				
 				<div style="width: 65%; height: 75px;">
 				<c:choose>
-					<c:when test="${commentList[0].profile ne null }">
-						<img class="rounded-circle w-100 h-100" src=${commentList[0].profile }>
+					<c:when test="${commentList.profile ne null }">
+						<img class="rounded-circle w-100 h-100" src=${commentList.profile }>
 					</c:when>
 					<c:otherwise>
 						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
@@ -542,23 +522,22 @@
 				</c:choose>
 				</div>
 
-				<div class="w-100 text-center" style="margin-top: 0px">${commentList[0].nickname }
+				<div class="w-100 text-center" style="margin-top: 0px">${commentList.nickname }
 				
 				</div>
 				
 					
 				<div class=" col-12 p-0 d-flex justify-content-center">
-					<c:forEach begin="1" end="${commentList[0].comment_Score }">
+					<c:forEach begin="1" end="${commentList.comment_Score }">
 						<i class="fas fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
 					</c:forEach>
-					<c:forEach begin="1" end="${5-commentList[0].comment_Score }">
+					<c:forEach begin="1" end="${5-commentList.comment_Score }">
 						<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
 					</c:forEach>
-					
-					
-					
-					
 				</div>
+				
+				
+				
 			</div>
 
 			<div
@@ -567,18 +546,18 @@
 				<div id="carouselExampleFade-1" class="carousel slide carousel-fade"
 					data-ride="carousel">
 					<div class="carousel-inner user-picture">
-						<div class="carousel-item active">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=230">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=240">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=280">
-						</div>
+<!-- 						<div class="carousel-item active"> -->
+<!-- 							<img class="d-block w-100 user-review-img" -->
+<!-- 								src="https://picsum.photos/200/200?image=230"> -->
+<!-- 						</div> -->
+<!-- 						<div class="carousel-item"> -->
+<!-- 							<img class="d-block w-100 user-review-img" -->
+<!-- 								src="https://picsum.photos/200/200?image=240"> -->
+<!-- 						</div> -->
+<!-- 						<div class="carousel-item"> -->
+<!-- 							<img class="d-block w-100 user-review-img" -->
+<!-- 								src="https://picsum.photos/200/200?image=280"> -->
+<!-- 						</div> -->
 					</div>
 					<a class="user-photo-button-left carousel-control-prev"
 						href="#carouselExampleFade-1" role="button" data-slide="prev">
@@ -594,7 +573,7 @@
 			</div>
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div class>${commentList[0].comment_Contents } </div>
+				<div class>${commentList.comment_Contents } </div>
 				
 			</div>
 			
@@ -602,10 +581,11 @@
 				class="d-flex col-2 flex-column align-items-center justify-content-center">
 				<i class="far fa-heart" style="font-size: 40px"></i>
 				<p class="heart-number">
-				<fmt:formatNumber value="${commentList[0].comment_Like }" pattern="#,###"/>
+				<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 				</p>
 			</div>
 		</div>
+	</c:forEach>
 <!-- 		끝 부분 -->
 
 
@@ -631,6 +611,7 @@
 	</div>
 </div>
 
+</div>
 
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
@@ -981,6 +962,7 @@ var flag2=true;
    				contentType : false,
    				
    				success: function(data){
+   					$('#comment').val('');
    					$('#grade').val('0')
    					location.reload();
    				},
@@ -992,7 +974,6 @@ var flag2=true;
    	        });
     	}
     }
-	
 	
 </script>
     

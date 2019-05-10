@@ -5,8 +5,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>All Review 로그인 페이지</title>
-
+	<title>로그인 - All Review</title>
+	
+	<!-- naverAPI -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+	
+	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +28,7 @@
 				<div class="card-wrapper" style = "width : 400px;">
 					<div class="brand">
 					<!-- 로그인 화면 로고이미지	 -->
-					<a href="/user/loginForm">
+					<a href="/main">
 						<img src="/img/all_review_img/All Review 로고.png" alt="logo" style="width:150px;">
 					</a>
 					</div>
@@ -70,7 +74,8 @@
 								
 								<!-- API 로그인 로고 -->
 								<div class = "api_login mt-3 d-flex flex-row jusfiy-content-center">
-									<div class="view overlay col-3 p-0">
+									<div class="view overlay col-3 p-0"
+									onclick="location.href='https://www.facebook.com/v3.2/dialog/oauth?client_id=432794210621575&redirect_uri=http://localhost:8000/user/oauth/facebook&response_type=code'">
 										<a href="#">
 											<img src="/img/all_review_img/facebook.png" width="60px">
 										</a>									
@@ -89,18 +94,18 @@
 									<div class="view overlay col-3 p-0">
 										<a href="#">
 											<img src="/img/all_review_img/google.png"width="60px">
-										</a>								
 										<div class="mask flex-center rgba-white-light">
 										</div>
+										</a>								
 									</div>
 
-									<div class="view overlay col-3 p-0">
-										<a href="#">
+									<a class="view overlay col-3 p-0"
+									onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=od8MnK4Tb6sAdnv6ZeIT&redirect_uri=http://localhost:8000/user/oauth/naver&state=${state}'">
+										<div>
 											<img src="/img/all_review_img/naver.PNG"width="60px">
-										</a>									
-										<div class="mask flex-center rgba-white-light">
-										</div>	
-									</div>
+											<div class="mask flex-center rgba-white-light"></div>	
+										</div>
+									</a>									
 								</div>
 
 								<!-- 회원가입, 아이디/비밀번호 찾기 -->

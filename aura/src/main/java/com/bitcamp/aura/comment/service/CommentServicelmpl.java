@@ -19,10 +19,10 @@ import com.bitcamp.aura.comment.model.CommentVO;
 
 @Service
 @Transactional
-public class CommentServicelmpl implements CommentService{
+public class CommentServicelmpl implements CommentService {
 	
 	@Autowired
-	CommentMapper commentMapper;
+	private CommentMapper commentMapper;
 	
 	@Override
 	public String insert_Comment(MultipartHttpServletRequest comment) {

@@ -35,39 +35,44 @@
           aria-hidden="true"></i><br>즐겨찾기</a>
     </li>
    
-    <li class="nav-item">
-      <a class="nav-link  waves-light active show text-center" id="profile-tab-classic-orange " data-toggle="modal" data-target="#modalLoginForm" href="#profile-classic-orange"
-        role="tab" aria-controls="profile-classic-orange" aria-selected="true" style="color:#1dd1a1">
-        <i class="fas fa-user fa-2x pb-2" aria-hidden="true"></i><br>회원수정<br>페이지 이동</a>
-          
-         <!--start-->
-          <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header text-center">
-			        <h4 class="modal-title w-100 font-weight-bold">비밀 번호를 입력해주세요</h4>
-			      </div>
-			      <form method="POST" name="infoCheck" action="/user/modifyInfo"onsubmit="return InfoCheckDouble()">
-				      <div class="modal-body mx-3">
-<!-- 					        <div class="md-form mb-5" style="font: 20px;"> -->
-<!-- 					         	비밀 번호를 입력해주세요 -->
-<!-- 					        </div> -->
-					
-				        <div class="md-form pr-5">
-				        	<i class="fas fa-lock prefix grey-text"></i>
-				          <input type="password" id="defaultForm-pass" class="form-control">
-				        </div>
-			     	 </div>
-			      <div class="modal-footer d-flex justify-content-center">
-			        <button type="submit" class="btn btn-primary btn-block" id="InfoCheck_Modify" >확 인</button>
-			      </div>
-		     	 </form>
-			    </div>
+   <c:choose>
+   <c:when test = "${regLocation eq 1}" >
+	    <li class="nav-item" id="modifyHidden" >
+	      <a class="nav-link  waves-light active show text-center"  id="profile-tab-classic-orange" data-toggle="modal" data-target="#modalLoginForm" href="#profile-classic-orange"
+	        role="tab" aria-controls="profile-classic-orange" aria-selected="true" style="color:#1dd1a1; ">
+	        <i class="fas fa-user fa-2x pb-2" aria-hidden="true"></i><br>회원정보수정</a>
+	          
+	         <!--start-->
+	          <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header text-center">
+				        <h4 class="modal-title w-100 font-weight-bold">비밀 번호를 입력해주세요</h4>
+				      </div>
+				      <form method="POST" name="infoCheck" action="/user/modifyInfo"onsubmit="return InfoCheckDouble()">
+					      <div class="modal-body mx-3">
+	
+						
+					        <div class="md-form pr-5">
+					        	<i class="fas fa-lock prefix grey-text"></i>
+					          <input type="password" id="defaultForm-pass" class="form-control">
+					        </div>
+				     	 </div>
+				      <div class="modal-footer d-flex justify-content-center">
+				        <button type="submit" class="btn btn-primary btn-block" id="InfoCheck_Modify" >확 인</button>
+				      </div>
+			     	 </form>
+				    </div>
+				</div>
 			</div>
-		</div>
-        <!--end-->
-          
-    </li>
+	        <!--end-->
+	    </li>
+    </c:when>
+    <c:otherwise>
+  
+    </c:otherwise>
+    </c:choose>
+    
    </ul>
   </div>
 </div>
@@ -96,32 +101,26 @@
   </div>
 <!-- Full Height Modal Right -->
 
+<script>
+// $(function() {
+// 	$('#fullHeightModalRight').on('focusin',function(){
+// 		$.ajax({
+// 			url : "/user/checkUser",
+// 			type : "GET",
+// 			success : function(data){	
+// 				if(data == true){
+// 					alert("일단 들어옴");
+// 					$('#modifyHidden').removeAttr('style');
+// 				}else
+// 					alert("일단 들어옴2");
+// 			}			
+// 		});
+// 	});	
+// })
+</script>
+
 
 <script>
-
-//	$('#myClassicTabContentOrange').text();
-
-//	console.log(data[2].num);
-
-//	for(var i in data){
-//		$('#follow-classic-orange').append('<span>data[i].date</span>');
-//		$('#follow-classic-orange').append('<span>data[i].num</span>');
-//		$('#follow-classic-orange').append('<span>data[i].reviewType</span>');
-//		$('#follow-classic-orange').append('<span>data[i].postNum</span><br>');
-
-//	}
-// 			var table = $('<table>');
-// 			var tableEnd = $('</table>');
-// 			var tr = $('<tr>');
-// 			var trEnd = $('</tr>');
-// 			var tr = $('<tr>');
-// 			var trEnd = $('</tr>');
-// 			$('#myClassicTabContentOrange').append('날짜').append('번호').append('타입').append('포스트').append('<br>');				
-// 			div.append($('#myClassicTabContentOrange').append(span).append(data[i].date).append(spanEnd).append(' '));
-// 			$('#myClassicTabContentOrange').append(span).append(data[i].num).append(spanEnd).append(' ');
-// 			$('#myClassicTabContentOrange').append(span).append(data[i].reviewType).append(spanEnd).append(' ');
-// 			$('#myClassicTabContentOrange').append(span).append(data[i].postNum).append(spanEnd).append('<br>');
-// <i class="fas fa-share-alt"><i class="far fa-star mx-4"><i class="far fa-thumbs-up">
 
 $('#follow-tab-classic-orange').on('click', function(){
 	$.ajax({
@@ -139,12 +138,11 @@ $('#follow-tab-classic-orange').on('click', function(){
 				div.css({
 					'text-align': 'center',
 					'font-size': '13px',
-					'border-bottom': '0.5px solid #c7ecee',
 					'height': '40px',
-					'margin-bottom' : '10px',
+					'margin' : '10px auto',
 				})
 				
-				var img = ((data[i].reviewType == 1) ? '<i class="fas fa-share-alt mx-1"> ': ((data[i].reviewType == 2) ? '<i class="far fa-star mx-1"> ' : '<i class="far fa-thumbs-up mx-1">'));
+				var img = ((data[i].reviewType == 1) ? '<i class="fas fa-share-alt mx-2 green-text"> ': ((data[i].reviewType == 2) ? '<i class="fas fa-star mx-2 amber-text"> ' : '<i class="fas fa-thumbs-up mx-2 cyan-text">'));
 				var str = '<b>'+data[i].title +'</b>을 <b>'+ ((data[i].reviewType == 1) ? '공유하기': ((data[i].reviewType == 2) ? '즐겨찾기 ' : '좋아요 '))+'</b>하셨습니다.<br> >> '+ data[i].date;
 				div.append(img).append(str);
 				$('#myClassicTabContentOrange').append(div);
@@ -156,7 +154,6 @@ $('#follow-tab-classic-orange').on('click', function(){
 
 	});
 });
-
 </script>
 
 <script>
@@ -174,14 +171,13 @@ $('#awesome-tab-classic-orange').on('click', function(){
 				div.css({
 					'text-align': 'center',
 					'font-size': '13px',
-					'border-bottom': '0.5px solid #c7ecee',
 					'height': '40px',
-					'margin-bottom' : '10px',
+					'margin' : '10px auto' ,
 				});
 				
 				if(data[i].reviewType == 2){
-					var img =  '<i class="far fa-star mx-1"> ';
-					var str = '게시글 <b>'+data[i].postNum +'번</b>을 <b>즐겨찾기 </b>하셨습니다.<br> >> '+ data[i].date;
+					var img =  '<i class="fas fa-star mx-2 amber-text"> ';
+					var str = '<b>'+data[i].title +'</b>을 <b>즐겨찾기 </b>하셨습니다.<br> >> '+ data[i].date;
 					div.append(img).append(str);
 					$('#myClassicTabContentOrange').append(div);
 				}else if(data[i].postNum == null){
@@ -239,5 +235,6 @@ function InfoCheckDouble(){
 	});
 
 </script>
+
 
 

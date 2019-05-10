@@ -46,7 +46,7 @@
  			NUM = #{num, jdbcType=NUMERIC}
  	</delete>
  
- 	<select id="selectOne" parameterType="String" resultType="NoticeVO">
+ 	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
  		SELECT
  			*
  		FROM
@@ -59,7 +59,7 @@
  	<select id="selectAll" resultType="NoticeVO">
 		SELECT 
 			* 
-		FORM
+		FROM
 			 BOARD
  	</select>
  </mapper>

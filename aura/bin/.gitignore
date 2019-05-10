@@ -1,6 +1,7 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+.properties
 
 ### STS ###
 .apt_generated
@@ -27,3 +28,10 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+/.gitignore
+/.mvn/
+/app/
+/mvnw
+/mvnw.cmd
+/pom.xml
+/src/

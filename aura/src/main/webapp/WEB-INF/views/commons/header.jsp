@@ -132,8 +132,13 @@
 		}
 		
 		.container {
-			max-width: 70%;
+			max-width: 80%;
 			margin: 0 auto;
+		}
+		@media (max-width: 1300px) {
+			.container {
+				max-width: 100%;
+			}
 		}
 		@media (max-width: 1199.98px) {
 			.container {
@@ -145,8 +150,8 @@
 </head>
 <body>
     <header class="navigation" id="navigation">
-		<a href="/main" style="width: 15%;">
-			<img class="navigation_brand_logo" src="/img/logo/logo2.png">
+		<a href="/main" style="width: 11%;">
+			<img class="navigation_brand_logo" src="/img/logo/whitelogo2.png">
 		</a>
 		
 		<div id="navigation_search_form" class="col-md-6 col-11 p-0">
