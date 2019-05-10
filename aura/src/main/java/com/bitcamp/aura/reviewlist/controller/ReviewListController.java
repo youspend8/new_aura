@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
+import com.bitcamp.aura.review.model.ReviewFileVO;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.bitcamp.aura.reviewlist.dao.ReviewListMapper;
 import com.bitcamp.aura.reviewlist.model.ReviewListVO;
@@ -46,15 +47,18 @@ public class ReviewListController {
 	@RequestMapping("/modal_review")
 	@ResponseBody
 	public List<ReviewListVO> modal_review(HttpSession session) {
-		ModelAndView mv = new ModelAndView();
+//		ModelAndView mv = new ModelAndView();
 		String nickname = (String) session.getAttribute("nickname");
-
 		List<ReviewListVO> reviewListVo = reviewListMapper.selectByNickname(nickname);
+//		int postNum = reviewListVo.get(0).getPostNum();
+//		System.out.println("postNum" + postNum);
+//		List<ReviewFileVO> reviewFileVo = reviewFileMapper.selectByPostNum(postNum);
 		reviewListVo.forEach(item -> {
 			item.setTitle(reviewService.searchOne(item.getPostNum()).getTitle());
+//			item.(postNum);
 		});
 				
-//		System.out.println("reviewListVo"+reviewListVo); //리뷰리스트의  List의 내용은 넘어옴
+		System.out.println("reviewListVo"+reviewListVo); //리뷰리스트의  List의 내용은 넘어옴
 		
 		return reviewListVo;
 		

@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+
+
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
@@ -63,7 +70,79 @@
 				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
 			</div>
 			<div class="col-12 d-flex justify-content-center my-4">
-				<a id="share" onclick="doReview(1)">
+			
+<!--모달 공유하기 가으자!!-->
+			<div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			
+			  <!-- Change class .modal-sm to change the size of the modal -->
+			  <div class="modal-dialog modal-sm" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h4 class="modal-title w-100" id="myModalLabel">공유하기</h4>
+			      </div>
+			      <div class="modal-body px-6 py-6 text-center">
+<!-- <span>카카오톡</span> -->
+			           <a id="kakao-link-btn" href="javascript:;">
+					   <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+					   </a>
+					<script type='text/javascript'>
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('53d1f3b1742d1856fff766c43108dfd7');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: document.title,
+        description: '내용, 주로 해시태그',
+        imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com'
+        }
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            webUrl: document.location.href
+          }
+        }
+      ]
+    });
+  //]]>
+</script>
+<!-- <span>카카오스토리</span> -->
+<div id="kakaostory-share-button"></div>
+<script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('53d1f3b1742d1856fff766c43108dfd7');
+    // 스토리 공유 버튼을 생성합니다.
+    Kakao.Story.createShareButton({
+      container: '#kakaostory-share-button',
+      url: 'https://developers.kakao.com',
+      text: '카카오 개발자 사이트로 놀러오세요! #개발자 #카카오 :)'
+    });
+  //]]>
+</script>
+
+			         <span>페이스북</span>
+			      </div>
+			    
+			    </div>
+			  </div>
+			</div>
+			<!-- Central Modal Small -->
+			
+			
+			<a id="share" onclick="doReview(1)" data-toggle="modal" data-target="#centralModalSm">
 				<c:choose>
 					<c:when test="${reviewInfo.isShare }">
 						<i class="fas fa-share-alt" value="${nickname}" style="color: blue"></i>
@@ -678,8 +757,6 @@ var flag2=true;
 					flag1=true;
 				}, 500);
 			}
-			
-		
 		})
 
     	function doReview(type, nickname) {
@@ -816,37 +893,7 @@ var flag2=true;
 			$('#star4').removeClass().addClass('fas fa-star');
 			$('#star5').removeClass().addClass('fas fa-star');
 		});
-		
-		
-		
-		
-		
-// 		$('#star3').click(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 		});
-		
-// 		$('#star4').hover(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 			$('#star3').removeClass().addClass('fas fa-star');
-// 		}, function(){
-// 			$('#star1').removeClass().addClass('far fa-star');
-// 			$('#star2').removeClass().addClass('far fa-star');
-// 			$('#star3').removeClass().addClass('far fa-star');
-// 		});
-		
-// 		$('#star5').hover(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 			$('#star3').removeClass().addClass('fas fa-star');
-// 			$('#star4').removeClass().addClass('fas fa-star');
-// 		}, function(){
-// 			$('#star1').removeClass().addClass('far fa-star');
-// 			$('#star2').removeClass().addClass('far fa-star');
-// 			$('#star3').removeClass().addClass('far fa-star');
-// 			$('#star4').removeClass().addClass('far fa-star');
-// 		})
+
 		
     </script>
     

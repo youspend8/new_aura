@@ -262,20 +262,6 @@ public class UserController {
 	}
 	
 	
-//	@RequestMapping("/checkUser")
-//	@ResponseBody
-//	public boolean checkUser(HttpSession session) {
-//		String nickname = (String)session.getAttribute("nickname");
-//		UserVO userVo = userService.getUser(nickname);
-//		int num = userVo.getRegLocation();
-//		if(num == 1) {
-//			return true;			
-//		}
-//		return false;
-//	}
-	
-	
-	
 	@RequestMapping("/modifyInfo")
 	public String InfoModify(Model model,HttpSession session) {
 	String nickname = (String)session.getAttribute("nickname");

@@ -101,23 +101,7 @@
   </div>
 <!-- Full Height Modal Right -->
 
-<script>
-// $(function() {
-// 	$('#fullHeightModalRight').on('focusin',function(){
-// 		$.ajax({
-// 			url : "/user/checkUser",
-// 			type : "GET",
-// 			success : function(data){	
-// 				if(data == true){
-// 					alert("일단 들어옴");
-// 					$('#modifyHidden').removeAttr('style');
-// 				}else
-// 					alert("일단 들어옴2");
-// 			}			
-// 		});
-// 	});	
-// })
-</script>
+
 
 
 <script>
