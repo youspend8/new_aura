@@ -501,15 +501,20 @@
 
 		<!-- strat -->
 		
+	<c:forEach var="commentList" items="${commentList }">
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active"
 			id="home">
+			
+			
 			<div
 				class=" col-2 d-flex flex-wrap justify-content-center align-items-center"
 				style="width: 100%; display: flex;">
+				
+				
 				<div style="width: 65%; height: 75px;">
 				<c:choose>
-					<c:when test="${commentList[0].profile ne null }">
-						<img class="rounded-circle w-100 h-100" src=${commentList[0].profile }>
+					<c:when test="${commentList.profile ne null }">
+						<img class="rounded-circle w-100 h-100" src=${commentList.profile }>
 					</c:when>
 					<c:otherwise>
 						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
@@ -517,23 +522,22 @@
 				</c:choose>
 				</div>
 
-				<div class="w-100 text-center" style="margin-top: 0px">${commentList[0].nickname }
+				<div class="w-100 text-center" style="margin-top: 0px">${commentList.nickname }
 				
 				</div>
 				
 					
 				<div class=" col-12 p-0 d-flex justify-content-center">
-					<c:forEach begin="1" end="${commentList[0].comment_Score }">
+					<c:forEach begin="1" end="${commentList.comment_Score }">
 						<i class="fas fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
 					</c:forEach>
-					<c:forEach begin="1" end="${5-commentList[0].comment_Score }">
+					<c:forEach begin="1" end="${5-commentList.comment_Score }">
 						<i class="far fa-star" style="font-size: 20px; color: rgb(255, 153, 0);"></i>
 					</c:forEach>
-					
-					
-					
-					
 				</div>
+				
+				
+				
 			</div>
 
 			<div
@@ -542,18 +546,18 @@
 				<div id="carouselExampleFade-1" class="carousel slide carousel-fade"
 					data-ride="carousel">
 					<div class="carousel-inner user-picture">
-						<div class="carousel-item active">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=230">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=240">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100 user-review-img"
-								src="https://picsum.photos/200/200?image=280">
-						</div>
+<!-- 						<div class="carousel-item active"> -->
+<!-- 							<img class="d-block w-100 user-review-img" -->
+<!-- 								src="https://picsum.photos/200/200?image=230"> -->
+<!-- 						</div> -->
+<!-- 						<div class="carousel-item"> -->
+<!-- 							<img class="d-block w-100 user-review-img" -->
+<!-- 								src="https://picsum.photos/200/200?image=240"> -->
+<!-- 						</div> -->
+<!-- 						<div class="carousel-item"> -->
+<!-- 							<img class="d-block w-100 user-review-img" -->
+<!-- 								src="https://picsum.photos/200/200?image=280"> -->
+<!-- 						</div> -->
 					</div>
 					<a class="user-photo-button-left carousel-control-prev"
 						href="#carouselExampleFade-1" role="button" data-slide="prev">
@@ -569,7 +573,7 @@
 			</div>
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div class>${commentList[0].comment_Contents } </div>
+				<div class>${commentList.comment_Contents } </div>
 				
 			</div>
 			
@@ -577,10 +581,11 @@
 				class="d-flex col-2 flex-column align-items-center justify-content-center">
 				<i class="far fa-heart" style="font-size: 40px"></i>
 				<p class="heart-number">
-				<fmt:formatNumber value="${commentList[0].comment_Like }" pattern="#,###"/>
+				<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 				</p>
 			</div>
 		</div>
+	</c:forEach>
 <!-- 		끝 부분 -->
 
 
@@ -942,6 +947,7 @@ var flag2=true;
    				contentType : false,
    				
    				success: function(data){
+   					$('#comment').val('');
    					$('#grade').val('0')
    					location.reload();
    				},
@@ -953,7 +959,6 @@ var flag2=true;
    	        });
     	}
     }
-	
 	
 </script>
     
