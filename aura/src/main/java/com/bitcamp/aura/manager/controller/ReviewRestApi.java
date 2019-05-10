@@ -60,10 +60,12 @@ public class ReviewRestApi {
 			@PathVariable("num") int num,
 			@PathVariable("type") int type) {
 		HashMap<String, Object> params = new HashMap<>();
+		System.out.println(1);
 		params.put("type", type);
 		params.put("num", num);
 		
 		HashMap<String, Object> review = service.searchByNum(params);
+		System.out.println(review);
 		StringBuilder sb = new StringBuilder();
 		Gson gson = new Gson();
 		sb.append(gson.toJson(review));
