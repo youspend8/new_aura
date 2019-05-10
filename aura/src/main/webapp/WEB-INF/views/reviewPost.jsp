@@ -73,13 +73,13 @@
 					</c:otherwise>
 				</c:choose>
 				</a>
-				<a id="share" onclick="doReview(2)">
+				<a id="share" >
 					<c:choose>
 						<c:when test="${reviewInfo.isStar }">
-						    <i class="fas fa-star mx-4" id="bb" value="${nickname}" style="color: yellow"></i>
+						    <i class="fas fa-star mx-4" id="bb" value="${nickname}" style="color: yellow" onclick="doReview(2)"></i>
 						</c:when>
 						<c:otherwise>
-							<i class="fas fa-star mx-4" id="bb" value="${nickname}"></i>
+							<i class="fas fa-star mx-4" id="bb" value="${nickname}" onclick="doReview(2)"></i>
 						</c:otherwise>
 					</c:choose>
 			
