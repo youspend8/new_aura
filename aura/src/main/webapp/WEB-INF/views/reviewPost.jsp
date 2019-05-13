@@ -563,14 +563,14 @@
 						<div class="carousel-inner user-picture" style="width:168px; height:123px;">
 							
 								<div class="carousel-item active">
-									<img class="d-block user-review-img" style="width:168px; height:123px;"
+									<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
 											src="${commentList.files[0].comment_File}">
 								</div>
 	
 								<c:forEach var="files" items="${commentList.files }" begin="1">
 									<c:if test="${files ne null}">
 										<div class="carousel-item">
-													<img class="d-block user-review-img" style="width:168px; height:123px;"
+													<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
 														src="${files.comment_File}">
 										</div>
 									</c:if>
@@ -608,11 +608,94 @@
 					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 					
 				</p>
+				<div class="w-50 d-flex mt-5 justify-content-between">
+					<a>수정</a>
+					<a>삭제</a>
+			   </div>
 			</div>
+			
+			
+			
 		</div>
 		
 	</c:forEach>
-<!-- 		끝 부분 -->
+	
+	<script type="text/javascript">
+	
+			function addComma(num) {
+				 var regexp = /\B(?=(\d{3})+(?!\d))/g;
+			     return num.toString().replace(regexp, ',');
+			}
+				
+			$('.heartCl').click(function(){
+				
+				if($(this).next().attr('nickname')!=""){
+					
+						if($(this).find("i").css('color')=='rgb(33, 37, 41)'){ 
+							$(this).find("i").css('color','rgb(255, 0, 0)')//빨강
+							
+							var num1=Number($(this).next().attr('value'))+1;
+							var num=addComma(Number($(this).next().attr('value'))+1);
+							
+							$(this).next().remove();
+							$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+							var commentNum = Number($(this).attr('commentNum'));
+							
+								$.ajax({
+						    		url: '/comment/update', // 요청 할 주소 
+						    	    type: 'get', // GET, PUT
+						    	    dataType: 'text', 
+						    	    data: {
+						    	    	commentNum : commentNum,
+						    	    	type : 1
+						    	    },
+						    	    success: function(data) {
+					    	        },
+					    	       error : function (data) {
+					    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+						    	        return false;
+					    	       }  // 전송할 데이터
+						    	})
+		    	
+						}else{
+							$(this).find("i").css('color','rgb(33, 37, 41)')//검정
+	
+							var num1=Number($(this).next().attr('value'))-1;
+							var num=addComma(Number($(this).next().attr('value'))-1);
+							
+							$(this).next().remove();
+							$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+							var commentNum = Number($(this).attr('commentNum'));
+							
+								$.ajax({
+						    		url: '/comment/update', // 요청 할 주소 
+						    	    type: 'get', // GET, PUT
+						    	    dataType: 'text', 
+						    	    data: {
+						    	    	commentNum : commentNum,
+						    	    	type : 2
+						    	    },
+						    	    success: function(data) {
+					    	        },
+					    	       error : function (data) {
+					    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+						    	        return false;
+					    	       }  // 전송할 데이터
+						    	})
+						}
+				}
+				else{
+					alert("회원만 이용 가능한 기능입니다. 로그인을 해주세요.")
+				}
+			})
+			
+			
+			
+			 $(document).ready(function(){
+			    $('.materialboxed').materialbox();
+			  });
+		
+		</script>
 
 </div>
 
@@ -629,6 +712,10 @@
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
+  
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
 <script type="text/javascript" src="/js/radialprogress.js"></script>
 
 <script type="text/javascript">
@@ -1049,7 +1136,7 @@ $('#review_more').on('click', function(){
                                 "<div class=\"preview-box mr-2 view overlay\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
                                         + "<img class=\"thumbnail w-100 img-fluid\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
                                         + "<div class=\"mask flex-center waves-effect waves-light rgba-red-strong\" style=\"height:159.13px;\">"
-                                        + "<a style=\"font-size:19px;\" class=\"white-text\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                        + "<a style=\"font-size:19px; display:flex; justify-content: center; align-items: center\" class=\"white-text w-100 h-100\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
                                         + "삭제" + "</a>" + "</div>" + "</div>");
             		}
 	            	
@@ -1104,6 +1191,11 @@ $('#review_more').on('click', function(){
    				contentType : false,
    				
    				success: function(data){
+   					if (data != ""){
+   					alert(data);
+   					return;
+   					}
+   					
    					$('#comment').val('');
    					$('#grade').val('0')
    					location.reload();

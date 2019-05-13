@@ -37,7 +37,6 @@ public class NoticeServiceImpl implements NoticeService{
 		//시간은 자동으로 저장해놓기
 		noticevo.setWriterDate(new SimpleDateFormat("yy/MM/dd").format(new Date()));
 		int result = noticemapper.insert(noticevo);
-		System.out.println("SEQ VAL : " + noticevo.getNum());
 		fileUpload.uploadNotice(noticevo.getNum(), multipartFiles);
 		return result;
 	}
@@ -45,16 +44,25 @@ public class NoticeServiceImpl implements NoticeService{
 	public HashMap<String, Object> searchOne(int num) {
 		HashMap<String, Object> notice = noticemapper.selectOne(num);
 		notice.put("FILES", StreamSupport.stream(repo.findAll().spliterator(), true)
-									.filter(n -> {
-										return n.getPostNum() == ((BigDecimal)notice.get("NUM")).intValue();
-									})
-									.map(f -> f.getName())
-									.collect(Collectors.toList()));
+										.filter(n -> {
+											return n.getPostNum() == ((BigDecimal)notice.get("NUM")).intValue();
+										})
+										.map(f -> f.getName())
+										.collect(Collectors.toList()));
 		return notice;
 	}
+	
 	@Override
 	public List<NoticeVO> searchAll() {
 		
 		return noticemapper.selectAll();
+	}
+	
+	@Override
+	public int deleteNotice(int num) {
+		// TODO Auto-generated method stub
+		int result = noticemapper.delete(num);
+
+		return result;
 	}
 }

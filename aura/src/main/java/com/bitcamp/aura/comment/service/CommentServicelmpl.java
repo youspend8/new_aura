@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +27,13 @@ public class CommentServicelmpl implements CommentService {
 	
 	@Override
 	public String insert_Comment(MultipartHttpServletRequest comment) {
+		List<MultipartFile> fileList = comment.getFiles("files");
+		
+		for (MultipartFile check : fileList) {
+			if (!isValidExtension(check.getOriginalFilename())) {
+				return ".gif, .jpg, .png 확장자만 가능합니다.";
+			}
+		}
 		
 		String review_Num = comment.getParameter("review_post_num");
 		String nickname = comment.getParameter("nickname_post");
@@ -41,7 +46,6 @@ public class CommentServicelmpl implements CommentService {
 		CommentFileVO commentFileVO = new CommentFileVO();
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		
-		List<MultipartFile> fileList = comment.getFiles("files");
 		
 		commentVo.setReview_Post_Num(Integer.parseInt(review_Num));
 		commentVo.setNickname(nickname);
@@ -60,8 +64,6 @@ public class CommentServicelmpl implements CommentService {
             } else { 	// 파일이 들어왔을 때
 //              long fileSize = mf.getSize(); // 파일 사이즈를 알고 싶다면 주석을 푸시오
 //              System.out.println("fileSize : " + fileSize);
-            	
-            	
             	
             	String fileName = "/files/" + System.currentTimeMillis() + " " + originFileName;
             	String safeFile = file.getAbsolutePath() + FileUpload.PATH + fileName;
@@ -90,7 +92,7 @@ public class CommentServicelmpl implements CommentService {
 		
 		return null;
 	}
-
+	
 	@Override
 	public String delete_Comment() {
 		// TODO Auto-generated method stub
@@ -141,5 +143,16 @@ public class CommentServicelmpl implements CommentService {
 		CommentVO comment = commentMapper.selectOne(comment_Num);
 		return comment;
 	}
-
+	
+	private boolean isValidExtension(String originalName) {
+        String originalNameExtension = originalName.substring(originalName.lastIndexOf(".") + 1);
+        switch(originalNameExtension) {
+        case "jpg":
+        case "png":
+        case "gif":
+            return true;
+        }
+        return false;
+    }
+	
 }
