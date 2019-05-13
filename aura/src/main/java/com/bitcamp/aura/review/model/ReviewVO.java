@@ -21,7 +21,8 @@ public class ReviewVO {
 	private String title;
 	private String contents;
 	private int type;
-	private int stars;
+	private double stars;
+	private int starCount;
 	private int goods;
 	private int bookmark;
 	private int shares;

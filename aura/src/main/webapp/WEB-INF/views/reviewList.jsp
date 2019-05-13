@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 	<jsp:include page="/WEB-INF/views/commons/header.jsp" />
 	<title>검색결과 - ALL Review</title>
 	
@@ -85,7 +86,9 @@
 					<div class="col-md-6 col-12">
 						<div>
 						    <a href="/review/post?num=${review.num}&type=${review.type}" class="text-dark">
-						    	<h5 class="board_list_title mb-1">${review.title}</h5>
+						    	<h5 class="board_list_title mb-1">
+						    		${review.title}
+						    	</h5>
 						    </a>
 						    <span style="float:right; font-size:2rem;">
 						      <a style="color:rgb(0, 102, 255)"><i class="far fa-star"></i></a>
@@ -94,7 +97,31 @@
 						</div>
 						
 						<div class="my-1">
-						    <span><i style="color: rgb(255, 153, 0);" class="fas fa-star"></i><i style="color: rgb(255, 153, 0);" class="fas fa-star"></i><i style="color: rgb(255, 153, 0);" class="fas fa-star"></i><i style="color: rgb(255, 153, 0);" class="fas fa-star-half-alt"></i><i style="color: rgb(255, 153, 0);" class="far fa-star"></i></span> <span style="font-weight:bolder">300</span><span style="font-size:90%;"> reviews</span>
+						    <span>
+						    	<c:forEach var="i" begin="0" end="4">
+						    		<c:if test="${review.stars - i >= 1}">
+							    		<i style="color: rgb(255, 153, 0);" class="fas fa-star"></i>
+					    			</c:if>
+					    			<c:if test="${review.stars - i < 1 && review.stars - i > 0}">
+						    			<i style="color: rgb(255, 153, 0);" class="fas fa-star-half-alt"></i>
+						    		</c:if>
+						    		<c:if test="${review.stars - i <= 0}">
+							    		<i style="color: rgb(255, 153, 0);" class="far fa-star"></i>
+						    		</c:if>
+						    	</c:forEach>
+						    </span>
+						    <span style="font-weight:bolder">
+						    	<c:if test="${review.stars != 0}">
+						    		<fmt:formatNumber value="${review.stars}" pattern=".0" />
+						    	</c:if>
+						    	<c:if test="${review.stars == 0}">
+						    		<fmt:formatNumber value="${review.stars}" pattern="0" />
+						    	</c:if>
+						    </span>
+						    <span class="ml-2" style="font-size:80%;">
+						    	${review.starCount}
+						    	Reviews
+						    </span>
 						</div>
 						<div class="my-1 align-middle">
 						    <i class="fas fa-heart"></i>
