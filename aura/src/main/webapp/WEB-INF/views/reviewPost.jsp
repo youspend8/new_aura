@@ -647,14 +647,14 @@
 						<div class="carousel-inner user-picture" style="width:168px; height:123px;">
 							
 								<div class="carousel-item active">
-									<img class="d-block user-review-img" style="width:168px; height:123px;"
+									<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
 											src="${commentList.files[0].comment_File}">
 								</div>
 	
 								<c:forEach var="files" items="${commentList.files }" begin="1">
 									<c:if test="${files ne null}">
 										<div class="carousel-item">
-													<img class="d-block user-review-img" style="width:168px; height:123px;"
+													<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
 														src="${files.comment_File}">
 										</div>
 									</c:if>
@@ -764,6 +764,12 @@
 					alert("회원만 이용 가능한 기능입니다. 로그인을 해주세요.")
 				}
 			})
+			
+			
+			
+			 $(document).ready(function(){
+			    $('.materialboxed').materialbox();
+			  });
 		
 		</script>
 <!-- 		끝 부분 -->
@@ -784,6 +790,10 @@
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
+  
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
 <script type="text/javascript" src="/js/radialprogress.js"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
