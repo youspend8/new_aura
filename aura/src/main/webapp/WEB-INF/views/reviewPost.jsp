@@ -612,10 +612,19 @@
 					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 					
 				</p>
+				<div class="w-50 d-flex mt-5 justify-content-between">
+					<a>수정</a>
+					<a>삭제</a>
+			   </div>
 			</div>
+			
+			
+			
 		</div>
 		
 	</c:forEach>
+	
+	
 	<script type="text/javascript">
 	
 			function addComma(num) {
@@ -1052,7 +1061,7 @@ $('#review_more').on('click', function(){
                                 "<div class=\"preview-box mr-2 view overlay\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
                                         + "<img class=\"thumbnail w-100 img-fluid\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
                                         + "<div class=\"mask flex-center waves-effect waves-light rgba-red-strong\" style=\"height:159.13px;\">"
-                                        + "<a style=\"font-size:19px;\" class=\"white-text\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                        + "<a style=\"font-size:19px; display:flex; justify-content: center; align-items: center\" class=\"white-text w-100 h-100\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
                                         + "삭제" + "</a>" + "</div>" + "</div>");
             		}
 	            	
@@ -1107,6 +1116,11 @@ $('#review_more').on('click', function(){
    				contentType : false,
    				
    				success: function(data){
+   					if (data != ""){
+   					alert(data);
+   					return;
+   					}
+   					
    					$('#comment').val('');
    					$('#grade').val('0')
    					location.reload();
