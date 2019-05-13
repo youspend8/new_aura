@@ -125,7 +125,7 @@
     Kakao.init('53d1f3b1742d1856fff766c43108dfd7');
     // 스토리 공유 버튼을 생성합니다.
     Kakao.Story.createShareButton({
-      container: '#kakaostory-share-button',
+      container: '#kakaostory-share-button',2
       url: 'https://developers.kakao.com',
       text: '카카오 개발자 사이트로 놀러오세요! #개발자 #카카오 :)'
     });
