@@ -18,7 +18,6 @@ import lombok.ToString;
 @Alias(value="reviewVo")
 public class ReviewVO {
 	private int num;
-	private String mainPicture;
 	private String title;
 	private String contents;
 	private int type;

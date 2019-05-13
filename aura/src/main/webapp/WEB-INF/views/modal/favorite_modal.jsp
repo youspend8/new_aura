@@ -76,7 +76,6 @@
    </ul>
   </div>
 </div>
-	
 <!-- modal Body -->
      <div class="modal-body">
         <div class="tab-content card" id="myClassicTabContentOrange">
