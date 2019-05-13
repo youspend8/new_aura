@@ -12,7 +12,12 @@
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
 		${reviewInfo.TITLE}
 		<span class="badge badge-pill badge-success" style="font-size: 20px; margin-left: 3px;">
-			${reviewInfo.CATEGORY}
+			<c:if test="${type eq 1}">
+				${reviewInfo.CATEGORY}
+			</c:if>
+			<c:if test="${type eq 2}">
+				${reviewInfo.HOSPITALCATEGORY}
+			</c:if>
 		</span>
 	</div>
 	<div class="col-12 p-0 d-flex justify-content-center align-items-start flex-wrap">
@@ -148,20 +153,22 @@
 				<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
 					<c:if test="${type eq 1}">
 						<c:forEach var="menu" items="${menu}"  varStatus="num">
-							<div class="col-md-6 col-12 p-0 d-flex">
-								<div class="col-8 p-0 m-0">
-									${menu.name}
+							<c:if test="${menu.name ne ''}">
+								<div class="col-md-6 col-12 p-0 d-flex">
+									<div class="col-8 p-0 m-0">
+										${menu.name}
+									</div>
+									<div class="col-4 p-0 m-0 text-center">
+										${String.format("%,3d", Integer.parseInt(menu.price))}원
+									</div>
 								</div>
-								<div class="col-4 p-0 m-0 text-center">
-									${String.format("%,3d", Integer.parseInt(menu.price))}원
-								</div>
-							</div>
+							</c:if>
 						</c:forEach>
 					</c:if>
 					<c:if test="${type eq 2}">
 						<c:forEach var="sub" items="${sub}"  varStatus="num">
 							<div class="col-5 p-0 m-0">
-								${sub.intValue()}
+								${medCategory.get(sub.intValue())}
 							</div>
 						</c:forEach>
 					</c:if>

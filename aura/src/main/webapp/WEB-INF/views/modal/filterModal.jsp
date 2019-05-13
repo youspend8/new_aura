@@ -40,32 +40,32 @@
 								    <hr>
 								</div>
 						
-								<div class="pt-1">
-									<b style="font-size:18px;">1인당 가격</b>
-								    <div class="custom-control custom-checkbox d-flex justify-content-around py-2">
-								        <b>
-								            <input type="checkbox" class="custom-control-input" id="defaultChecked1"
-								            	name="restPrice" value="0">
-								            <label class="custom-control-label" for="defaultChecked1">만원미만</label>
-								        </b>
-								        <b>
-								            <input type="checkbox" class="custom-control-input" id="defaultChecked2"
-								            	name="restPrice" value="10000">
-								            <label class="custom-control-label" for="defaultChecked2">1만원대</label>
-								        </b>
-								        <b>
-								            <input type="checkbox" class="custom-control-input" id="defaultChecked3"
-								            	name="restPrice" value="20000">
-								            <label class="custom-control-label" for="defaultChecked3">2만원대</label>
-								        </b>
-								        <b>
-								            <input type="checkbox" class="custom-control-input" id="defaultChecked4"
-								            	name="restPrice" value="30000">
-								            <label class="custom-control-label" for="defaultChecked4">3만원대</label>
-								        </b>
-								    </div>
-								    <hr>
-								</div>
+<!-- 								<div class="pt-1"> -->
+<!-- 									<b style="font-size:18px;">1인당 가격</b> -->
+<!-- 								    <div class="custom-control custom-checkbox d-flex justify-content-around py-2"> -->
+<!-- 								        <b> -->
+<!-- 								            <input type="checkbox" class="custom-control-input" id="defaultChecked1" -->
+<!-- 								            	name="restPrice" value="0"> -->
+<!-- 								            <label class="custom-control-label" for="defaultChecked1">만원미만</label> -->
+<!-- 								        </b> -->
+<!-- 								        <b> -->
+<!-- 								            <input type="checkbox" class="custom-control-input" id="defaultChecked2" -->
+<!-- 								            	name="restPrice" value="10000"> -->
+<!-- 								            <label class="custom-control-label" for="defaultChecked2">1만원대</label> -->
+<!-- 								        </b> -->
+<!-- 								        <b> -->
+<!-- 								            <input type="checkbox" class="custom-control-input" id="defaultChecked3" -->
+<!-- 								            	name="restPrice" value="20000"> -->
+<!-- 								            <label class="custom-control-label" for="defaultChecked3">2만원대</label> -->
+<!-- 								        </b> -->
+<!-- 								        <b> -->
+<!-- 								            <input type="checkbox" class="custom-control-input" id="defaultChecked4" -->
+<!-- 								            	name="restPrice" value="30000"> -->
+<!-- 								            <label class="custom-control-label" for="defaultChecked4">3만원대</label> -->
+<!-- 								        </b> -->
+<!-- 								    </div> -->
+<!-- 								    <hr> -->
+<!-- 								</div> -->
 						
 								<div class="pt-1">
 									<b style="font-size:18px;">지역</b>
@@ -181,7 +181,7 @@
 												<div class="d-flex flex-row flex-wrap">
 													<c:forEach var="loc" items="${locCate.value}" varStatus="j">
 														<div class="w-25 pl-4">
-															<input type="checkbox" class="custom-control-input" id="hospital_${locCate.key}${j.index}" name="hospLoc" value="${loc}">
+															<input type="checkbox" class="custom-control-input" id="hospital_${locCate.key}${j.index}" name="hosLoc" value="${loc}">
 															<label class="custom-control-label" for="hospital_${locCate.key}${j.index}">${loc}</label>
 														</div>
 													</c:forEach>

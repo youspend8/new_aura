@@ -1,11 +1,15 @@
 package com.bitcamp.aura.review.controller;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.servlet.http.HttpSession;
 
+import org.assertj.core.internal.Comparables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitcamp.aura.category.model.MedicalCategoryVO;
+import com.bitcamp.aura.category.service.HospitalCategoryService;
 import com.bitcamp.aura.category.service.MedicalCategoryService;
 import com.bitcamp.aura.category.service.RestaurantCategoryService;
 import com.bitcamp.aura.comment.model.CommentVO;
@@ -29,6 +35,8 @@ import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
 import com.bitcamp.aura.reviewlist.service.ReviewListServiceImp;
 import com.bitcamp.aura.user.service.UserService;
 import com.google.gson.Gson;
+
+import ch.qos.logback.core.joran.spi.HostClassAndPropertyDouble;
 
 @Controller
 @RequestMapping(value = "/review")
@@ -47,6 +55,8 @@ public class ReviewController {
 	private RestaurantCategoryService restCateService;
 	@Autowired
 	private MedicalCategoryService medCateService;
+	@Autowired
+	private HospitalCategoryService hospitalService;
 	
 	@RequestMapping(value = "/post")
 	public String post(Model model,
@@ -68,6 +78,10 @@ public class ReviewController {
 				model.addAttribute("sub", new Gson()
 						.fromJson((String) reviewInfo.get("SUBCATEGORY"), HashMap.class)
 						.get("subCategory"));
+				model.addAttribute("medCategory", StreamSupport.stream(medCateService.readAll().spliterator(), false)
+														.sorted((c1, c2) -> c1.getNum() > c2.getNum() ? 1 : -1)
+														.map(c -> c.getName())
+														.collect(Collectors.toList()));
 				break;
 			}
 		}
@@ -140,6 +154,7 @@ public class ReviewController {
 		model.addAttribute("type", params.getType());
 		model.addAttribute("keyword", params.getKeyword());
 		model.addAttribute("restCategory", restCateService.readAll());
+		model.addAttribute("hosCategory", hospitalService.readAll());
 		model.addAttribute("medCategory", medCateService.readAll());
 		model.addAttribute("locationCate", new Location()	.locationList());
 		return "/reviewList";
@@ -153,11 +168,9 @@ public class ReviewController {
 		return service.search(params);
 	}
 	
-	@RequestMapping(value = "/search/address")
+	@RequestMapping(value="/search/address")
 	@ResponseBody
 	public String getAddress(
-			@RequestParam("type") int type,
-			@RequestParam("keyword") String keyword,
 			@ModelAttribute SearchParams params) {
 
 		return new Gson().toJson(service.searchAddress(params));
