@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bitcamp.aura.notice.model.NoticeVO;
-import com.bitcamp.aura.notice.persist.NoticeFileRepository;
 import com.bitcamp.aura.notice.service.NoticeService;
-import com.bitcamp.aura.notice.service.NoticeServiceImpl;
 import com.google.gson.Gson;
 
 @RestController
@@ -47,15 +46,18 @@ public class NoticeRestApi {
 	public String getPost(
 			HttpServletRequest request,
 			@PathVariable("num") int num) {
-		System.out.println(1);
 		HashMap<String, Object> notice = service.searchOne(num);
-		
-		System.out.println("notice : "+ notice);
 		StringBuilder sb = new StringBuilder();
 		Gson gson = new Gson();
 		sb.append(gson.toJson(notice));
 		
-		System.out.println("sb.toString() "+sb.toString());
 		return sb.toString();
+	}
+	
+	@DeleteMapping(value="/{num}")
+	public boolean delete(@PathVariable("num") int num) {
+		System.out.println("num :"+num);
+		
+		return service.deleteNotice(num) == 1 ? true : false;
 	}
 }
