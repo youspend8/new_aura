@@ -89,8 +89,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public HashMap<String, Object> searchByNum(HashMap<String, Object> params) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> reviewInfo = mapper.selectByNum(params);
-		reviewInfo.put("CATEGORY", RestaurantCategory.values()[((BigDecimal)reviewInfo.get("CATEGORY")).intValue()]);
-		reviewInfo.put("HOSPITALCATEGORY", HospitalCategory.values()[((BigDecimal)reviewInfo.get("HOSPITALCATEGORY")).intValue()]);
+		if (params.get("type").equals(1)) {
+			reviewInfo.put("CATEGORY", RestaurantCategory.values()[((BigDecimal)reviewInfo.get("CATEGORY")).intValue()]);
+		} else if (params.get("type").equals(2)) {
+			reviewInfo.put("HOSPITALCATEGORY", HospitalCategory.values()[((BigDecimal)reviewInfo.get("HOSPITALCATEGORY")).intValue()]);
+		}
 		List<String> files = new ArrayList<>();
 		for (ReviewFileVO r : fileMapper.selectByPostNum((Integer)params.get("num"))) {
 			files.add(r.getFilePath());
