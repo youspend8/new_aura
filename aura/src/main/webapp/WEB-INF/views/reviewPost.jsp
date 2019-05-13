@@ -654,7 +654,7 @@
 								<c:forEach var="files" items="${commentList.files }" begin="1">
 									<c:if test="${files ne null}">
 										<div class="carousel-item">
-													<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
+											<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
 														src="${files.comment_File}">
 										</div>
 									</c:if>
@@ -765,12 +765,9 @@
 				}
 			})
 			
-			
-			
-			 $(document).ready(function(){
-			    $('.materialboxed').materialbox();
-			  });
-		
+			$(function() {
+				$('.materialboxed').materialbox();
+			})
 		</script>
 <!-- 		끝 부분 -->
 
