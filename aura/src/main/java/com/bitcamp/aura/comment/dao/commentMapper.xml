@@ -38,30 +38,32 @@
 			#{comment_File, jdbcType=VARCHAR}
 		)
 	</insert>
+	
 	<update id="update" parameterType="CommentVO">
 		UPDATE
 			USER_COMMENT
 		SET
-			COMMENT_CONTENTS = #{comment_contents, jdbcType=VARCHAR},
-			COMMENT_LIKE = #{comment_like, jdbcType=NUMERIC},
-			COMMENT_SCORE = #{comment_score, jdbcType=NUMERIC},
+			COMMENT_CONTENTS = #{comment_Contents, jdbcType=VARCHAR},
+			COMMENT_LIKE = #{comment_Like, jdbcType=NUMERIC},
+			COMMENT_SCORE = #{comment_Score, jdbcType=NUMERIC},
 			COMMENT_DATE = #{comment_Date, jdbcType=VARCHAR}
 		WHERE
-			COMMENT_NUM = #{comment_num, jdbcType=NUMERIC}
+			COMMENT_NUM = #{comment_Num, jdbcType=NUMERIC}
 	</update>
+	
 	<delete id="delete" parameterType="String">
 		DELETE FROM
 			USER_COMMENT
 		WHERE
 			COMMENT_NUM = #{comment_num, jdbcType=NUMERIC}
 	</delete>
-	<select id="selectOne" parameterType="String" resultType="CommentVO">
+	<select id="selectOne" parameterType="int" resultType="CommentVO">
 		SELECT
 			*
 		FROM
 			USER_COMMENT
 		WHERE
-			NICKNAME = #{NICKNAME, jdbcType=VARCHAR}
+			COMMENT_NUM = #{comment_Num, jdbcType=NUMERIC}
 	</select>
 	<select id="selectAll" resultType="CommentVO">
 		SELECT
