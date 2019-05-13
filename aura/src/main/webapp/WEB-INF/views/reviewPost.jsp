@@ -503,7 +503,7 @@
 
 		<!-- strat -->
 		
-	<c:forEach var="commentList" items="${commentList }" varStatus="status">
+	<c:forEach var="commentList" items="${commentList }" varStatus="status" end="4">
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" id="home">
 		
 		
@@ -598,6 +598,7 @@
         <img src="/img/more.png" style="width: 20%; border-radius: 100%; border: 1px solid gray">
         <span class="ml-2 text-dark">검색결과 더보기</span>
     </a>
+    <div id="bar" style="display: none;"></div>
 </div>
 
 </div>
@@ -605,6 +606,7 @@
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
+<script type="text/javascript" src="/js/radialprogress.js"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -807,37 +809,50 @@ var flag2=true;
 		});
 		
 		
-		
-		
-		
-// 		$('#star3').click(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 		});
-		
-// 		$('#star4').hover(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 			$('#star3').removeClass().addClass('fas fa-star');
-// 		}, function(){
-// 			$('#star1').removeClass().addClass('far fa-star');
-// 			$('#star2').removeClass().addClass('far fa-star');
-// 			$('#star3').removeClass().addClass('far fa-star');
-// 		});
-		
-// 		$('#star5').hover(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 			$('#star3').removeClass().addClass('fas fa-star');
-// 			$('#star4').removeClass().addClass('fas fa-star');
-// 		}, function(){
-// 			$('#star1').removeClass().addClass('far fa-star');
-// 			$('#star2').removeClass().addClass('far fa-star');
-// 			$('#star3').removeClass().addClass('far fa-star');
-// 			$('#star4').removeClass().addClass('far fa-star');
-// 		})
-		
     </script>
+    
+<script>
+var start = 6;
+
+var bar = new RadialProgress(document.getElementById("bar"),{indeterminate:true,colorBg:"white",colorFg:"red",thick:5});
+
+$('#review_more').on('click', function(){
+	$('#bar').show();
+	$('#more_button').hide();
+// 	start += 5;
+	
+	$.ajax({
+		url: '/comment/more',
+		type: 'get',
+		dataType: 'json',
+		data: {
+			start: start,
+			end: start + 4
+		},
+		success: function(data){
+			console.log(data)
+			if (data.length == 0){
+				$('#review_more').text('더 이상 불러올 댓글이 없습니다.');
+			}
+// 			data.for
+		}
+	})
+	
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
     
 <script>
 	var files = new Array();

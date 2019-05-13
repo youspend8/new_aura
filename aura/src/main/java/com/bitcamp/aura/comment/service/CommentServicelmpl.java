@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -107,18 +108,23 @@ public class CommentServicelmpl implements CommentService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public List<CommentVO> more_Comment(HashMap<String, Object> params) {
+		return commentMapper.moreComment(params);
+	}
 
 	@Override
 	public List<CommentVO> selectAllByNum(int postNum) {
 		ArrayList<CommentVO> list = (ArrayList<CommentVO>) commentMapper.selectAllByNum(postNum);
-			
+
 		return list;
 	}
 
 	@Override
 	public List<CommentFileVO> selectFilesByNum(int num) {
-		// TODO Auto-generated method stub
 		return commentMapper.selectFilesByNum(num);
 	}
+
 
 }
