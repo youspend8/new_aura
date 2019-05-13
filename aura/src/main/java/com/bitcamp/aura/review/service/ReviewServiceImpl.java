@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bitcamp.aura.review.common.HospitalCategory;
 import com.bitcamp.aura.review.common.RestaurantCategory;
 import com.bitcamp.aura.review.dao.ReviewFileMapper;
 import com.bitcamp.aura.review.dao.ReviewMapper;
@@ -62,6 +63,8 @@ public class ReviewServiceImpl implements ReviewService {
 			list = mapper.selectRestaurantsByParams(params);
 		} else if (params.getType() == 2) {
 			list = mapper.selectHospitalsByParams(params);
+		} else if (params.getType() == 3) {
+			list = mapper.selectDigitalsByParams(params);
 		}
 		
 		List<HashMap<String, Object>> reviewList = new ArrayList<>();
@@ -87,6 +90,7 @@ public class ReviewServiceImpl implements ReviewService {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> reviewInfo = mapper.selectByNum(params);
 		reviewInfo.put("CATEGORY", RestaurantCategory.values()[((BigDecimal)reviewInfo.get("CATEGORY")).intValue()]);
+		reviewInfo.put("HOSPITALCATEGORY", HospitalCategory.values()[((BigDecimal)reviewInfo.get("HOSPITALCATEGORY")).intValue()]);
 		List<String> files = new ArrayList<>();
 		for (ReviewFileVO r : fileMapper.selectByPostNum((Integer)params.get("num"))) {
 			files.add(r.getFilePath());

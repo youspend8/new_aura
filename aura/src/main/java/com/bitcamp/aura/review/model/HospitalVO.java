@@ -16,7 +16,7 @@ import lombok.ToString;
 @Alias(value="hospitalVo")
 public class HospitalVO extends PlaceVO {
 	private int num;
-	private int category;
-	private boolean delivery;
-	private boolean takeOut;
+	private int hospitalCategory;
+	private int medicalCategory;
+	private String subCategory;
 }
