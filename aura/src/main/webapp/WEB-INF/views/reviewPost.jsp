@@ -5,11 +5,8 @@
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
-<<<<<<< HEAD
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-=======
->>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
 <div class="container d-flex flex-wrap p-md-2 px-1 py-4">
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
@@ -135,7 +132,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		${reviewInfo}
+	${reviewInfo}
 		<!-- 리뷰 상세 설명 -->
 		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
 			<div class="col-12 p-0 my-1">
@@ -342,108 +339,13 @@
 <!-- 					<p class="text-center">4.5</p> -->
 <!-- 				</div> -->
 
-<<<<<<< HEAD
-				<div
-					class="d-flex col-5 flex-column align-items-center justify-content-center">
-					<i class="fas fa-heart" style="font-size: 30px"></i>
-					<p>87.451</p>
-				</div>
-			</div>
-		</div>
-=======
 <!-- 				<div -->
 <!-- 					class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
-<!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
+<!-- 					<i class="fas fa-heart" style="font-size: 30px"></i> -->
 <!-- 					<p>87.451</p> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
->>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
-
-<!-- 		<div class="card col-12 my-3 d-md-none d-block"> -->
-<!-- 			<div -->
-<!-- 				class="card-header px-2 d-flex justify-content-start align-items-center bg-white border-0"> -->
-<!-- 				<div style="width: 13%"> -->
-<!-- 					<img class="rounded-circle w-100" -->
-<!-- 						src="https://picsum.photos/50/50?image=1081"> -->
-<!-- 				</div> -->
-
-<!-- 				<div class="ml-3" style="width: 80%">유저 닉네임2</div> -->
-<!-- 			</div> -->
-
-<!-- 			<div class="card-body p-2"> -->
-<!-- 				<div -->
-<!-- 					class="col-12 d-flex justify-content-center align-items-center p-0 my-3"> -->
-<!-- 					유저들이 올린리뷰 후기 사진0 -->
-<!-- 					<div id="carouselExampleFade" class="carousel slide w-100" -->
-<!-- 						data-ride="carousel"> -->
-<!-- 						<div class="carousel-inner"> -->
-<!-- 							<div class="carousel-item active"> -->
-<!-- 								<div class="d-flex justify-content-around flex-row"> -->
-<!-- 									<img class="col-4 p-0" -->
-<!-- 										src="https://picsum.photos/200/200?image=230" -->
-<!-- 										style="width: 30%"> <img class="col-4 p-0 mx-2" -->
-<!-- 										src="https://picsum.photos/200/200?image=240" -->
-<!-- 										style="width: 30%"> <img class="col-4 p-0" -->
-<!-- 										src="https://picsum.photos/200/200?image=280" -->
-<!-- 										style="width: 30%"> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="carousel-item"> -->
-<!-- 								<div class="d-flex justify-content-around flex-row"> -->
-<!-- 									<img class="col-4 p-0" -->
-<!-- 										src="https://picsum.photos/200/200?image=230" -->
-<!-- 										style="width: 30%"> <img class="col-4 p-0 mx-2" -->
-<!-- 										src="https://picsum.photos/200/200?image=240" -->
-<!-- 										style="width: 30%"> <img class="col-4 p-0" -->
-<!-- 										src="https://picsum.photos/200/200?image=280" -->
-<!-- 										style="width: 30%"> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="carousel-item"> -->
-<!-- 								<div class="d-flex justify-content-around flex-row"> -->
-<!-- 									<img class="col-4 p-0" -->
-<!-- 										src="https://picsum.photos/200/200?image=230" -->
-<!-- 										style="width: 30%"> <img class="col-4 p-0 mx-2" -->
-<!-- 										src="https://picsum.photos/200/200?image=240" -->
-<!-- 										style="width: 30%"> <img class="col-4 p-0" -->
-<!-- 										src="https://picsum.photos/200/200?image=280" -->
-<!-- 										style="width: 30%"> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<a class="user-photo-button-left carousel-control-prev pr-5" -->
-<!-- 							href="#carouselExampleFade" role="button" data-slide="prev"> -->
-<!-- 							<span class="carousel-control-prev-icon bg-dark" -->
-<!-- 							aria-hidden="true"></span> <span class="sr-only">Previous</span> -->
-<!-- 						</a> <a class="user-photo-button-right carousel-control-next pl-5" -->
-<!-- 							href="#carouselExampleFade" role="button" data-slide="next"> -->
-<!-- 							<span class="carousel-control-next-icon bg-dark" -->
-<!-- 							aria-hidden="true"></span> <span class="sr-only">Next</span> -->
-<!-- 						</a> -->
-<!-- 					</div> -->
-<!-- 					유저들이 올린리뷰 후기 사진0 End -->
-<!-- 				</div> -->
-<!-- 				<div class="col-12 p-0 my-3">Lorem ipsum dolor sit amet -->
-<!-- 					consectetur adipisicing elit. Maiores, quam ipsum! Expedita -->
-<!-- 					nesciunt repellat officia deserunt incidunt libero sequi possimus -->
-<!-- 					pariatur, fugiat magnam, repellendus ipsa mollitia in explicabo -->
-<!-- 					vitae quos.</div> -->
-<!-- 			</div> -->
-
-<!-- 			<div class="card-footer d-flex justify-content-between bg-white"> -->
-<!-- 				<div -->
-<!-- 					class="col-6 p-0 d-flex flex-wrap align-items-center justify-content-center"> -->
-<!-- 					<div class="col-12 d-flex justify-content-center"> -->
-<!-- 						<i class="far fa-star" style="font-size: 20px;"></i> <i -->
-<!-- 							class="far fa-star" style="font-size: 20px;"></i> <i -->
-<!-- 							class="far fa-star" style="font-size: 20px;"></i> <i -->
-<!-- 							class="far fa-star" style="font-size: 20px;"></i> <i -->
-<!-- 							class="far fa-star" style="font-size: 20px;"></i> -->
-<!-- 					</div> -->
-<!-- 					<p class="text-center">4.5</p> -->
-<!-- 				</div> -->
-
 <!-- 				<div -->
 <!-- 					class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
 <!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
@@ -536,14 +438,6 @@
 <!-- 					<p class="text-center">4.5</p> -->
 <!-- 				</div> -->
 
-<<<<<<< HEAD
-				<div class="d-flex col-5 flex-column align-items-center justify-content-center">
-					<i class="far fa-heart" style="font-size: 30px"></i>
-					<p>87.451</p>
-				</div>
-			</div>
-		</div>
-=======
 <!-- 				<div -->
 <!-- 					class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
 <!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
@@ -551,7 +445,104 @@
 <!-- 				</div> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
->>>>>>> branch 'master' of https://github.com/youspend8/new_aura.git
+
+<!-- 		<div class="card col-12 my-3 d-md-none d-block"> -->
+<!-- 			<div -->
+<!-- 				class="card-header px-2 d-flex justify-content-start align-items-center bg-white border-0"> -->
+<!-- 				<div style="width: 13%"> -->
+<!-- 					<img class="rounded-circle w-100" -->
+<!-- 						src="https://picsum.photos/50/50?image=1081"> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="ml-3" style="width: 80%">유저 닉네임2</div> -->
+<!-- 			</div> -->
+
+<!-- 			<div class="card-body p-2"> -->
+<!-- 				<div -->
+<!-- 					class="col-12 d-flex justify-content-center align-items-center p-0 my-3"> -->
+<!-- 					유저들이 올린리뷰 후기 사진0 -->
+<!-- 					<div id="carouselExampleFade" class="carousel slide w-100" -->
+<!-- 						data-ride="carousel"> -->
+<!-- 						<div class="carousel-inner"> -->
+<!-- 							<div class="carousel-item active"> -->
+<!-- 								<div class="d-flex justify-content-around flex-row"> -->
+<!-- 									<img class="col-4 p-0" -->
+<!-- 										src="https://picsum.photos/200/200?image=230" -->
+<!-- 										style="width: 30%"> <img class="col-4 p-0 mx-2" -->
+<!-- 										src="https://picsum.photos/200/200?image=240" -->
+<!-- 										style="width: 30%"> <img class="col-4 p-0" -->
+<!-- 										src="https://picsum.photos/200/200?image=280" -->
+<!-- 										style="width: 30%"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="carousel-item"> -->
+<!-- 								<div class="d-flex justify-content-around flex-row"> -->
+<!-- 									<img class="col-4 p-0" -->
+<!-- 										src="https://picsum.photos/200/200?image=230" -->
+<!-- 										style="width: 30%"> <img class="col-4 p-0 mx-2" -->
+<!-- 										src="https://picsum.photos/200/200?image=240" -->
+<!-- 										style="width: 30%"> <img class="col-4 p-0" -->
+<!-- 										src="https://picsum.photos/200/200?image=280" -->
+<!-- 										style="width: 30%"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="carousel-item"> -->
+<!-- 								<div class="d-flex justify-content-around flex-row"> -->
+<!-- 									<img class="col-4 p-0" -->
+<!-- 										src="https://picsum.photos/200/200?image=230" -->
+<!-- 										style="width: 30%"> <img class="col-4 p-0 mx-2" -->
+<!-- 										src="https://picsum.photos/200/200?image=240" -->
+<!-- 										style="width: 30%"> <img class="col-4 p-0" -->
+<!-- 										src="https://picsum.photos/200/200?image=280" -->
+<!-- 										style="width: 30%"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<a class="user-photo-button-left carousel-control-prev pr-5" -->
+<!-- 							href="#carouselExampleFade" role="button" data-slide="prev"> -->
+<!-- 							<span class="carousel-control-prev-icon bg-dark" -->
+<!-- 							aria-hidden="true"></span> <span class="sr-only">Previous</span> -->
+<!-- 						</a> <a class="user-photo-button-right carousel-control-next pl-5" -->
+<!-- 							href="#carouselExampleFade" role="button" data-slide="next"> -->
+<!-- 							<span class="carousel-control-next-icon bg-dark" -->
+<!-- 							aria-hidden="true"></span> <span class="sr-only">Next</span> -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 					유저들이 올린리뷰 후기 사진0 End -->
+<!-- 				</div> -->
+<!-- 				<div class="col-12 p-0 my-3">Lorem ipsum dolor sit amet -->
+<!-- 					consectetur adipisicing elit. Maiores, quam ipsum! Expedita -->
+<!-- 					nesciunt repellat officia deserunt incidunt libero sequi possimus -->
+<!-- 					pariatur, fugiat magnam, repellendus ipsa mollitia in explicabo -->
+<!-- 					vitae quos.</div> -->
+<!-- 			</div> -->
+
+<!-- 			<div class="card-footer d-flex justify-content-between bg-white"> -->
+<!-- 				<div -->
+<!-- 					class="col-6 p-0 d-flex flex-wrap align-items-center justify-content-center"> -->
+<!-- 					<div class="col-12 d-flex justify-content-center"> -->
+<!-- 						<i class="far fa-star" style="font-size: 20px;"></i> <i -->
+<!-- 							class="far fa-star" style="font-size: 20px;"></i> <i -->
+<!-- 							class="far fa-star" style="font-size: 20px;"></i> <i -->
+<!-- 							class="far fa-star" style="font-size: 20px;"></i> <i -->
+<!-- 							class="far fa-star" style="font-size: 20px;"></i> -->
+<!-- 					</div> -->
+<!-- 					<p class="text-center">4.5</p> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
+<!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
+<!-- 					<p>87.451</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 				<div -->
+<!-- 					class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
+<!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
+<!-- 					<p>87.451</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
 		<!-- strat -->
 		
@@ -627,30 +618,94 @@
 			</div>
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div class>${commentList.comment_Contents }</div>
+				<div class>${commentList.comment_Contents }
+				 </div>
 				
 			</div>
 			
-			<div
-				class="d-flex col-2 flex-column align-items-center justify-content-center">
-				<i class="fas fa-heart heartCl"  style="font-size: 40px"></i>
-				<p class="heart-number">
-				<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
+			<div class="d-flex col-2 flex-column align-items-center justify-content-center ">
+				<a class="heartCl" commentNum="${commentList.comment_Num}">
+					<i class="fas fa-heart "  style="font-size: 40px" ></i>
+				</a>
+				<p value="${commentList.comment_Like }" nickname="${nickname}">
+			
+					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
+					
 				</p>
 			</div>
 		</div>
-		<script type="text/javascript">
-			$('.heartCl').click(function(){
-				if($(this).css('color')=='rgb(33, 37, 41)'){
-					$(this).css('color','rgb(255, 0, 0)')//빨강
-				}else{
-					$(this).css('color','rgb(33, 37, 41)')//검정
-				}
+		
+	</c:forEach>
+	<script type="text/javascript">
+	
+			function addComma(num) {
+				 var regexp = /\B(?=(\d{3})+(?!\d))/g;
+			     return num.toString().replace(regexp, ',');
+			}
 				
+			$('.heartCl').click(function(){
+				
+				if($(this).next().attr('nickname')!=""){
+					
+						if($(this).find("i").css('color')=='rgb(33, 37, 41)'){ 
+							$(this).find("i").css('color','rgb(255, 0, 0)')//빨강
+							
+							var num1=Number($(this).next().attr('value'))+1;
+							var num=addComma(Number($(this).next().attr('value'))+1);
+							
+							$(this).next().remove();
+							$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+							var commentNum = Number($(this).attr('commentNum'));
+							
+								$.ajax({
+						    		url: '/comment/update', // 요청 할 주소 
+						    	    type: 'get', // GET, PUT
+						    	    dataType: 'text', 
+						    	    data: {
+						    	    	commentNum : commentNum,
+						    	    	type : 1
+						    	    },
+						    	    success: function(data) {
+					    	        },
+					    	       error : function (data) {
+					    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+						    	        return false;
+					    	       }  // 전송할 데이터
+						    	})
+		    	
+						}else{
+							$(this).find("i").css('color','rgb(33, 37, 41)')//검정
+	
+							var num1=Number($(this).next().attr('value'))-1;
+							var num=addComma(Number($(this).next().attr('value'))-1);
+							
+							$(this).next().remove();
+							$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+							var commentNum = Number($(this).attr('commentNum'));
+							
+								$.ajax({
+						    		url: '/comment/update', // 요청 할 주소 
+						    	    type: 'get', // GET, PUT
+						    	    dataType: 'text', 
+						    	    data: {
+						    	    	commentNum : commentNum,
+						    	    	type : 2
+						    	    },
+						    	    success: function(data) {
+					    	        },
+					    	       error : function (data) {
+					    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+						    	        return false;
+					    	       }  // 전송할 데이터
+						    	})
+						}
+				}
+				else{
+					alert("회원만 이용 가능한 기능입니다. 로그인을 해주세요.")
+				}
 			})
 		
 		</script>
-	</c:forEach>
 <!-- 		끝 부분 -->
 
 </div>
