@@ -98,9 +98,13 @@ public class CommentServicelmpl implements CommentService {
 	}
 
 	@Override
-	public String update_Comment() {
-		// TODO Auto-generated method stub
-		return null;
+	public void update (CommentVO comment,int type) {
+		if(type==1) {
+			comment.setComment_Like(comment.getComment_Like()+1);
+		}else {
+			comment.setComment_Like(comment.getComment_Like()-1);
+		}
+		commentMapper.update(comment);
 	}
 
 	@Override
@@ -132,5 +136,10 @@ public class CommentServicelmpl implements CommentService {
 		return commentMapper.selectFilesByNum(num);
 	}
 
+	@Override
+	public CommentVO selectOne(int comment_Num) {
+		CommentVO comment = commentMapper.selectOne(comment_Num);
+		return comment;
+	}
 
 }

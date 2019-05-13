@@ -32,6 +32,16 @@ public class CommentController {
 		return "reviewPost";
 	}
 	
+	@RequestMapping(value="/update")
+	@ResponseBody
+	public String update(int commentNum, int type) {
+	
+	 CommentVO comment=commentService.selectOne(commentNum);
+	 commentService.update(comment, type);
+	 
+		return "1";
+	}
+	
 	@RequestMapping(value="/write")
 	public String write(MultipartHttpServletRequest multipartFiles) throws IOException {
 		commentService.insert_Comment(multipartFiles);
