@@ -111,7 +111,13 @@ public class CommentServicelmpl implements CommentService {
 	
 	@Override
 	public List<CommentVO> more_Comment(HashMap<String, Object> params) {
-		return commentMapper.moreComment(params);
+		 List<CommentVO> commentVO = commentMapper.moreComment(params);
+		 
+		 for (CommentVO files : commentVO) {
+			 files.setFiles(commentMapper.selectFilesByNum(files.getComment_Num()));
+		 }
+		 
+		return commentVO;
 	}
 
 	@Override

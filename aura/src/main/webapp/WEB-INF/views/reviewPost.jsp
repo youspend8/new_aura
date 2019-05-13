@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
-<div class="container d-flex flex-wrap p-md-2 px-1 py-4">
+<div class="container d-flex flex-wrap p-md-2 px-1">
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
 		${reviewInfo.TITLE}
 		<span class="badge badge-pill badge-success" style="font-size: 20px; margin-left: 3px;">
@@ -96,10 +96,10 @@
 			</div>
 			<c:choose>
 				<c:when test="${nickname ne null}">
-					<button type="button" id="review_write_pc" class="btn btn-warning review-write">리뷰 작성하기</button>
+					<button type="button" id="review_write_pc" class="d-md-block d-none btn btn-warning review-write">리뷰 작성하기</button>
 				</c:when>
 				<c:otherwise>
-					<button type="button" id="review_write_login" class="btn btn-warning review-write">리뷰 작성하기</button>
+					<button type="button" id="review_write_login" class="d-md-block d-none btn btn-warning review-write">리뷰 작성하기</button>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -155,55 +155,36 @@
 <div class="container d-flex flex-wrap">
 
 	<!-- 댓글 작성 양식 -->
-	<div id="write_form" class="col-12 flex-md-row flex-wrap justify-content-center"
-		style="display: none; height: 0px; border-bottom: 2px solid #dadee6;">
+	<div id="write_form" class="col-12 flex-column align-items-center">
 		<button id="review_write_cancel" type="button"
-			class="btn btn-light col-12 text-center py-3 m-0 mb-3">
+			class="btn btn-light d-none d-md-block text-center w-100 m-0">
 			댓글 작성창 접기 <i class="fas fa-arrow-up"></i>
 		</button>
 
-		<div class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
-			<h4 class="my-3 font-weight-bold w-100" id="review_write">리뷰 작성</h4>
-			<div class="w-50">
-				<c:choose>
-					<c:when test="${profile ne null }">
-						<img class="rounded-circle w-100 h-100" src=${profile }>
-					</c:when>
-					<c:otherwise>
-						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
-					</c:otherwise>
-				</c:choose>
-				
-			</div>
-<!-- 			세션 유저의 닉네임 넣기 			-->
-			<div class="w-100 my-3" id="nickname">${nickname}</div>
-
-			<div class="d-flex flex-wrap text-left mt-4">
-				<div class="star-box">
-<!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
-					<a class="far fa-star" id="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-				</div>
-			</div>
-		</div>	
-
-		<div class="col-md-9 col-12 p-0 flex-column my-3">
+		<div class="col-md-9 col-12 p-0 flex-column mt-5">
 			<form id="commentForm" method="post" enctype="multipart/form-data">
 				<input id="review_post_num" name="review_post_num" value=${reviewInfo.NUM} style="display: none;">
-				<input id="nickname_post" name="nickname_post" value=${nickname} style="display: none;">
+				<input id="nickname_post" name="nickname_post" value="${nickname}" style="display: none;">
 				<input id="grade" name="grade" value="0" style="display: none;">
 				
-				<textarea rows="10" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
-
-				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
+				<textarea rows="5" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
+				<div class="d-flex flex-wrap justify-content-between mt-3">
+					<div class="star-box d-flex align-items-center">
+	<!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
+						<a class="far fa-star" id="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					</div>
+					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
 				
+				</div>
+				<div id="comment_image" class="d-flex col-12 p-0 my-3">
 					<div class="mr-2" style="width: 20%;">
 						<label for="comment_file" class="filebox">
 							<a>
-								<img src="/img/addfile.png" id="img22" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+								<img src="/img/addfile.png" id="img22" class="w-100" style="border: 2px dotted #b8bcc4">
 								<input type="file" id="comment_file" name="comment_file" accept="image/*">
 							</a>
 						</label>
@@ -211,14 +192,6 @@
 					
 				</div>
 			</form>
-
-				
-				
-				<div class="my-4 text-md-right text-center">
-					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
-					
-				</div>
-			
 			
 		</div>
 	</div>
@@ -511,13 +484,13 @@
 				class=" col-2 d-flex flex-column justify-content-center align-items-center"
 				style="width: 100%;">
 				
-				<div style="width: 65%; height: 75px;">
+				<div class="p-0">
 				<c:choose>
 					<c:when test="${commentList.profile ne null }">
-						<img class="rounded-circle w-100 h-100" src=${commentList.profile }>
+						<img class="rounded-circle" src=${commentList.profile } style="height: 75px;">
 					</c:when>
 					<c:otherwise>
-						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
+						<img class="rounded-circle" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png" style="height: 75px;">
 					</c:otherwise>
 				</c:choose>
 				</div>
@@ -707,26 +680,20 @@ var flag2=true;
             
             $('#review_write_pc').on('click', () => {
                 $('#write_form').animate({
-                    height: '630px'
+                    height: '520px'
                 }, 400);
                 $('#write_form').css('display', 'flex');
-            });
-            
-            $('#review_write_mobile').on('click', () => {
-                $('#write_form').animate({
-                    height: '900px'
-                }, 400);
-                $('#write_form').css('display', 'flex');
+                $('#write_form').css('border-bottom', '2px solid #dadee6');
             });
 
             $('#review_write_cancel').on('click', () => {
                 $('#write_form').animate({
                     height: '0px'
-                }, 200);
+                }, 300);
                 // $('#write_form').css('visibility', 'hidden');
                 setTimeout(() => {
                     $('#write_form').css('display', 'none');
-
+                    $('#write_form').css('border-bottom', '');
                 }, 180);
             });
             
@@ -736,6 +703,7 @@ var flag2=true;
             
         });
         
+        $
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
         	var comment = $('#comment').val();
@@ -830,15 +798,22 @@ $('#review_more').on('click', function(){
 			end: start + 4
 		},
 		success: function(data){
-			console.log(data)
+			console.log(data);
 			if (data.length == 0){
 				$('#review_more').text('더 이상 불러올 댓글이 없습니다.');
-			}
-// 			data.for
+			};
+			
+		},
+		error: function(request, status, error){
+			alert(request.status);
+			alert(request.responseText);
 		}
+		
+		});
+		
+		
+		
 	})
-	
-})
 
 
 
@@ -983,6 +958,23 @@ $('#review_more').on('click', function(){
     border: 1px solid #ffb833;
     box-shadow: 0 0 0 0.2rem #ffdb99;
 }
+#img22 {
+	height: 160px;
+}
+#write_form {
+	display: none;
+	height: 0px;
+}
+@media (max-width: 767.9px) {
+	#img22 {
+		height: 100px;
+	}
+	#write_form {
+		display: flex;
+		height: 100%;
+	}
+}
+
 </style>
 
 </body>
