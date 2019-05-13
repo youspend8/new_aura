@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -40,10 +41,8 @@
 			</div>
 	
 			<!-- 지도 -->
-			<div class="col-12 board_list_map">
+			<div class="col-12">
 				<div id="map" class="w-100" style="height:400px;"></div>
-				
-<!-- 			    <img src="/img/지도.png" style="width:100%; height:100%;"> -->
 			</div>
 			
 			<div class="my-5" style="border-bottom: rgb(217, 217, 217) solid 1px;">
@@ -88,13 +87,55 @@
 						    <a href="/review/post?num=${review.num}&type=${review.type}" class="text-dark">
 						    	<h5 class="board_list_title mb-1">
 						    		${review.title}
+							    	<c:if test="${type == 1}">
+									    <span style="color: gray; font-size: 12px;">
+								    		<c:forEach var="cate" items="${restCategory}" varStatus="i">
+												<c:if test="${review.category eq i.index}">${cate.name}</c:if>
+								    		</c:forEach>
+										</span>
+									</c:if>
+							    	<c:if test="${type == 2}">
+									    <span style="color: gray; font-size: 12px;">
+								    		<c:forEach var="cate" items="${hosCategory}" varStatus="i">
+												<c:if test="${review.hospitalCategory eq i.index}">${cate.name}</c:if>
+								    		</c:forEach>
+										</span>
+									</c:if>
+									<fmt:parseDate value="${review.addDate}" var="addDate" pattern="yyyy-MM-dd" />
+									<c:if test="${addDate.month + 1 == 5}">
+										<span class="badge badge-pill align-middle ml-1" style="font-size: 12px; background-color: red">
+											NEW
+										</span>
+									</c:if>
 						    	</h5>
 						    </a>
-						    <span style="float:right; font-size:2rem;">
-						      <a style="color:rgb(0, 102, 255)"><i class="far fa-star"></i></a>
+						    
+						    <span style="float:right; font-size:2rem;" id="favostar">
+						      <a style="color:red"  ><i class="far fa-star"></i></a>
 						    </span>
-						
 						</div>
+						
+<script>
+						$("#favostar").on('click',function(){
+							$.ajax({
+								url : "/reviewList/favostar",
+								type: "POST",
+								data: {
+									review_post_num : "${review.num}",
+									review_type : "2"
+//review_num :"review_num" // Primary Key
+								},
+								success : function(data){
+									alert("즐겨찾기에 추가되었습니다.");
+								},
+								error : function(data){
+									alert("즐겨찾기에 추가가 안되었습니다.");
+								}
+								
+							})
+							
+						})
+  </script>
 						
 						<div class="my-1">
 						    <span>
@@ -123,14 +164,6 @@
 						    	Reviews
 						    </span>
 						</div>
-						<div class="my-1 align-middle">
-						    <i class="fas fa-heart"></i>
-						    <span>
-					    		<c:forEach var="cate" items="${restCategory}" varStatus="i">
-									<c:if test="${review.category eq i.index}">${cate.name}</c:if>
-					    		</c:forEach>
-							</span>
-						</div>
 						<div class="my-2" style="font-weight:bolder">
 							<i class="fas fa-phone"></i>
 							<span>${review.tel}</span> 
@@ -140,16 +173,24 @@
 							<span>${review.addr}</span>
 						</div>
 						<div class="my-2" style="font-weight:bolder;">
-							<i class="fas fa-clipboard-list"></i>
-							<div>
+							<i class="fas fa-clipboard-list mr-1"></i>
+							<span>
 								${review.contents}
-							</div>
+							</span>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
 		<div class="my-3" style="border-bottom: rgb(217, 217, 217) solid 1px;"></div>
+		<div class="text-right">
+			<span class="badge badge-pill align-middle ml-1" style="font-size: 12px; background-color: red">
+				NEW
+			</span>
+			<span style="font-size: 12px;">
+			: 이번달 신규 등록 지점
+			</span>
+		</div>
 		<div id="review_more" class="d-flex col-12 justify-content-center align-items-center bg-white py-3 my-5">
 		    <a id="more_button" class="text-center" style="text-decoration: none">
 		        <img src="/img/more.png" style="width: 20%; border-radius: 100%; border: 1px solid gray">
@@ -167,6 +208,9 @@
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6060ab38dd0e3fd90aaea5e539c8172e&libraries=services"></script>
 	<script type="text/javascript" src="/js/radialprogress.js"></script>
+	
+
+	
 	<script type="text/javascript">
 		var categoryList = [
 			'뷔페',
@@ -187,6 +231,7 @@
 			'맥주',
 			'호프'
 		];
+		
 		$(document).ready(function(){
 			// 내용 더 보기
 			$('contents').each(function(){
@@ -232,7 +277,6 @@
 						end: start + 4
 					},
 					success: function(data) {
-						console.log(data)
 						if (data.length == 0) {
 							$('#review_more').text('더 이상 불러올 리뷰글이 없습니다.');
 						}
@@ -241,7 +285,7 @@
 						  	item.files.forEach(function(file, index) {
 							    files +='<div class="carousel-item ' + (index == 0 ? 'active' : '') + '">' +
 									      '<img src="' + file + '" style="width:100%; height: 250px;">' +
-									    '</div>'
+									    '</div>	'
 						  	});
 							var list = 
 							'<div class="d-flex flex-wrap" style="margin: 3% 0 3% 0;" >' +
@@ -300,79 +344,102 @@
 							'</div>'
 							document.getElementById('content').innerHTML += list;
 						});
+						getReviewAddr(start);
 					}
 				}).done(function() {
 					$('#bar').hide();
 					$('#more_button').show();
 				})
 			});
+
+			getReviewAddr(0);
 		});
 
-		$(function() {
+		function getReviewAddr(start) {
 			$.ajax({
 				url: '/review/search/address',
 				type: 'get',
 				dataType: 'json',
 				data: {
 					type: '${type}',
-					keyword: '${keyword}'
+					keyword: '${keyword}',
+					start: start,
+					end: start + 4
 				},
 				success: function(data) {
 					getCoords(data);
 				}
 			})
-		});
+		}
 		
-		function getCoords(data) {
+		function getCoords(data, map) {
 			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 			var options = { //지도를 생성할 때 필요한 기본 옵션
 				center: new daum.maps.LatLng(37.49581788064077, 127.03051440129362), //지도의 중심좌표.
 				level: 3 //지도의 레벨(확대, 축소 정도)
 			};
 			var map = new daum.maps.Map(container, options);
-
-			var geocoder = new daum.maps.services.Geocoder();
+			var zoomControl = new daum.maps.ZoomControl();
+			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+			
 			var bounds = new daum.maps.LatLngBounds();    
 			
-			var callback = function(result, status) {
+			//	주소로 좌표 가져오기
+			var geocoder = new daum.maps.services.Geocoder();
+			
+			var callback = (data) => function(result, status) {
+				console.log(data)
 			    if (status === daum.maps.services.Status.OK) {
-					var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-				    var imageSize = new daum.maps.Size(24, 35); 
-				    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
-				    
-				    var point = new daum.maps.LatLng(result[0].y, result[0].x);
-				    // 마커를 생성합니다
-				    var marker = new daum.maps.Marker({
-				        map: map,
-				        position: point,
-				        image : markerImage
-				    });
-
-					marker.setMap(map);
-				    bounds.extend(point);
+			    	reviewArr.push({
+			    		'title': data.title,
+			    		'x': result[0].x,
+			    		'y': result[0].y
+			    	})
 			    }
 			};
-
-			for (var i = 0; i < data.length; i++) {
-				geocoder.addressSearch(data[i].addr, callback);			  
-			}
 			
-			setTimeout(() => {
-				map.setBounds(bounds);
-			}, 200);
-		}
+			for (var i = 0; i < data.length; i++) {
+				geocoder.addressSearch(data[i].addr, callback(data[i]));	
+				
+				setTimeout(() => {
+					reviewArr.forEach((item, index) => {
+						var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+					    var imageSize = new daum.maps.Size(24, 35); 
+					    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+					    
+					    var point = new daum.maps.LatLng(item.y, item.x);
+					    
+					    // 마커를 생성합니다
+					    var marker = new daum.maps.Marker({
+					        map: map,
+					        position: point,
+					        image : markerImage
+					    });
+					    
+					    var infowindow = new daum.maps.InfoWindow({
+						    content : '<div style="width: 150px; text-align: center; padding: 5px 0; font-weight: 800">' + item.title + '</div>' // 인포윈도우에 표시할 내용
+						});
 
-		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-		function makeOverListener(map, marker, infowindow) {
-		    return function() {
-		        infowindow.open(map, marker);
-		    };
+						marker.setMap(map);
+					    bounds.extend(point)
+						
+						// 마커에 마우스오버 이벤트를 등록합니다
+						daum.maps.event.addListener(marker, 'mouseover', function() {
+						  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+						    infowindow.open(map, marker);
+						});
+						
+						// 마커에 마우스아웃 이벤트를 등록합니다
+						daum.maps.event.addListener(marker, 'mouseout', function() {
+						    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+						    infowindow.close();
+						});
+						
+						map.setBounds(bounds);
+					})
+				}, 200);
+			}
 		}
-
-		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-		function makeOutListener(infowindow) {
-		    return function() {
-		        infowindow.close();
-		    };
-		}
+		
+		const reviewArr = [];
 	</script>

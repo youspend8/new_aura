@@ -80,51 +80,106 @@
 	
 	<select id="selectHospitalsByParams" parameterType="SearchParams" resultType="HospitalVo">
 		SELECT
-		    REVIEW.NUM AS num,
-		    REVIEW.TITLE AS title,
-		    REVIEW.CONTENTS AS contents,
-		    REVIEW.STARS AS stars,
-		    REVIEW.GOODS AS goods,
-		    REVIEW.BOOKMARK AS bookmark,
-		    REVIEW.SHARES AS shares,
-		    REVIEW.READ_COUNT AS readCount,
-		    REVIEW.ADD_DATE AS addDate,
-		    REVIEW.TYPE AS type,
-		    PLACE_REVIEW.ADDRESS1 AS address1,
-		    PLACE_REVIEW.ADDRESS2 AS address2,
-		    PLACE_REVIEW.ADDRESS3 AS address3,
-		    PLACE_REVIEW.DETAIL_ADDR AS addr,
-		    PLACE_REVIEW.TEL AS tel,
-		    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
-		    PLACE_REVIEW.WAITING_TIME AS waitingTime,
-		    HOSPITAL_REVIEW.NUM AS category,
-		    HOSPITAL_REVIEW.HOSPITAL_CATEGORY AS hospitalCategory,
-		    HOSPITAL_REVIEW.MEDICAL_CATEGORY AS medicalCategory,
-		    HOSPITAL_REVIEW.SUB_MEDICAL_CATEGORY AS subCategory
-		FROM 
-		    REVIEW
-        INNER JOIN 
-            PLACE_REVIEW
-        ON
-            REVIEW.NUM = PLACE_REVIEW.NUM
-        INNER JOIN
-            HOSPITAL_REVIEW
-        ON
-            PLACE_REVIEW.NUM = HOSPITAL_REVIEW.NUM
-        INNER JOIN 
-            HOSPITAL_CATEGORY
-        ON
-            HOSPITAL_REVIEW.HOSPITAL_CATEGORY = HOSPITAL_CATEGORY.CATEGORY_NUM
-        INNER JOIN 
-            MEDICAL_CATEGORY
-        ON
-            HOSPITAL_REVIEW.MEDICAL_CATEGORY = MEDICAL_CATEGORY.CATEGORY_NUM
-        WHERE 1 = 1
-        <if test="keyword != null">
-	        AND
-	        	REVIEW.TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
-        </if> 
-        ORDER BY REVIEW.NUM DESC
+			*
+		FROM (
+			SELECT
+				ROWNUM rnum,
+				REVIEW.*
+			FROM (
+				SELECT
+				    REVIEW.NUM AS num,
+				    REVIEW.TITLE AS title,
+				    REVIEW.CONTENTS AS contents,
+				    NVL((
+					    SELECT
+					        AVG(COMMENT_SCORE)
+					    FROM
+					        USER_COMMENT
+					    WHERE
+					        USER_COMMENT.REVIEW_POST_NUM = REVIEW.NUM
+				    ), 0) AS stars,
+				    (
+					    SELECT
+					        COUNT(COMMENT_NUM)
+					    FROM
+					        USER_COMMENT
+					    WHERE
+					        USER_COMMENT.REVIEW_POST_NUM = REVIEW.NUM
+				    ) AS starCount,
+				    REVIEW.GOODS AS goods,
+				    REVIEW.BOOKMARK AS bookmark,
+				    REVIEW.SHARES AS shares,
+				    REVIEW.READ_COUNT AS readCount,
+				    REVIEW.ADD_DATE AS addDate,
+				    REVIEW.TYPE AS type,
+				    PLACE_REVIEW.ADDRESS1 AS address1,
+				    PLACE_REVIEW.ADDRESS2 AS address2,
+				    PLACE_REVIEW.ADDRESS3 AS address3,
+				    PLACE_REVIEW.DETAIL_ADDR AS addr,
+				    PLACE_REVIEW.TEL AS tel,
+				    PLACE_REVIEW.SERVICE_TIME AS serviceTime,
+				    PLACE_REVIEW.WAITING_TIME AS waitingTime,
+				    HOSPITAL_REVIEW.HOSPITAL_CATEGORY AS hospitalCategory,
+				    HOSPITAL_REVIEW.MEDICAL_CATEGORY AS medicalCategory,
+				    HOSPITAL_REVIEW.SUB_MEDICAL_CATEGORY AS subCategory
+				FROM 
+				    REVIEW
+		        INNER JOIN 
+		            PLACE_REVIEW
+		        ON
+		            REVIEW.NUM = PLACE_REVIEW.NUM
+		        INNER JOIN
+		            HOSPITAL_REVIEW
+		        ON
+		            PLACE_REVIEW.NUM = HOSPITAL_REVIEW.NUM
+		        INNER JOIN 
+		            HOSPITAL_CATEGORY
+		        ON
+		            HOSPITAL_REVIEW.HOSPITAL_CATEGORY = HOSPITAL_CATEGORY.CATEGORY_NUM
+		        INNER JOIN 
+		            MEDICAL_CATEGORY
+		        ON
+		            HOSPITAL_REVIEW.MEDICAL_CATEGORY = MEDICAL_CATEGORY.CATEGORY_NUM
+				WHERE
+					1 = 1
+				<if test="medCategory != null">
+					AND
+					<foreach collection="medCategory" item="category" open="(" close=")" separator="OR">
+						HOSPITAL_REVIEW.MEDICAL_CATEGORY = #{category.value}
+					</foreach>
+				</if>
+				<if test="hosLoc != null">
+					AND
+					<foreach collection="hosLoc" item="loc" open="(" close=")" separator="OR">
+						PLACE_REVIEW.ADDRESS1 LIKE '%'||#{loc, jdbcType=VARCHAR}||'%'
+						OR
+						PLACE_REVIEW.ADDRESS2 LIKE '%'||#{loc, jdbcType=VARCHAR}||'%'
+						OR
+						PLACE_REVIEW.ADDRESS3 LIKE '%'||#{loc, jdbcType=VARCHAR}||'%'
+					</foreach>
+				</if>
+		        <if test="keyword != null">
+			        AND
+			        	REVIEW.TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		        </if> 
+		        <if test="hospitalGroup != null and hospitalGroup.equals('score')">
+		   			ORDER BY stars DESC
+		        </if>
+		        <if test="hospitalGroup != null and hospitalGroup.equals('comments')">
+		   			ORDER BY starCount DESC
+		        </if>
+			) REVIEW
+		)
+		WHERE 
+			1 = 1
+			<if test="start == 0">
+				AND
+					rnum BETWEEN 1 AND 5
+			</if>
+			<if test="start != 0">
+				AND
+					rnum BETWEEN #{start} AND #{end}
+		    </if>
 	</select>
 	
 	<select id="selectDigitalsByParams" parameterType="SearchParams" resultType="DigitalVO">
@@ -214,6 +269,9 @@
 		        </if>
 		        <if test="restGroup != null and restGroup.equals('score')">
 		   			ORDER BY stars DESC
+		        </if>
+		        <if test="restGroup != null and restGroup.equals('comments')">
+		   			ORDER BY starCount DESC
 		        </if>
 			) REVIEW
 		)

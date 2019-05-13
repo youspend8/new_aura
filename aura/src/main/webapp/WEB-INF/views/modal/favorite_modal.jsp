@@ -76,7 +76,6 @@
    </ul>
   </div>
 </div>
-	
 <!-- modal Body -->
      <div class="modal-body">
         <div class="tab-content card" id="myClassicTabContentOrange">
@@ -101,23 +100,7 @@
   </div>
 <!-- Full Height Modal Right -->
 
-<script>
-// $(function() {
-// 	$('#fullHeightModalRight').on('focusin',function(){
-// 		$.ajax({
-// 			url : "/user/checkUser",
-// 			type : "GET",
-// 			success : function(data){	
-// 				if(data == true){
-// 					alert("일단 들어옴");
-// 					$('#modifyHidden').removeAttr('style');
-// 				}else
-// 					alert("일단 들어옴2");
-// 			}			
-// 		});
-// 	});	
-// })
-</script>
+
 
 
 <script>
@@ -143,7 +126,7 @@ $('#follow-tab-classic-orange').on('click', function(){
 				})
 				
 				var img = ((data[i].reviewType == 1) ? '<i class="fas fa-share-alt mx-2 green-text"> ': ((data[i].reviewType == 2) ? '<i class="fas fa-star mx-2 amber-text"> ' : '<i class="fas fa-thumbs-up mx-2 cyan-text">'));
-				var str = '<b>'+data[i].title +'</b>을 <b>'+ ((data[i].reviewType == 1) ? '공유하기': ((data[i].reviewType == 2) ? '즐겨찾기 ' : '좋아요 '))+'</b>하셨습니다.<br> >> '+ data[i].date;
+				var str = '<b>'+ data[i].title +'</b>을 <b>'+ ((data[i].reviewType == 1) ? '공유하기': ((data[i].reviewType == 2) ? '즐겨찾기 ' : '좋아요 '))+'</b>하셨습니다.<br> >> '+ data[i].date;
 				div.append(img).append(str);
 				$('#myClassicTabContentOrange').append(div);
 			}

@@ -22,7 +22,7 @@ public class SearchParams {
 	private String[] restLoc;
 	private String[] hosLoc;
 	private int[] restCategory;
-	private int medCategory;
+	private int[] medCategory;
 	private int start;
 	private int end;
 }
