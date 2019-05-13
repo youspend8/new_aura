@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.bitcamp.aura.comment.model.CommentFileVO;
 import com.bitcamp.aura.comment.model.CommentVO;
 
 public interface CommentService {
@@ -11,5 +12,6 @@ public interface CommentService {
 	public String delete_Comment();
 	public String update_Comment();
 	public String selectAll_Comment();
+	public List<CommentFileVO> selectFilesByNum(int num);
 	public List<CommentVO> selectAllByNum(int postNum);
 }

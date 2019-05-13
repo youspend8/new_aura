@@ -4,7 +4,11 @@
 
 	<jsp:include page="/WEB-INF/views/commons/header.jsp"></jsp:include>
 	<title>All Review</title>
-	
+	<style>
+		.fade {
+		  	transition: opacity 0.4s linear;
+		}
+	</style>
 	<script>
 		$(function() {
 			var index = 1;
