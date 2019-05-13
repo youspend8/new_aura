@@ -2,13 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
-
-
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
@@ -77,77 +70,6 @@
 			</div>
 			<div class="col-12 d-flex justify-content-center my-4">
 			
-<!--모달 공유하기 가으자!!-->
-			<div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			
-			  <!-- Change class .modal-sm to change the size of the modal -->
-			  <div class="modal-dialog modal-sm" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h4 class="modal-title w-100" id="myModalLabel">공유하기</h4>
-			      </div>
-			      <div class="modal-body px-6 py-6 text-center">
-<!-- <span>카카오톡</span> -->
-			           <a id="kakao-link-btn" href="javascript:;">
-					   <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-					   </a>
-					<script type='text/javascript'>
-  //<![CDATA[
-    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('53d1f3b1742d1856fff766c43108dfd7');
-    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
-    Kakao.Link.createDefaultButton({
-      container: '#kakao-link-btn',
-      objectType: 'feed',
-      content: {
-        title: document.title,
-        description: '내용, 주로 해시태그',
-        imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-        link: {
-          mobileWebUrl: 'https://developers.kakao.com',
-          webUrl: 'https://developers.kakao.com'
-        }
-      },
-      social: {
-        likeCount: 286,
-        commentCount: 45,
-        sharedCount: 845
-      },
-      buttons: [
-        {
-          title: '웹으로 보기',
-          link: {
-            webUrl: document.location.href
-          }
-        }
-      ]
-    });
-  //]]>
-</script>
-<!-- <span>카카오스토리</span> -->
-<div id="kakaostory-share-button"></div>
-<script type='text/javascript'>
-  //<![CDATA[
-    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('53d1f3b1742d1856fff766c43108dfd7');
-    // 스토리 공유 버튼을 생성합니다.
-    Kakao.Story.createShareButton({
-      container: '#kakaostory-share-button',2
-      url: 'https://developers.kakao.com',
-      text: '카카오 개발자 사이트로 놀러오세요! #개발자 #카카오 :)'
-    });
-  //]]>
-</script>
-
-			         <span>페이스북</span>
-			      </div>
-			    
-			    </div>
-			  </div>
-			</div>
-			<!-- Central Modal Small -->
-			
-			
 			<a id="share" onclick="doReview(1)" data-toggle="modal" data-target="#centralModalSm">
 
 				<c:choose>
@@ -180,33 +102,28 @@
 						</c:otherwise>
 					</c:choose>
 				</a>
-				<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal"> -->
-<!--   Launch demo modal -->
-<!-- </button> -->
-
-<!-- Modal -->
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <a href="javascript:;" id="kakao-link-btn"> 
-		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" /> <!-- 톡 이미지 부분이고, 전 kakaolink_btn_small.png로 불러왔습니다.   -->
-		</a>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+				<!-- Modal -->
+				<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				  aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								  <span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<a href="javascript:;" id="kakao-link-btn"> 
+									<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" /> <!-- 톡 이미지 부분이고, 전 kakaolink_btn_small.png로 불러왔습니다.   -->
+								</a>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<c:choose>
 				<c:when test="${nickname ne null}">
@@ -217,7 +134,6 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-	${reviewInfo}
 		<!-- 리뷰 상세 설명 -->
 		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
 			<div class="col-12 p-0 my-1">
@@ -692,10 +608,18 @@
 					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 					
 				</p>
+				<div class="w-50 d-flex mt-5 justify-content-between">
+					<a>수정</a>
+					<a>삭제</a>
+			   </div>
 			</div>
+			
+			
+			
 		</div>
 		
 	</c:forEach>
+	
 	<script type="text/javascript">
 	
 			function addComma(num) {
@@ -769,7 +693,6 @@
 				$('.materialboxed').materialbox();
 			})
 		</script>
-<!-- 		끝 부분 -->
 
 </div>
 
@@ -782,7 +705,6 @@
     <div id="bar" style="display: none;"></div>
 </div>
 
-</div>
 
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
@@ -792,6 +714,77 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     
 <script type="text/javascript" src="/js/radialprogress.js"></script>
+
+<script type="text/javascript">
+
+	function addComma(num) {
+		 var regexp = /\B(?=(\d{3})+(?!\d))/g;
+	     return num.toString().replace(regexp, ',');
+	}
+		
+	$('.heartCl').click(function(){
+		
+		if($(this).next().attr('nickname')!=""){
+			
+				if($(this).find("i").css('color')=='rgb(33, 37, 41)'){ 
+					$(this).find("i").css('color','rgb(255, 0, 0)')//빨강
+					
+					var num1=Number($(this).next().attr('value'))+1;
+					var num=addComma(Number($(this).next().attr('value'))+1);
+					
+					$(this).next().remove();
+					$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+					var commentNum = Number($(this).attr('commentNum'));
+					
+						$.ajax({
+				    		url: '/comment/update', // 요청 할 주소 
+				    	    type: 'get', // GET, PUT
+				    	    dataType: 'text', 
+				    	    data: {
+				    	    	commentNum : commentNum,
+				    	    	type : 1
+				    	    },
+				    	    success: function(data) {
+			    	        },
+			    	       error : function (data) {
+			    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+				    	        return false;
+			    	       }  // 전송할 데이터
+				    	})
+    	
+				}else{
+					$(this).find("i").css('color','rgb(33, 37, 41)')//검정
+
+					var num1=Number($(this).next().attr('value'))-1;
+					var num=addComma(Number($(this).next().attr('value'))-1);
+					
+					$(this).next().remove();
+					$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+					var commentNum = Number($(this).attr('commentNum'));
+					
+						$.ajax({
+				    		url: '/comment/update', // 요청 할 주소 
+				    	    type: 'get', // GET, PUT
+				    	    dataType: 'text', 
+				    	    data: {
+				    	    	commentNum : commentNum,
+				    	    	type : 2
+				    	    },
+				    	    success: function(data) {
+			    	        },
+			    	       error : function (data) {
+			    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+				    	        return false;
+			    	       }  // 전송할 데이터
+				    	})
+				}
+		}
+		else{
+			alert("회원만 이용 가능한 기능입니다. 로그인을 해주세요.")
+		}
+	})
+	
+</script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -802,6 +795,8 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new daum.maps.services.Geocoder();
 
@@ -1138,7 +1133,7 @@ $('#review_more').on('click', function(){
                                 "<div class=\"preview-box mr-2 view overlay\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
                                         + "<img class=\"thumbnail w-100 img-fluid\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
                                         + "<div class=\"mask flex-center waves-effect waves-light rgba-red-strong\" style=\"height:159.13px;\">"
-                                        + "<a style=\"font-size:19px;\" class=\"white-text\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                        + "<a style=\"font-size:19px; display:flex; justify-content: center; align-items: center\" class=\"white-text w-100 h-100\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
                                         + "삭제" + "</a>" + "</div>" + "</div>");
             		}
 	            	
@@ -1193,6 +1188,11 @@ $('#review_more').on('click', function(){
    				contentType : false,
    				
    				success: function(data){
+   					if (data != ""){
+   					alert(data);
+   					return;
+   					}
+   					
    					$('#comment').val('');
    					$('#grade').val('0')
    					location.reload();
@@ -1207,43 +1207,37 @@ $('#review_more').on('click', function(){
     }
 	
 </script>
-
-    
 <style>
-
-.filebox input[type="file"] { /* 파일 필드 숨기기 */
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
-
-#comment:focus {
-    border: 1px solid #ffb833;
-    box-shadow: 0 0 0 0.2rem #ffdb99;
-}
-#img22 {
-	height: 160px;
-}
-#write_form {
-	display: none;
-	height: 0px;
-}
-@media (max-width: 767.9px) {
+	.filebox input[type="file"] { /* 파일 필드 숨기기 */
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		border: 0;
+	}
+	
+	#comment:focus {
+	    border: 1px solid #ffb833;
+	    box-shadow: 0 0 0 0.2rem #ffdb99;
+	}
 	#img22 {
-		height: 100px;
+		height: 160px;
 	}
 	#write_form {
-		display: flex;
-		height: 100%;
+		display: none;
+		height: 0px;
 	}
-}
+	@media (max-width: 767.9px) {
+		#img22 {
+			height: 100px;
+		}
+		#write_form {
+			display: flex;
+			height: 100%;
+		}
+	}
 
 </style>
-
-</body>
-</html>
