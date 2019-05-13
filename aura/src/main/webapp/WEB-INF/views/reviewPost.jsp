@@ -5,8 +5,10 @@
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
-<div class="container d-flex flex-wrap p-md-2 px-1 py-4">
+<div class="container d-flex flex-wrap p-md-2 px-1">
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
 		${reviewInfo.TITLE}
 		<span class="badge badge-pill badge-success" style="font-size: 20px; margin-left: 3px;">
@@ -66,24 +68,24 @@
 				<div id="map" class="my-4" style="width:100%; height:250px;"></div>
 				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
 			</div>
-			<div class="col-12 d-flex justify-content-center my-4">
+			<div class="col-12 d-flex justify-content-center my-4"> 
 				<a id="share" onclick="doReview(1)">
 				<c:choose>
 					<c:when test="${reviewInfo.isShare }">
-						<i class="fas fa-share-alt" value="${nickname}" style="color: blue"></i>
+						<i class="fas fa-share-alt" id="aa" value="${nickname}" style="color: green" data-toggle="modal" data-target="#basicExampleModal"></i>
 					</c:when>
 					<c:otherwise>
-						<i class="fas fa-share-alt" value="${nickname}"></i>
+						<i class="fas fa-share-alt" id="aa" value="${nickname}" data-toggle="modal" data-target="#basicExampleModal"></i>
 					</c:otherwise>
 				</c:choose>
 				</a>
-				<a id="share" onclick="doReview(2)">
+				<a id="share" >
 					<c:choose>
 						<c:when test="${reviewInfo.isStar }">
-						    <i class="far fa-star mx-4" value="${nickname}" style="color: blue"></i>
+						    <i class="fas fa-star mx-4" id="bb" value="${nickname}" style="color: yellow" onclick="doReview(2)"></i>
 						</c:when>
 						<c:otherwise>
-							<i class="far fa-star mx-4" value="${nickname}"></i>
+							<i class="fas fa-star mx-4" id="bb" value="${nickname}" onclick="doReview(2)"></i>
 						</c:otherwise>
 					</c:choose>
 			
@@ -91,23 +93,51 @@
 				<a id="share" onclick="doReview(3)">
 					<c:choose>
 						<c:when test="${reviewInfo.isLike }">
-						    <i class="far fa-thumbs-up" value="${nickname}" style="color: blue"></i>
+						    <i class="fas fa-thumbs-up" id="cc" value="${nickname}" style="color: blue"></i>
 						</c:when>
 						<c:otherwise>
-							<i class="far fa-thumbs-up" value="${nickname}"></i>
+							<i class="fas fa-thumbs-up" id="cc" value="${nickname}"></i>
 						</c:otherwise>
 					</c:choose>
 				</a>
+				<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal"> -->
+<!--   Launch demo modal -->
+<!-- </button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <a href="javascript:;" id="kakao-link-btn"> 
+		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" /> <!-- 톡 이미지 부분이고, 전 kakaolink_btn_small.png로 불러왔습니다.   -->
+		</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 			</div>
 			<c:choose>
 				<c:when test="${nickname ne null}">
-					<button type="button" id="review_write_pc" class="btn btn-warning review-write">리뷰 작성하기</button>
+					<button type="button" id="review_write_pc" class="d-md-block d-none btn btn-warning review-write">리뷰 작성하기</button>
 				</c:when>
 				<c:otherwise>
-					<button type="button" id="review_write_login" class="btn btn-warning review-write">리뷰 작성하기</button>
+					<button type="button" id="review_write_login" class="d-md-block d-none btn btn-warning review-write">리뷰 작성하기</button>
 				</c:otherwise>
 			</c:choose>
 		</div>
+	${reviewInfo}
 		<!-- 리뷰 상세 설명 -->
 		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
 			<div class="col-12 p-0 my-1">
@@ -162,55 +192,36 @@
 <div class="container d-flex flex-wrap">
 
 	<!-- 댓글 작성 양식 -->
-	<div id="write_form" class="col-12 flex-md-row flex-wrap justify-content-center"
-		style="display: none; height: 0px; border-bottom: 2px solid #dadee6;">
+	<div id="write_form" class="col-12 flex-column align-items-center">
 		<button id="review_write_cancel" type="button"
-			class="btn btn-light col-12 text-center py-3 m-0 mb-3">
+			class="btn btn-light d-none d-md-block text-center w-100 m-0">
 			댓글 작성창 접기 <i class="fas fa-arrow-up"></i>
 		</button>
 
-		<div class="col-md-3 col-12 d-flex flex-wrap text-center align-content-start justify-content-center">
-			<h4 class="my-3 font-weight-bold w-100" id="review_write">리뷰 작성</h4>
-			<div class="w-50">
-				<c:choose>
-					<c:when test="${profile ne null }">
-						<img class="rounded-circle w-100 h-100" src=${profile }>
-					</c:when>
-					<c:otherwise>
-						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
-					</c:otherwise>
-				</c:choose>
-				
-			</div>
-<!-- 			세션 유저의 닉네임 넣기 			-->
-			<div class="w-100 my-3" id="nickname">${nickname}</div>
-
-			<div class="d-flex flex-wrap text-left mt-4">
-				<div class="star-box">
-<!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
-					<a class="far fa-star" id="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-					<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
-				</div>
-			</div>
-		</div>	
-
-		<div class="col-md-9 col-12 p-0 flex-column my-3">
+		<div class="col-md-9 col-12 p-0 flex-column mt-5">
 			<form id="commentForm" method="post" enctype="multipart/form-data">
 				<input id="review_post_num" name="review_post_num" value=${reviewInfo.NUM} style="display: none;">
-				<input id="nickname_post" name="nickname_post" value=${nickname} style="display: none;">
+				<input id="nickname_post" name="nickname_post" value="${nickname}" style="display: none;">
 				<input id="grade" name="grade" value="0" style="display: none;">
 				
-				<textarea rows="10" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
-
-				<div id="comment_image" class="d-md-flex d-none col-12 p-0 my-3">
+				<textarea rows="5" class="form-control px-2" id="comment" name="comment" autofocus></textarea>
+				<div class="d-flex flex-wrap justify-content-between mt-3">
+					<div class="star-box d-flex align-items-center">
+	<!-- 					마우스가 호버되면 별 색깔 바꾸기 및 호버된 별의 순서에따라 점수를 다르게 주기 -->
+						<a class="far fa-star" id="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+						<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>
+					</div>
+					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
 				
+				</div>
+				<div id="comment_image" class="d-flex col-12 p-0 my-3">
 					<div class="mr-2" style="width: 20%;">
 						<label for="comment_file" class="filebox">
 							<a>
-								<img src="/img/addfile.png" id="img22" class="w-100" style="height: 160px; border: 2px dotted #b8bcc4">
+								<img src="/img/addfile.png" id="img22" class="w-100" style="border: 2px dotted #b8bcc4">
 								<input type="file" id="comment_file" name="comment_file" accept="image/*">
 							</a>
 						</label>
@@ -218,14 +229,6 @@
 					
 				</div>
 			</form>
-
-				
-				
-				<div class="my-4 text-md-right text-center">
-					<input id="comment_submit" type="button" class="btn btn-light" value="등록하기" onclick="fileSubmit();" disabled>
-					
-				</div>
-			
 			
 		</div>
 	</div>
@@ -318,6 +321,13 @@
 
 <!-- 				<div -->
 <!-- 					class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
+<!-- 					<i class="fas fa-heart" style="font-size: 30px"></i> -->
+<!-- 					<p>87.451</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 				<div -->
+<!-- 					class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
 <!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
 <!-- 					<p>87.451</p> -->
 <!-- 				</div> -->
@@ -500,6 +510,12 @@
 <!-- 					<p class="text-center">4.5</p> -->
 <!-- 				</div> -->
 
+<!-- 				<div class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
+<!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
+<!-- 					<p>87.451</p> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 <!-- 				<div -->
 <!-- 					class="d-flex col-5 flex-column align-items-center justify-content-center"> -->
 <!-- 					<i class="far fa-heart" style="font-size: 30px"></i> -->
@@ -510,7 +526,7 @@
 
 		<!-- strat -->
 		
-	<c:forEach var="commentList" items="${commentList }" varStatus="status">
+	<c:forEach var="commentList" items="${commentList }" varStatus="status" end="4">
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" id="home">
 		
 		
@@ -518,13 +534,13 @@
 				class=" col-2 d-flex flex-column justify-content-center align-items-center"
 				style="width: 100%;">
 				
-				<div style="width: 65%; height: 75px;">
+				<div class="p-0">
 				<c:choose>
 					<c:when test="${commentList.profile ne null }">
-						<img class="rounded-circle w-100 h-100" src=${commentList.profile }>
+						<img class="rounded-circle" src=${commentList.profile } style="height: 75px;">
 					</c:when>
 					<c:otherwise>
-						<img class="rounded-circle w-100 h-100" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png">
+						<img class="rounded-circle" src="https://ssl.pstatic.net/static/pwe/address/img_profile.png" style="height: 75px;">
 					</c:otherwise>
 				</c:choose>
 				</div>
@@ -582,19 +598,94 @@
 			</div>
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div class>${commentList.comment_Contents } </div>
+				<div class>${commentList.comment_Contents }
+				 </div>
 				
 			</div>
 			
-			<div
-				class="d-flex col-2 flex-column align-items-center justify-content-center">
-				<i class="far fa-heart" style="font-size: 40px"></i>
-				<p class="heart-number">
-				<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
+			<div class="d-flex col-2 flex-column align-items-center justify-content-center ">
+				<a class="heartCl" commentNum="${commentList.comment_Num}">
+					<i class="fas fa-heart "  style="font-size: 40px" ></i>
+				</a>
+				<p value="${commentList.comment_Like }" nickname="${nickname}">
+			
+					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
+					
 				</p>
 			</div>
 		</div>
+		
 	</c:forEach>
+	<script type="text/javascript">
+	
+			function addComma(num) {
+				 var regexp = /\B(?=(\d{3})+(?!\d))/g;
+			     return num.toString().replace(regexp, ',');
+			}
+				
+			$('.heartCl').click(function(){
+				
+				if($(this).next().attr('nickname')!=""){
+					
+						if($(this).find("i").css('color')=='rgb(33, 37, 41)'){ 
+							$(this).find("i").css('color','rgb(255, 0, 0)')//빨강
+							
+							var num1=Number($(this).next().attr('value'))+1;
+							var num=addComma(Number($(this).next().attr('value'))+1);
+							
+							$(this).next().remove();
+							$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+							var commentNum = Number($(this).attr('commentNum'));
+							
+								$.ajax({
+						    		url: '/comment/update', // 요청 할 주소 
+						    	    type: 'get', // GET, PUT
+						    	    dataType: 'text', 
+						    	    data: {
+						    	    	commentNum : commentNum,
+						    	    	type : 1
+						    	    },
+						    	    success: function(data) {
+					    	        },
+					    	       error : function (data) {
+					    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+						    	        return false;
+					    	       }  // 전송할 데이터
+						    	})
+		    	
+						}else{
+							$(this).find("i").css('color','rgb(33, 37, 41)')//검정
+	
+							var num1=Number($(this).next().attr('value'))-1;
+							var num=addComma(Number($(this).next().attr('value'))-1);
+							
+							$(this).next().remove();
+							$(this).after('<p value=\"'+num1+'\">'+num+'</p>')
+							var commentNum = Number($(this).attr('commentNum'));
+							
+								$.ajax({
+						    		url: '/comment/update', // 요청 할 주소 
+						    	    type: 'get', // GET, PUT
+						    	    dataType: 'text', 
+						    	    data: {
+						    	    	commentNum : commentNum,
+						    	    	type : 2
+						    	    },
+						    	    success: function(data) {
+					    	        },
+					    	       error : function (data) {
+					    	        	alert('죄송합니다. 잠시 후 다시 시도해주세요.');
+						    	        return false;
+					    	       }  // 전송할 데이터
+						    	})
+						}
+				}
+				else{
+					alert("회원만 이용 가능한 기능입니다. 로그인을 해주세요.")
+				}
+			})
+		
+		</script>
 <!-- 		끝 부분 -->
 
 </div>
@@ -605,6 +696,7 @@
         <img src="/img/more.png" style="width: 20%; border-radius: 100%; border: 1px solid gray">
         <span class="ml-2 text-dark">검색결과 더보기</span>
     </a>
+    <div id="bar" style="display: none;"></div>
 </div>
 
 </div>
@@ -612,6 +704,7 @@
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
+<script type="text/javascript" src="/js/radialprogress.js"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -655,6 +748,41 @@ geocoder.addressSearch('${reviewInfo.ADDR}', function(result, status) {
     } 
 });    
 </script>
+<script type="text/javascript">
+
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('cec5c87f0e6a1c8fc2daedbc6a4c7d6b');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',  // 컨테이너는 아까 위에 버튼이 쓰여진 부분 id 
+      objectType: 'feed',
+      content: {  // 여기부터 실제 내용이 들어갑니다. 
+        title: '${reviewInfo.TITLE}', // 본문 제목
+        description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',  // 본문 바로 아래 들어가는 영역?
+        imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png', // 이미지
+        link: {
+          mobileWebUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}',
+          webUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}'
+        }
+      },
+      social: {  /* 공유하면 소셜 정보도 같이 줄 수 있는데, 이 부분은 기반 서비스마다 적용이 쉬울수도 어려울 수도 있을듯 합니다. 전 연구해보고 안되면 제거할 예정 (망할 google  blogger...) */
+        likeCount: ${reviewInfo.GOODS},
+         commentCount: 45,
+        sharedCount: ${reviewInfo.SHARES}
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}',
+            webUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}'
+          }
+        }
+ 
+      ]
+    });
+
+</script> 
 <script>
 var flag1=true;
 var flag2=true;
@@ -663,18 +791,39 @@ var flag2=true;
 			if(flag1){
 				flag1=false;
 				
-				if(e.target.getAttribute('value') == ''){
+			if($(this).attr('value')=='' && ($(this).attr('id')=='bb'||$(this).attr('id')=='cc')){
+		
 					alert('해당기능은 회원만 이용가능합니다.')
+					$(this).attr("data-toggle","")
+					
 				}else{
-					if($(this).css("color")=='rgb(0, 0, 255)'){
-						$(this).css("color","black")
+				
+					if($(this).css("color")!="rgb(33, 37, 41)"){
+						$(this).attr("data-toggle","")
+						$(this).css("color","rgb(33, 37, 41)")
 					}else{
-						$(this).css("color","blue")
+						if($(this).attr('id')=='aa'){
+						
+							$(this).css("color","green")
+							
+						}
+						if($(this).attr('id')=='bb'){
+							
+							$(this).css("color","yellow")
+						
+						}
+						if($(this).attr('id')=='cc'){
+							
+							$(this).css("color","blue")
+						
+						}
 					}
+					
 				}
 				setTimeout(() => {
+					$(this).attr("data-toggle","modal")
 					flag1=true;
-				}, 500);
+				}, 300);
 			}
 			
 		
@@ -703,7 +852,7 @@ var flag2=true;
 		    	})
 		    	setTimeout(() => {
 					flag2=true;
-				}, 500);
+				}, 300);
 			}
 	    
     	}
@@ -714,26 +863,20 @@ var flag2=true;
             
             $('#review_write_pc').on('click', () => {
                 $('#write_form').animate({
-                    height: '630px'
+                    height: '520px'
                 }, 400);
                 $('#write_form').css('display', 'flex');
-            });
-            
-            $('#review_write_mobile').on('click', () => {
-                $('#write_form').animate({
-                    height: '900px'
-                }, 400);
-                $('#write_form').css('display', 'flex');
+                $('#write_form').css('border-bottom', '2px solid #dadee6');
             });
 
             $('#review_write_cancel').on('click', () => {
                 $('#write_form').animate({
                     height: '0px'
-                }, 200);
+                }, 300);
                 // $('#write_form').css('visibility', 'hidden');
                 setTimeout(() => {
                     $('#write_form').css('display', 'none');
-
+                    $('#write_form').css('border-bottom', '');
                 }, 180);
             });
             
@@ -743,6 +886,7 @@ var flag2=true;
             
         });
         
+        $
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
         	var comment = $('#comment').val();
@@ -816,37 +960,57 @@ var flag2=true;
 		});
 		
 		
-		
-		
-		
-// 		$('#star3').click(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 		});
-		
-// 		$('#star4').hover(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 			$('#star3').removeClass().addClass('fas fa-star');
-// 		}, function(){
-// 			$('#star1').removeClass().addClass('far fa-star');
-// 			$('#star2').removeClass().addClass('far fa-star');
-// 			$('#star3').removeClass().addClass('far fa-star');
-// 		});
-		
-// 		$('#star5').hover(function(){
-// 			$('#star1').removeClass().addClass('fas fa-star');
-// 			$('#star2').removeClass().addClass('fas fa-star');
-// 			$('#star3').removeClass().addClass('fas fa-star');
-// 			$('#star4').removeClass().addClass('fas fa-star');
-// 		}, function(){
-// 			$('#star1').removeClass().addClass('far fa-star');
-// 			$('#star2').removeClass().addClass('far fa-star');
-// 			$('#star3').removeClass().addClass('far fa-star');
-// 			$('#star4').removeClass().addClass('far fa-star');
-// 		})
-		
     </script>
+    
+<script>
+var start = 6;
+
+var bar = new RadialProgress(document.getElementById("bar"),{indeterminate:true,colorBg:"white",colorFg:"red",thick:5});
+
+$('#review_more').on('click', function(){
+	$('#bar').show();
+	$('#more_button').hide();
+// 	start += 5;
+	
+	$.ajax({
+		url: '/comment/more',
+		type: 'get',
+		dataType: 'json',
+		data: {
+			start: start,
+			end: start + 4
+		},
+		success: function(data){
+			console.log(data);
+			if (data.length == 0){
+				$('#review_more').text('더 이상 불러올 댓글이 없습니다.');
+			};
+			
+		},
+		error: function(request, status, error){
+			alert(request.status);
+			alert(request.responseText);
+		}
+		
+		});
+		
+		
+		
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
     
 <script>
 	var files = new Array();
@@ -959,6 +1123,7 @@ var flag2=true;
     }
 	
 </script>
+
     
 <style>
 
@@ -977,6 +1142,23 @@ var flag2=true;
     border: 1px solid #ffb833;
     box-shadow: 0 0 0 0.2rem #ffdb99;
 }
+#img22 {
+	height: 160px;
+}
+#write_form {
+	display: none;
+	height: 0px;
+}
+@media (max-width: 767.9px) {
+	#img22 {
+		height: 100px;
+	}
+	#write_form {
+		display: flex;
+		height: 100%;
+	}
+}
+
 </style>
 
 </body>
