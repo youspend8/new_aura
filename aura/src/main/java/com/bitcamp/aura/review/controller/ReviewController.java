@@ -113,6 +113,7 @@ public class ReviewController {
 		} else {
 			params2.setNickname((String) session.getAttribute("nickname"));
 			params2.setPostNum(num);
+			
 			params2.setReviewType(1);
 			isShare = listService.isShare(params2);
 			params2.setReviewType(2);

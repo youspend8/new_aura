@@ -109,11 +109,33 @@
 									</c:if>
 						    	</h5>
 						    </a>
-						    <span style="float:right; font-size:2rem;">
-						      <a style="color:rgb(0, 102, 255)"><i class="far fa-star"></i></a>
+						    
+						    <span style="float:right; font-size:2rem;" id="favostar">
+						      <a style="color:red"  ><i class="far fa-star"></i></a>
 						    </span>
-						
 						</div>
+						
+<script>
+						$("#favostar").on('click',function(){
+							$.ajax({
+								url : "/reviewList/favostar",
+								type: "POST",
+								data: {
+									review_post_num : "${review.num}",
+									review_type : "2"
+//review_num :"review_num" // Primary Key
+								},
+								success : function(data){
+									alert("즐겨찾기에 추가되었습니다.");
+								},
+								error : function(data){
+									alert("즐겨찾기에 추가가 안되었습니다.");
+								}
+								
+							})
+							
+						})
+  </script>
 						
 						<div class="my-1">
 						    <span>
@@ -186,6 +208,9 @@
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6060ab38dd0e3fd90aaea5e539c8172e&libraries=services"></script>
 	<script type="text/javascript" src="/js/radialprogress.js"></script>
+	
+
+	
 	<script type="text/javascript">
 		var categoryList = [
 			'뷔페',
