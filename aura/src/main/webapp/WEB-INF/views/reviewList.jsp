@@ -96,8 +96,8 @@
 									</c:if>
 							    	<c:if test="${type == 2}">
 									    <span style="color: gray; font-size: 12px;">
-								    		<c:forEach var="cate" items="${hosCategory}" varStatus="i">
-												<c:if test="${review.hospitalCategory eq i.index}">${cate.name}</c:if>
+								    		<c:forEach var="cate" items="${hosCategory}" varStatus="j">
+												<c:if test="${review.hospitalCategory eq j.index}">${cate.name}</c:if>
 								    		</c:forEach>
 										</span>
 									</c:if>
@@ -109,33 +109,38 @@
 									</c:if>
 						    	</h5>
 						    </a>
-						    
-						    <span style="float:right; font-size:2rem;" id="favostar">
-						      <a style="color:red"  ><i class="far fa-star"></i></a>
-						    </span>
+<!-- 즐겨찾기 별부분  -->
+						    <form style="float:right; font-size:2rem;" class="favostar">
+								<a style="color:rgb(33, 37, 41)"  >
+								</a>
+						      	<input type="hidden" name="postNum" value="${review.num}">
+								<button class="p-0 m-0" type="submit" style="border: none; background-color: white">
+									<c:choose>
+										<c:when test="${reviewList[review.num] eq null}">
+											<i class="fas fa-star"></i>
+										</c:when>
+										<c:otherwise>
+											<i class="fas fa-star" style="color: #f9ca24"></i>
+										</c:otherwise>
+									</c:choose>
+								</button>
+						    </form>
 						</div>
 						
-<script>
-						$("#favostar").on('click',function(){
-							$.ajax({
-								url : "/reviewList/favostar",
-								type: "POST",
-								data: {
-									review_post_num : "${review.num}",
-									review_type : "2"
-//review_num :"review_num" // Primary Key
-								},
-								success : function(data){
-									alert("즐겨찾기에 추가되었습니다.");
-								},
-								error : function(data){
-									alert("즐겨찾기에 추가가 안되었습니다.");
-								}
-								
-							})
 							
-						})
-  </script>
+						
+<%-- 									<c:choose> --%>
+<%-- 									<c:when test ="${flag eq true}"> --%>
+<!-- 									<i class="fas fa-star" style ="color: #f9ca24"></i> -->
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 									<i class="fas fa-star"></i> -->
+<%-- 									</c:otherwise> --%>
+<%-- 									</c:choose> --%>
+	
+<!-- 검색 후 즐겨찾기 부분	-->
+			
+
 						
 						<div class="my-1">
 						    <span>
@@ -209,6 +214,66 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6060ab38dd0e3fd90aaea5e539c8172e&libraries=services"></script>
 	<script type="text/javascript" src="/js/radialprogress.js"></script>
 	
+<!-- 	  <span style="float:right; font-size:2rem;" id="favostar" value=${nickname} > -->
+
+<!-- 						      <a style="color:rgb(33, 37, 41)"  ><i class="far fa-star"></i></a> -->
+<!-- 	</span> -->
+	
+	<script>
+		var nickname = "${nickname}";
+		var flag = false;
+		$('.favostar').submit(function(e) {
+			e.preventDefault();
+			
+			if(nickname != ""){ //닉네임이 null이 아닌 경우
+					if(e.target[1].children[0].style.color == '' || 
+					   e.target[1].children[0].style.color === 'rgb(0, 0, 0)') {//검정
+						e.target[1].children[0].style.color = '#f9ca24';
+												
+						$.ajax({
+							url : '/reviewList/favostar',
+							type: "POST",
+							dataType : "text",
+							data :{
+								postNum : e.target.postNum.value,
+								nickname : nickname,
+								reviewType : 2
+							},
+							success : function(data){
+								console.log(data);
+							},
+							error : function(data){
+								alert("잘못된 경로입니다.");
+								console.log(data);
+								return false;
+							}
+						})
+					}else{
+						e.target[1].children[0].style.color = 'rgb(0, 0, 0)';
+							$.ajax({
+								url : "/reviewList/favostar",
+								type: "POST",
+								dataType : "text",
+								data: 
+								{
+									postNum : e.target.postNum.value,
+									nickname : nickname,
+									reviewType : 2,
+								},
+								success : function(data){
+								},
+								error : function(data){
+									alert("잘못된 경로입니다.");
+								}
+							})							
+				    }								
+			}else{
+				alert("회원만 이용 가능합니다. 로그인 해주세요");
+			}
+			
+		})
+	</script>		
+	
 
 	
 	<script type="text/javascript">
@@ -218,7 +283,6 @@
 			'양식',
 			'중식',
 			'일식',
-			'분식',
 			'카페',
 			'치킨',
 			'피자',

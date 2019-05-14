@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,32 +48,37 @@ public class ReviewListController {
 	
 	@RequestMapping("/favostar")
 	@ResponseBody
-	public int favostar(int review_post_num, HttpSession session ){
+	public boolean favostar(
+			@ModelAttribute ReviewListVO params, 
+			HttpSession session){
 		System.out.println("여기까지는 들어옵니다.");
-		String nickname = (String)session.getAttribute("nickname");
+		System.out.println("params(파람 찍히는 것 확인)1:"+ params);
 		
-		Date today = new Date();
-		SimpleDateFormat sm = new SimpleDateFormat("yy/mm/dd HH:mm:ss");
-		ReviewListVO reviewListVo = new ReviewListVO();
-		
-		
-		int num =0;
-		num++;
-		reviewListVo.setNickname(nickname); 
-		reviewListVo.setDate(sm.format(today));
-		reviewListVo.setReviewType(2);
-		reviewListVo.setPostNum(review_post_num);
-		reviewListVo.setNum(num);
-		System.out.println("리뷰리스트 삽입:" + reviewListVo);
-		
-		reviewListMapper.insert(reviewListVo);
-		
-		return 1;
+		if(session.getAttribute("nickname")!=null ) {
+//			System.out.println("params(파람 찍히는 것 확인)2:"+ params);
+			listService.doReview(params);
+			return true;
+		}
+		return false;
 	}
-	
-	
-	
-	
+		
+//		Date today = new Date();
+//		SimpleDateFormat sm = new SimpleDateFormat("yy/mm/dd HH:mm:ss");
+//		ReviewListVO reviewListVo = new ReviewListVO();
+//		
+		
+//		int num =0;
+//		num++;
+//		reviewListVo.setNickname(nickname); 
+//		reviewListVo.setDate(sm.format(today));
+//		reviewListVo.setReviewType(2);
+//		reviewListVo.setPostNum(review_post_num);
+//		reviewListVo.setNum(num);
+//		System.out.println("리뷰리스트 삽입:" + reviewListVo);
+		
+//		reviewListMapper.insert(reviewListVo);
+		
+		
 	
 	
 	@RequestMapping("/modal_review")
