@@ -6,7 +6,6 @@
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
 <div class="container d-flex flex-wrap p-md-2 px-1">
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
@@ -560,22 +559,20 @@
 				<c:if test="${commentList.files[0] ne null }">
 					<div id="carouselExampleFade-${status.index }" class="carousel slide carousel-fade"
 						data-ride="carousel">
-						<div class="carousel-inner user-picture" style="width:168px; height:123px;">
-							
-								<div class="carousel-item active">
-									<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
+						<div class="carousel-inner" style="width:168px; height:123px;">
+								<div class="carousel-item active sample_image">
+									<img class="d-block user-review-img" style="width:168px; height:123px;"
 											src="${commentList.files[0].comment_File}">
 								</div>
 	
 								<c:forEach var="files" items="${commentList.files }" begin="1">
 									<c:if test="${files ne null}">
-										<div class="carousel-item">
-											<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
+										<div class="carousel-item big sample_image">
+											<img class="d-block user-review-img" style="width:168px; height:123px;" 
 														src="${files.comment_File}">
 										</div>
 									</c:if>
 								</c:forEach>
-							
 						</div>
 						
 						<a class="user-photo-button-left carousel-control-prev"
@@ -689,9 +686,6 @@
 				}
 			})
 			
-			$(function() {
-				$('.materialboxed').materialbox();
-			})
 		</script>
 
 </div>
@@ -709,12 +703,6 @@
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
-  
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
-<script type="text/javascript" src="/js/radialprogress.js"></script>
-
 <script type="text/javascript">
 
 	function addComma(num) {
@@ -1078,17 +1066,6 @@ $('#review_more').on('click', function(){
 	})
 
 
-
-
-
-
-
-
-
-
-
-
-
 </script>
     
 <script>
@@ -1205,7 +1182,6 @@ $('#review_more').on('click', function(){
    	        });
     	}
     }
-	
 </script>
 <style>
 	.filebox input[type="file"] { /* 파일 필드 숨기기 */
@@ -1230,6 +1206,7 @@ $('#review_more').on('click', function(){
 		display: none;
 		height: 0px;
 	}
+	
 	@media (max-width: 767.9px) {
 		#img22 {
 			height: 100px;
@@ -1239,5 +1216,4 @@ $('#review_more').on('click', function(){
 			height: 100%;
 		}
 	}
-
 </style>
