@@ -614,7 +614,7 @@
 					<input type="hidden" value="" name="">
 					
 						<button id="update_Comment" style="border:0; outline:0; opacity: 0.3; padding: 0"
-							onclick='test2(${commentList.comment_Num }, "${commentList.comment_Contents}", "${commentList.files}")'>수정</button>
+							onclick='update_Area(${commentList.comment_Num }, "${commentList.comment_Contents}", "${commentList.files}")'>수정</button>
 							
 						
 						<button id="delete_Comment" style="border:0; outline:0; opacity: 0.3; padding: 0">삭제</button>
@@ -623,16 +623,20 @@
 			</div>
 			
 		
-	<div id="update_area_${commentList.comment_Num }">
-	
-	
-	
-	</div>
 	
 		</div>
 	
+		<div class="container d-flex flex-wrap" id="update_area_${commentList.comment_Num }">
+		
+		
+		
+		</div>
+	
+	
 	</c:forEach>
 	
+	
+</div>
 	
 	
 	
@@ -710,7 +714,6 @@
 			})
 		</script>
 
-</div>
 
 <div class="my-3 col-12" style="border-bottom: rgb(217, 217, 217) solid 1px;"></div>
 <div id="review_more" class="d-flex col-12 justify-content-center align-items-center bg-white py-3 my-5">
@@ -981,24 +984,28 @@ var flag2=true;
         });
         
         function update_Form(){
-            $('#write_form').animate({
-                height: '520px'
-            }, 400);
             $('#update_form').css('display', 'flex');
             $('#update_form').css('border-bottom', '2px solid #dadee6');
+            $('#update_form').animate({
+                height: '520px'
+            }, 400);
         };
         
-        $('#update_write_cancel').on('click', () => {
-            $('#update_form').animate({
+        function update_Form_Cancel(){
+        	$('#update_form').animate({
                 height: '0px'
             }, 300);
-            // $('#write_form').css('visibility', 'hidden');
-            setTimeout(() => {
-                $('#update_form').css('display', 'none');
-                $('#update_form').css('border-bottom', '');
-            }, 180);
-        });
+        	setTimeout(() => {
+        	$('#update_form').remove();
+			}, 200);
+        }
         
+//         $('#update_write_cancel').on('click', () => {
+//         	alert('gdgd');
+//             $('#update_form').animate({
+//                 height: '0px'
+//             }, 300);
+//         });
         
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
@@ -1103,13 +1110,13 @@ $('#review_more').on('click', function(){
 		
 	});
 	
-function test2(num, contents, files) {
-	console.dir(num);
-	console.dir(contents);
-	console.dir(files);
+function update_Area(num, contents, files) {
+	if ($('#update_form').css('display') != null){
+		return alert('이미 수정중인 댓글이 있습니다.');
+	};
 	var update_Tag =
-		'<div id="update_form" class="col-12 flex-column align-items-center">'
-		 + '<button id="update_write_cancel" type="button" class="btn btn-light d-none d-md-block text-center w-100 m-0">'
+		'<div id="update_form" class="col-12 flex-column align-items-center" style="display:none; height:0px;">'
+		 + '<button id="update_write_cancel" type="button" class="btn btn-light d-none d-md-block text-center w-100 m-0" onclick="update_Form_Cancel(this)">'
 		 +	'댓글 작성창 접기 <i class="fas fa-arrow-up"></i>'
 		 + '</button>'
 		 + '<div class="col-md-9 col-12 p-0 flex-column mt-5">'
@@ -1117,7 +1124,7 @@ function test2(num, contents, files) {
 				+ '<input id="review_post_num" name="review_post_num" value=' + num + ' style="display: none;">'
 				+ '<input id="grade" name="grade" value="0" style="display: none;">'
 				
-				+ '<textarea rows="5" class="form-control px-2" id="comment" name="comment" autofocus>' + contents + '</textarea>'
+				+ '<textarea rows="6" class="form-control px-2" id="comment" name="comment" autofocus>' + contents + '</textarea>'
 				+ '<div class="d-flex flex-wrap justify-content-between mt-3">'
 				+	'<div class="star-box d-flex align-items-center">'
 					
@@ -1127,15 +1134,15 @@ function test2(num, contents, files) {
 						+ '<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
 						+ '<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
 					+ '</div>'
-					+ '<input id="comment_submit" type="button" class="btn btn-warning" value="수정하기" onclick="fileSubmit();">'
+					+ '<input type="button" class="btn btn-warning" value="수정하기" onclick="update_Submit();">'
 				
 				+ '</div>'
-				+ '<div id="comment_image" class="d-flex col-12 p-0 my-3">'
+				+ '<div id="update_comment_image" class="d-flex col-12 p-0 my-3">'
 					+ '<div class="mr-2" style="width: 20%;">'
-						+ '<label for="comment_file" class="filebox">'
+						+ '<label for="update_comment_file" class="filebox">'
 							+ '<a>'
-								+ '<img src="/img/addfile.png" id="img22" class="w-100" style="border: 2px dotted #b8bcc4">'
-								+ '<input type="file" id="comment_file" name="comment_file" accept="image/*">'
+								+ '<img src="/img/addfile.png" id="update_img22" class="w-100" style="border: 2px dotted #b8bcc4">'
+								+ '<input type="file" id="update_comment_file" name="update_comment_file" accept="image/*">'
 							+ '</a>'
 						+ '</label>'
 					+ '</div>'
@@ -1145,15 +1152,127 @@ function test2(num, contents, files) {
 			
 		+ '</div>'
 	+ '</div>';
-	$('#home_' + num).remove();
 	$('#update_area_' + num).append(update_Tag);
+	update_Form();
 };
 
-function update(){
+function update_Submit(){
+	alert('업데이트 완료 !');
+}
+
+var update_files = new Array();
+var update_previewIndex = 0;
+var update_deleteIndex = 0;
+var update_test = 0;
+var update_j = 0;
+
+function update_addPreview(input) {
 	
+	image_Exists : if (input[0].files) {
+		
+        //파일 선택이 여러개였을 시의 대응
+        for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+            var file = input[0].files[fileIndex];
+            var reader = new FileReader();
+            
+            if (files.length >= 4){
+				alert('최대 4개까지 이미지를 등록 할 수 있습니다.');
+				break image_Exists;
+			}
+            
+            for (var i = 0; i < test; i++){
+            	if (files[i].name == input[0].files[fileIndex].name){
+            		alert(input[0].files[fileIndex].name + ' 는 이미 업로드된 이미지입니다.');
+            		break image_Exists;
+            	}
+            };
+            
+            update_files[test] = file;
+            update_reader.readAsDataURL(file);
+            update_test++;
+            
+            reader.onload = function(img) {
+            	var imgNum = update_previewIndex++;
+            	var deleteNum = update_deleteIndex++;
+            	
+        		if (files[i].name != null) {
+        			$("#update_comment_image")
+                    .append(
+                            "<div class=\"preview-box mr-2 view overlay\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
+                                    + "<img class=\"thumbnail w-100 img-fluid\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
+                                    + "<div class=\"mask flex-center waves-effect waves-light rgba-red-strong\" style=\"height:159.13px;\">"
+                                    + "<a style=\"font-size:19px; display:flex; justify-content: center; align-items: center\" class=\"white-text w-100 h-100\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                    + "삭제" + "</a>" + "</div>" + "</div>");
+        		}
+            	
+            };
+        }
+    } else
+        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책 세우지 않았음
+}
+
+$('#update_comment_file').change(function() {
+	update_addPreview($(this));
+});
+
+function deletePreview(obj) {	// 미리보기 사진 삭제
+var deleteNum = obj.attributes['id'].value;
+var imgId = obj.attributes['value'].value;
+
+for (var i in files){
+	if(files[i].name == imgId){
+		files.splice(i, 1);
+		test--;
+		previewIndex--;
+	}
+};
+
+$("#comment_image .preview-box[value=" + deleteNum + "]").remove();
 }
 
 
+
+function fileSubmit(){ // 멀티파트 파일 업로더
+	
+	 if($('#grade').val() == 0){
+     	return alert('별점을 주세요');
+     };
+	
+	var comment = $('#comment').val();
+	var formData = new FormData($('#commentForm')[0]);
+	
+	for (var index = 0; index < Object.keys(files).length; index++){
+        formData.append('files',files[index]);
+	};
+	
+	if (comment == "") {
+		alert('내용을 입력해주세요.');
+	} else {
+		$.ajax({
+	            url : "/comment/write",
+				type : "post",
+				data : formData,
+				processData : false,
+				contentType : false,
+				
+				success: function(data){
+					if (data != ""){
+					alert(data);
+					return;
+					}
+					
+					$('#comment').val('');
+					$('#grade').val('0')
+					location.reload();
+				},
+				error : function(error) {
+					alert("파일업로드 실패");
+					console.log(error);
+					console.log(error.status);
+				}
+	        });
+	}
+}
 
 
 </script>
