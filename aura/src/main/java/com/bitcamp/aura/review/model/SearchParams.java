@@ -19,6 +19,7 @@ public class SearchParams {
 	private String keyword;
 	private String restGroup;
 	private String hospitalGroup;
+	private String digitalGroup;
 	private String[] restLoc;
 	private String[] hosLoc;
 	private int[] restCategory;

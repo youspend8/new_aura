@@ -47,8 +47,7 @@
 						</div>
 					</c:forEach>
 				</div>
-				
-				<c:if test="${reviewInfo.FILES.size() > 3}">
+				<c:if test="o.FILES.size() > 3}">
 					<!--Controls-->
 					<a class="carousel-control-prev" href="#carousel-example-2"
 						role="button" data-slide="prev"> <span
@@ -63,11 +62,13 @@
 			</div>
 		</c:if>
 		
-		<div class="col-md-4 col-12 p-0 d-flex flex-wrap align-items-start justify-content-center order-2 order-md-1">
-			<div class="col-md-12 col-8">
-				<div id="map" class="my-4" style="width:100%; height:250px;"></div>
-				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
-			</div>
+		<div class="col-md-4 col-12 p-0 d-flex flex-wrap align-items-start justify-content-center order-2 ${type eq 3 ? 'order-md-2' : 'order-md-1'}">
+			<c:if test="${type eq 1 || type eq 2}">
+				<div class="col-md-12 col-8">
+					<div id="map" class="my-4" style="width:100%; height:250px;"></div>
+					<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
+				</div>
+			</c:if>
 			<div class="col-12 d-flex justify-content-center my-4">
 			
 			<a id="share" onclick="doReview(1)" data-toggle="modal" data-target="#centralModalSm">
@@ -135,45 +136,66 @@
 			</c:choose>
 		</div>
 		<!-- 리뷰 상세 설명 -->
-		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
-			<div class="col-12 p-0 my-1">
-				<i class="col-1 fas fa-phone"></i>
-				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.TEL}</span>
-			</div>
-			<div class="col-12 p-0 my-1">
-				<i class="col-1 far fa-clock"></i>
-				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.SERVICETIME}</span>
-			</div>
-			<div class="col-12 d-flex flex-row p-0 my-1">
-				<i class="col-1 pt-1 fas fa-utensils"></i>
-				<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
-					<c:if test="${type eq 1}">
-						<c:forEach var="menu" items="${menu}"  varStatus="num">
-							<c:if test="${menu.name ne ''}">
-								<div class="col-md-6 col-12 p-0 d-flex">
-									<div class="col-8 p-0 m-0">
-										${menu.name}
-									</div>
-									<div class="col-4 p-0 m-0 text-center">
-										${String.format("%,3d", Integer.parseInt(menu.price))}원
-									</div>
-								</div>
-							</c:if>
-						</c:forEach>
-					</c:if>
-					<c:if test="${type eq 2}">
-						<c:forEach var="sub" items="${sub}"  varStatus="num">
-							<div class="col-5 p-0 m-0">
-								${medCategory.get(sub.intValue())}
-							</div>
-						</c:forEach>
-					</c:if>
+		<div class="d-flex flex-wrap col-md-8 col-12 order-1 ${type eq 3 ? 'order-md-1' : 'order-md-2'} mx-auto">
+			<c:if test="${type eq 1 || type eq 2}">
+				<div class="col-12 p-0 my-1">
+					<i class="col-1 fas fa-phone"></i>
+					<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.TEL}</span>
 				</div>
-			</div>
+				<div class="col-12 p-0 my-1">
+					<i class="col-1 far fa-clock"></i>
+					<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.SERVICETIME}</span>
+				</div>
+				<div class="col-12 d-flex flex-row p-0 my-1">
+					<i class="col-1 pt-1 fas fa-utensils"></i>
+					<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
+						<c:if test="${type eq 1}">
+							<c:forEach var="menu" items="${menu}"  varStatus="num">
+								<c:if test="${menu.name ne ''}">
+									<div class="col-md-6 col-12 p-0 d-flex">
+										<div class="col-8 p-0 m-0">
+											${menu.name}
+										</div>
+										<div class="col-4 p-0 m-0 text-center">
+											${String.format("%,3d", Integer.parseInt(menu.price))}원
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:if>
+						<c:if test="${type eq 2}">
+							<c:forEach var="sub" items="${sub}"  varStatus="num">
+								<div class="col-5 p-0 m-0">
+									${medCategory.get(sub.intValue())}
+								</div>
+							</c:forEach>
+						</c:if>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${reviewInfo.CONTENTS ne '내용없음'}">
+				<div class="col-12 d-flex flex-row p-0 my-1">
+					<i class="col-1 pt-1 far fa-comment-alt"></i> 
+					<div class="col-11 pl-1 font-weight-bold review-explanation-2">
+						${reviewInfo.CONTENTS}				
+					</div>
+				</div>
+			</c:if>
 			<div class="col-12 d-flex flex-row p-0 my-1">
 				<i class="col-1 pt-1 far fa-comment-alt"></i> 
 				<div class="col-11 pl-1 font-weight-bold review-explanation-2">
-					${reviewInfo.CONTENTS}				
+					<c:forEach var="option" items="${options}" varStatus="num">
+						<c:if test="${option.key ne ''}">
+							<div class="col-12 p-0 d-flex">
+								<div class="col-3 p-0 m-0">
+									${option.key}
+								</div>
+								<div class="col-9 p-0 m-0">
+									${option.value}
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

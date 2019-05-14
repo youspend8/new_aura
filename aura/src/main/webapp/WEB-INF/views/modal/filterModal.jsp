@@ -213,18 +213,78 @@
 							<!-- 전자제품  -->
 							<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 								<div class="pt-3">
-									<b style="font-size:18px;">검색 필터</b>
-									<div class="custom-control custom-radio d-flex justify-content-around py-2">
-									    <b>
-									        <input type="radio" class="custom-control-input" id="defaultGroupExample5" name="groupOfDefaultRadios">
-									        <label class="custom-control-label" for="defaultGroupExample5">평점순</label>
-									    </b>
-									    <b>
-									        <input type="radio" class="custom-control-input" id="defaultGroupExample6" name="groupOfDefaultRadios">
-									        <label class="custom-control-label" for="defaultGroupExample6">인기순</label>
-									    </b>
+								    <b style="font-size:18px;">검색 필터</b>
+								    <div class="custom-control custom-radio d-flex justify-content-around py-2">
+								        <b>
+								            <input type="radio" class="custom-control-input" id="grade7" name="digitalGroup" value="score" checked>
+								            <label class="custom-control-label" for="grade7">평점순</label>
+								        </b>
+								        <b>
+								            <input type="radio" class="custom-control-input" id="grade8" name="digitalGroup" value="pop">
+								            <label class="custom-control-label" for="grade8">인기순</label>
+								        </b>
+								        <b>
+								            <input type="radio" class="custom-control-input" id="grade9" name="digitalGroup" value="comments">
+								            <label class="custom-control-label" for="grade9">댓글수</label>
+								        </b>
+								    </div>
+								    <hr>
+								</div>
+								<div class="pt-1">
+								    <div class="pb-3">
+								        <b style="font-size:18px;">분류</b>
 									</div>
-									<hr>
+									
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<c:forEach var="category1" items="${digitalCategory[0]}" varStatus="i">
+										    <li class="nav-item">
+										        <a class="nav-link ${i.index == 0 ? 'active' : ''} text-dark" style="font-weight: bold;" id="${category1.name}-tab" data-toggle="tab" href="#${category1.name}" role="tab" aria-controls="${category1.name}"
+											    aria-selected="true">${category1.name}</a>
+											</li>
+										</c:forEach>
+									</ul>
+									
+									<input type="hidden" id="digital_category2_value" name="digiCategory2" value="0">
+									<div class="tab-content" id="myTabContent">
+										<c:forEach var="category1" items="${digitalCategory[0]}" varStatus="i">
+											<div class="tab-pane fade custom-control custom-checkbox px-0 py-2 ${i.index == 0 ? 'show active' : ''}" id="${category1.name}" role="tabpanel">
+												<div class="d-flex flex-row flex-wrap">
+													<c:forEach var="category2" items="${digitalCategory[1]}" varStatus="i">
+														<c:if test="${category2.category1Num eq category1.num}">
+															<a class="w-25 px-2 py-2" id="${category2.name}-tab" class="digital_category2" data-toggle="tab" href="#category2_${category2.num}" role="tab"
+																onclick="$('#digital_category2_value').val(${category2.num})">
+																${category2.name}
+															</a>
+														</c:if>
+													</c:forEach>
+												</div>
+												<hr>
+											</div>
+										</c:forEach>
+										<div class="pt-1">
+											<div class="pb-2">
+											    <b style="font-size:18px;">상세분류</b>
+											</div>
+							                
+											<div class="tab-content" id="myTabContent">
+											<c:forEach var="category2" items="${digitalCategory[1]}" varStatus="i">
+												<div class="tab-pane fade custom-control custom-checkbox px-0 py-2 ${i.index == 0 ? 'show active' : ''}" id="category2_${category2.num}" role="tabpanel">
+													<div class="d-flex flex-row flex-wrap">
+														<c:forEach var="category3" items="${digitalCategory[2]}" varStatus="j">
+															<c:if test="${category3.category2Num eq category2.num}">
+																<div class="w-25 pl-4">
+																	<input type="checkbox" class="custom-control-input" id="digital_${category3.num}_${j.index}" name="digiCategory3" value="${category3.num}">
+																	<label class="custom-control-label" for="digital_${category3.num}_${j.index}">${category3.name}</label>
+																</div>
+															</c:if>
+														</c:forEach>
+													</div>
+													<hr>
+												</div>
+											</c:forEach>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -235,3 +295,8 @@
 			</form>
 		</div>
 	</div>
+	<script>
+// 		function setValue(num) {
+// 			$('#digital_category2_value').val(num)
+// 		}
+	</script>

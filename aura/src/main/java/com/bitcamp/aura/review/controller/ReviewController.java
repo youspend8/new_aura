@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitcamp.aura.category.model.MedicalCategoryVO;
+import com.bitcamp.aura.category.service.DigitalCategoryService;
 import com.bitcamp.aura.category.service.HospitalCategoryService;
 import com.bitcamp.aura.category.service.MedicalCategoryService;
 import com.bitcamp.aura.category.service.RestaurantCategoryService;
@@ -57,6 +58,8 @@ public class ReviewController {
 	private MedicalCategoryService medCateService;
 	@Autowired
 	private HospitalCategoryService hospitalService;
+	@Autowired
+	private DigitalCategoryService digitalService;
 	
 	@RequestMapping(value = "/post")
 	public String post(Model model,
@@ -82,6 +85,13 @@ public class ReviewController {
 														.sorted((c1, c2) -> c1.getNum() > c2.getNum() ? 1 : -1)
 														.map(c -> c.getName())
 														.collect(Collectors.toList()));
+				break;
+			}
+			case 3: {
+				model.addAttribute("options", new Gson()
+						.fromJson((String) reviewInfo.get("OPTIONS"), HashMap.class)
+						.get("options"));
+				model.addAttribute("digitalCategory", digitalService.readAll());
 				break;
 			}
 		}
@@ -158,6 +168,7 @@ public class ReviewController {
 		model.addAttribute("hosCategory", hospitalService.readAll());
 		model.addAttribute("medCategory", medCateService.readAll());
 		model.addAttribute("locationCate", new Location()	.locationList());
+		model.addAttribute("digitalCategory", digitalService.readAll());
 		return "/reviewList";
 	}
 	
