@@ -2,6 +2,9 @@ package com.bitcamp.aura.comment.controller;
 
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,10 +34,15 @@ public class CommentController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	public String update(int commentNum, int type) {
+	public String update(int commentNum, int type,  HttpSession session) {
 	
 	 CommentVO comment=commentService.selectOne(commentNum);
 	 commentService.update(comment, type);
+	 HashMap<String, Object> param = new HashMap<>();
+	 param.put("comment_num", commentNum); 
+	 param.put("nickname", session.getAttribute("nickname"));
+	 System.out.println("@#$%@#$@#^#$%@#$"+param);
+	 commentService.likeControll(param, type);
 	 
 		return "1";
 	}

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
+
 <title>${reviewInfo.TITLE} - All Review</title>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
@@ -62,7 +63,6 @@
 				</c:if>
 			</div>
 		</c:if>
-		
 		<div class="col-md-4 col-12 p-0 d-flex flex-wrap align-items-start justify-content-center order-2 order-md-1">
 			<div class="col-md-12 col-8">
 				<div id="map" class="my-4" style="width:100%; height:250px;"></div>
@@ -100,33 +100,6 @@
 						</c:otherwise>
 					</c:choose>
 				</a>
-				<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal"> -->
-<!--   Launch demo modal -->
-<!-- </button> -->
-
-<!-- Modal -->
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <a href="javascript:;" id="kakao-link-btn"> 
-		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" /> <!-- 톡 이미지 부분이고, 전 kakaolink_btn_small.png로 불러왔습니다.   -->
-		</a>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 			</div>
 			<c:choose>
 				<c:when test="${nickname ne null}">
@@ -137,7 +110,6 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-	${reviewInfo}
 		<!-- 리뷰 상세 설명 -->
 		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
 			<div class="col-12 p-0 my-1">
@@ -182,7 +154,6 @@
 			</div>
 		</div>
 	</div>
-	
 <div class="mt-5 col-12" style="border-bottom: rgb(217, 217, 217) solid 1px;"></div>
 	
 </div>
@@ -226,7 +197,6 @@
 				</div>
 			</div>
 		</div>	
-
 		<div class="col-md-9 col-12 p-0 flex-column my-3">
 			<form id="commentForm" method="post" enctype="multipart/form-data">
 				<input id="review_post_num" name="review_post_num" value=${reviewInfo.NUM} style="display: none;">
@@ -552,6 +522,7 @@
 <!-- 		</div> -->
 
 		<!-- strat -->
+	
 		
 	<c:forEach var="commentList" items="${commentList }" varStatus="status">
 		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" id="home">
@@ -625,33 +596,37 @@
 			</div>
 
 			<div class="col-6 d-flex flex-wrap flex-row align-items-center">
-				<div class>${commentList.comment_Contents }
+				<div class>${commentList.comment_Contents } ${commentList.comment_Num}
 				 </div>
 				
 			</div>
 			
 			<div class="d-flex col-2 flex-column align-items-center justify-content-center ">
 				<a class="heartCl" commentNum="${commentList.comment_Num}">
-					<i class="fas fa-heart "  style="font-size: 40px" ></i>
+					<i class="fas fa-heart" commentNum="${commentList.comment_Num}" style="font-size: 40px"></i>
 				</a>
 				<p value="${commentList.comment_Like }" nickname="${nickname}">
-			
 					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
-					
 				</p>
 			</div>
 		</div>
 		
 	</c:forEach>
 	<script type="text/javascript">
-	
-			function addComma(num) {
-				 var regexp = /\B(?=(\d{3})+(?!\d))/g;
-			     return num.toString().replace(regexp, ',');
+		$(function() {
+			var userComments = ${userComments};
+			var heartCl = $('.heartCl');
+			for (var i = 0; i < userComments.length; i++) {
+				for (var j = 0; j < heartCl.length; j++) {
+					if (userComments[i].COMMENT_NUM == heartCl[j].children[0].attributes[1].value) {
+						heartCl[j].children[0].style.color = 'red'
+					}
+				}
+// 				}
 			}
-				
-			$('.heartCl').click(function(){
-				
+			
+
+			$('.heartCl').click(function(e){
 				if($(this).next().attr('nickname')!=""){
 					
 						if($(this).find("i").css('color')=='rgb(33, 37, 41)'){ 
@@ -712,7 +687,14 @@
 				}
 			})
 		
-		</script>
+		})
+			
+		function addComma(num) {
+			 var regexp = /\B(?=(\d{3})+(?!\d))/g;
+		     return num.toString().replace(regexp, ',');
+		}
+				
+	</script>
 <!-- 		끝 부분 -->
 
 </div>
@@ -725,8 +707,38 @@
     </a>
 </div>
 
-</div>
 
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">공유하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-around">
+		<!-- 카카오 공유하기  -->
+        <a href="javascript:;" id="kakao-link-btn"> 
+			<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="60px"/> <!-- 톡 이미지 부분이고, 전 kakaolink_btn_small.png로 불러왔습니다.   -->
+		</a>
+		<!-- 페이스북 공유하기  -->
+		<a href="javascript:shareFB();" class="fb" title="facebook 공유">
+			<img src="/img/all_review_img/facebook.png" width="60px">
+		</a>
+		<!-- 네이버 공유하기  -->
+		<a href="javascript:shareNaver();" class="fa" title="naver공유">
+			<img src="/img/all_review_img/naver.PNG" width="60px">
+		</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
@@ -768,45 +780,58 @@ geocoder.addressSearch('${reviewInfo.ADDR}', function(result, status) {
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
-    } 
+    }
 });    
 </script>
 <script type="text/javascript">
 
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
     Kakao.init('cec5c87f0e6a1c8fc2daedbc6a4c7d6b');
-    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
-    Kakao.Link.createDefaultButton({
-      container: '#kakao-link-btn',  // 컨테이너는 아까 위에 버튼이 쓰여진 부분 id 
-      objectType: 'feed',
-      content: {  // 여기부터 실제 내용이 들어갑니다. 
-        title: '${reviewInfo.TITLE}', // 본문 제목
-        description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',  // 본문 바로 아래 들어가는 영역?
-        imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png', // 이미지
-        link: {
-          mobileWebUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}',
-          webUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}'
-        }
-      },
-      social: {  /* 공유하면 소셜 정보도 같이 줄 수 있는데, 이 부분은 기반 서비스마다 적용이 쉬울수도 어려울 수도 있을듯 합니다. 전 연구해보고 안되면 제거할 예정 (망할 google  blogger...) */
-        likeCount: ${reviewInfo.GOODS},
-         commentCount: 45,
-        sharedCount: ${reviewInfo.SHARES}
-      },
-      buttons: [
-        {
-          title: '웹으로 보기',
-          link: {
-            mobileWebUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}',
-            webUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}'
-          }
-        }
- 
-      ]
-    });
-
+   	Kakao.Link.scrapImage({
+   		imageUrl: 'http://blogfiles.naver.net/20110429_219/tkddnr205_13040708461824PmvI_JPEG/tkddnr205_%2819%29.jpg'
+   	}).then(function(res) {
+       	// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+           Kakao.Link.createDefaultButton({
+             container: '#kakao-link-btn',  // 컨테이너는 아까 위에 버튼이 쓰여진 부분 id 
+             objectType: 'feed',
+             content: {  // 여기부터 실제 내용이 들어갑니다. 
+               title: '${reviewInfo.TITLE}', // 본문 제목
+               description: "${reviewInfo.CONTENTS.length() >= 40 ? reviewInfo.CONTENTS.substring(0, 40) : reviewInfo.CONTENTS}",  // 본문 바로 아래 들어가는 영역?
+               imageUrl: res.infos.original.url, // 이미지
+               link: {
+                 mobileWebUrl: location.href,
+                 webUrl: location.href
+               }
+             },
+             social: {  /* 공유하면 소셜 정보도 같이 줄 수 있는데, 이 부분은 기반 서비스마다 적용이 쉬울수도 어려울 수도 있을듯 합니다. 전 연구해보고 안되면 제거할 예정 (망할 google  blogger...) */
+               likeCount: ${reviewInfo.GOODS},
+               commentCount: ${reviewInfo.STARCOUNT},
+               sharedCount: ${reviewInfo.SHARES}
+             },
+             buttons: [
+               {
+                 title: '웹으로 보기',
+                 link: {
+//                    mobileWebUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}',
+//                    webUrl: 'http://localhost:8000/review/post?num=${reviewInfo.NUM}&type=${reviewInfo.TYPE}'
+                	 mobileWebUrl: location.href,
+                     webUrl: location.href
+                 }
+               }
+        
+             ]
+           });
+   	})
 </script> 
 <script>
+function shareFB() {
+	window.open('http://www.facebook.com/sharer/sharer.php?u=https://www.mangoplate.com/restaurants/B8CzA6i9Bb8Z',"zzzzzzzz",
+			"width=700, height=700, toolbar=no, menubar=no, scrollbars=yes, resizable=yes")
+}
+function shareNaver() {
+	window.open('https://share.naver.com/web/shareView.nhn?url=https://www.mangoplate.com&title=${reviewInfo.TITLE}','naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
+}
+	
 var flag1=true;
 var flag2=true;
 
@@ -817,12 +842,11 @@ var flag2=true;
 			if($(this).attr('value')=='' && ($(this).attr('id')=='bb'||$(this).attr('id')=='cc')){
 		
 					alert('해당기능은 회원만 이용가능합니다.')
-					$(this).attr("data-toggle","")
 					
 				}else{
 				
 					if($(this).css("color")!="rgb(33, 37, 41)"){
-						$(this).attr("data-toggle","")
+// 						$(this).attr("data-toggle","")
 						$(this).css("color","rgb(33, 37, 41)")
 					}else{
 						if($(this).attr('id')=='aa'){
@@ -844,7 +868,7 @@ var flag2=true;
 					
 				}
 				setTimeout(() => {
-					$(this).attr("data-toggle","modal")
+// 					$(this).attr("data-toggle","modal")
 					flag1=true;
 				}, 300);
 			}

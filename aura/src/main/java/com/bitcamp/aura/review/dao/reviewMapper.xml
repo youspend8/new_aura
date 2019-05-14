@@ -312,6 +312,14 @@
 		    REVIEW.TITLE AS title,
 		    REVIEW.CONTENTS AS contents,
 		    REVIEW.STARS AS stars,
+		    (
+			    SELECT
+			        COUNT(COMMENT_NUM)
+			    FROM
+			        USER_COMMENT
+			    WHERE
+			        USER_COMMENT.REVIEW_POST_NUM = REVIEW.NUM
+		    ) AS starCount,
 		    REVIEW.GOODS AS goods,
 		    REVIEW.BOOKMARK AS bookmark,
 		    REVIEW.SHARES AS shares,

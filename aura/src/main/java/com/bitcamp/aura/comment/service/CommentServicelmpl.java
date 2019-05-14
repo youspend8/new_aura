@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -130,5 +131,23 @@ public class CommentServicelmpl implements CommentService {
 		CommentVO comment = commentMapper.selectOne(comment_Num);
 		return comment;
 	}
+
+	@Override
+	public void likeControll(HashMap<String, Object> param, int type) {
+		if(type==1) {
+			commentMapper.insertLike(param);
+		}else {
+			commentMapper.deleteLike(param);
+		}
+		
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> selectLikeList(String nickname) {
+		ArrayList<HashMap<String, Object>> list = commentMapper.selectLikeList(nickname);
+
+		return list;
+	}
+
 
 }

@@ -7,6 +7,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	
+	<meta property="og:title" content="제목이다 새꺄" />
+	<meta property="og:url" content="http://localhost:8000/" />
+	<meta property="og:description" content="내용 설명" />
+	<meta property="og:image" content="https://search.naver.com/search.naver?sm=tab_hty.top&where=image&query=%EC%B1%84%EC%A7%80%EC%95%88&oquery=%EC%9D%B4%EB%AF%B8%EC%A7%80&tqi=ULC16wpVuFKssuPZ3gVssssssD8-515553#" />
+  	
   	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/js/popper.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>

@@ -1,5 +1,6 @@
 package com.bitcamp.aura.review.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -119,8 +120,13 @@ public class ReviewController {
 			isStar = listService.isShare(params2);
 			params2.setReviewType(3);
 			isLike = listService.isShare(params2);
+			//////////////////////@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@/////////////////////////////////////////////////
+			System.out.println("@@@@@@@@@@@@@$#$~!@#!%!#@#@!$%@#%@!#$#^#$$@#");////////////////////////////////////////////////
+			ArrayList<HashMap<String, Object>> userComments = commentService.selectLikeList((String)session.getAttribute("nickname"));
+			System.out.println(userComments);
+			model.addAttribute("userComments", new Gson().toJson(userComments));
 		}
-
+		
 		reviewInfo.put("isStar", isStar);
 		reviewInfo.put("isShare", isShare);
 		reviewInfo.put("isLike", isLike);

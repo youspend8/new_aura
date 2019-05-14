@@ -39,6 +39,31 @@
 		)
 	</insert>
 	
+	<insert id="insertLike" parameterType="java.util.HashMap">
+		insert into COMMENT_LIKE values(null, #{comment_num, jdbcType=NUMERIC}, #{nickname, jdbcType=VARCHAR})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="java.util.HashMap">
+		DELETE from 
+		
+			COMMENT_LIKE 
+			
+			WHERE COMMENT_NUM=#{comment_num, jdbcType=NUMERIC} and NICKNAME=#{nickname, jdbcType=VARCHAR}
+	</delete>
+	<select id="selectLikeList" parameterType="String" resultType="java.util.HashMap">
+		select 
+		
+			NUM as num, 
+			
+			COMMENT_NUM as comment_num, 
+			
+			NICKNAME as nickname 
+			
+				from COMMENT_LIKE 
+				
+					where NICKNAME=#{nickname, jdbcType=VARCHAR}
+	</select>
+	
 	<update id="update" parameterType="CommentVO">
 		UPDATE
 			USER_COMMENT

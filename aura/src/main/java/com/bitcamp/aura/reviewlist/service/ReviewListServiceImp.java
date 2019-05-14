@@ -37,8 +37,7 @@ public class ReviewListServiceImp implements ReviewListService{
 		ReviewListVO review =reviewMapper.selectByParams(param);
 	
 	
-		ReviewVO reviewUpdate=reviewMapperForUpdate.selectOneForUpdateByNum(params.getPostNum()); 
-		System.out.println("11111@@@@@@@@@"+reviewUpdate);
+		ReviewVO reviewUpdate = reviewMapperForUpdate.selectOneForUpdateByNum(params.getPostNum()); 
 		if(review==null) {
 			SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			params.setDate(sim.format(new Date()));
