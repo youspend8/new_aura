@@ -26,19 +26,32 @@
 	    	#{type, jdbcType=NUMERIC},
 	    	0
 	    )
-	    INTO PLACE_REVIEW (
-	    	NUM, ADDRESS1, TEL, SERVICE_TIME, WAITING_TIME, ADDRESS2, ADDRESS3, DETAIL_ADDR
-	    )
-	    VALUES (
-	    	#{num, jdbcType=NUMERIC},
-	    	#{address1, jdbcType=VARCHAR},
-	    	#{tel, jdbcType=VARCHAR},
-	    	#{serviceTime, jdbcType=VARCHAR},
-	    	#{waitingTime, jdbcType=VARCHAR},
-	    	#{address2, jdbcType=VARCHAR},
-	    	#{address3, jdbcType=VARCHAR},
-	    	#{detaileAddr, jdbcType=VARCHAR}
-	    )
+	    <if test="type == 1 or type == 2">
+		    INTO PLACE_REVIEW (
+		    	NUM, ADDRESS1, TEL, SERVICE_TIME, WAITING_TIME, ADDRESS2, ADDRESS3, DETAIL_ADDR
+		    )
+		    VALUES (
+		    	#{num, jdbcType=NUMERIC},
+		    	#{address1, jdbcType=VARCHAR},
+		    	#{tel, jdbcType=VARCHAR},
+		    	#{serviceTime, jdbcType=VARCHAR},
+		    	#{waitingTime, jdbcType=VARCHAR},
+		    	#{address2, jdbcType=VARCHAR},
+		    	#{address3, jdbcType=VARCHAR},
+		    	#{detaileAddr, jdbcType=VARCHAR}
+		    )
+	    </if>
+	    <if test="type == 3">
+		    INTO PRODUCTOR_REVIEW (
+		    	NUM, RELEASE, PRICE, PRODUCTOR
+		    )
+		    VALUES (
+		    	#{num, jdbcType=NUMERIC},
+		    	#{release, jdbcType=VARCHAR},
+		    	#{price, jdbcType=VARCHAR},
+		    	#{productor, jdbcType=VARCHAR}
+		    )
+	    </if>
 	    <if test="type == 1">
 		    INTO RESTAURANT_REVIEW(
 		    	NUM, RESTAURANT_CATEGORY, RESTAURANT_DELIVERY, RESTAURANT_TAKEOUT, RESTAURANT_MENU
@@ -62,6 +75,19 @@
 		    	#{subMedicalCategory, jdbcType=VARCHAR}
 		    )
 	    </if>
+	    <if test="type == 3">
+		    INTO DIGITAL_REVIEW (
+		    	NUM, MODEL, SUB_CATEGORY1, SUB_CATEGORY2, SUB_CATEGORY3, OPTIONS
+		    )
+		    VALUES (
+		    	#{num, jdbcType=NUMERIC},
+		    	#{model, jdbcType=NUMERIC},
+		    	#{subCategory1, jdbcType=NUMERIC},
+		    	#{subCategory2, jdbcType=NUMERIC},
+		    	#{subCategory3, jdbcType=NUMERIC},
+		    	#{options, jdbcType=VARCHAR}
+		    )
+	    </if>
 		SELECT
 		    *
 		FROM
@@ -69,13 +95,27 @@
 	</insert>
 	
 	<update id="updateReview" parameterType="ReviewVO">
-		update REVIEW set TITLE=#{title}, CONTENTS=#{contents}, STARS=#{stars}, GOODS=#{goods}, 
-		BOOKMARK=${bookmark},SHARES=#{shares}, READ_COUNT=#{readCount}, TYPE=#{type}, COMMENTS=#{comments} where NUM=#{num}
-<!-- 			update REVIEW set  GOODS=#{goods},BOOKMARK=${bookmark},SHARES=#{shares}	where NUM=#{num} -->
+		UPDATE
+			REVIEW
+		SET
+			TITLE = #{title},
+			CONTENTS = #{contents},
+			STARS = #{stars},
+			GOODS = #{goods}, 
+			BOOKMARK = ${bookmark},
+			SHARES = #{shares},
+			READ_COUNT = #{readCount},
+			TYPE = #{type},
+			COMMENTS = #{comments}
+		WHERE
+			NUM = #{num}
 	</update>
 	
 	<delete id="delete" parameterType="int">
-		
+		DELETE FROM
+			REVIEW
+		WHERE
+			NUM = #{num}
 	</delete>
 	
 	<select id="selectHospitalsByParams" parameterType="SearchParams" resultType="HospitalVo">
@@ -183,7 +223,81 @@
 	</select>
 	
 	<select id="selectDigitalsByParams" parameterType="SearchParams" resultType="DigitalVO">
-	
+		SELECT
+			*
+		FROM (
+			SELECT
+				ROWNUM rnum,
+				REVIEW.*
+			FROM (
+				SELECT
+				    REVIEW.NUM AS num,
+				    REVIEW.TITLE AS title,
+				    REVIEW.CONTENTS AS contents,
+				    NVL((
+					    SELECT
+					        AVG(COMMENT_SCORE)
+					    FROM
+					        USER_COMMENT
+					    WHERE
+					        USER_COMMENT.REVIEW_POST_NUM = REVIEW.NUM
+				    ), 0) AS stars,
+				    (
+					    SELECT
+					        COUNT(COMMENT_NUM)
+					    FROM
+					        USER_COMMENT
+					    WHERE
+					        USER_COMMENT.REVIEW_POST_NUM = REVIEW.NUM
+				    ) AS starCount,
+				    REVIEW.GOODS AS goods,
+				    REVIEW.BOOKMARK AS bookmark,
+				    REVIEW.SHARES AS shares,
+				    REVIEW.READ_COUNT AS readCount,
+				    REVIEW.ADD_DATE AS addDate,
+				    REVIEW.TYPE AS type,
+				    PRODUCTOR_REVIEW.RELEASE AS release,
+				    PRODUCTOR_REVIEW.PRICE AS price,
+				    PRODUCTOR_REVIEW.PRODUCTOR AS productor,
+				    DIGITAL_REVIEW.MODEL AS model,
+				    DIGITAL_REVIEW.SUB_CATEGORY1 AS subCategory1,
+				    DIGITAL_REVIEW.SUB_CATEGORY2 AS subCategory2,
+				    DIGITAL_REVIEW.SUB_CATEGORY3 AS subCategory3,
+				    DIGITAL_REVIEW.OPTIONS AS options
+				FROM 
+				    REVIEW 
+		        INNER JOIN 
+		            PRODUCTOR_REVIEW
+		        ON
+		            REVIEW.NUM = PRODUCTOR_REVIEW.NUM
+		        INNER JOIN
+		            DIGITAL_REVIEW
+		        ON
+		            PRODUCTOR_REVIEW.NUM = DIGITAL_REVIEW.NUM
+				WHERE
+					1 = 1
+		        <if test="keyword != null">
+			        AND
+			        	REVIEW.TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		        </if>
+		        <if test="digitalGroup != null and digitalGroup.equals('score')">
+		   			ORDER BY stars DESC
+		        </if>
+		        <if test="digitalGroup != null and digitalGroup.equals('comments')">
+		   			ORDER BY starCount DESC
+		        </if>
+			) REVIEW
+		)
+		WHERE 
+			1 = 1
+			<if test="start == 0">
+				AND
+					rnum BETWEEN 1 AND 5
+			</if>
+			<if test="start != 0">
+				AND
+					rnum BETWEEN #{start} AND #{end}
+		    </if>
 	</select>
 	
 	<select id="selectRestaurantsByParams" parameterType="SearchParams" resultType="RestaurantVO">
@@ -345,15 +459,14 @@
 			    HOSPITAL_REVIEW.SUB_MEDICAL_CATEGORY AS subCategory
 			</if>
 			<if test='type == 3'>
-			    PRODUCTOR_REVIEW.NUM AS num,
-			    PRODUCTOR_REVIEW.CATEGORY AS category,
 			    PRODUCTOR_REVIEW.PRICE AS price,
 			    PRODUCTOR_REVIEW.RELEASE AS release,
-			    DIGITAL_REVIEW.NUM AS num,
+			    PRODUCTOR_REVIEW.PRODUCTOR AS productor,
 			    DIGITAL_REVIEW.MODEL AS model,
 			    DIGITAL_REVIEW.SUB_CATEGORY1 AS subCategory1,
 			    DIGITAL_REVIEW.SUB_CATEGORY2 AS subCategory2,
-			    DIGITAL_REVIEW.SUB_CATEGORY3 AS subCategory3
+			    DIGITAL_REVIEW.SUB_CATEGORY3 AS subCategory3,
+			    DIGITAL_REVIEW.OPTIONS AS options
 			</if>
 		FROM 
 		    REVIEW

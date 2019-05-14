@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,8 +53,16 @@ public class ReviewRestApi {
 	public boolean write(
 			@RequestParam HashMap<String, Object> params,
 			@RequestParam("file") MultipartFile[] multipartFiles) {
+		System.out.println(params);
+		service.writeReview(params, multipartFiles);
+		return true;
+	}
+	
+	@DeleteMapping(value="/{num}")
+	public boolean delete(
+			@PathVariable("num") int num) {
 		
-		return service.writeReview(params, multipartFiles) == 1 ? true : false;
+		return service.deleteReview(num) == 1 ? true : false;
 	}
 	
 	@RequestMapping(value="/{num}/{type}")

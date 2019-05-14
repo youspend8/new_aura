@@ -6,7 +6,6 @@
 <jsp:include page="/WEB-INF/views/commons/header.jsp" />
 <title>${reviewInfo.TITLE} - All Review</title>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-${reviewInfo}
 <!-- 리뷰 항목 설명 및 사진, 지도 -->
 <div class="container d-flex flex-wrap p-md-2 px-1">
 	<div class="col-12 text-center font-weight-bold my-3 d-flex flex-row align-items-center justify-content-center" style="font-size: 40px; padding: 25px 0; border-bottom: 2px solid orange">
@@ -47,8 +46,7 @@ ${reviewInfo}
 						</div>
 					</c:forEach>
 				</div>
-				
-				<c:if test="${reviewInfo.FILES.size() > 3}">
+				<c:if test="o.FILES.size() > 3}">
 					<!--Controls-->
 					<a class="carousel-control-prev" href="#carousel-example-2"
 						role="button" data-slide="prev"> <span
@@ -63,11 +61,13 @@ ${reviewInfo}
 			</div>
 		</c:if>
 		
-		<div class="col-md-4 col-12 p-0 d-flex flex-wrap align-items-start justify-content-center order-2 order-md-1">
-			<div class="col-md-12 col-8">
-				<div id="map" class="my-4" style="width:100%; height:250px;"></div>
-				<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
-			</div>
+		<div class="col-md-4 col-12 p-0 d-flex flex-wrap align-items-start justify-content-center order-2 ${type eq 3 ? 'order-md-2' : 'order-md-1'}">
+			<c:if test="${type eq 1 || type eq 2}">
+				<div class="col-md-12 col-8">
+					<div id="map" class="my-4" style="width:100%; height:250px;"></div>
+					<div class="font-weight-bold text-center" style="font-size: 20px"> ${reviewInfo.ADDR} </div>
+				</div>
+			</c:if>
 			<div class="col-12 d-flex justify-content-center my-4">
 			
 			<a id="share" onclick="doReview(1)" data-toggle="modal" data-target="#centralModalSm">
@@ -135,45 +135,66 @@ ${reviewInfo}
 			</c:choose>
 		</div>
 		<!-- 리뷰 상세 설명 -->
-		<div class="d-flex flex-wrap col-md-8 col-12 order-1 order-md-2 mx-auto">
-			<div class="col-12 p-0 my-1">
-				<i class="col-1 fas fa-phone"></i>
-				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.TEL}</span>
-			</div>
-			<div class="col-12 p-0 my-1">
-				<i class="col-1 far fa-clock"></i>
-				<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.SERVICETIME}</span>
-			</div>
-			<div class="col-12 d-flex flex-row p-0 my-1">
-				<i class="col-1 pt-1 fas fa-utensils"></i>
-				<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
-					<c:if test="${type eq 1}">
-						<c:forEach var="menu" items="${menu}"  varStatus="num">
-							<c:if test="${menu.name ne ''}">
-								<div class="col-md-6 col-12 p-0 d-flex">
-									<div class="col-8 p-0 m-0">
-										${menu.name}
-									</div>
-									<div class="col-4 p-0 m-0 text-center">
-										${String.format("%,3d", Integer.parseInt(menu.price))}원
-									</div>
-								</div>
-							</c:if>
-						</c:forEach>
-					</c:if>
-					<c:if test="${type eq 2}">
-						<c:forEach var="sub" items="${sub}"  varStatus="num">
-							<div class="col-5 p-0 m-0">
-								${medCategory.get(sub.intValue())}
-							</div>
-						</c:forEach>
-					</c:if>
+		<div class="d-flex flex-wrap col-md-8 col-12 order-1 ${type eq 3 ? 'order-md-1' : 'order-md-2'} mx-auto">
+			<c:if test="${type eq 1 || type eq 2}">
+				<div class="col-12 p-0 my-1">
+					<i class="col-1 fas fa-phone"></i>
+					<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.TEL}</span>
 				</div>
-			</div>
+				<div class="col-12 p-0 my-1">
+					<i class="col-1 far fa-clock"></i>
+					<span class="col-11 p-0 font-weight-bold" style="font-size: 20px;">${reviewInfo.SERVICETIME}</span>
+				</div>
+				<div class="col-12 d-flex flex-row p-0 my-1">
+					<i class="col-1 pt-1 fas fa-utensils"></i>
+					<div class="col-11 pl-1 d-flex flex-wrap font-weight-bold" style="font-size: 20px;">
+						<c:if test="${type eq 1}">
+							<c:forEach var="menu" items="${menu}"  varStatus="num">
+								<c:if test="${menu.name ne ''}">
+									<div class="col-md-6 col-12 p-0 d-flex">
+										<div class="col-8 p-0 m-0">
+											${menu.name}
+										</div>
+										<div class="col-4 p-0 m-0 text-center">
+											${String.format("%,3d", Integer.parseInt(menu.price))}원
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>
+						</c:if>
+						<c:if test="${type eq 2}">
+							<c:forEach var="sub" items="${sub}"  varStatus="num">
+								<div class="col-5 p-0 m-0">
+									${medCategory.get(sub.intValue())}
+								</div>
+							</c:forEach>
+						</c:if>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${reviewInfo.CONTENTS ne '내용없음'}">
+				<div class="col-12 d-flex flex-row p-0 my-1">
+					<i class="col-1 pt-1 far fa-comment-alt"></i> 
+					<div class="col-11 pl-1 font-weight-bold review-explanation-2">
+						${reviewInfo.CONTENTS}				
+					</div>
+				</div>
+			</c:if>
 			<div class="col-12 d-flex flex-row p-0 my-1">
 				<i class="col-1 pt-1 far fa-comment-alt"></i> 
 				<div class="col-11 pl-1 font-weight-bold review-explanation-2">
-					${reviewInfo.CONTENTS}				
+					<c:forEach var="option" items="${options}" varStatus="num">
+						<c:if test="${option.key ne ''}">
+							<div class="col-12 p-0 d-flex">
+								<div class="col-3 p-0 m-0">
+									${option.key}
+								</div>
+								<div class="col-9 p-0 m-0">
+									${option.value}
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -523,7 +544,7 @@ ${reviewInfo}
 		<!-- strat -->
 		
 	<c:forEach var="commentList" items="${commentList }" varStatus="status" end="4">
-		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" id="home">
+		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" id="home_${commentList.comment_Num }">
 		
 		
 			<div
@@ -560,22 +581,20 @@ ${reviewInfo}
 				<c:if test="${commentList.files[0] ne null }">
 					<div id="carouselExampleFade-${status.index }" class="carousel slide carousel-fade"
 						data-ride="carousel">
-						<div class="carousel-inner user-picture" style="width:168px; height:123px;">
-							
-								<div class="carousel-item active">
-									<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
+						<div class="carousel-inner" style="width:168px; height:123px;">
+								<div class="carousel-item active sample_image">
+									<img class="d-block user-review-img" style="width:168px; height:123px;"
 											src="${commentList.files[0].comment_File}">
 								</div>
 	
 								<c:forEach var="files" items="${commentList.files }" begin="1">
 									<c:if test="${files ne null}">
-										<div class="carousel-item">
-													<img class="materialboxed d-block user-review-img" style="width:168px; height:123px;"
+										<div class="carousel-item big sample_image">
+											<img class="d-block user-review-img" style="width:168px; height:123px;" 
 														src="${files.comment_File}">
 										</div>
 									</c:if>
 								</c:forEach>
-							
 						</div>
 						
 						<a class="user-photo-button-left carousel-control-prev"
@@ -608,20 +627,40 @@ ${reviewInfo}
 					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 					
 				</p>
-				<div class="w-50 d-flex mt-5 justify-content-between">
-					<a>수정</a>
-					<a>삭제</a>
-			   </div>
+				<c:if test="${nickname eq commentList.nickname}">
+					<div id="session_Comment" class="w-50 d-flex mt-5 justify-content-between">
+					<input type="hidden" value="" name="">
+					<input type="hidden" value="" name="">
+					
+						<button id="update_Comment" style="border:0; outline:0; opacity: 0.3; padding: 0"
+							onclick='update_Area(${commentList.comment_Num }, "${commentList.comment_Contents}", "${commentList.files}")'>수정</button>
+							
+						
+						<button id="delete_Comment" style="border:0; outline:0; opacity: 0.3; padding: 0">삭제</button>
+				   </div>
+				</c:if>
 			</div>
 			
-			
-			
-		</div>
 		
+	
+		</div>
+	
+		<div class="container d-flex flex-wrap" id="update_area_${commentList.comment_Num }">
+		
+		
+		
+		</div>
+	
+	
 	</c:forEach>
 	
-	<script type="text/javascript">
 	
+</div>
+	
+	
+	
+	<script type="text/javascript">
+		
 			function addComma(num) {
 				 var regexp = /\B(?=(\d{3})+(?!\d))/g;
 			     return num.toString().replace(regexp, ',');
@@ -689,15 +728,8 @@ ${reviewInfo}
 				}
 			})
 			
-			
-			
-			 $(document).ready(function(){
-			    $('.materialboxed').materialbox();
-			  });
-		
 		</script>
 
-</div>
 
 <div class="my-3 col-12" style="border-bottom: rgb(217, 217, 217) solid 1px;"></div>
 <div id="review_more" class="d-flex col-12 justify-content-center align-items-center bg-white py-3 my-5">
@@ -712,12 +744,6 @@ ${reviewInfo}
 
 <jsp:include page="/WEB-INF/views/commons/footer.jsp" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=53d46cec9bd19a0835b7c8bc8150a448&libraries=services"></script>
-  
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
-<script type="text/javascript" src="/js/radialprogress.js"></script>
-
 <script type="text/javascript">
 
 	function addComma(num) {
@@ -967,7 +993,30 @@ var flag2=true;
             
         });
         
-        $
+        function update_Form(){
+            $('#update_form').css('display', 'flex');
+            $('#update_form').css('border-bottom', '2px solid #dadee6');
+            $('#update_form').animate({
+                height: '520px'
+            }, 400);
+        };
+        
+        function update_Form_Cancel(){
+        	$('#update_form').animate({
+                height: '0px'
+            }, 300);
+        	setTimeout(() => {
+        	$('#update_form').remove();
+			}, 200);
+        }
+        
+//         $('#update_write_cancel').on('click', () => {
+//         	alert('gdgd');
+//             $('#update_form').animate({
+//                 height: '0px'
+//             }, 300);
+//         });
+        
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
         	var comment = $('#comment').val();
@@ -985,15 +1034,6 @@ var flag2=true;
         	
         });
         
-        
-// 		for (var i = 1; i <= 5; i++){
-// 			$('#star' + i).hover(function(){ // 별 마우스호버 이벤트
-// 	        	$(this).removeClass().addClass('fas fa-star');
-// 	        }, function(){
-// 	        		$(this).removeClass().addClass('far fa-star');
-// 	        	});
-// 		}
-		
 		$('#star1').click(function(){
 			$('#grade').val('1');
 			$('#star1').removeClass().addClass('fas fa-star');
@@ -1078,18 +1118,171 @@ $('#review_more').on('click', function(){
 		
 		
 		
-	})
+	});
+	
+function update_Area(num, contents, files) {
+	if ($('#update_form').css('display') != null){
+		return alert('이미 수정중인 댓글이 있습니다.');
+	};
+	var update_Tag =
+		'<div id="update_form" class="col-12 flex-column align-items-center" style="display:none; height:0px;">'
+		 + '<button id="update_write_cancel" type="button" class="btn btn-light d-none d-md-block text-center w-100 m-0" onclick="update_Form_Cancel(this)">'
+		 +	'댓글 작성창 접기 <i class="fas fa-arrow-up"></i>'
+		 + '</button>'
+		 + '<div class="col-md-9 col-12 p-0 flex-column mt-5">'
+		 + '<form id="updateForm" method="post" enctype="multipart/form-data">'
+				+ '<input id="review_post_num" name="review_post_num" value=' + num + ' style="display: none;">'
+				+ '<input id="grade" name="grade" value="0" style="display: none;">'
+				
+				+ '<textarea rows="6" class="form-control px-2" id="comment" name="comment" autofocus>' + contents + '</textarea>'
+				+ '<div class="d-flex flex-wrap justify-content-between mt-3">'
+				+	'<div class="star-box d-flex align-items-center">'
+					
+						+ '<a class="far fa-star" id="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+					+ '</div>'
+					+ '<input type="button" class="btn btn-warning" value="수정하기" onclick="update_Submit();">'
+				
+				+ '</div>'
+				+ '<div id="update_comment_image" class="d-flex col-12 p-0 my-3">'
+					+ '<div class="mr-2" style="width: 20%;">'
+						+ '<label for="update_comment_file" class="filebox">'
+							+ '<a>'
+								+ '<img src="/img/addfile.png" id="update_img22" class="w-100" style="border: 2px dotted #b8bcc4">'
+								+ '<input type="file" id="update_comment_file" name="update_comment_file" accept="image/*">'
+							+ '</a>'
+						+ '</label>'
+					+ '</div>'
+					
+				+ '</div>'
+			+ '</form>'
+			
+		+ '</div>'
+	+ '</div>';
+	$('#update_area_' + num).append(update_Tag);
+	update_Form();
+};
+
+function update_Submit(){
+	alert('업데이트 완료 !');
+}
+
+var update_files = new Array();
+var update_previewIndex = 0;
+var update_deleteIndex = 0;
+var update_test = 0;
+var update_j = 0;
+
+function update_addPreview(input) {
+	
+	image_Exists : if (input[0].files) {
+		
+        //파일 선택이 여러개였을 시의 대응
+        for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
+            var file = input[0].files[fileIndex];
+            var reader = new FileReader();
+            
+            if (files.length >= 4){
+				alert('최대 4개까지 이미지를 등록 할 수 있습니다.');
+				break image_Exists;
+			}
+            
+            for (var i = 0; i < test; i++){
+            	if (files[i].name == input[0].files[fileIndex].name){
+            		alert(input[0].files[fileIndex].name + ' 는 이미 업로드된 이미지입니다.');
+            		break image_Exists;
+            	}
+            };
+            
+            update_files[test] = file;
+            update_reader.readAsDataURL(file);
+            update_test++;
+            
+            reader.onload = function(img) {
+            	var imgNum = update_previewIndex++;
+            	var deleteNum = update_deleteIndex++;
+            	
+        		if (files[i].name != null) {
+        			$("#update_comment_image")
+                    .append(
+                            "<div class=\"preview-box mr-2 view overlay\" style=\"width:20%;\" value=\"" + deleteNum +"\">"
+                                    + "<img class=\"thumbnail w-100 img-fluid\" style=\"height:159.13px;\" src=\"" + img.target.result + "\"\/>"
+                                    + "<div class=\"mask flex-center waves-effect waves-light rgba-red-strong\" style=\"height:159.13px;\">"
+                                    + "<a style=\"font-size:19px; display:flex; justify-content: center; align-items: center\" class=\"white-text w-100 h-100\" id=\"" + deleteNum + "\"  value=\"" + files[imgNum].name + "\" onclick=\"deletePreview(this)\">"
+                                    + "삭제" + "</a>" + "</div>" + "</div>");
+        		}
+            	
+            };
+        }
+    } else
+        alert('invalid file input'); // 첨부클릭 후 취소시의 대응책 세우지 않았음
+}
+
+$('#update_comment_file').change(function() {
+	update_addPreview($(this));
+});
+
+function deletePreview(obj) {	// 미리보기 사진 삭제
+var deleteNum = obj.attributes['id'].value;
+var imgId = obj.attributes['value'].value;
+
+for (var i in files){
+	if(files[i].name == imgId){
+		files.splice(i, 1);
+		test--;
+		previewIndex--;
+	}
+};
+
+$("#comment_image .preview-box[value=" + deleteNum + "]").remove();
+}
 
 
 
-
-
-
-
-
-
-
-
+function fileSubmit(){ // 멀티파트 파일 업로더
+	
+	 if($('#grade').val() == 0){
+     	return alert('별점을 주세요');
+     };
+	
+	var comment = $('#comment').val();
+	var formData = new FormData($('#commentForm')[0]);
+	
+	for (var index = 0; index < Object.keys(files).length; index++){
+        formData.append('files',files[index]);
+	};
+	
+	if (comment == "") {
+		alert('내용을 입력해주세요.');
+	} else {
+		$.ajax({
+	            url : "/comment/write",
+				type : "post",
+				data : formData,
+				processData : false,
+				contentType : false,
+				
+				success: function(data){
+					if (data != ""){
+					alert(data);
+					return;
+					}
+					
+					$('#comment').val('');
+					$('#grade').val('0')
+					location.reload();
+				},
+				error : function(error) {
+					alert("파일업로드 실패");
+					console.log(error);
+					console.log(error.status);
+				}
+	        });
+	}
+}
 
 
 </script>
@@ -1208,7 +1401,6 @@ $('#review_more').on('click', function(){
    	        });
     	}
     }
-	
 </script>
 <style>
 	.filebox input[type="file"] { /* 파일 필드 숨기기 */
@@ -1233,6 +1425,7 @@ $('#review_more').on('click', function(){
 		display: none;
 		height: 0px;
 	}
+	
 	@media (max-width: 767.9px) {
 		#img22 {
 			height: 100px;
@@ -1242,5 +1435,4 @@ $('#review_more').on('click', function(){
 			height: 100%;
 		}
 	}
-
 </style>

@@ -20,4 +20,5 @@ public class DigitalVO extends ProductorVO {
 	private String subCategory1;
 	private String subCategory2;
 	private String subCategory3;
+	private String options;
 }

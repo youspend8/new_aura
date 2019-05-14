@@ -56,7 +56,6 @@ public class NoticeRestApi {
 	
 	@DeleteMapping(value="/{num}")
 	public boolean delete(@PathVariable("num") int num) {
-		System.out.println("num :"+num);
 		
 		return service.deleteNotice(num) == 1 ? true : false;
 	}
