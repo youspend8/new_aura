@@ -522,7 +522,7 @@
 		<!-- strat -->
 		
 	<c:forEach var="commentList" items="${commentList }" varStatus="status" end="4">
-		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" id="home">
+		<div class="col-12 my-3 d-md-flex d-none flex-wrap fade show active" id="home_${commentList.comment_Num }">
 		
 		
 			<div
@@ -605,20 +605,36 @@
 					<fmt:formatNumber value="${commentList.comment_Like }" pattern="#,###"/>
 					
 				</p>
-				<div class="w-50 d-flex mt-5 justify-content-between">
-					<a>수정</a>
-					<a>삭제</a>
-			   </div>
+				<c:if test="${nickname eq commentList.nickname}">
+					<div id="session_Comment" class="w-50 d-flex mt-5 justify-content-between">
+					<input type="hidden" value="" name="">
+					<input type="hidden" value="" name="">
+					
+						<button id="update_Comment" style="border:0; outline:0; opacity: 0.3; padding: 0"
+							onclick='test2(${commentList.comment_Num }, "${commentList.comment_Contents}", "${commentList.files}")'>수정</button>
+							
+						
+						<button id="delete_Comment" style="border:0; outline:0; opacity: 0.3; padding: 0">삭제</button>
+				   </div>
+				</c:if>
 			</div>
 			
-			
-			
-		</div>
 		
+	<div id="update_area_${commentList.comment_Num }">
+	
+	
+	
+	</div>
+	
+		</div>
+	
 	</c:forEach>
 	
-	<script type="text/javascript">
 	
+	
+	
+	<script type="text/javascript">
+		
 			function addComma(num) {
 				 var regexp = /\B(?=(\d{3})+(?!\d))/g;
 			     return num.toString().replace(regexp, ',');
@@ -952,7 +968,26 @@ var flag2=true;
             
         });
         
-        $
+        function update_Form(){
+            $('#write_form').animate({
+                height: '520px'
+            }, 400);
+            $('#update_form').css('display', 'flex');
+            $('#update_form').css('border-bottom', '2px solid #dadee6');
+        };
+        
+        $('#update_write_cancel').on('click', () => {
+            $('#update_form').animate({
+                height: '0px'
+            }, 300);
+            // $('#write_form').css('visibility', 'hidden');
+            setTimeout(() => {
+                $('#update_form').css('display', 'none');
+                $('#update_form').css('border-bottom', '');
+            }, 180);
+        });
+        
+        
         $('#comment').on('keyup', function(){ // 댓글에 내용이 있는지 (확인 CSS 이벤트)
         	
         	var comment = $('#comment').val();
@@ -970,15 +1005,6 @@ var flag2=true;
         	
         });
         
-        
-// 		for (var i = 1; i <= 5; i++){
-// 			$('#star' + i).hover(function(){ // 별 마우스호버 이벤트
-// 	        	$(this).removeClass().addClass('fas fa-star');
-// 	        }, function(){
-// 	        		$(this).removeClass().addClass('far fa-star');
-// 	        	});
-// 		}
-		
 		$('#star1').click(function(){
 			$('#grade').val('1');
 			$('#star1').removeClass().addClass('fas fa-star');
@@ -1063,7 +1089,59 @@ $('#review_more').on('click', function(){
 		
 		
 		
-	})
+	});
+	
+function test2(num, contents, files) {
+	console.dir(num);
+	console.dir(contents);
+	console.dir(files);
+	var update_Tag =
+		'<div id="update_form" class="col-12 flex-column align-items-center">'
+		 + '<button id="update_write_cancel" type="button" class="btn btn-light d-none d-md-block text-center w-100 m-0">'
+		 +	'댓글 작성창 접기 <i class="fas fa-arrow-up"></i>'
+		 + '</button>'
+		 + '<div class="col-md-9 col-12 p-0 flex-column mt-5">'
+		 + '<form id="updateForm" method="post" enctype="multipart/form-data">'
+				+ '<input id="review_post_num" name="review_post_num" value=' + num + ' style="display: none;">'
+				+ '<input id="grade" name="grade" value="0" style="display: none;">'
+				
+				+ '<textarea rows="5" class="form-control px-2" id="comment" name="comment" autofocus>' + contents + '</textarea>'
+				+ '<div class="d-flex flex-wrap justify-content-between mt-3">'
+				+	'<div class="star-box d-flex align-items-center">'
+					
+						+ '<a class="far fa-star" id="star1" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star2" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star3" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star4" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+						+ '<a class="far fa-star" id="star5" style="font-size: 30px; color: rgb(255, 153, 0);"></a>'
+					+ '</div>'
+					+ '<input id="comment_submit" type="button" class="btn btn-warning" value="수정하기" onclick="fileSubmit();">'
+				
+				+ '</div>'
+				+ '<div id="comment_image" class="d-flex col-12 p-0 my-3">'
+					+ '<div class="mr-2" style="width: 20%;">'
+						+ '<label for="comment_file" class="filebox">'
+							+ '<a>'
+								+ '<img src="/img/addfile.png" id="img22" class="w-100" style="border: 2px dotted #b8bcc4">'
+								+ '<input type="file" id="comment_file" name="comment_file" accept="image/*">'
+							+ '</a>'
+						+ '</label>'
+					+ '</div>'
+					
+				+ '</div>'
+			+ '</form>'
+			
+		+ '</div>'
+	+ '</div>';
+	$('#home_' + num).remove();
+	$('#update_area_' + num).append(update_Tag);
+};
+
+function update(){
+	
+}
+
+
 
 
 </script>
