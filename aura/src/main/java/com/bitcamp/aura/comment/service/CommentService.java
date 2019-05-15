@@ -10,12 +10,11 @@ import com.bitcamp.aura.comment.model.CommentFileVO;
 import com.bitcamp.aura.comment.model.CommentVO;
 
 public interface CommentService {
-	public void likeControll(HashMap<String, Object> param, int type);
 	public String insert_Comment(MultipartHttpServletRequest comment);
 	public String delete_Comment();
 	public void update (CommentVO comment,int type);
-	public ArrayList<HashMap<String, Object>> selectLikeList(String nickname);
 	public String selectAll_Comment();
+	public List<CommentVO> more_Comment(HashMap<String, Object> params);
 	public CommentVO selectOne(int comment_Num);
 	public List<CommentFileVO> selectFilesByNum(int num);
 	public List<CommentVO> selectAllByNum(int postNum);

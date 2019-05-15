@@ -17,6 +17,7 @@ import lombok.ToString;
 public class ProductorVO extends ReviewVO {
 	private int num;
 	private int category;
+	private String productor;
 	private String release;
 	private int price;
 }

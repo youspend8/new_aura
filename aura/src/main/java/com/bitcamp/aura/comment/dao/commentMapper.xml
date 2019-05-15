@@ -39,31 +39,6 @@
 		)
 	</insert>
 	
-	<insert id="insertLike" parameterType="java.util.HashMap">
-		insert into COMMENT_LIKE values(null, #{comment_num, jdbcType=NUMERIC}, #{nickname, jdbcType=VARCHAR})
-	</insert>
-	
-	<delete id="deleteLike" parameterType="java.util.HashMap">
-		DELETE from 
-		
-			COMMENT_LIKE 
-			
-			WHERE COMMENT_NUM=#{comment_num, jdbcType=NUMERIC} and NICKNAME=#{nickname, jdbcType=VARCHAR}
-	</delete>
-	<select id="selectLikeList" parameterType="String" resultType="java.util.HashMap">
-		select 
-		
-			NUM as num, 
-			
-			COMMENT_NUM as comment_num, 
-			
-			NICKNAME as nickname 
-			
-				from COMMENT_LIKE 
-				
-					where NICKNAME=#{nickname, jdbcType=VARCHAR}
-	</select>
-	
 	<update id="update" parameterType="CommentVO">
 		UPDATE
 			USER_COMMENT
@@ -96,6 +71,34 @@
 		FROM
 			USER_COMMENT
 	</select>
+	<select id="moreComment" parameterType="java.util.HashMap" resultType="CommentVO">
+		SELECT
+			RESULT.*
+		FROM (
+			SELECT
+				ROWNUM AS rnum,
+				TEMP.*
+			FROM (
+				SELECT
+					USER_COMMENT.COMMENT_NUM AS comment_Num,
+					USER_COMMENT.NICKNAME AS nickname,
+					USER_COMMENT.COMMENT_CONTENTS AS comment_Contents,
+					USER_COMMENT.COMMENT_LIKE AS comment_Like,
+					USER_COMMENT.COMMENT_SCORE AS comment_Score,
+					USER_ACCOUNT.PROFILE AS profile
+				FROM
+					USER_COMMENT
+				INNER JOIN
+					USER_ACCOUNT
+				ON
+					USER_COMMENT.NICKNAME = USER_ACCOUNT.NICKNAME
+				ORDER BY USER_COMMENT.COMMENT_NUM DESC
+			) TEMP
+		) RESULT
+		WHERE 1 = 1
+			AND
+				rnum BETWEEN #{start} AND #{end}
+	</select>
 	
 	<select id="selectAllByNum" parameterType="int" resultType="CommentVO">
 		SELECT
@@ -103,7 +106,7 @@
 		FROM
 			USER_COMMENT
 		WHERE
-			REVIEW_POST_NUM=#{postNum} ORDER BY COMMENT_NUM
+			REVIEW_POST_NUM=#{postNum} ORDER BY COMMENT_NUM DESC
 	</select>
 	<select id="selectFilesByNum" parameterType="int" resultType="CommentFileVo">
 		SELECT
@@ -113,11 +116,4 @@
 		WHERE
 			COMMENT_NUM = #{num}
 	</select>
-
-
-
-
-
-
-
 </mapper>

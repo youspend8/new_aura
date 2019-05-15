@@ -40,13 +40,15 @@
 				</div>
 			</div>
 	
-			<!-- 지도 -->
-			<div class="col-12">
-				<div id="map" class="w-100" style="height:400px;"></div>
-			</div>
+			<c:if test="type == 1 || type == 2">
+				<!-- 지도 -->
+				<div class="col-12">
+					<div id="map" class="w-100" style="height:400px;"></div>
+				</div>
+				<div class="my-2" style="border-bottom: rgb(217, 217, 217) solid 1px;">
+				</div>
+			</c:if>
 			
-			<div class="my-5" style="border-bottom: rgb(217, 217, 217) solid 1px;">
-			</div>
 	      
 	    	<!-- 게시글의 사진 및 내용 -->
 		   	<c:forEach items="${list}" var="review" varStatus="i">
@@ -87,17 +89,17 @@
 						    <a href="/review/post?num=${review.num}&type=${review.type}" class="text-dark">
 						    	<h5 class="board_list_title mb-1">
 						    		${review.title}
-							    	<c:if test="${type == 1}">
+							    	<c:if test="${type eq 1}">
 									    <span style="color: gray; font-size: 12px;">
 								    		<c:forEach var="cate" items="${restCategory}" varStatus="i">
 												<c:if test="${review.category eq i.index}">${cate.name}</c:if>
 								    		</c:forEach>
 										</span>
 									</c:if>
-							    	<c:if test="${type == 2}">
+							    	<c:if test="${type eq 2}">
 									    <span style="color: gray; font-size: 12px;">
-								    		<c:forEach var="cate" items="${hosCategory}" varStatus="i">
-												<c:if test="${review.hospitalCategory eq i.index}">${cate.name}</c:if>
+								    		<c:forEach var="cate" items="${hosCategory}" varStatus="j">
+												<c:if test="${review.hospitalCategory eq j.index}">${cate.name}</c:if>
 								    		</c:forEach>
 										</span>
 									</c:if>
@@ -109,11 +111,38 @@
 									</c:if>
 						    	</h5>
 						    </a>
-						    <span style="float:right; font-size:2rem;">
-						      <a style="color:rgb(0, 102, 255)"><i class="far fa-star"></i></a>
-						    </span>
-						
+<!-- 즐겨찾기 별부분  -->
+						    <form style="float:right; font-size:2rem;" class="favostar">
+								<a style="color:rgb(33, 37, 41)"  >
+								</a>
+						      	<input type="hidden" name="postNum" value="${review.num}">
+								<button class="p-0 m-0" type="submit" style="border: none; background-color: white">
+									<c:choose>
+										<c:when test="${reviewList[review.num] eq null}">
+											<i class="fas fa-star"></i>
+										</c:when>
+										<c:otherwise>
+											<i class="fas fa-star" style="color: #f9ca24"></i>
+										</c:otherwise>
+									</c:choose>
+								</button>
+						    </form>
 						</div>
+						
+							
+						
+<%-- 									<c:choose> --%>
+<%-- 									<c:when test ="${flag eq true}"> --%>
+<!-- 									<i class="fas fa-star" style ="color: #f9ca24"></i> -->
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 									<i class="fas fa-star"></i> -->
+<%-- 									</c:otherwise> --%>
+<%-- 									</c:choose> --%>
+	
+<!-- 검색 후 즐겨찾기 부분	-->
+			
+
 						
 						<div class="my-1">
 						    <span>
@@ -142,20 +171,44 @@
 						    	Reviews
 						    </span>
 						</div>
-						<div class="my-2" style="font-weight:bolder">
-							<i class="fas fa-phone"></i>
-							<span>${review.tel}</span> 
-						</div>
-						<div class="my-2" style="font-weight:bolder">
-							<i class="fas fa-location-arrow"></i>
-							<span>${review.addr}</span>
-						</div>
-						<div class="my-2" style="font-weight:bolder;">
-							<i class="fas fa-clipboard-list mr-1"></i>
-							<span>
-								${review.contents}
-							</span>
-						</div>
+						<c:if test="${type eq 1 || type == 2}">
+							<div class="my-2" style="font-weight:bolder">
+								<i class="fas fa-phone"></i>
+								<span>${review.tel}</span> 
+							</div>
+							<div class="my-2" style="font-weight:bolder">
+								<i class="fas fa-location-arrow"></i>
+								<span>${review.addr}</span>
+							</div>
+							<div class="my-2" style="font-weight:bolder;">
+								<i class="fas fa-clipboard-list mr-1"></i>
+								<span>
+									${review.contents}
+								</span>
+							</div>
+						</c:if>
+						<c:if test="${type eq 3}">
+							<div class="my-2" style="font-weight:bolder">
+								<span>카테고리 : </span> 
+								<span>${digitalCategory[0][review.subCategory1].name}</span> 
+								<span>-</span> 
+								<span>${digitalCategory[1][review.subCategory2].name}</span> 
+								<span>-</span> 
+								<span>${digitalCategory[2][review.subCategory3].name}</span> 
+							</div>
+							<div class="my-2" style="font-weight:bolder">
+								<span>제조사 : </span> 
+								<span>${review.productor}</span> 
+							</div>
+							<div class="my-2" style="font-weight:bolder">
+								<span>출시일 : </span> 
+								<span>${review.release}</span> 
+							</div>
+							<div class="my-2" style="font-weight:bolder">
+								<span>모델명 : </span> 
+								<span>${review.model}</span> 
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>
@@ -165,9 +218,16 @@
 			<span class="badge badge-pill align-middle ml-1" style="font-size: 12px; background-color: red">
 				NEW
 			</span>
-			<span style="font-size: 12px;">
-			: 이번달 신규 등록 지점
-			</span>
+			<c:if test="${type eq 1 || type == 2}">
+				<span style="font-size: 12px;">
+					: 이번달 신규 등록 지점
+				</span>
+			</c:if>
+			<c:if test="${type eq 3}">
+				<span style="font-size: 12px;">
+					: 이번달 신규 출시 제품
+				</span>
+			</c:if>
 		</div>
 		<div id="review_more" class="d-flex col-12 justify-content-center align-items-center bg-white py-3 my-5">
 		    <a id="more_button" class="text-center" style="text-decoration: none">
@@ -186,6 +246,69 @@
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6060ab38dd0e3fd90aaea5e539c8172e&libraries=services"></script>
 	<script type="text/javascript" src="/js/radialprogress.js"></script>
+	
+<!-- 	  <span style="float:right; font-size:2rem;" id="favostar" value=${nickname} > -->
+
+<!-- 						      <a style="color:rgb(33, 37, 41)"  ><i class="far fa-star"></i></a> -->
+<!-- 	</span> -->
+	
+	<script>
+		var nickname = "${nickname}";
+		var flag = false;
+		$('.favostar').submit(function(e) {
+			e.preventDefault();
+			
+			if(nickname != ""){ //닉네임이 null이 아닌 경우
+					if(e.target[1].children[0].style.color == '' || 
+					   e.target[1].children[0].style.color === 'rgb(0, 0, 0)') {//검정
+						e.target[1].children[0].style.color = '#f9ca24';
+												
+						$.ajax({
+							url : '/reviewList/favostar',
+							type: "POST",
+							dataType : "text",
+							data :{
+								postNum : e.target.postNum.value,
+								nickname : nickname,
+								reviewType : 2
+							},
+							success : function(data){
+								console.log(data);
+							},
+							error : function(data){
+								alert("잘못된 경로입니다.");
+								console.log(data);
+								return false;
+							}
+						})
+					}else{
+						e.target[1].children[0].style.color = 'rgb(0, 0, 0)';
+							$.ajax({
+								url : "/reviewList/favostar",
+								type: "POST",
+								dataType : "text",
+								data: 
+								{
+									postNum : e.target.postNum.value,
+									nickname : nickname,
+									reviewType : 2,
+								},
+								success : function(data){
+								},
+								error : function(data){
+									alert("잘못된 경로입니다.");
+								}
+							})							
+				    }								
+			}else{
+				alert("회원만 이용 가능합니다. 로그인 해주세요");
+			}
+			
+		})
+	</script>		
+	
+
+	
 	<script type="text/javascript">
 		var categoryList = [
 			'뷔페',
@@ -193,7 +316,6 @@
 			'양식',
 			'중식',
 			'일식',
-			'분식',
 			'카페',
 			'치킨',
 			'피자',
@@ -206,6 +328,7 @@
 			'맥주',
 			'호프'
 		];
+		var type = ${type};
 		
 		$(document).ready(function(){
 			// 내용 더 보기
@@ -319,7 +442,9 @@
 							'</div>'
 							document.getElementById('content').innerHTML += list;
 						});
-						getReviewAddr(start);
+						if (type == 1 && type == 2) {
+							getReviewAddr(start);
+						}
 					}
 				}).done(function() {
 					$('#bar').hide();
@@ -327,7 +452,9 @@
 				})
 			});
 
-			getReviewAddr(0);
+			if (type == 1 && type == 2) {
+				getReviewAddr(0);
+			}
 		});
 
 		function getReviewAddr(start) {

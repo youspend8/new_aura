@@ -1,16 +1,14 @@
 package com.bitcamp.aura.review.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.servlet.http.HttpSession;
 
-import org.assertj.core.internal.Comparables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bitcamp.aura.category.model.MedicalCategoryVO;
+import com.bitcamp.aura.category.service.DigitalCategoryService;
 import com.bitcamp.aura.category.service.HospitalCategoryService;
 import com.bitcamp.aura.category.service.MedicalCategoryService;
 import com.bitcamp.aura.category.service.RestaurantCategoryService;
@@ -32,12 +30,12 @@ import com.bitcamp.aura.review.model.ReviewVO;
 import com.bitcamp.aura.review.model.SearchParams;
 import com.bitcamp.aura.review.service.ReviewService;
 import com.bitcamp.aura.review.util.Location;
+import com.bitcamp.aura.reviewlist.dao.ReviewListMapper;
 import com.bitcamp.aura.reviewlist.model.ReviewListSelectParamsVO;
+import com.bitcamp.aura.reviewlist.model.ReviewListVO;
 import com.bitcamp.aura.reviewlist.service.ReviewListServiceImp;
 import com.bitcamp.aura.user.service.UserService;
 import com.google.gson.Gson;
-
-import ch.qos.logback.core.joran.spi.HostClassAndPropertyDouble;
 
 @Controller
 @RequestMapping(value = "/review")
@@ -58,6 +56,10 @@ public class ReviewController {
 	private MedicalCategoryService medCateService;
 	@Autowired
 	private HospitalCategoryService hospitalService;
+	@Autowired
+	private ReviewListMapper reviewListMapper;
+	@Autowired
+	private DigitalCategoryService digitalService;
 	
 	@RequestMapping(value = "/post")
 	public String post(Model model,
@@ -83,6 +85,13 @@ public class ReviewController {
 														.sorted((c1, c2) -> c1.getNum() > c2.getNum() ? 1 : -1)
 														.map(c -> c.getName())
 														.collect(Collectors.toList()));
+				break;
+			}
+			case 3: {
+				model.addAttribute("options", new Gson()
+						.fromJson((String) reviewInfo.get("OPTIONS"), HashMap.class)
+						.get("options"));
+				model.addAttribute("digitalCategory", digitalService.readAll());
 				break;
 			}
 		}
@@ -114,6 +123,7 @@ public class ReviewController {
 		} else {
 			params2.setNickname((String) session.getAttribute("nickname"));
 			params2.setPostNum(num);
+			
 			params2.setReviewType(1);
 			isShare = listService.isShare(params2);
 			params2.setReviewType(2);
@@ -147,11 +157,11 @@ public class ReviewController {
 	public String search(Model model,
 			@ModelAttribute SearchParams params,
 			HttpSession session) {
-		System.out.println("params : " + params);
+		String nickname = (String) session.getAttribute("nickname");
 		
 		logger.info(new StringBuilder()
 					.append("search/")
-					.append((String) session.getAttribute("nickname") + "/")
+					.append(nickname + "/")
 					.append(params.getType() + "/")
 					.append(params.getKeyword())
 					.toString());
@@ -163,6 +173,14 @@ public class ReviewController {
 		model.addAttribute("hosCategory", hospitalService.readAll());
 		model.addAttribute("medCategory", medCateService.readAll());
 		model.addAttribute("locationCate", new Location()	.locationList());
+		model.addAttribute("digitalCategory", digitalService.readAll());
+
+		Map<Integer, String> map = StreamSupport.stream(reviewListMapper.selectByNickname(nickname).spliterator(), true)
+										.filter(e -> e.getReviewType() == 2)
+										.collect(Collectors.toMap(ReviewListVO::getPostNum, ReviewListVO::getNickname));
+		model.addAttribute("reviewList", map);
+	
+		System.out.println(map);
 		return "/reviewList";
 	}
 	

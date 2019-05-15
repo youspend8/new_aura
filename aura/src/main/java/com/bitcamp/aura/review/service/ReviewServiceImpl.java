@@ -40,6 +40,12 @@ public class ReviewServiceImpl implements ReviewService {
 		fileUpload.uploadFiles(num, multipartFiles);
 		return result;
 	}
+
+	@Override
+	public int deleteReview(int num) {
+		// TODO Auto-generated method stub
+		return mapper.delete(num);
+	}
 	
 	@Override
 	public List<ReviewVO> search(SearchParams params) {
@@ -121,4 +127,5 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return list;
 	}
+
 }
